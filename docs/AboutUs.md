@@ -50,6 +50,22 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Developer
 * Responsibilities: Dev Ops + Threading
 
+
+### Rachel Wong
+
+<img src="images/cleo7799.png" width="200px">
+
+[[github](http://github.com/cleo7799)]
+[[portfolio](team/cleo7799.md)]
+
+* Role: Developer
+* Responsibilities: UI
+
+
+
+
+
+
 ### Dickson Lai
 
 <img src="images/dicksonlai29.png" width="200px">
@@ -59,3 +75,4 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 * Role: Developer
 * Responsibilities: Documentation
+
