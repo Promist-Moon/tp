@@ -40,15 +40,15 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Developer
 * Responsibilities: Testing
 
-### Jean Doe
+### Emilia Ayu Binti Yuhasnor Affandy
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/promist-moon.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/Promist-Moon)]
+[[portfolio](team/promist-moon.md)]
 
 * Role: Developer
-* Responsibilities: Dev Ops + Threading
+* Responsibilities: Code Quality
 
 
 ### Rachel Wong
