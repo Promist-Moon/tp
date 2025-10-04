@@ -555,10 +555,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 1. Tutor takes in a new student.
 2. Student confirms class details with the tutor.
 3. Parent pays the student’s fees for the month.
-4. Tutor adds a student (**_UC-AddStudent_**).
-5. Tutor adds a parent (**_UC-AddParent_**).
-6. Tutor adds a class for the student (**_UC-AddClass_**).
-7. Tutor marks payment received (**_UC-Pay_**).  
+4. Tutor <ins>adds a student (UC-AddStudent)</ins>.
+5. Tutor <ins>adds a parent (UC-AddParent)</ins>.
+6. Tutor <ins>adds a class for the student (UC-AddClass)</ins>.
+7. Tutor <ins>marks payment received (UC-Pay)</ins>.  
    **Use case ends.**
 
 ---
@@ -574,7 +574,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### **MSS**
 1. Student terminates classes with the tutor.
-2. Tutor deletes the student (**_UC-DeleteStudent_**).  
+2. Tutor <ins>deletes the student (UC-DeleteStudent)</ins>.  
    **Use case ends.**
 
 ### **Extensions**
@@ -593,9 +593,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Actor:** Tutor
 
 ### **MSS**
-1. Tutor views list of paid students (**_UC-ListPaid_**).
-2. Tutor views list of unpaid students (**_UC-ListUnpaid_**).
-3. Tutor views list of overdue students (**_UC-ListOverdue_**).  
+1. Tutor <ins>views list of paid students (UC-ListPaid)</ins>.
+2. Tutor <ins>views list of unpaid students (UC-ListUnpaid)</ins>.
+3. Tutor <ins>views list of overdue students (UC-ListOverdue)</ins>.  
    **Use case ends.**
 
 ---
