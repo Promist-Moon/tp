@@ -10,7 +10,6 @@
 - [About](#about)
 - [UI](#ui)
 - [Features](#features)
-- [Commands](#commands)
 - [Acknowledgements](#acknowledgements)
 
 ---
@@ -47,61 +46,6 @@ Our UI is readable and concise, providing tutors only with information they need
 8. List all overdue
 9. Find student
 10. Filter students
-
----
-
-## Commands
-### Add Contact
-Add a new contact with the necessary details
-
-`add /n <name> /c <contactNumber> /a <address> /p <parentName>
-`
-
-### Delete Contact
-Delete an existing contact
-
-`delete /i <student index>`
-
-### Add Class
-Adds a class to the specific student
-
-`add.class /i <student index> /s <subject> /l <level> /d <day> /s <start time> /e <end time> /r <hourly rate>
-`
-
-### Delete Class
-Deletes an existing class from a specific student
-
-`delete.class /i <student index> /c <class index>`
-
-### Make Payment
-Tracks that a student has made payment
-
-`pay <student index>`
-
-### List all payments
-Lists all students that have paid the fees
-
-`list.paid`
-
-### List all unpaid
-Lists all students that have unpaid fees
-
-`list.unpaid`
-
-### List all overdue
-Lists all students that have overdue fees
-
-`list.overdue`
-
-### Find Student
-Finds existing student
-
-`find /n <name> /s <subject> /l <level>`
-
-### Filter Students
-Filters existing students by subject and/or level
-
-`filter /s <subject> /l <level>`
 
 ---
 
