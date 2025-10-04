@@ -288,32 +288,317 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+---
 
-**Use case: Delete a person**
+## **Use Case List**
 
-**MSS**
+1. [UC-AddStudent](#uc-addstudent)
+2. **Edit a Student** (placeholder for future UC)
+3. [UC-AddClass](#uc-addclass)
+4. [UC-Pay](#uc-pay)
+5. **Find a Student** (placeholder for future UC)
+6. [UC-DeleteStudent](#uc-deletestudent)
+7. [UC-DeleteClass](#uc-deleteclass)
+8. [UC-ListPaid](#uc-listpaid)
+9. [UC-ListUnpaid](#uc-listunpaid)
+10. [UC-ListOverdue](#uc-listoverdue)
+11. [UC-AddAndBillStudent](#uc-addandbillstudent)
+12. [UC-QuitStudent](#uc-quitstudent)
+13. [UC-SeeSummaryForMonth](#uc-seesummaryformonth)
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+---
 
-    Use case ends.
+## **UC-AddStudent**
 
-**Extensions**
+**System:** Tuiniverse Student Management System (TSMS)  
+**Use case:** UC-AddStudent  
+**Actor:** Tutor
 
-* 2a. The list is empty.
+### **MSS**
+1. Tutor chooses to add a student.
+2. Tutor enters all details in order.
+3. TSMS validates the details:
+    - Name, address, contact number, and parent fields are non-blank.
+    - Contact number must contain only numerical digits.
+4. TSMS creates the student and displays a message confirming successful creation.  
+   **Use case ends.**
 
-  Use case ends.
+### **Extensions**
+- **3a.** TSMS detects an error in a field.
+    - **3a1.** TSMS returns an error message.
+    - **3a2.** TSMS clears user input.  
+      **Use case ends.**
 
-* 3a. The given index is invalid.
+- **3b.** TSMS detects unknown command markers.
+    - **3b1.** TSMS returns an error message.
+    - **3b2.** TSMS clears user input.  
+      **Use case ends.**
 
-    * 3a1. AddressBook shows an error message.
+---
 
-      Use case resumes at step 2.
+## **UC-AddClass**
 
-*{More to be added}*
+**System:** Tuiniverse Student Management System (TSMS)  
+**Use case:** UC-AddClass  
+**Actor:** Tutor
+
+### **MSS**
+1. User adds a class using the command.
+2. TSMS checks that the student index exists.
+3. TSMS validates the class details:
+    - Subject matches existing subjects.
+    - Level matches existing levels.
+    - Day is a valid day.
+    - Time is valid.
+    - Hourly rate is a number.
+4. TSMS checks for clashes in the timetable.
+5. TSMS creates and saves the class, linking it to the student.  
+   **Use case ends.**
+
+### **Extensions**
+- **1a.** Tutor omits a field.
+    - **1a1.** TSMS returns an error message.
+    - **1a2.** TSMS clears user input.  
+      Steps **1a1–1a2** repeat until valid input is entered.  
+      **Use case ends.**
+
+- **2a.** TSMS cannot find a student with that index.
+    - **2a1.** TSMS returns an error message.
+    - **2a2.** TSMS clears user input.  
+      Steps **2a1–2a2** repeat until valid input is entered.  
+      **Use case ends.**
+
+- **4a.** TSMS detects a timetable clash.
+    - **4a1.** TSMS returns an error message.
+    - **4a2.** TSMS clears user input.  
+      **Use case ends.**
+
+---
+
+## **UC-Pay**
+
+**System:** Tuiniverse Student Management System (TSMS)  
+**Use case:** UC-Pay  
+**Actor:** Tutor
+
+**Guarantees:**
+- Student's payment status changes.
+- Student shows up in list of paid students.
+
+### **MSS**
+1. Tutor chooses a student who has paid.
+2. TSMS validates the student index.
+3. TSMS verifies that the student has outstanding payment.
+4. TSMS updates the student’s payment status to *Paid*.  
+   **Use case ends.**
+
+### **Extensions**
+- **1a.** Tutor omits input.
+    - **1a1.** TSMS returns an error message.
+    - **1a2.** TSMS clears user input.  
+      Steps **1a1–1a2** repeat until valid input is entered.  
+      **Use case ends.**
+
+- **2a.** TSMS cannot find a student with that index.
+    - **2a1.** TSMS returns an error message.
+    - **2a2.** TSMS clears user input.  
+      Steps **2a1–2a2** repeat until valid input is entered.  
+      **Use case ends.**
+
+- **3a.** Student has no outstanding payment.
+    - **3a1.** TSMS returns an error message.  
+      **Use case ends.**
+
+---
+
+## **UC-DeleteStudent**
+
+**System:** Tuiniverse Student Management System (TSMS)  
+**Use case:** UC-DeleteStudent  
+**Actor:** Tutor
+
+### **MSS**
+1. Tutor chooses to delete a student.
+2. TSMS validates whether the student exists.
+3. TSMS displays a confirmation prompt.
+4. Tutor confirms the deletion.
+5. TSMS deletes the student and all associated data (e.g., classes).  
+   **Use case ends.**
+
+### **Extensions**
+- **1a.** Tutor omits the student index.
+    - **1a1.** TSMS returns an error message.
+    - **1a2.** TSMS clears user input.  
+      Steps **1a1–1a2** repeat until valid input is entered.  
+      **Use case ends.**
+
+- **2a.** TSMS cannot find a student with that index.
+    - **2a1.** TSMS returns an error message.
+    - **2a2.** TSMS clears user input.  
+      Steps **2a1–2a2** repeat until valid input is entered.  
+      **Use case ends.**
+
+- **3a.** Tutor chooses not to confirm deletion.
+    - **3a1.** TSMS closes the prompt.
+    - **3a2.** TSMS clears user input.  
+      **Use case ends.**
+
+---
+
+## **UC-DeleteClass**
+
+**System:** Tuiniverse Student Management System (TSMS)  
+**Use case:** UC-DeleteClass  
+**Actor:** Tutor
+
+### **MSS**
+1. User deletes a class with the command.
+2. TSMS checks that the student index exists.
+3. TSMS removes the class from the timetable and unlinks it from the student.  
+   **Use case ends.**
+
+### **Extensions**
+- **1a.** Tutor omits a field.
+    - **1a1.** TSMS returns an error message.
+    - **1a2.** TSMS clears user input.  
+      Steps **1a1–1a2** repeat until valid input is entered.  
+      **Use case ends.**
+
+- **2a.** TSMS cannot find a student with that index.
+    - **2a1.** TSMS returns an error message.
+    - **2a2.** TSMS clears user input.  
+      Steps **2a1–2a2** repeat until valid input is entered.  
+      **Use case ends.**
+
+---
+
+## **UC-ListPaid**
+
+**System:** Tuiniverse Student Management System (TSMS)  
+**Use case:** UC-ListPaid  
+**Actor:** Tutor
+
+**Guarantees:**
+- Lists students who have paid for the current month.
+- Lists corresponding amounts paid by each student.
+
+### **MSS**
+1. Tutor chooses to list paid students.
+2. TSMS retrieves all students marked *Paid* for the current month.
+3. TSMS displays the list of students and their amounts.  
+   **Use case ends.**
+
+### **Extensions**
+- **2a.** No students have paid for the month.
+    - **2a1.** TSMS displays a message in the console:
+  **Use case ends.**
+
+---
+
+## **UC-ListUnpaid**
+
+**System:** Tuiniverse Student Management System (TSMS)  
+**Use case:** UC-ListUnpaid  
+**Actor:** Tutor
+
+**Guarantees:**
+- Lists students who have not paid for the current month.
+- Lists corresponding amount owed by each student.
+
+### **MSS**
+1. Tutor chooses to list unpaid students.
+2. TSMS retrieves all students not marked *Paid* for the current month.
+3. TSMS displays the list of students and their owed amounts.  
+   **Use case ends.**
+
+### **Extensions**
+- **2a.** All students have paid.
+    - **2a1.** TSMS displays a message in the console.  
+      **Use case ends.**
+
+---
+
+## **UC-ListOverdue**
+
+**System:** Tuiniverse Student Management System (TSMS)  
+**Use case:** UC-ListOverdue  
+**Actor:** Tutor
+
+**Guarantees:**
+- Lists students who have not paid for previous months.
+- Lists corresponding amounts owed.
+
+### **MSS**
+1. Tutor chooses to list overdue students.
+2. TSMS retrieves all students who have unpaid fees from past months.
+3. TSMS displays the list of overdue students and their owed amounts.  
+   **Use case ends.**
+
+### **Extensions**
+- **2a.** All students have paid for previous months.
+    - **2a1.** TSMS displays a message in the console.  
+      **Use case ends.**
+
+---
+
+## **UC-AddAndBillStudent**
+
+**System:** Tuiniverse Student Management System (TSMS)  
+**Use case:** UC-AddAndBillStudent  
+**Actor:** Tutor, Student, Parent
+
+### **Preconditions**
+- No existing student with the same details.
+- No class schedule clashes.
+
+### **MSS**
+1. Tutor takes in a new student.
+2. Student confirms class details with the tutor.
+3. Parent pays the student’s fees for the month.
+4. Tutor adds a student (**_UC-AddStudent_**).
+5. Tutor adds a parent (**_UC-AddParent_**).
+6. Tutor adds a class for the student (**_UC-AddClass_**).
+7. Tutor marks payment received (**_UC-Pay_**).  
+   **Use case ends.**
+
+---
+
+## **UC-QuitStudent**
+
+**System:** Tuiniverse Student Management System (TSMS)  
+**Use case:** UC-QuitStudent  
+**Actor:** Tutor, Student
+
+### **Precondition**
+- Student currently has classes with the tutor.
+
+### **MSS**
+1. Student terminates classes with the tutor.
+2. Tutor deletes the student (**_UC-DeleteStudent_**).  
+   **Use case ends.**
+
+### **Extensions**
+- **2b.** Student has unpaid fees.
+    - **2b1.** TSMS displays an additional confirmation prompt.
+    - **2b2.** Tutor confirms the deletion.
+    - **2b3.** TSMS updates owed amount and total earnings.  
+      **Use case ends.**
+
+---
+
+## **UC-SeeSummaryForMonth**
+
+**System:** Tuiniverse Student Management System (TSMS)  
+**Use case:** UC-SeeSummaryForMonth  
+**Actor:** Tutor
+
+### **MSS**
+1. Tutor views list of paid students (**_UC-ListPaid_**).
+2. Tutor views list of unpaid students (**_UC-ListUnpaid_**).
+3. Tutor views list of overdue students (**_UC-ListOverdue_**).  
+   **Use case ends.**
+
+---
 
 ### Non-Functional Requirements
 
