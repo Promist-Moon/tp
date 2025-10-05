@@ -297,6 +297,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* *`    | tutor                                       | mark students' attendance after every class             | track class hours and calculate the student's bill                       |
 | `*`      | tutor motivated to see students improve     | add a note for a student before their class             | track class content for the student                                      |
 | `*`      | tutor motivated to see students improve     | edit a student's note after a class                     | check student's progress                                                 |
+| `*`      | tutor who teaches multiple subjects         | filter students by subject                              | prepare resources and reuse lesson materials for similar classes         |
+| `*`      | tutor who teaches multiple subjects         | organise students by subject                            | better plan lesson materials and lesson outlines                         |
 
 *{More to be added}*
 
