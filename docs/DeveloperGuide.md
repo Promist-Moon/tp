@@ -262,29 +262,53 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
+* Freelance secondary school tuition teachers teaching one-to-one classes
+* travels to meet their students
 * has a need to manage a significant number of contacts
+* requires organisation and scheduling features to keep track of students' and parents' contacts,
+  payment status and lesson timings
 * prefer desktop apps over other types
 * can type fast
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
 
+
 **Value proposition**: manage contacts faster than a typical mouse/GUI driven app
+Tuiniverse is built for freelance secondary school tutors to stay organized. 
+It manages student and parent contacts, tracks attendance, student's progress and payments effortlessly. 
+Tuiniverse enables tutors to schedule classes and prevent clashes. 
+In addition, tutors can check lessons scheduled for the day to help plan their day more productively.
 
 
 ### User stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
-| -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| `* * *`  | new user                                   | see usage instructions         | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person               |                                                                        |
-| `* * *`  | user                                       | delete a person                | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name          | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details   | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name           | locate a person easily                                                 |
+| Priority | As a …​                                     | I want to …​                                            | So that I can…​                                                          |
+|----------|---------------------------------------------|---------------------------------------------------------|--------------------------------------------------------------------------|
+| `* * *`  | new user                                    | see usage instructions                                  | refer to instructions when I forget how to use the App                   |
+| `* * *`  | tutor                                       | add a new student                                       |                                                                          |
+| `* *`    | tutor                                       | add a new parent                                        | view parent's details                                                    |
+| `* *`    | tutor                                       | link a student with their parent's contact              | bill the parent and contact them regarding their child’s academic matter |
+| `* * *`  | tutor                                       | delete a person                                         | remove entries that I no longer need                                     |
+| `* * *`  | tutor                                       | edit a person's information                             | update their information                                                 |
+| `* * *`  | tutor                                       | find a person by name                                   | locate details of persons without having to go through the entire list   |
+| `* *`    | tutor with many persons in the address book | sort persons by name                                    | locate a person easily                                                   |
+| `* *`    | tutor                                       | see students' payment status                            | track who has and has not paid                                           |
+| `* *`    | tutor                                       | list students who have not made payment                 | track students who have not paid                                         |
+| `* *`    | tutor                                       | view my schedule for today                              | know which locations I will be travelling to today                       |
+| `*`      | busy tutor                                  | view upcoming classes for the week                      | plan, prepare and organise lesson materials in advance                   |
+| `*`      | tutor who hates commuting long distances    | know the most efficient time slot to add in a student   | minimize commute time                                                    |
+| `*`      | tutor who frequently uses the app           | edit a class for a certain week only                    | reschedule a class and without it affecting my regular schedule          |
+| `* * *`  | tutor                                       | add a new class                                         | view class details                                                       |
+| `* *`    | forgetful tutor                             | be prevented from adding classes of conflicting timings | avoid accidentally holding two classes at the same time                  |
+| `* *`    | tutor                                       | see students' bill for the month                        | track each student's bill                                                |
+| `* *`    | tutor                                       | mark students' attendance after every class             | track class hours and calculate the student's bill                       |
+| `*`      | tutor motivated to see students improve     | add a note for a student before their class             | track class content for the student                                      |
+| `*`      | tutor motivated to see students improve     | edit a student's note after a class                     | check student's progress                                                 |
+| `*`      | tutor who teaches multiple subjects         | filter students by subject                              | prepare resources and reuse lesson materials for similar classes         |
+| `*`      | tutor who teaches multiple subjects         | organise students by subject                            | better plan lesson materials and lesson outlines                         |
 
-*{More to be added}*
 
 ### Use cases
 
@@ -613,7 +637,17 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
-* **Private contact detail**: A contact detail that is not meant to be shared with others
+* **GUI**: Graphical User Interface
+* **CLI**: Command Line Interface
+* **Person**: Student or parent
+* **Payment Status**: 
+  * Paid - The student has paid within the month
+  * Unpaid - Payment has been requested less than 2 weeks ago but has not been paid
+  * Overdue - Payment has been requested more than 2 weeks ago but has not been paid
+* **Bill**: The payment amount owed by a student
+* **Subjects**: Math, English, Physics, Chemistry, Biology, Geography, History, Mother tongue, Social Studies, Literature
+* **Note**: A comment located in a student's information
+* **Schedule**: A timetable for classes containing the time, location, subject of the class and the student taking the class
 
 --------------------------------------------------------------------------------------------------------------------
 
