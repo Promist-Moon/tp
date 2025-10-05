@@ -262,13 +262,22 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
+* Freelance secondary school tuition teachers teaching one-to-one classes
+* travels to meet their students
 * has a need to manage a significant number of contacts
+* requires organisation and scheduling features to keep track of students' and parents' contacts,
+  payment status and lesson timings
 * prefer desktop apps over other types
 * can type fast
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
 
+
 **Value proposition**: manage contacts faster than a typical mouse/GUI driven app
+Tuiniverse is built for freelance secondary school tutors to stay organized. 
+It manages student and parent contacts, tracks attendance, student's progress and payments effortlessly. 
+Tuiniverse enables tutors to schedule classes and prevent clashes. 
+In addition, tutors can check lessons scheduled for the day to help plan their day more productively.
 
 
 ### User stories
@@ -300,7 +309,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `*`      | tutor who teaches multiple subjects         | filter students by subject                              | prepare resources and reuse lesson materials for similar classes         |
 | `*`      | tutor who teaches multiple subjects         | organise students by subject                            | better plan lesson materials and lesson outlines                         |
 
-*{More to be added}*
 
 ### Use cases
 
