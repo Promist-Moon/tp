@@ -75,6 +75,7 @@ public class AddLessonCommand extends Command {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 
+        // check if model hasLesson (same timeslot)
         Person studentToAddLesson = lastShownList.get(targetIndex.getZeroBased());
         model.addLesson(studentToAddLesson, toAdd);
 

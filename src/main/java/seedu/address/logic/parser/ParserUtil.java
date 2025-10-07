@@ -1,7 +1,10 @@
 package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.CliSyntax.*;
 
+import java.time.DayOfWeek;
+import java.time.LocalTime;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
@@ -9,10 +12,11 @@ import java.util.Set;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Phone;
+import seedu.address.model.lesson.Day;
+import seedu.address.model.lesson.Level;
+import seedu.address.model.lesson.Rate;
+import seedu.address.model.lesson.Subject;
+import seedu.address.model.person.*;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -121,4 +125,72 @@ public class ParserUtil {
         }
         return tagSet;
     }
+
+    //=========== Lesson ==================================================================================
+
+
+    LocalTime startTime = ParserUtil.parseTime(argMultimap.getValue(PREFIX_START_TIME).get());
+    LocalTime endTime = ParserUtil.parseEndTime(argMultimap.getValue(PREFIX_END_TIME).get(), startTime);
+
+    /**
+     * Parses a {@code String subject} into an {@code Subject}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code subject} is invalid.
+     */
+    public static Subject parseSubject(String subject) throws ParseException {
+        requireNonNull(subject);
+        String trimmedSubject = subject.trim();
+        if (!Subject.isValidSubject(trimmedSubject)) {
+            throw new ParseException(Subject.MESSAGE_CONSTRAINTS);
+        }
+        return Subject.fromString(trimmedSubject);
+    }
+
+    /**
+     * Parses a {@code String level} into an {@code Level}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code level} is invalid.
+     */
+    public static Level parseLevel(String level) throws ParseException {
+        requireNonNull(level);
+        String trimmedLevel = level.trim();
+        int integerLevel = Integer.parseInt(trimmedLevel);
+        if (!Level.isValidLevel(integerLevel)) {
+            throw new ParseException(Level.MESSAGE_CONSTRAINTS);
+        }
+        return Level.fromInt(integerLevel);
+    }
+
+    /**
+     * Parses a {@code String subject} into an {@code Subject}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code subject} is invalid.
+     */
+    public static Day parseDay(String day) throws ParseException {
+        requireNonNull(day);
+        String trimmedDay = day.trim();
+        if (!Day.isValidDay(trimmedDay)) {
+            throw new ParseException(Day.MESSAGE_CONSTRAINTS);
+        }
+        return new Day(trimmedDay);
+    }
+
+    /**
+     * Parses a {@code String rate} into an {@code Rate}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code rate} is invalid.
+     */
+    public static Rate parseRate(String rate) throws ParseException {
+        requireNonNull(rate);
+        String trimmedRate = rate.trim();
+        if (!Rate.isValidRate(trimmedRate)) {
+            throw new ParseException(Rate.MESSAGE_CONSTRAINTS);
+        }
+        return new Rate(trimmedRate);
+    }
+
 }

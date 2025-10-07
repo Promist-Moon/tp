@@ -17,16 +17,14 @@ public class Lesson {
     private Address address;
     private Duration duration;
 
-    public Lesson(Person student, Subject subject, Level level, Day day, LocalTime startTime, LocalTime endTime,
+    public Lesson(Subject subject, Level level, Day day, LocalTime startTime, LocalTime endTime,
                   Rate rate) {
-        this.student = student;
         this.subject = subject;
         this.level = level;
         this.day = day;
         this.startTime = startTime;
         this.endTime = endTime;
         this.rate = rate;
-        this.address = student.getAddress();
         this.duration = Duration.between(startTime, endTime);
     }
 
@@ -64,6 +62,11 @@ public class Lesson {
 
     public Person getStudent() {
         return student;
+    }
+
+    public void addStudent(Person student) {
+        this.student = student;
+        this.address = student.getAddress();
     }
 
 }
