@@ -1,4 +1,4 @@
-package seedu.address.model.Class;
+package seedu.address.model.lesson;
 
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Person;
@@ -7,7 +7,7 @@ import java.time.DayOfWeek;
 import java.time.Duration;
 import java.time.LocalTime;
 
-public class Class {
+public class Lesson {
     private String subject;
     private int level;
     private DayOfWeek day;
@@ -17,8 +17,8 @@ public class Class {
     private Address location;
     private Duration duration;
 
-    public Class(Person person, String subject, int level, DayOfWeek day, LocalTime startTime, LocalTime endTime,
-                 float hourlyRate) {
+    public Lesson(Person person, String subject, int level, DayOfWeek day, LocalTime startTime, LocalTime endTime,
+                  float hourlyRate) {
         this.subject = subject;
         assert level < 6 : "Level must be smaller than 6 but was: " + level;
         assert level > 0 : "Level must be larger than 0 but was: " + level;
