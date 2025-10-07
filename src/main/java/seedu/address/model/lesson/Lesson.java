@@ -7,24 +7,26 @@ import java.time.Duration;
 import java.time.LocalTime;
 
 public class Lesson {
+    private Person student;
     private Subject subject;
     private Level level;
-    private DayOfWeek day;
+    private Day day;
     private LocalTime startTime;
     private LocalTime endTime;
     private Rate rate;
     private Address address;
     private Duration duration;
 
-    public Lesson(Person person, Subject subject, Level level, DayOfWeek day, LocalTime startTime, LocalTime endTime,
+    public Lesson(Person student, Subject subject, Level level, Day day, LocalTime startTime, LocalTime endTime,
                   Rate rate) {
+        this.student = student;
         this.subject = subject;
         this.level = level;
         this.day = day;
         this.startTime = startTime;
         this.endTime = endTime;
         this.rate = rate;
-        this.address = person.getAddress();
+        this.address = student.getAddress();
         this.duration = Duration.between(startTime, endTime);
     }
 
@@ -36,7 +38,7 @@ public class Lesson {
         return level;
     }
 
-    public DayOfWeek getDay() {
+    public Day getDay() {
         return day;
     }
 
@@ -58,6 +60,10 @@ public class Lesson {
 
     public Duration getDuration() {
         return duration;
+    }
+
+    public Person getStudent() {
+        return student;
     }
 
 }

@@ -48,6 +48,6 @@ public enum Level {
 
     @Override
     public String toString() {
-        return String.format("Secondary %d", this.level);
+        return String.format("%d", this.level);
     }
 }

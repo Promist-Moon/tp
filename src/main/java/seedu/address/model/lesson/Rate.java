@@ -8,15 +8,17 @@ public class Rate {
 
     private final float rate;
 
-    private Rate(float rate) {
-        checkArgument(isValidRate(rate), MESSAGE_CONSTRAINTS);
+    public Rate(String str) {
+        checkArgument(isValidRate(str), MESSAGE_CONSTRAINTS);
+        float rate = Float.parseFloat(str);
         this.rate = rate;
     }
 
     /**
      * Checks if the given float is a valid rate.
      */
-    public static boolean isValidRate(float rate) {
+    public static boolean isValidRate(String str) {
+        float rate = Float.parseFloat(str);
         return rate >= 0;
     }
 
