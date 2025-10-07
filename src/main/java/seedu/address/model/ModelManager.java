@@ -149,12 +149,16 @@ public class ModelManager implements Model {
     //=========== Lesson ================================================================================
 
 
+
     @Override
     public boolean hasLesson(Lesson lesson) {
         // TO BE IMPLEMENTED
         requireNonNull(lesson);
         //return addressBook.hasLesson(lesson);
+        return false;
     }
+
+
 
     @Override
     public void addLesson(Person student, Lesson lesson) {
