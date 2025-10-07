@@ -1,10 +1,12 @@
 package seedu.address.logic;
 
+import java.time.Duration;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import seedu.address.logic.parser.Prefix;
+import seedu.address.model.lesson.Lesson;
 import seedu.address.model.person.Person;
 
 /**
@@ -17,7 +19,7 @@ public class Messages {
     public static final String MESSAGE_INVALID_PERSON_DISPLAYED_INDEX = "The person index provided is invalid";
     public static final String MESSAGE_PERSONS_LISTED_OVERVIEW = "%1$d persons listed!";
     public static final String MESSAGE_DUPLICATE_FIELDS =
-                "Multiple values specified for the following single-valued field(s): ";
+            "Multiple values specified for the following single-valued field(s): ";
 
     /**
      * Returns an error message indicating the duplicate prefixes.
@@ -45,6 +47,28 @@ public class Messages {
                 .append(person.getAddress())
                 .append("; Tags: ");
         person.getTags().forEach(builder::append);
+        return builder.toString();
+    }
+
+    /**
+     * Formats the {@code lesson} for display to the user.
+     */
+    public static String formatLesson(Lesson lesson) {
+        final StringBuilder builder = new StringBuilder();
+        builder.append(lesson.getSubject())
+                .append("; Subject: ")
+                .append(lesson.getLevel())
+                .append("; Secondary: ")
+                .append(lesson.getDay())
+                .append("; Day: ")
+                .append(lesson.getStartTime())
+                .append("; Start: ")
+                .append(lesson.getEndTime())
+                .append("; End: ")
+                .append(lesson.getAddress())
+                .append("; Address: ")
+                .append(lesson.getRate())
+                .append("; Rate: $");
         return builder.toString();
     }
 
