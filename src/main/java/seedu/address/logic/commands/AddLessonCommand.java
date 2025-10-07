@@ -9,11 +9,15 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_START_TIME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_END_TIME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_RATE;
 
+import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.lesson.Lesson;
+import seedu.address.model.person.Person;
+
+import java.util.List;
 
 /**
  * Adds a lesson to the address book.
@@ -43,14 +47,19 @@ public class AddLessonCommand extends Command {
     public static final String MESSAGE_DUPLICATE_LESSON = "This timeslot is already taken";
 
     private final Lesson toAdd;
+    private final Index targetIndex;
 
     /**
      * Creates an AddLessonCommand to add the specified {@code Lesson}
      */
-    public AddLessonCommand(Lesson lesson) {
+    public AddLessonCommand(Index index, Lesson lesson) {
         requireNonNull(lesson);
+        this.targetIndex = index;
         toAdd = lesson;
     }
+
+    // student and address fields should be set here...
+    // needs to check if person at index is a student
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
@@ -59,9 +68,18 @@ public class AddLessonCommand extends Command {
         if (model.hasLesson(toAdd)) {
             throw new CommandException(MESSAGE_DUPLICATE_LESSON);
         }
+        List<Person> lastShownList = model.getFilteredPersonList();
 
-        model.addLesson(toAdd);
+        // need to check if index is a student
+        if (targetIndex.getZeroBased() >= lastShownList.size()) {
+            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        }
+
+        Person studentToAddLesson = lastShownList.get(targetIndex.getZeroBased());
+        model.addLesson(studentToAddLesson, toAdd);
+
         return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.formatLesson(toAdd)));
+
     }
 
     @Override
