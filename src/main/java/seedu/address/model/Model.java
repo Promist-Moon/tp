@@ -5,6 +5,7 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.model.lesson.Lesson;
 import seedu.address.model.person.Person;
 
 /**
@@ -84,4 +85,15 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredPersonList(Predicate<Person> predicate);
+
+    /**
+     * Returns true if a lesson with the same timeslot as {@code lesson} exists in the address book.
+     */
+    boolean hasLesson(Lesson lesson);
+
+    /**
+     * Adds the given lesson.
+     * {@code lesson} must not already exist in the address book.
+     */
+    void addLesson(Person student, Lesson lesson);
 }
