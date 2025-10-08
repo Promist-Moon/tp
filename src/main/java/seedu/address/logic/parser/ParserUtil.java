@@ -12,10 +12,7 @@ import java.util.Set;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.lesson.Day;
-import seedu.address.model.lesson.Level;
-import seedu.address.model.lesson.Rate;
-import seedu.address.model.lesson.Subject;
+import seedu.address.model.lesson.*;
 import seedu.address.model.person.*;
 import seedu.address.model.tag.Tag;
 
@@ -128,10 +125,6 @@ public class ParserUtil {
 
     //=========== Lesson ==================================================================================
 
-
-    LocalTime startTime = ParserUtil.parseTime(argMultimap.getValue(PREFIX_START_TIME).get());
-    LocalTime endTime = ParserUtil.parseEndTime(argMultimap.getValue(PREFIX_END_TIME).get(), startTime);
-
     /**
      * Parses a {@code String subject} into an {@code Subject}.
      * Leading and trailing whitespaces will be trimmed.
@@ -191,6 +184,36 @@ public class ParserUtil {
             throw new ParseException(Rate.MESSAGE_CONSTRAINTS);
         }
         return new Rate(trimmedRate);
+    }
+
+    /**
+     * Parses a {@code String startTime} into an {@code startTime}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code startTime} is invalid.
+     */
+    public static StartTime parseStartTime(String startTime) throws ParseException {
+        requireNonNull(startTime);
+        String trimmedStartTime = startTime.trim();
+        if (!StartTime.isValidTimeFormat(trimmedStartTime)) {
+            throw new ParseException(StartTime.MESSAGE_CONSTRAINTS);
+        }
+        return new StartTime(trimmedStartTime);
+    }
+
+    /**
+     * Parses a {@code String endTime} into an {@code endTime}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code endTime} is invalid.
+     */
+    public static EndTime parseEndTime(StartTime start, String endTime) throws ParseException {
+        requireNonNull(endTime);
+        String trimmedEndTime = endTime.trim();
+        if (!EndTime.isValidEndTimeFormat(start, trimmedEndTime)) {
+            throw new ParseException(EndTime.MESSAGE_CONSTRAINTS);
+        }
+        return EndTime.ofEndTime(start, trimmedEndTime);
     }
 
 }

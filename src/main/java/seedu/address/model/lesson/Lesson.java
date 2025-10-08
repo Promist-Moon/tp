@@ -11,13 +11,13 @@ public class Lesson {
     private Subject subject;
     private Level level;
     private Day day;
-    private LocalTime startTime;
-    private LocalTime endTime;
+    private StartTime startTime;
+    private EndTime endTime;
     private Rate rate;
     private Address address;
     private Duration duration;
 
-    public Lesson(Subject subject, Level level, Day day, LocalTime startTime, LocalTime endTime,
+    public Lesson(Subject subject, Level level, Day day, StartTime startTime, EndTime endTime,
                   Rate rate) {
         this.subject = subject;
         this.level = level;
@@ -25,7 +25,7 @@ public class Lesson {
         this.startTime = startTime;
         this.endTime = endTime;
         this.rate = rate;
-        this.duration = Duration.between(startTime, endTime);
+        this.duration = endTime.getDuration();
     }
 
     public Subject getSubject() {

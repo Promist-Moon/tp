@@ -49,8 +49,8 @@ public class AddLessonCommandParser implements Parser {
         Subject subject = ParserUtil.parseSubject(argMultimap.getValue(PREFIX_SUBJECT).get());
         Level level = ParserUtil.parseLevel(argMultimap.getValue(PREFIX_LEVEL).get());
         Day day = ParserUtil.parseDay(argMultimap.getValue(PREFIX_DAY).get());
-        LocalTime startTime = ParserUtil.parseTime(argMultimap.getValue(PREFIX_START_TIME).get());
-        LocalTime endTime = ParserUtil.parseEndTime(argMultimap.getValue(PREFIX_END_TIME).get(), startTime);
+        StartTime startTime = ParserUtil.parseStartTime(argMultimap.getValue(PREFIX_START_TIME).get());
+        EndTime endTime = ParserUtil.parseEndTime(startTime, argMultimap.getValue(PREFIX_END_TIME).get());
         Rate rate = ParserUtil.parseRate(argMultimap.getValue(PREFIX_RATE).get());
 
 
