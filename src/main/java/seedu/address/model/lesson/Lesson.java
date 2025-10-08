@@ -1,10 +1,10 @@
 package seedu.address.model.lesson;
 
+import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.person.*;
 
-import java.time.DayOfWeek;
 import java.time.Duration;
-import java.time.LocalTime;
+import java.util.Objects;
 
 public class Lesson {
     private Person student;
@@ -67,6 +67,44 @@ public class Lesson {
     public void addStudent(Person student) {
         this.student = student;
         this.address = student.getAddress();
+    }
+
+    /**
+     * Returns true if both lessons have the same day and their lesson times clash.
+     * This defines a stronger notion of equality between two lessons.
+     */
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof Lesson)) {
+            return false;
+        }
+
+        Lesson otherLesson = (Lesson) other;
+        return day.getDayOfWeek().equals(otherLesson.day.getDayOfWeek())
+                && endTime.hasTimeClash(otherLesson.endTime);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(student, subject, level, day, startTime, endTime, rate, address, duration);
+    }
+
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this)
+                .add("subject", subject)
+                .add("level", level)
+                .add("day", day)
+                .add("startTime", startTime)
+                .add("endTime", endTime)
+                .add("rate", rate)
+                .add("address", address)
+                .toString();
     }
 
 }

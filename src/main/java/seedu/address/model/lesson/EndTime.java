@@ -43,4 +43,15 @@ public class EndTime extends Time {
     public Duration getDuration() {
         return Duration.between(start, end);
     }
+
+    /**
+     * Checks if the timings of endTime2 overlaps with this
+     */
+    public boolean hasTimeClash(EndTime endTime2) {
+        LocalTime start2 = endTime2.start;
+        LocalTime end2 = endTime2.end;
+        boolean isTime2Before = start2.isBefore(start) && (end2.isBefore(start) || end2.equals(start));
+        boolean isTime2After = (start2.isAfter(end) || start2.equals(end)) && end2.isAfter(end);
+        return isTime2Before || isTime2After;
+    }
 }

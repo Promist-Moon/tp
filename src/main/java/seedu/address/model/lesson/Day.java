@@ -1,8 +1,5 @@
 package seedu.address.model.lesson;
 
-import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.Phone;
-
 import java.time.DayOfWeek;
 
 import static seedu.address.commons.util.AppUtil.checkArgument;
@@ -30,6 +27,10 @@ public class Day {
             return integerDay >= 1 && integerDay <= 7;
         }
         return false;
+    }
+
+    public DayOfWeek getDayOfWeek() {
+        return day;
     }
 
     @Override
