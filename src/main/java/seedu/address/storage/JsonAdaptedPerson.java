@@ -15,6 +15,7 @@ import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.student.Student;
 import seedu.address.model.person.student.tag.Tag;
 
 /**
@@ -27,6 +28,7 @@ class JsonAdaptedPerson {
     private final String name;
     private final String phone;
     private final String email;
+    private final String type; // "student" or "parent" (null for legacy files)
     private final String address;
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
 
@@ -34,9 +36,10 @@ class JsonAdaptedPerson {
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
      */
     @JsonCreator
-    public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
+    public JsonAdaptedPerson(@JsonProperty("type") String type, @JsonProperty("name") String name, @JsonProperty("phone") String phone,
             @JsonProperty("email") String email, @JsonProperty("address") String address,
             @JsonProperty("tags") List<JsonAdaptedTag> tags) {
+        this.type = type;
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -53,10 +56,16 @@ class JsonAdaptedPerson {
         name = source.getName().fullName;
         phone = source.getPhone().value;
         email = source.getEmail().value;
-        address = source.getAddress().value;
-        tags.addAll(source.getTags().stream()
-                .map(JsonAdaptedTag::new)
-                .collect(Collectors.toList()));
+        this.type = (source instanceof Student) ? "student" : "parent";
+        if (source instanceof Student student) {
+            address = student.getAddress().value;
+            tags.addAll(student.getTags().stream()
+                    .map(JsonAdaptedTag::new)
+                    .collect(Collectors.toList()));
+        } else {
+            // For now only Student is supported; non-student persons will fail during toModelType() validation
+            address = null;
+        }
     }
 
     /**
@@ -94,16 +103,27 @@ class JsonAdaptedPerson {
         }
         final Email modelEmail = new Email(email);
 
-        if (address == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Address.class.getSimpleName()));
+        // Determine subtype (back-compat: no type => student)
+        String kind = (type == null) ? "student" : type.toLowerCase();
+        switch (kind) {
+        case "student": {
+            if (address == null) {
+                throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Address.class.getSimpleName()));
+            }
+            if (!Address.isValidAddress(address)) {
+                throw new IllegalValueException(Address.MESSAGE_CONSTRAINTS);
+            }
+            final Address modelAddress = new Address(address);
+            final Set<Tag> modelTags = new HashSet<>(personTags);
+            return new Student(modelName, modelPhone, modelEmail, modelAddress, modelTags);
         }
-        if (!Address.isValidAddress(address)) {
-            throw new IllegalValueException(Address.MESSAGE_CONSTRAINTS);
+        case "parent": {
+            // TODO: When Parent is implemented, validate Parent-specific fields here and return new Parent(...)
+            throw new IllegalValueException("Parent deserialization not supported yet.");
         }
-        final Address modelAddress = new Address(address);
-
-        final Set<Tag> modelTags = new HashSet<>(personTags);
-        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelTags);
+        default:
+            throw new IllegalValueException("Unknown person type: " + kind);
+        }
     }
 
 }

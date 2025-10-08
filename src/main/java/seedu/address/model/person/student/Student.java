@@ -91,6 +91,15 @@ public class Student extends Person {
     }
 
     @Override
+    public String toDisplayString() {
+        final StringBuilder builder = new StringBuilder(super.toDisplayString());
+        builder.append("; Address: ").append(address)
+                .append("; Tags: ");
+        this.getTags().forEach(builder::append);
+        return builder.toString();
+    }
+
+    @Override
     public String toString() {
         return new ToStringBuilder(this)
                 .add("name", getName())

@@ -10,12 +10,13 @@ import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.student.Student;
 import seedu.address.model.person.student.tag.Tag;
 
 /**
- * A utility class to help with building EditStudentDescriptor objects.
+ * A utility class to help with building EditPersonDescriptor objects.
  */
-public class EditStudentDescriptorBuilder {
+public class EditPersonDescriptorBuilder {
 
     private EditPersonDescriptor descriptor;
 
@@ -32,11 +33,17 @@ public class EditStudentDescriptorBuilder {
      */
     public EditPersonDescriptorBuilder(Person person) {
         descriptor = new EditPersonDescriptor();
+        // Common fields from abstract Person
         descriptor.setName(person.getName());
         descriptor.setPhone(person.getPhone());
         descriptor.setEmail(person.getEmail());
-        descriptor.setAddress(person.getAddress());
-        descriptor.setTags(person.getTags());
+
+        // Subclass-specific fields
+        if (person instanceof Student student) {
+            descriptor.setAddress(student.getAddress());
+            descriptor.setTags(student.getTags());
+        }
+        // NOTE: Parent not yet implemented; when added, extend here with its fields.
     }
 
     /**

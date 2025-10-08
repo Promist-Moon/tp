@@ -65,6 +65,19 @@ public abstract class Person {
         return Objects.hash(name, phone, email);
     }
 
+
+    /**
+     * Returns a user-facing string for display.
+     * Subclasses may override this method to append their own fields.
+     */
+    public String toDisplayString() {
+        final StringBuilder builder = new StringBuilder();
+        builder.append("Name: ").append(name)
+                .append("; Phone: ").append(phone)
+                .append("; Email: ").append(email);
+        return builder.toString();
+    }
+
     public String toString() {
         return new ToStringBuilder(this)
                 .add("name", name)
