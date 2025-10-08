@@ -40,11 +40,11 @@ public class Lesson {
         return day;
     }
 
-    public LocalTime getStartTime() {
+    public StartTime getStartTime() {
         return startTime;
     }
 
-    public LocalTime getEndTime() {
+    public EndTime getEndTime() {
         return endTime;
     }
 
