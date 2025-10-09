@@ -9,44 +9,35 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 
-### John Doe
+### Chow Bing Hang
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/binghangc.png" width="200px">
 
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
-* Role: Project Advisor
-
-### Jane Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)]
+[[github](https://github.com/binghangc)]
 [[portfolio](team/johndoe.md)]
 
 * Role: Team Lead
-* Responsibilities: UI
+* Responsibilities: Deadlines
 
-### Johnny Doe
+### Ang Rui Wen Ray
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/ruileirei.png" width="200px">
 
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
-
-* Role: Developer
-* Responsibilities: Data
-
-### Jean Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](https://github.com/Ruileirei)] [[portfolio](team/johndoe.md)]
 
 * Role: Developer
-* Responsibilities: Dev Ops + Threading
+* Responsibilities: Testing
+
+### Emilia Ayu Binti Yuhasnor Affandy
+
+<img src="images/promist-moon.png" width="200px">
+
+[[github](http://github.com/Promist-Moon)]
+[[portfolio](team/promist-moon.md)]
+
+* Role: Developer
+* Responsibilities: Code Quality
+
 
 ### Rachel Wong
 
@@ -61,4 +52,15 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 
 
+
+
+### Dickson Lai
+
+<img src="images/dicksonlai29.png" width="200px">
+
+[[github](http://github.com/Dicksonlai29)]
+[[portfolio](team/johndoe.md)]
+
+* Role: Developer
+* Responsibilities: Documentation
 

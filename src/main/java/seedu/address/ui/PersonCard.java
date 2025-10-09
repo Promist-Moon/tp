@@ -8,6 +8,7 @@ import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.student.Student;
 
 /**
  * An UI component that displays information of a {@code Person}.
@@ -50,10 +51,25 @@ public class PersonCard extends UiPart<Region> {
         id.setText(displayedIndex + ". ");
         name.setText(person.getName().fullName);
         phone.setText(person.getPhone().value);
-        address.setText(person.getAddress().value);
         email.setText(person.getEmail().value);
-        person.getTags().stream()
-                .sorted(Comparator.comparing(tag -> tag.tagName))
-                .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+        // Support Student subclass only (Parent not implemented yet)
+        if (person instanceof Student student) {
+            address.setText(student.getAddress().value);
+            address.setVisible(true);
+            address.setManaged(true);
+            tags.getChildren().clear();
+            tags.setVisible(true);
+            tags.setManaged(true);
+            student.getTags().stream()
+                    .sorted(Comparator.comparing(tag -> tag.tagName))
+                    .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+        } else {
+            // Fallback: hide address and tags if not a Student
+            address.setVisible(false);
+            address.setManaged(false);
+            tags.getChildren().clear();
+            tags.setVisible(false);
+            tags.setManaged(false);
+        }
     }
 }
