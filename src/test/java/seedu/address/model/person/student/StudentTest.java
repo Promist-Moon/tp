@@ -124,11 +124,11 @@ public class StudentTest {
                 .withAddress(VALID_ADDRESS_AMY)
                 .withTags(VALID_TAG_FRIEND)
                 .build();
-        String expectedMessage = "Name: " + VALID_NAME_AMY +
-                "; Phone: " + VALID_PHONE_AMY +
-                "; Email: " + VALID_EMAIL_AMY +
-                "; Address: " + VALID_ADDRESS_AMY +
-                "; Tags: [" + VALID_TAG_FRIEND + "]";
+        String expectedMessage = "Name: " + VALID_NAME_AMY
+                + "; Phone: " + VALID_PHONE_AMY
+                + "; Email: " + VALID_EMAIL_AMY
+                + "; Address: " + VALID_ADDRESS_AMY
+                + "; Tags: [" + VALID_TAG_FRIEND + "]";
         assertEquals(expectedMessage, amy.toDisplayString());
 
     }
