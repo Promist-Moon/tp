@@ -1,4 +1,4 @@
-package seedu.address.model.person;
+package seedu.address.model.person.student;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -14,7 +14,7 @@ import static seedu.address.testutil.TypicalPersons.BOB;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.model.person.student.Student;
+import seedu.address.model.person.Person;
 import seedu.address.testutil.StudentBuilder;
 
 public class StudentTest {
