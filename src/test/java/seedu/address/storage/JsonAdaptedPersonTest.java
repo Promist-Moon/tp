@@ -18,6 +18,7 @@ import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.student.Address;
 import seedu.address.model.person.student.Student;
+import seedu.address.testutil.PersonBuilder;
 
 public class JsonAdaptedPersonTest {
     private static final String INVALID_NAME = "R@chel";
@@ -38,6 +39,20 @@ public class JsonAdaptedPersonTest {
     public void toModelType_validPersonDetails_returnsPerson() throws Exception {
         JsonAdaptedPerson person = new JsonAdaptedPerson(BENSON);
         assertEquals(BENSON, person.toModelType());
+    }
+
+
+    @Test
+    public void constructor_nonStudent_setsAddressNull() {
+        // Create a simple non-Student Person using PersonBuilder (DummyPerson)
+        Person dummyPerson = new PersonBuilder().build();
+
+        // Build a JsonAdaptedPerson from this dummy
+        JsonAdaptedPerson jsonPerson = new JsonAdaptedPerson(dummyPerson);
+
+        // Since non-Student persons have no address, the address field should be null
+        // When we call toModelType(), it should throw because address == null for student subtype
+        assertThrows(IllegalValueException.class, jsonPerson::toModelType);
     }
 
     @Test
