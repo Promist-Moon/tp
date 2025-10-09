@@ -36,28 +36,4 @@ public class Rate {
         return String.format("%.2f", rate);
     }
 
-    /*
-    @Override
-    public boolean equals(Object other) {
-        if (other == this) {
-            return true;
-        }
-
-        // instanceof handles nulls
-        if (!(other instanceof Rate)) {
-            return false;
-        }
-
-        Rate otherRate = (Rate) other;
-        return rate == otherRate.rate;
-    }
-
-    @Override
-    public int hashCode() {
-        Float floatRate = rate;
-        return floatRate.hashCode();
-    }
-
-     */
-
 }
