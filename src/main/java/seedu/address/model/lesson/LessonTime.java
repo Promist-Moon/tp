@@ -12,8 +12,8 @@ import java.time.format.DateTimeFormatter;
  */
 public class LessonTime {
 
-    public static final String MESSAGE_CONSTRAINTS = "Time must be given in the format HH:MM, " +
-            "and the start time should be before the end time";
+    public static final String MESSAGE_CONSTRAINTS = "Time must be given in the format HH:MM, "
+            + "and the start time should be before the end time";
 
     /** Input time format for parsing user input. */
     public static final DateTimeFormatter TIME_FORMAT = DateTimeFormatter.ofPattern("HH:mm");
