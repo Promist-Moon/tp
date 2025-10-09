@@ -14,7 +14,7 @@ public class Rate {
 
     /**
      * Constructs a {@code Rate}.
-     * @param str A valid rate
+     * @param str A valid rate.
      */
     public Rate(String str) {
         checkArgument(isValidRate(str), MESSAGE_CONSTRAINTS);
