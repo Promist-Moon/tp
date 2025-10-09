@@ -1,18 +1,23 @@
 package seedu.address.model.person;
 
-import seedu.address.commons.util.ToStringBuilder;
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Objects;
 
-import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+import seedu.address.commons.util.ToStringBuilder;
 
 
+/**
+ * Represents an abstract Person in the address book.
+ * A Person stores basic identity details such as name, phone number, and email address.
+ * Subclasses (e.g., Student, Parent) may include additional fields specific to their roles.
+ */
 public abstract class Person {
 
     // Identity fields
     private final Name name;
     private final Phone phone;
-    private final Email  email;
+    private final Email email;
 
     protected Person(Name name, Phone phone, Email email) {
         requireAllNonNull(name, phone, email);
@@ -33,6 +38,14 @@ public abstract class Person {
         return email;
     }
 
+    /**
+     * Checks if this person is equal to another object.
+     * Two persons are considered equal if they have the same name, phone, and email,
+     * and are of the same subclass type.
+     *
+     * @param other the object to compare with.
+     * @return true if both objects represent the same person with identical identity fields.
+     */
     public boolean equals(Object other) {
         if (this == other) {
             return true;
@@ -78,6 +91,13 @@ public abstract class Person {
         return builder.toString();
     }
 
+    /**
+     * Returns a string representation of this {@code Person} for debugging purposes.
+     * The string includes the person's {@code Name}, {@code Phone}, and {@code Email}, and is mainly intended
+     * for logging or internal inspection rather than user display.
+     *
+     * @return a string representation of this person with their core identity fields.
+     */
     public String toString() {
         return new ToStringBuilder(this)
                 .add("name", name)
