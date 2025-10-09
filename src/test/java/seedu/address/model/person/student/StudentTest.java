@@ -15,6 +15,7 @@ import static seedu.address.testutil.TypicalPersons.BOB;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.model.person.Person;
+import seedu.address.testutil.PersonBuilder;
 import seedu.address.testutil.StudentBuilder;
 
 public class StudentTest {
@@ -67,6 +68,14 @@ public class StudentTest {
         // different type -> returns false
         assertFalse(ALICE.equals(5));
 
+        // different subclass (Person vs Student) -> returns false
+        Person dummyPerson = new PersonBuilder()
+                .withName(ALICE.getName().fullName)
+                .withPhone(ALICE.getPhone().value)
+                .withEmail(ALICE.getEmail().value)
+                .build();
+        assertFalse(ALICE.equals(dummyPerson));
+
         // different person -> returns false
         assertFalse(ALICE.equals(BOB));
 
@@ -101,4 +110,6 @@ public class StudentTest {
                 + ", tags=" + ALICE.getTags() + "}";
         assertEquals(expected, ALICE.toString());
     }
+
+
 }
