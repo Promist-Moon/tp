@@ -34,5 +34,4 @@ public class Rate {
     public String toString() {
         return String.format("%.2f", rate);
     }
-
 }
