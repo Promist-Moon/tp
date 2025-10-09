@@ -1,10 +1,14 @@
 package seedu.address.testutil;
 
-import seedu.address.model.person.Person;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Phone;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.Name;
+import seedu.address.model.person.Person;
+import seedu.address.model.person.Phone;
 
+
+/**
+ * A utility class to help with building Person objects for testing.
+ */
 public class PersonBuilder {
 
     private static final String DEFAULT_NAME = "Alice Pauline";
@@ -15,27 +19,53 @@ public class PersonBuilder {
     private Phone phone;
     private Email email;
 
+    /**
+     * Creates a {@code PersonBuilder} with default details.
+     */
     public PersonBuilder() {
         name = new Name(DEFAULT_NAME);
         phone = new Phone(DEFAULT_PHONE);
         email = new Email(DEFAULT_EMAIL);
     }
 
+    /**
+     * Sets the {@code Name} of the {@code Person} that we are building.
+     *
+     * @param name The name to set.
+     * @return This {@code PersonBuilder} instance for chaining.
+     */
     public PersonBuilder withName(String name) {
         this.name = new Name(name);
         return this;
     }
 
+    /**
+     * Sets the {@code Phone} of the {@code Person} that we are building.
+     *
+     * @param phone The phone to set.
+     * @return This {@code PersonBuilder} instance for chaining.
+     */
     public PersonBuilder withPhone(String phone) {
         this.phone = new Phone(phone);
         return this;
     }
 
+    /**
+     * Sets the {@code Email} of the {@code Person} that we are building.
+     *
+     * @param email The email to set.
+     * @return This {@code PersonBuilder} instance for chaining.
+     */
     public PersonBuilder withEmail(String email) {
         this.email = new Email(email);
         return this;
     }
 
+    /**
+     * Returns a new {@code Person} with the specified attributes.
+     *
+     * @return A new {@code Person} instance.
+     */
     public Person build() {
         return new DummyPerson(name, phone, email);
     }
