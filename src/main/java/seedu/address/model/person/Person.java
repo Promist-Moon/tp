@@ -2,39 +2,28 @@ package seedu.address.model.person;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
-import java.util.Collections;
-import java.util.HashSet;
 import java.util.Objects;
-import java.util.Set;
 
 import seedu.address.commons.util.ToStringBuilder;
-import seedu.address.model.tag.Tag;
+
 
 /**
- * Represents a Person in the address book.
- * Guarantees: details are present and not null, field values are validated, immutable.
+ * Represents an abstract Person in the address book.
+ * A Person stores basic identity details such as name, phone number, and email address.
+ * Subclasses (e.g., Student, Parent) may include additional fields specific to their roles.
  */
-public class Person {
+public abstract class Person {
 
     // Identity fields
     private final Name name;
     private final Phone phone;
     private final Email email;
 
-    // Data fields
-    private final Address address;
-    private final Set<Tag> tags = new HashSet<>();
-
-    /**
-     * Every field must be present and not null.
-     */
-    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, address, tags);
+    protected Person(Name name, Phone phone, Email email) {
+        requireAllNonNull(name, phone, email);
         this.name = name;
         this.phone = phone;
         this.email = email;
-        this.address = address;
-        this.tags.addAll(tags);
     }
 
     public Name getName() {
@@ -49,20 +38,31 @@ public class Person {
         return email;
     }
 
-    public Address getAddress() {
-        return address;
-    }
-
     /**
-     * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
-     * if modification is attempted.
+     * Checks if this person is equal to another object.
+     * Two persons are considered equal if they have the same name, phone, and email,
+     * and are of the same subclass type.
+     *
+     * @param other the object to compare with.
+     * @return true if both objects represent the same person with identical identity fields.
      */
-    public Set<Tag> getTags() {
-        return Collections.unmodifiableSet(tags);
+    public boolean equals(Object other) {
+        if (this == other) {
+            return true;
+        }
+
+        if (other == null || this.getClass() != other.getClass()) {
+            return false;
+        }
+
+        Person that = (Person) other;
+        return name.equals(that.name)
+                && phone.equals(that.phone)
+                && email.equals(that.email);
     }
 
     /**
-     * Returns true if both persons have the same name.
+     * Returns true if both person have the same name.
      * This defines a weaker notion of equality between two persons.
      */
     public boolean isSamePerson(Person otherPerson) {
@@ -74,44 +74,36 @@ public class Person {
                 && otherPerson.getName().equals(getName());
     }
 
-    /**
-     * Returns true if both persons have the same identity and data fields.
-     * This defines a stronger notion of equality between two persons.
-     */
-    @Override
-    public boolean equals(Object other) {
-        if (other == this) {
-            return true;
-        }
-
-        // instanceof handles nulls
-        if (!(other instanceof Person)) {
-            return false;
-        }
-
-        Person otherPerson = (Person) other;
-        return name.equals(otherPerson.name)
-                && phone.equals(otherPerson.phone)
-                && email.equals(otherPerson.email)
-                && address.equals(otherPerson.address)
-                && tags.equals(otherPerson.tags);
-    }
-
-    @Override
     public int hashCode() {
-        // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, tags);
+        return Objects.hash(name, phone, email);
     }
 
-    @Override
+
+    /**
+     * Returns a user-facing string for display.
+     * Subclasses may override this method to append their own fields.
+     */
+    public String toDisplayString() {
+        final StringBuilder builder = new StringBuilder();
+        builder.append("Name: ").append(name)
+                .append("; Phone: ").append(phone)
+                .append("; Email: ").append(email);
+        return builder.toString();
+    }
+
+    /**
+     * Returns a string representation of this {@code Person} for debugging purposes.
+     * The string includes the person's {@code Name}, {@code Phone}, and {@code Email}, and is mainly intended
+     * for logging or internal inspection rather than user display.
+     *
+     * @return a string representation of this person with their core identity fields.
+     */
     public String toString() {
         return new ToStringBuilder(this)
                 .add("name", name)
                 .add("phone", phone)
                 .add("email", email)
-                .add("address", address)
-                .add("tags", tags)
                 .toString();
-    }
 
+    }
 }
