@@ -1,12 +1,20 @@
 package seedu.address.model.lesson;
 
-import seedu.address.commons.util.ToStringBuilder;
-import seedu.address.model.person.*;
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.time.Duration;
 import java.time.LocalTime;
 import java.util.Objects;
 
+import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.model.person.Address;
+import seedu.address.model.person.Person;
+
+/**
+ * Represents a Lesson.
+ * Does not guarantee: details are present and not null, field values are validated, immutable.
+ * Fields student and address may be null, can only be fixed when the student class has been created.
+ */
 public class Lesson {
     private Person student;
     private Subject subject;
@@ -16,7 +24,11 @@ public class Lesson {
     private Rate rate;
     private Address address;
 
+    /**
+     * Every field must be present and not null.
+     */
     public Lesson(Subject subject, Level level, Day day, LessonTime lessonTime, Rate rate) {
+        requireAllNonNull(subject, level, day, lessonTime, rate);
         this.subject = subject;
         this.level = level;
         this.day = day;
@@ -64,7 +76,12 @@ public class Lesson {
         return student;
     }
 
+    /**
+     * Adds a student to the student field and adds the address of the student in the address field
+     * @param student The student to be added.
+     */
     public void addStudent(Person student) {
+        requireAllNonNull(student);
         this.student = student;
         this.address = student.getAddress();
     }

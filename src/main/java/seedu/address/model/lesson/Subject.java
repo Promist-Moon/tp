@@ -1,7 +1,5 @@
 package seedu.address.model.lesson;
 
-import static seedu.address.commons.util.AppUtil.checkArgument;
-
 /**
  * Represents a Lesson's Subject in the address book.
  * Guarantees: immutable; is valid as declared in {@link #isValidSubject(String)}
@@ -18,7 +16,9 @@ public enum Subject {
     SOCIAL_STUDIES("Social Studies"),
     MOTHER_TONGUE("Mother Tongue");
 
-    public static final String MESSAGE_CONSTRAINTS = "Subjects are not case-sensitive and can only take these values: Math, English, Physics, Chemistry, Biology, Geography, History, Literature, Social Studies, Mother Tongue";
+    public static final String MESSAGE_CONSTRAINTS = "Subjects are not case-sensitive, " +
+            "and can only take these values: Math, English, Physics, Chemistry, Biology, " +
+            "Geography, History, Literature, Social Studies, Mother Tongue";
 
     private final String displayName;
 

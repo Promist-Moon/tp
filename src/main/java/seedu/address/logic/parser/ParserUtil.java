@@ -153,12 +153,11 @@ public class ParserUtil {
      */
     public static Level parseLevel(String level) throws ParseException {
         requireNonNull(level);
-        String trimmedLevel = level.trim();
-        int integerLevel = Integer.parseInt(trimmedLevel);
-        if (!Level.isValidLevel(integerLevel)) {
+        String trimmedLevel = level.trim();;
+        if (!Level.isValidLevel(trimmedLevel)) {
             throw new ParseException(Level.MESSAGE_CONSTRAINTS);
         }
-        return Level.fromInt(integerLevel);
+        return Level.fromString(trimmedLevel);
     }
 
     /**
