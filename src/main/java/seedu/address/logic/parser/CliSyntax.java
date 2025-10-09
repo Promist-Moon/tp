@@ -12,4 +12,13 @@ public class CliSyntax {
     public static final Prefix PREFIX_ADDRESS = new Prefix("a/");
     public static final Prefix PREFIX_TAG = new Prefix("t/");
 
+    /* Prefix definitions for Lesson */
+    public static final Prefix PREFIX_STUDENT_INDEX = new Prefix("i/");
+    public static final Prefix PREFIX_SUBJECT = new Prefix("s/");
+    public static final Prefix PREFIX_LEVEL = new Prefix("l/");
+    public static final Prefix PREFIX_DAY = new Prefix("d/");
+    public static final Prefix PREFIX_START_TIME = new Prefix("s/");
+    public static final Prefix PREFIX_END_TIME = new Prefix("e/");
+    public static final Prefix PREFIX_RATE = new Prefix("r/");
+
 }
