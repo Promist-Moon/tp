@@ -11,7 +11,9 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.model.lesson.Lesson;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.student.Student;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -144,5 +146,26 @@ public class ModelManager implements Model {
                 && userPrefs.equals(otherModelManager.userPrefs)
                 && filteredPersons.equals(otherModelManager.filteredPersons);
     }
+
+    //=========== Lesson ================================================================================
+
+
+
+    @Override
+    public boolean hasLesson(Lesson lesson) {
+        // TO BE IMPLEMENTED
+        requireNonNull(lesson);
+        //return addressBook.hasLesson(lesson);
+        return false;
+    }
+
+    @Override
+    public void addLesson(Student student, Lesson lesson) {
+        // TO BE IMPLEMENTED WITH STUDENT
+        //addressBook.addLesson(lesson);
+        //updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        lesson.addStudent(student);
+    }
+
 
 }
