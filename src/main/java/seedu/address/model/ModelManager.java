@@ -13,6 +13,7 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.lesson.Lesson;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.student.Student;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -158,10 +159,8 @@ public class ModelManager implements Model {
         return false;
     }
 
-
-
     @Override
-    public void addLesson(Person student, Lesson lesson) {
+    public void addLesson(Student student, Lesson lesson) {
         // TO BE IMPLEMENTED WITH STUDENT
         //addressBook.addLesson(lesson);
         //updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);

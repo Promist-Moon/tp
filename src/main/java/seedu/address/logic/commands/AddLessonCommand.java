@@ -18,6 +18,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.lesson.Lesson;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.student.Student;
 
 /**
  * Adds a lesson to the address book.
@@ -76,8 +77,14 @@ public class AddLessonCommand extends Command {
         }
 
         // check if model hasLesson (same timeslot)
-        Person studentToAddLesson = lastShownList.get(targetIndex.getZeroBased());
-        model.addLesson(studentToAddLesson, toAdd);
+        Person person = lastShownList.get(targetIndex.getZeroBased());
+        if (person instanceof Student) {
+            Student studentToAddLesson = (Student) person;
+            model.addLesson(studentToAddLesson, toAdd);
+        } else {
+            // to edit and create a message for invalid student
+            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        }
 
         return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.formatLesson(toAdd)));
 

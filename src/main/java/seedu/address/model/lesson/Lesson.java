@@ -7,8 +7,8 @@ import java.time.LocalTime;
 import java.util.Objects;
 
 import seedu.address.commons.util.ToStringBuilder;
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Person;
+import seedu.address.model.person.student.Address;
+import seedu.address.model.person.student.Student;
 
 /**
  * Represents a Lesson.
@@ -16,7 +16,7 @@ import seedu.address.model.person.Person;
  * Fields student and address may be null, can only be fixed when the student class has been created.
  */
 public class Lesson {
-    private Person student;
+    private Student student;
     private Subject subject;
     private Level level;
     private Day day;
@@ -72,7 +72,7 @@ public class Lesson {
         return lessonTime.getDuration();
     }
 
-    public Person getStudent() {
+    public Student getStudent() {
         return student;
     }
 
@@ -80,7 +80,7 @@ public class Lesson {
      * Adds a student to the student field and adds the address of the student in the address field
      * @param student The student to be added.
      */
-    public void addStudent(Person student) {
+    public void addStudent(Student student) {
         requireAllNonNull(student);
         this.student = student;
         this.address = student.getAddress();
