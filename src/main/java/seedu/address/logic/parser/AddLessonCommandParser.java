@@ -15,11 +15,10 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.AddLessonCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.lesson.Day;
-import seedu.address.model.lesson.EndTime;
+import seedu.address.model.lesson.LessonTime;
 import seedu.address.model.lesson.Lesson;
 import seedu.address.model.lesson.Level;
 import seedu.address.model.lesson.Rate;
-import seedu.address.model.lesson.StartTime;
 import seedu.address.model.lesson.Subject;
 
 /**
@@ -51,12 +50,13 @@ public class AddLessonCommandParser implements Parser {
         Subject subject = ParserUtil.parseSubject(argMultimap.getValue(PREFIX_SUBJECT).get());
         Level level = ParserUtil.parseLevel(argMultimap.getValue(PREFIX_LEVEL).get());
         Day day = ParserUtil.parseDay(argMultimap.getValue(PREFIX_DAY).get());
-        StartTime startTime = ParserUtil.parseStartTime(argMultimap.getValue(PREFIX_START_TIME).get());
-        EndTime endTime = ParserUtil.parseEndTime(startTime, argMultimap.getValue(PREFIX_END_TIME).get());
+        String startTime = argMultimap.getValue(PREFIX_START_TIME).get();
+        String endTime = argMultimap.getValue(PREFIX_END_TIME).get();
+        LessonTime lessonTime = ParserUtil.parseLessonTime(startTime, endTime);
         Rate rate = ParserUtil.parseRate(argMultimap.getValue(PREFIX_RATE).get());
 
 
-        Lesson lesson = new Lesson(subject, level, day, startTime, endTime, rate);
+        Lesson lesson = new Lesson(subject, level, day, lessonTime, rate);
 
         return new AddLessonCommand(index, lesson);
     }

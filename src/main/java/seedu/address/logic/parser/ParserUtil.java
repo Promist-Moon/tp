@@ -11,10 +11,9 @@ import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 import seedu.address.model.lesson.Day;
-import seedu.address.model.lesson.EndTime;
+import seedu.address.model.lesson.LessonTime;
 import seedu.address.model.lesson.Level;
 import seedu.address.model.lesson.Rate;
-import seedu.address.model.lesson.StartTime;
 import seedu.address.model.lesson.Subject;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
@@ -193,33 +192,19 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String startTime} into an {@code startTime}.
+     * Parses a {@code String startTime} and a {@code String endTime} into an {@code LessonTime}.
      * Leading and trailing whitespaces will be trimmed.
      *
-     * @throws ParseException if the given {@code startTime} is invalid.
+     * @throws ParseException if the given {@code startTime} and {@code String endTime} is invalid.
      */
-    public static StartTime parseStartTime(String startTime) throws ParseException {
-        requireNonNull(startTime);
+    public static LessonTime parseLessonTime(String startTime, String endTime) throws ParseException {
+        requireNonNull(startTime, endTime);
         String trimmedStartTime = startTime.trim();
-        if (!StartTime.isValidTimeFormat(trimmedStartTime)) {
-            throw new ParseException(StartTime.MESSAGE_CONSTRAINTS);
-        }
-        return new StartTime(trimmedStartTime);
-    }
-
-    /**
-     * Parses a {@code String endTime} into an {@code endTime}.
-     * Leading and trailing whitespaces will be trimmed.
-     *
-     * @throws ParseException if the given {@code endTime} is invalid.
-     */
-    public static EndTime parseEndTime(StartTime start, String endTime) throws ParseException {
-        requireNonNull(endTime);
         String trimmedEndTime = endTime.trim();
-        if (!EndTime.isValidEndTimeFormat(start, trimmedEndTime)) {
-            throw new ParseException(EndTime.MESSAGE_CONSTRAINTS);
+        if (!LessonTime.isValidLessonTime(trimmedStartTime, trimmedEndTime)) {
+            throw new ParseException(LessonTime.MESSAGE_CONSTRAINTS);
         }
-        return EndTime.ofEndTime(start, trimmedEndTime);
+        return LessonTime.ofLessonTime(trimmedStartTime, trimmedEndTime);
     }
 
 }

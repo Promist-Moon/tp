@@ -4,6 +4,7 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.person.*;
 
 import java.time.Duration;
+import java.time.LocalTime;
 import java.util.Objects;
 
 public class Lesson {
@@ -11,21 +12,16 @@ public class Lesson {
     private Subject subject;
     private Level level;
     private Day day;
-    private StartTime startTime;
-    private EndTime endTime;
+    private LessonTime lessonTime;
     private Rate rate;
     private Address address;
-    private Duration duration;
 
-    public Lesson(Subject subject, Level level, Day day, StartTime startTime, EndTime endTime,
-                  Rate rate) {
+    public Lesson(Subject subject, Level level, Day day, LessonTime lessonTime, Rate rate) {
         this.subject = subject;
         this.level = level;
         this.day = day;
-        this.startTime = startTime;
-        this.endTime = endTime;
+        this.lessonTime = lessonTime;
         this.rate = rate;
-        this.duration = endTime.getDuration();
     }
 
     public Subject getSubject() {
@@ -40,12 +36,16 @@ public class Lesson {
         return day;
     }
 
-    public StartTime getStartTime() {
-        return startTime;
+    public LocalTime getStartTime() {
+        return lessonTime.getStart();
     }
 
-    public EndTime getEndTime() {
-        return endTime;
+    public LocalTime getEndTime() {
+        return lessonTime.getEnd();
+    }
+
+    public LessonTime getLessonTime() {
+        return lessonTime;
     }
 
     public Rate getRate() {
@@ -57,7 +57,7 @@ public class Lesson {
     }
 
     public Duration getDuration() {
-        return duration;
+        return lessonTime.getDuration();
     }
 
     public Person getStudent() {
@@ -86,12 +86,12 @@ public class Lesson {
 
         Lesson otherLesson = (Lesson) other;
         return day.getDayOfWeek().equals(otherLesson.day.getDayOfWeek())
-                && endTime.hasTimeClash(otherLesson.endTime);
+                && lessonTime.hasTimeClash(otherLesson.lessonTime);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(student, subject, level, day, startTime, endTime, rate, address, duration);
+        return Objects.hash(student, subject, level, day, lessonTime, rate, address);
     }
 
     @Override
@@ -100,8 +100,7 @@ public class Lesson {
                 .add("subject", subject)
                 .add("level", level)
                 .add("day", day)
-                .add("startTime", startTime)
-                .add("endTime", endTime)
+                .add("time", lessonTime)
                 .add("rate", rate)
                 .add("address", address)
                 .toString();

@@ -1,9 +1,13 @@
 package seedu.address.model.lesson;
 
-import java.time.DayOfWeek;
-
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
+import java.time.DayOfWeek;
+
+/**
+ * Represents the day of a Lesson.
+ * Guarantees: immutable; is valid as declared in {@link #isValidDay(String)}
+ */
 public class Day {
 
     public static final String MESSAGE_CONSTRAINTS = "Day is an integer which corresponds to: "
@@ -12,6 +16,11 @@ public class Day {
 
     private final DayOfWeek day;
 
+    /**
+     * Constructs a {@code Day}.
+     *
+     * @param str A valid string representing an integer day.
+     */
     public Day(String str) {
         checkArgument(isValidDay(str), MESSAGE_CONSTRAINTS);
         int integerDay = Integer.parseInt(str);
