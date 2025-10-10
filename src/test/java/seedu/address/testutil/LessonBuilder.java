@@ -1,5 +1,7 @@
 package seedu.address.testutil;
 
+import static seedu.address.model.lesson.LessonTime.ofLessonTime;
+
 import java.time.LocalTime;
 
 import seedu.address.model.lesson.Day;
@@ -10,8 +12,6 @@ import seedu.address.model.lesson.Rate;
 import seedu.address.model.lesson.Subject;
 import seedu.address.model.person.student.Student;
 import seedu.address.model.person.student.Address;
-
-import static seedu.address.model.lesson.LessonTime.ofLessonTime;
 
 /**
  * A utility class to help with building {@link Lesson} objects for testing.
@@ -138,7 +138,7 @@ public class LessonBuilder {
      * Associates a {@link Student} with this lesson.
      * The student's address is automatically recorded in the builder.
      *
-     * @param student the student to associate (may be null).
+     * @param student the student to associate.
      * @return this builder for chaining.
      */
     public LessonBuilder withStudent(Student student) {
