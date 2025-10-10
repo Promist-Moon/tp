@@ -1,20 +1,20 @@
 package seedu.address.model.lesson;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
 
-import org.junit.jupiter.api.Test;
-
 import java.time.DayOfWeek;
+
+import org.junit.jupiter.api.Test;
 
 public class DayTest {
 
     @Test
     public void constructor_validDayString_success() {
-        for (int i= 1; i <=7; i++) {
+        for (int i = 1; i <= 7; i++) {
             Day day = new Day(String.valueOf(i));
             assertEquals(DayOfWeek.of(i), day.getDayOfWeek());
         }
@@ -46,7 +46,7 @@ public class DayTest {
     }
 
     @Test
-    public void valid_equals_and_hashcode() {
+    public void validEquals_and_validHashcode() {
         Day day1 = new Day("4");
         Day day2 = new Day("4");
         Day day3 = new Day("3");

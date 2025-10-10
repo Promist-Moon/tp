@@ -13,6 +13,16 @@ public class Payment {
     private int numberOfHours;
     private int hourlyRate;
 
+
+    /**
+     * Constructs a new {@code Payment} object for a specified student.
+     * This constructor initializes the payment details including
+     * the associated student, total number of hours worked, and the hourly rate.
+     *
+     * @param student        the student receiving the payment
+     * @param numberOfHours  the total number of hours worked
+     * @param hourlyRate     the rate of payment per hour
+     */
     public Payment(Student student, int numberOfHours, int hourlyRate) {
         this.student = student;
         this.numberOfHours = numberOfHours;
