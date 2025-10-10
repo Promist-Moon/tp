@@ -40,6 +40,15 @@ public class DayTest {
     }
 
     @Test
+    public void isValidDay_nullAndWhitespace() {
+        assertThrows(NullPointerException.class, () -> Day.isValidDay(null));
+        assertFalse(Day.isValidDay(""));
+        assertFalse(Day.isValidDay(" "));
+        assertFalse(Day.isValidDay(" 1 "));
+        assertFalse(Day.isValidDay("01"));
+    }
+
+    @Test
     public void toString_returnsCorrectDayString() {
         Day day = new Day("3");
         assertEquals("WEDNESDAY", day.toString());
