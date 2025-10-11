@@ -13,7 +13,15 @@ import java.util.TreeMap;
  */
 public class PaymentList {
 
-    private final NavigableMap<YearMonth, Payment> byMonth = new TreeMap<>();
+    private final NavigableMap<YearMonth, Payment> byMonth;
+
+    /**
+     * Constructs an empty PaymentList.
+     */
+    public PaymentList() {
+        this.byMonth = new TreeMap<>();
+    }
+
 
     public boolean add(Payment payment) {
         Objects.requireNonNull(payment);
