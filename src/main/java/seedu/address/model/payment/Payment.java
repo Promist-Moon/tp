@@ -12,6 +12,7 @@ public class Payment {
     private YearMonth yearMonth;
     private int numberOfHours;
     private int hourlyRate;
+    private boolean isPaid;
 
 
     /**
@@ -27,6 +28,15 @@ public class Payment {
         this.student = student;
         this.numberOfHours = numberOfHours;
         this.hourlyRate = hourlyRate;
+        this.isPaid = false;
+    }
+
+    public YearMonth getYearMonth() {
+        return this.yearMonth;
+    }
+
+    public boolean isPaid() {
+        return isPaid;
     }
 
     /**

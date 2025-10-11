@@ -1,14 +1,13 @@
 package seedu.address.model.lesson;
 
-import java.io.IOException;
-import java.time.Duration;
-import java.time.LocalDateTime;
+import java.time.YearMonth;
 import java.util.ArrayList;
 
 import seedu.address.model.lesson.exceptions.LessonException;
+import seedu.address.model.util.DateTimeUtil;
 
 /**
- * Represents an in-memory list of lessons that can be modified and persisted.
+ * Represents a list of lessons.
  * A LessonList represents the lessons one student takes under one tutor.
  * It supports adding, retrieving, deleting, and printing lessons.
  */
@@ -16,7 +15,7 @@ public class LessonList {
     private final ArrayList<Lesson> lessons;
 
     /**
-     * Creates a new lesson list by creating an empty array list.
+     * Constructs a new lesson list by creating an empty array list.
      */
     public LessonList() {
         this.lessons = new ArrayList<>();
@@ -62,11 +61,17 @@ public class LessonList {
     /**
      * Returns the total duration of all classes in a month.
      */
-    public long getTotalHours() {
+    public long getTotalHours(YearMonth month) {
         long totalHours = 0;
         for (Lesson l : lessons) {
+            Day day = l.getDay();
+
             // count number of lessons in a month based on local month
-            totalHours = totalHours + l.getDurationLong();
+            int daysInMonth = DateTimeUtil.countDaysOfWeekInMonth(month, day);
+            long hoursPerLesson = l.getDurationLong();
+            long hoursPerMonth = daysInMonth * hoursPerLesson;
+
+            totalHours += hoursPerMonth;
         }
         return totalHours;
     }
