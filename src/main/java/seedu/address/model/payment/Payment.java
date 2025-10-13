@@ -39,12 +39,4 @@ public class Payment {
         return isPaid;
     }
 
-    /**
-     * Calculates fees the student owes the tutor for the month
-     * @return product of numberOfHours and hourlyRate
-     */
-    public int calculateMonthlyRate() {
-        return this.numberOfHours * this.hourlyRate;
-    }
-
 }
