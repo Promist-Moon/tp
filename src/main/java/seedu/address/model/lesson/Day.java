@@ -56,7 +56,7 @@ public class Day {
         }
     }
 
-    public DayOfWeek getDay() {
+    public DayOfWeek getDayOfWeek() {
         return day;
     }
 
