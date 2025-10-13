@@ -1,6 +1,7 @@
 package seedu.address.logic;
 
 import java.nio.file.Path;
+import java.time.YearMonth;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
@@ -47,4 +48,10 @@ public interface Logic {
      * Set the user prefs' GUI settings.
      */
     void setGuiSettings(GuiSettings guiSettings);
+
+    /**
+     * Gets current year/month
+     * @return
+     */
+    YearMonth getCurrentYearMonth();
 }
