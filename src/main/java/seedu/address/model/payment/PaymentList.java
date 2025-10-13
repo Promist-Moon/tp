@@ -23,6 +23,11 @@ public class PaymentList {
     }
 
 
+    /**
+     * Add Payment object to PaymentList.
+     * @param payment for current month.
+     * @return true if successfully added.
+     */
     public boolean add(Payment payment) {
         Objects.requireNonNull(payment);
         YearMonth m = payment.getYearMonth();
