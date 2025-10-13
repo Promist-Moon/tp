@@ -10,7 +10,7 @@ import seedu.address.model.person.student.Student;
 public class Payment {
     private final Student student;
     private YearMonth yearMonth;
-    private float amountPerStudent;
+    private TotalAmount totalAmount;
     private boolean isPaid;
 
     /**
@@ -20,11 +20,11 @@ public class Payment {
      *
      * @param student        the student receiving the payment
      * @param yearMonth      the year and month corresponding to payment
-     * @param amountPerStudent  the total amount due per month by a student
+     * @param totalAmount  the total amount due per month by a student
      */
-    public Payment(Student student, YearMonth yearMonth, float amountPerStudent) {
+    public Payment(Student student, YearMonth yearMonth, TotalAmount totalAmount) {
         this.student = student;
-        this.amountPerStudent = amountPerStudent;
+        this.totalAmount = totalAmount;
         this.yearMonth = yearMonth;
         this.isPaid = false;
     }
@@ -37,8 +37,12 @@ public class Payment {
         return this.yearMonth;
     }
 
-    public float getAmountPerStudent() {
-        return this.amountPerStudent;
+    public TotalAmount getTotalAmount() {
+        return this.totalAmount;
+    }
+
+    public float getTotalAmountFloat() {
+        return this.totalAmount.getAsFloat();
     }
 
     public boolean isPaid() {

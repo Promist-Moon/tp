@@ -5,6 +5,7 @@ import static seedu.address.testutil.TypicalPersons.ALICE;
 import java.time.YearMonth;
 
 import seedu.address.model.payment.Payment;
+import seedu.address.model.payment.TotalAmount;
 import seedu.address.model.person.student.Student;
 
 /**
@@ -14,12 +15,12 @@ public class PaymentBuilder {
 
     public static final Student DEFAULT_STUDENT = ALICE;
     public static final YearMonth DEFAULT_YEARMONTH = YearMonth.of(2025, 10);
-    public static final float DEFAULT_AMOUNT = 600;
+    public static final TotalAmount DEFAULT_AMOUNT = new TotalAmount(600);
     public static final boolean DEFAULT_ISPAID = false;
 
     private Student student;
     private YearMonth yearMonth;
-    private float amountPerStudent;
+    private TotalAmount totalAmount;
     private boolean isPaid;
 
     /**
@@ -28,7 +29,7 @@ public class PaymentBuilder {
     public PaymentBuilder() {
         student = DEFAULT_STUDENT;
         yearMonth = DEFAULT_YEARMONTH;
-        amountPerStudent = DEFAULT_AMOUNT;
+        totalAmount = DEFAULT_AMOUNT;
         isPaid = DEFAULT_ISPAID;
     }
 
@@ -38,7 +39,7 @@ public class PaymentBuilder {
     public PaymentBuilder(Payment paymentToCopy) {
         student = paymentToCopy.getStudent();
         yearMonth = paymentToCopy.getYearMonth();
-        amountPerStudent = paymentToCopy.getAmountPerStudent();
+        totalAmount = paymentToCopy.getTotalAmount();
         isPaid = paymentToCopy.isPaid();
     }
 
@@ -59,10 +60,10 @@ public class PaymentBuilder {
     }
 
     /**
-     * Sets the {@code amountPerStudent} of the {@code Payment} that we are building.
+     * Sets the {@code totalAmount} of the {@code Payment} that we are building.
      */
-    public PaymentBuilder withAmountPerStudent(float amountPerStudent) {
-        this.amountPerStudent = amountPerStudent;
+    public PaymentBuilder withTotalAmount(TotalAmount totalAmount) {
+        this.totalAmount = totalAmount;
         return this;
     }
 
@@ -75,6 +76,6 @@ public class PaymentBuilder {
     }
 
     public Payment build() {
-        return new Payment(student, yearMonth, amountPerStudent);
+        return new Payment(student, yearMonth, totalAmount);
     }
 }
