@@ -17,6 +17,7 @@ public class PaymentList {
 
     /**
      * Constructs an empty PaymentList.
+     * Creates a new TreeMap.
      */
     public PaymentList() {
         this.byMonth = new TreeMap<>();
