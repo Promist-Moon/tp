@@ -1,5 +1,6 @@
 package seedu.address.model.person.student;
 
+import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Collections;
@@ -28,6 +29,8 @@ public class Student extends Person {
     private final LessonList lessons;
     private final PaymentList payments;
 
+    private PaymentStatus paymentStatus;
+
     /**
      * Every field must be present and not null.
      */
@@ -38,6 +41,7 @@ public class Student extends Person {
         this.tags.addAll(tags);
         this.lessons = new LessonList();
         this.payments = new PaymentList();
+        this.paymentStatus = PaymentStatus.UNPAID;
     }
 
     public Address getAddress() {
@@ -64,6 +68,27 @@ public class Student extends Person {
      */
     public PaymentList getPaymentList() {
         return this.payments;
+    }
+
+    /**
+     * Returns the payment status of the student for the month
+     */
+    public PaymentStatus getPaymentStatus() {
+        return this.paymentStatus;
+    }
+
+    /**
+     * Changes payment status to {@link PaymentStatus}
+     *
+     * Changes to paid when pay command is used.
+     * Changes to unpaid when a new month has started.
+     * Changes to overdue when a new month has started and previous month is still unpaid.
+     *
+     * @param paymentStatus paid, unpaid, or overdue.
+     */
+    public void setPaymentStatus(PaymentStatus paymentStatus) {
+        requireNonNull(paymentStatus);
+        this.paymentStatus = paymentStatus;
     }
 
     /**

@@ -11,5 +11,12 @@ package seedu.address.model.person.student;
 public enum PaymentStatus {
     PAID,
     UNPAID,
-    OVERDUE
+    OVERDUE;
+
+    @Override
+    public String toString() {
+        // Capitalize first letter only, e.g. "Paid"
+        String lower = name().toLowerCase();
+        return Character.toUpperCase(lower.charAt(0)) + lower.substring(1);
+    }
 }

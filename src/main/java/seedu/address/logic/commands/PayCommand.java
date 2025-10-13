@@ -10,6 +10,7 @@ import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.student.Student;
 
 /**
  * Marks all payments associated with the specified person as paid.
@@ -41,7 +42,28 @@ public class PayCommand extends Command {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 
+        Person studentToPay = lastShownList.get(targetIndex.getZeroBased());
+
         return new CommandResult(String.format(MESSAGE_PAYMENT_SUCCESS, "placeholder success message"));
+    }
+
+    private static Person setPaymentStatus(Person studentToPay) {
+        assert studentToPay != null;
+
+        // edit for future iterations to accept only student objects straightaway
+        if (studentToPay instanceof Student s) {
+            return setPaymentStatus(s);
+        }
+
+        // if not Student (or Parent in future additions)
+        throw new IllegalArgumentException("Unsupported person: " + studentToPay.getClass().getSimpleName());
+    }
+
+    private static Student setPaymentStatus(Student studentToPay) {
+
+
+        // if not Student (or Parent in future additions)
+        throw new IllegalArgumentException("Unsupported person: " + studentToPay.getClass().getSimpleName());
     }
 
     @Override
