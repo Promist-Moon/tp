@@ -9,13 +9,13 @@ import org.junit.jupiter.api.Test;
 public class TotalAmountTest {
 
     @Test
-    public void constructor_invalidPhone_throwsIllegalArgumentException() {
+    public void constructor_invalidTotalAmount_throwsIllegalArgumentException() {
         float invalidTotalAmount = -100;
         assertThrows(IllegalArgumentException.class, () -> new TotalAmount(invalidTotalAmount));
     }
 
     @Test
-    public void isValidPhone() {
+    public void isValidTotalAmount() {
         // invalid total amounts
         assertFalse(TotalAmount.isValidTotalAmount(-122)); // negative numbers
 
