@@ -101,8 +101,7 @@ public class Student extends Person {
 
         Student otherStudent = (Student) other;
         return address.equals(otherStudent.address)
-                && tags.equals(otherStudent.tags)
-                && lessons.equals(otherStudent.lessons);
+                && tags.equals(otherStudent.tags);
     }
 
     @Override
@@ -117,7 +116,6 @@ public class Student extends Person {
         builder.append("; Address: ").append(address)
                 .append("; Tags: ");
         this.getTags().forEach(builder::append);
-        builder.append("; Lessons: ").append(lessons.getListString());
         return builder.toString();
     }
 
