@@ -160,12 +160,18 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public boolean hasLessonClash(Lesson lesson) {
+        requireNonNull(lesson);
+        // TO BE IMPLEMENTED
+        return false;
+    }
+
+    @Override
     public void addLesson(Student student, Lesson lesson) {
         // TO BE IMPLEMENTED WITH STUDENT
         //addressBook.addLesson(lesson);
         //updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         lesson.addStudent(student);
     }
-
 
 }

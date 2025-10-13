@@ -88,9 +88,14 @@ public interface Model {
     void updateFilteredPersonList(Predicate<Person> predicate);
 
     /**
-     * Returns true if a lesson with the same timeslot as {@code lesson} exists in the address book.
+     * Returns true if a lesson with the same identity {@code lesson} exists in the address book.
      */
     boolean hasLesson(Lesson lesson);
+
+    /**
+     * Returns true if a lesson with the same timeslot as {@code lesson} exists in the address book.
+     */
+    boolean hasLessonClash(Lesson lesson);
 
     /**
      * Adds the given lesson.
