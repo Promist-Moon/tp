@@ -10,6 +10,7 @@ import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.student.PaymentStatus;
 import seedu.address.model.person.student.Student;
 
 /**
@@ -44,7 +45,7 @@ public class PayCommand extends Command {
 
         Person studentToPay = lastShownList.get(targetIndex.getZeroBased());
 
-        return new CommandResult(String.format(MESSAGE_PAYMENT_SUCCESS, "placeholder success message"));
+        return new CommandResult(String.format(MESSAGE_PAYMENT_SUCCESS, Messages.format(studentToPay)));
     }
 
     private static Person setPaymentStatus(Person studentToPay) {
@@ -60,10 +61,9 @@ public class PayCommand extends Command {
     }
 
     private static Student setPaymentStatus(Student studentToPay) {
+        studentToPay.setPaymentStatus(PaymentStatus.PAID);
 
-
-        // if not Student (or Parent in future additions)
-        throw new IllegalArgumentException("Unsupported person: " + studentToPay.getClass().getSimpleName());
+        return studentToPay;
     }
 
     @Override
