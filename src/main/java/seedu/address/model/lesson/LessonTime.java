@@ -113,6 +113,14 @@ public class LessonTime {
     }
 
     /**
+     * Converts the Duration of the class to hours
+     * @return a long representing number of hours
+     */
+    public long getDurationLong() {
+        return this.getDuration().toHours();
+    }
+
+    /**
      * Returns true if both lesson times have overlapping start times and end times
      */
     public boolean hasTimeClash(Object other) {
