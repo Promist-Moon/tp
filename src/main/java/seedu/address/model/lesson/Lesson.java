@@ -108,7 +108,7 @@ public class Lesson {
         }
 
         Lesson otherLesson = (Lesson) other;
-        return day.getDay().equals(otherLesson.day.getDay())
+        return day.getDayOfWeek().equals(otherLesson.day.getDayOfWeek())
                 && lessonTime.hasTimeClash(otherLesson.lessonTime);
     }
 
@@ -128,7 +128,7 @@ public class Lesson {
         }
 
         Lesson otherLesson = (Lesson) other;
-        return day.getDay().equals(otherLesson.day.getDay())
+        return day.getDayOfWeek().equals(otherLesson.day.getDayOfWeek())
                 && lessonTime.equals(otherLesson.lessonTime)
                 && student.equals(otherLesson.student)
                 && subject.equals(otherLesson.subject)
