@@ -39,4 +39,19 @@ public class TotalAmount {
     public String toString() {
         return String.format("%.2f", totalAmount);
     }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof TotalAmount)) {
+            return false;
+        }
+
+        TotalAmount otherTotalAmount = (TotalAmount) other;
+        return totalAmount == otherTotalAmount.getAsFloat();
+    }
 }
