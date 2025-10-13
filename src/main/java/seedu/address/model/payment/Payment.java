@@ -10,10 +10,8 @@ import seedu.address.model.person.student.Student;
 public class Payment {
     private final Student student;
     private YearMonth yearMonth;
-    private int numberOfHours;
-    private int hourlyRate;
+    private TotalAmount totalAmount;
     private boolean isPaid;
-
 
     /**
      * Constructs a new {@code Payment} object for a specified student.
@@ -21,30 +19,34 @@ public class Payment {
      * the associated student, total number of hours worked, and the hourly rate.
      *
      * @param student        the student receiving the payment
-     * @param numberOfHours  the total number of hours worked
-     * @param hourlyRate     the rate of payment per hour
+     * @param yearMonth      the year and month corresponding to payment
+     * @param totalAmount  the total amount due per month by a student
      */
-    public Payment(Student student, int numberOfHours, int hourlyRate) {
+    public Payment(Student student, YearMonth yearMonth, TotalAmount totalAmount) {
         this.student = student;
-        this.numberOfHours = numberOfHours;
-        this.hourlyRate = hourlyRate;
+        this.totalAmount = totalAmount;
+        this.yearMonth = yearMonth;
         this.isPaid = false;
+    }
+
+    public Student getStudent() {
+        return this.student;
     }
 
     public YearMonth getYearMonth() {
         return this.yearMonth;
     }
 
-    public boolean isPaid() {
-        return isPaid;
+    public TotalAmount getTotalAmount() {
+        return this.totalAmount;
     }
 
-    /**
-     * Calculates fees the student owes the tutor for the month
-     * @return product of numberOfHours and hourlyRate
-     */
-    public int calculateMonthlyRate() {
-        return this.numberOfHours * this.hourlyRate;
+    public float getTotalAmountFloat() {
+        return this.totalAmount.getAsFloat();
+    }
+
+    public boolean isPaid() {
+        return isPaid;
     }
 
 }
