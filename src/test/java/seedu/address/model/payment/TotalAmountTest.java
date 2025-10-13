@@ -35,7 +35,7 @@ public class TotalAmountTest {
     }
 
     @Test
-    public void toString_threeDPFloat_roundsDownCorrectly() {
+    public void toString_threeDpFloat_roundsDownCorrectly() {
         TotalAmount amount = new TotalAmount(123.451f);
         assertEquals("123.45", amount.toString());
     }
