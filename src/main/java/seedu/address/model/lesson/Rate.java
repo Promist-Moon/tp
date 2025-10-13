@@ -22,6 +22,10 @@ public class Rate {
         this.rate = rate;
     }
 
+    public float getRate() {
+        return this.rate;
+    }
+
     /**
      * Checks if the given float is a valid rate.
      */

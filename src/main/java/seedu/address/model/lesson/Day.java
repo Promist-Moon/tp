@@ -38,7 +38,7 @@ public class Day {
         return false;
     }
 
-    public DayOfWeek getDayOfWeek() {
+    public DayOfWeek getDay() {
         return day;
     }
 

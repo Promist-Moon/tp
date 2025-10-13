@@ -77,6 +77,13 @@ public class Lesson {
     }
 
     /**
+     * Returns the total amount to pay per lesson.
+     */
+    public float getAmountPerLesson() {
+        return getDuration().toHours() * rate.getRate();
+    }
+
+    /**
      * Adds a student to the student field and adds the address of the student in the address field
      * @param student The student to be added.
      */
@@ -101,7 +108,7 @@ public class Lesson {
         }
 
         Lesson otherLesson = (Lesson) other;
-        return day.getDayOfWeek().equals(otherLesson.day.getDayOfWeek())
+        return day.getDay().equals(otherLesson.day.getDay())
                 && lessonTime.hasTimeClash(otherLesson.lessonTime);
     }
 
@@ -121,7 +128,7 @@ public class Lesson {
         }
 
         Lesson otherLesson = (Lesson) other;
-        return day.getDayOfWeek().equals(otherLesson.day.getDayOfWeek())
+        return day.getDay().equals(otherLesson.day.getDay())
                 && lessonTime.equals(otherLesson.lessonTime)
                 && student.equals(otherLesson.student)
                 && subject.equals(otherLesson.subject)
