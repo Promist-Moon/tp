@@ -8,8 +8,6 @@ import java.util.Objects;
 import java.util.Set;
 
 import seedu.address.commons.util.ToStringBuilder;
-import seedu.address.model.lesson.LessonList;
-import seedu.address.model.payment.PaymentList;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
@@ -25,8 +23,6 @@ public class Student extends Person {
     // Data fields
     private final Address address;
     private final Set<Tag> tags = new HashSet<>();
-    private final LessonList lessons;
-    private final PaymentList payments;
 
     /**
      * Every field must be present and not null.
@@ -36,8 +32,6 @@ public class Student extends Person {
         requireAllNonNull(address, tags);
         this.address = address;
         this.tags.addAll(tags);
-        this.lessons = new LessonList();
-        this.payments = new PaymentList();
     }
 
     public Address getAddress() {
@@ -50,20 +44,6 @@ public class Student extends Person {
      */
     public Set<Tag> getTags() {
         return Collections.unmodifiableSet(tags);
-    }
-
-    /**
-     * Returns an mutable ArrayList of Lessons.
-     */
-    public LessonList getLessonList() {
-        return this.lessons;
-    }
-
-    /**
-     * Returns an mutable TreeMap of Payments.
-     */
-    public PaymentList getPaymentList() {
-        return this.payments;
     }
 
     /**

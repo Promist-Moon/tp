@@ -72,14 +72,6 @@ public class Lesson {
         return lessonTime.getDuration();
     }
 
-    /**
-     * Returns the Duration of the class in hours
-     * @return a long representing number of hours
-     */
-    public long getDurationLong() {
-        return lessonTime.getDurationLong();
-    }
-
     public Student getStudent() {
         return student;
     }
