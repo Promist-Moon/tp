@@ -113,6 +113,14 @@ public class LessonTime {
     }
 
     /**
+     * Converts the Duration of the class to hours
+     * @return a long representing number of hours
+     */
+    public long getDurationLong() {
+        return this.getDuration().toHours();
+    }
+
+    /**
      * Returns true if both lesson times have overlapping start times and end times
      */
     public boolean hasTimeClash(Object other) {
@@ -125,12 +133,8 @@ public class LessonTime {
             return false;
         }
 
-        LessonTime time2 = (LessonTime) other;
-        LocalTime start2 = time2.start;
-        LocalTime end2 = time2.end;
-        boolean isTime2Before = start2.isBefore(start) && (end2.isBefore(start) || end2.equals(start));
-        boolean isTime2After = (start2.isAfter(end) || start2.equals(end)) && end2.isAfter(end);
-        return isTime2Before || isTime2After;
+        LessonTime otherTime = (LessonTime) other;
+        return this.start.isBefore(otherTime.end) && otherTime.start.isBefore(this.end);
     }
 
     @Override
