@@ -16,7 +16,7 @@ public class DayTest {
     public void constructor_validDayString_success() {
         for (int i = 1; i <= 7; i++) {
             Day day = new Day(String.valueOf(i));
-            assertEquals(DayOfWeek.of(i), day.getDayOfWeek());
+            assertEquals(DayOfWeek.of(i), day.getDay());
         }
     }
 
