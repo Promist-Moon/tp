@@ -69,6 +69,17 @@ public class CommandTestUtil {
                 .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
     }
 
+    public static final String VALID_SUBJECT_LESSON1 = "History";
+    public static final String VALID_SUBJECT_LESSON2 = "Mother Tongue";
+    public static final String VALID_LEVEL_LESSON1 = "1";
+    public static final String VALID_LEVEL_LESSON2 = "2";
+    public static final String VALID_DAY_LESSON1 = "1";
+    public static final String VALID_DAY_LESSON2 = "2";
+    public static final String VALID_START_TIME_LESSON1 = "08:00";
+    public static final String VALID_START_TIME_LESSON2 = "16:45";
+    public static final String VALID_END_TIME_LESSON1 = "11:30";
+    public static final String VALID_END_TIME_LESSON2 = "19:45";
+
     /**
      * Executes the given {@code command}, confirms that <br>
      * - the returned {@link CommandResult} matches {@code expectedCommandResult} <br>
