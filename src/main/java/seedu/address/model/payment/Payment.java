@@ -19,6 +19,7 @@ public class Payment {
      * the associated student, total number of hours worked, and the hourly rate.
      *
      * @param student        the student receiving the payment
+     * @param yearMonth      the year and month corresponding to payment
      * @param amountPerStudent  the total amount due per month by a student
      */
     public Payment(Student student, YearMonth yearMonth, float amountPerStudent) {
@@ -28,11 +29,15 @@ public class Payment {
         this.isPaid = false;
     }
 
+    public Student getStudent() {
+        return this.student;
+    }
+
     public YearMonth getYearMonth() {
         return this.yearMonth;
     }
 
-    public float getAmountDue() {
+    public float getAmountPerStudent() {
         return this.amountPerStudent;
     }
 
