@@ -8,6 +8,7 @@ import seedu.address.model.lesson.Rate;
 import seedu.address.model.lesson.Subject;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
+import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.student.Address;
 import seedu.address.model.util.SampleDataUtil;
@@ -95,6 +96,12 @@ public class LessonBuilder {
     }
 
     public Lesson build() {
-        return new Lesson(subject, level, day, lessonTime, rate);
+        return new DummyLesson(subject, level, day, lessonTime, rate);
+    }
+
+    private static class DummyLesson extends Lesson {
+        DummyLesson(Subject subject, Level level, Day day, LessonTime lessonTime, Rate rate) {
+            super(subject, level, day, lessonTime, rate);
+        }
     }
 }
