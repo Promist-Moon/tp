@@ -1,22 +1,29 @@
 package seedu.address.logic.commands;
 
-
-import seedu.address.logic.Messages;
-import seedu.address.model.Model;
-import seedu.address.model.lesson.Lesson;
-import seedu.address.model.lesson.LessonList;
-import seedu.address.model.lesson.exceptions.LessonException;
-import seedu.address.model.person.Person;
-import seedu.address.commons.core.index.Index;
-import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.person.student.Student;
-
 import java.util.List;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LESSON_INDEX;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STUDENT_INDEX;
 
+import seedu.address.logic.Messages;
+import seedu.address.model.Model;
+import seedu.address.model.lesson.Lesson;
+import seedu.address.model.lesson.LessonList;
+import seedu.address.model.person.Person;
+import seedu.address.commons.core.index.Index;
+import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.model.lesson.exceptions.LessonException;
+import seedu.address.model.person.student.Student;
+
+/**
+ * Represents a command to delete a lesson from a student's lesson list.
+ * This command deletes the lesson identified by the index number
+ * used in the displayed lesson list for the student identified by the index number
+ * used in the displayed student list.
+ * Usage example:
+ *     delete.lesson s/1 l/2
+ */
 public class DeleteLessonCommand extends Command {
 
     public static final String COMMAND_WORD = "delete.lesson";
@@ -40,6 +47,15 @@ public class DeleteLessonCommand extends Command {
         this.lessonIndex = lI;
     }
 
+    /**
+     * Executes the DeleteLessonCommand.
+     * Attempts to delete the lesson from the specified student's lesson list.
+     *
+     * @param model the {@link Model} which the command should operate on
+     * @return the result of command execution
+     * @throws CommandException if the provided indexes are invalid,
+     *         or if the lesson deletion fails
+     */
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
