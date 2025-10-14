@@ -12,6 +12,7 @@ import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.lesson.Lesson;
+import seedu.address.model.lesson.LessonList;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.student.Student;
 
@@ -164,8 +165,20 @@ public class ModelManager implements Model {
         // TO BE IMPLEMENTED WITH STUDENT
         //addressBook.addLesson(lesson);
         //updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-        lesson.addStudent(student);
+        requireNonNull(student);
+        requireNonNull(lesson);
+
+        LessonList ls = student.getLessonList();
+        ls.addLesson(lesson);
     }
 
+    @Override
+    public void deleteLesson(Student student, Lesson lesson) {
+        requireNonNull(student);
+        requireNonNull(lesson);
+
+        LessonList ls = student.getLessonList();
+        ls.deleteLesson(lesson);
+    }
 
 }

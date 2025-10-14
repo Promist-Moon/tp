@@ -97,4 +97,6 @@ public interface Model {
      * {@code lesson} must not already exist in the address book.
      */
     void addLesson(Student student, Lesson lesson);
+
+    void deleteLesson(Student student, Lesson lesson);
 }

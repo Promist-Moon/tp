@@ -40,6 +40,25 @@ public class LessonList {
         lessons.add(new Lesson(subject, level, day, lessonTime, rate));
     }
 
+    /**
+     * Adds a new lesson to the lesson list.
+     * Overloaded method to take in current lesson instead of creating new lesson object.
+     */
+    public void addLesson(Lesson lesson) {
+        lessons.add(lesson);
+    }
+
+    /**
+     * Deletes a lesson from the lesson List.
+     * @param lesson
+     */
+    public void deleteLesson(Lesson lesson) {
+        int ind = lessons.indexOf(lesson);
+        if (ind != -1) {
+            lessons.remove(ind);
+        }
+    }
+
     public boolean isEmpty() {
         return this.getSize() == 0;
     }
