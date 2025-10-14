@@ -7,14 +7,14 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_STUDENT_INDEX;
 import java.util.List;
 
 import seedu.address.commons.core.index.Index;
-import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.Messages;
-import seedu.address.model.lesson.exceptions.LessonException;
+import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.model.Model;
 import seedu.address.model.lesson.Lesson;
 import seedu.address.model.lesson.LessonList;
-import seedu.address.model.Model;
-import seedu.address.model.person.student.Student;
+import seedu.address.model.lesson.exceptions.LessonException;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.student.Student;
 
 /**
  * Represents a command to delete a lesson from a student's lesson list.
@@ -42,6 +42,12 @@ public class DeleteLessonCommand extends Command {
     private final Index studentIndex;
     private final Index lessonIndex;
 
+    /**
+     * Constructs a DeleteLessonCommand with given student and lesson indexes.
+     *
+     * @param sI Index of the student in the displayed list.
+     * @param lI Index of the lesson in the student's lesson list.
+     */
     public DeleteLessonCommand(Index sI, Index lI) {
         this.studentIndex = sI;
         this.lessonIndex = lI;
