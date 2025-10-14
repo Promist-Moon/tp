@@ -11,11 +11,12 @@ import seedu.address.model.person.student.StudentMatchesPaymentStatusPredicate;
  * Lists all persons in the address book to the user.
  */
 public class ListUnpaidCommand extends Command {
-    private StudentMatchesPaymentStatusPredicate predicate;
 
     public static final String COMMAND_WORD = "list.unpaid";
 
     public static final String MESSAGE_SUCCESS = "Listed all unpaid persons";
+
+    private StudentMatchesPaymentStatusPredicate predicate;
 
     public ListUnpaidCommand() {
         this.predicate = new StudentMatchesPaymentStatusPredicate(PaymentStatus.UNPAID);

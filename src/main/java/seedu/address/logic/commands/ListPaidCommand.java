@@ -10,11 +10,12 @@ import static java.util.Objects.requireNonNull;
  * Lists all persons in the address book to the user.
  */
 public class ListPaidCommand extends Command {
-    private StudentMatchesPaymentStatusPredicate predicate;
 
     public static final String COMMAND_WORD = "list.paid";
 
     public static final String MESSAGE_SUCCESS = "Listed all paid students";
+
+    private StudentMatchesPaymentStatusPredicate predicate;
 
     public ListPaidCommand() {
         this.predicate = new StudentMatchesPaymentStatusPredicate(PaymentStatus.PAID);
