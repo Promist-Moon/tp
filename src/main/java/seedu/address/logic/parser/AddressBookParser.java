@@ -18,8 +18,13 @@ import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.ListOverdueCommand;
+import seedu.address.logic.commands.ListPaidCommand;
+import seedu.address.logic.commands.ListUnpaidCommand;
 import seedu.address.logic.commands.PayCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.person.student.PaymentStatus;
+import seedu.address.model.person.student.StudentMatchesPaymentStatusPredicate;
 
 /**
  * Parses user input.
@@ -72,6 +77,15 @@ public class AddressBookParser {
 
         case ListCommand.COMMAND_WORD:
             return new ListCommand();
+
+        case ListUnpaidCommand.COMMAND_WORD:
+            return new ListUnpaidCommand();
+
+        case ListPaidCommand.COMMAND_WORD:
+            return new ListPaidCommand();
+
+        case ListOverdueCommand.COMMAND_WORD:
+            return new ListOverdueCommand();
 
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand();

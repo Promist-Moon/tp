@@ -1,24 +1,23 @@
 package seedu.address.logic.commands;
 
-import static java.util.Objects.requireNonNull;
-
-
 import seedu.address.model.Model;
 import seedu.address.model.person.student.PaymentStatus;
 import seedu.address.model.person.student.StudentMatchesPaymentStatusPredicate;
 
+import static java.util.Objects.requireNonNull;
+
 /**
  * Lists all persons in the address book to the user.
  */
-public class ListUnpaidCommand extends Command {
+public class ListOverdueCommand extends Command {
     private StudentMatchesPaymentStatusPredicate predicate;
 
-    public static final String COMMAND_WORD = "list.unpaid";
+    public static final String COMMAND_WORD = "list.overdue";
 
-    public static final String MESSAGE_SUCCESS = "Listed all unpaid persons";
+    public static final String MESSAGE_SUCCESS = "Listed all overdue students";
 
-    public ListUnpaidCommand() {
-        this.predicate = new StudentMatchesPaymentStatusPredicate(PaymentStatus.UNPAID);
+    public ListOverdueCommand() {
+        this.predicate = new StudentMatchesPaymentStatusPredicate(PaymentStatus.OVERDUE);
     }
 
     @Override
