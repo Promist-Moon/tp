@@ -36,7 +36,6 @@ public class PayCommandTest {
                 Messages.format(personToPay));
 
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
-        expectedModel.deletePerson(personToPay);
 
         assertCommandSuccess(payCommand, model, expectedMessage, expectedModel);
     }
@@ -60,7 +59,6 @@ public class PayCommandTest {
                 Messages.format(personToPay));
 
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
-        expectedModel.deletePerson(personToPay);
 
         assertCommandSuccess(payCommand, model, expectedMessage, expectedModel);
     }
@@ -87,8 +85,8 @@ public class PayCommandTest {
         assertTrue(payFirstCommand.equals(payFirstCommand));
 
         // same values -> returns true
-        PayCommand deleteFirstCommandCopy = new PayCommand(INDEX_FIRST_PERSON);
-        assertTrue(payFirstCommand.equals(deleteFirstCommandCopy));
+        PayCommand payFirstCommandCopy = new PayCommand(INDEX_FIRST_PERSON);
+        assertTrue(payFirstCommand.equals(payFirstCommandCopy));
 
         // different types -> returns false
         assertFalse(payFirstCommand.equals(1));
