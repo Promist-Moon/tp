@@ -1,20 +1,20 @@
 package seedu.address.logic.commands;
 
-import java.util.List;
-
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LESSON_INDEX;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STUDENT_INDEX;
 
-import seedu.address.logic.Messages;
-import seedu.address.model.Model;
-import seedu.address.model.lesson.Lesson;
-import seedu.address.model.lesson.LessonList;
-import seedu.address.model.person.Person;
+import java.util.List;
+
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.Messages;
 import seedu.address.model.lesson.exceptions.LessonException;
+import seedu.address.model.lesson.Lesson;
+import seedu.address.model.lesson.LessonList;
+import seedu.address.model.Model;
 import seedu.address.model.person.student.Student;
+import seedu.address.model.person.Person;
 
 /**
  * Represents a command to delete a lesson from a student's lesson list.
