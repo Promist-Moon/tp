@@ -23,8 +23,7 @@ import seedu.address.logic.commands.ListPaidCommand;
 import seedu.address.logic.commands.ListUnpaidCommand;
 import seedu.address.logic.commands.PayCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.student.PaymentStatus;
-import seedu.address.model.person.student.StudentMatchesPaymentStatusPredicate;
+
 
 /**
  * Parses user input.

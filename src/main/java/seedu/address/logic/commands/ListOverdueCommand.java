@@ -6,7 +6,6 @@ import seedu.address.model.Model;
 import seedu.address.model.person.student.PaymentStatus;
 import seedu.address.model.person.student.StudentMatchesPaymentStatusPredicate;
 
-
 /**
  * Lists all persons in the address book to the user.
  */
