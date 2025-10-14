@@ -59,6 +59,7 @@ public class PayCommandTest {
                 Messages.format(personToPay));
 
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        showPersonAtIndex(expectedModel, INDEX_FIRST_PERSON);
 
         assertCommandSuccess(payCommand, model, expectedMessage, expectedModel);
     }
