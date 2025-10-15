@@ -66,6 +66,28 @@ public class LessonList {
     }
 
     /**
+     * Returns the total amount earned per month for a list of lessons
+     *
+     * @param month a YearMonth object, usually current month
+     * @return float representing the sum of all amounts earned per lesson.
+     */
+    public float getTotalAmountEarned(YearMonth month) {
+        float totalAmountEarned = 0;
+        for (Lesson l : lessons) {
+            Day day = l.getDay();
+
+            // count number of lessons in a month based on local month
+            int daysInMonth = DateTimeUtil.countDaysOfWeekInMonth(month, day);
+
+            float amountPerLesson = l.getAmountEarned();
+            float amountPerMonth = daysInMonth * amountPerLesson;
+
+            totalAmountEarned += amountPerMonth;
+        }
+        return totalAmountEarned;
+    }
+
+    /**
      * Returns a string representation of the lesson list, with
      * each lesson prefixed by its index.
      *
