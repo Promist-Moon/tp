@@ -13,6 +13,7 @@ import java.util.List;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
 import seedu.address.model.lesson.exceptions.DuplicateLessonException;
 import seedu.address.model.lesson.exceptions.LessonNotFoundException;
 
@@ -145,7 +146,7 @@ public class UniqueLessonListTest {
     @Test
     public void asUnmodifiableObservableList_modifyList_throwsUnsupportedOperationException() {
         uniqueLessonList.add(Y3_MATH);
-        assertThrows(UnsupportedOperationException.class,
-                () -> uniqueLessonList.asUnmodifiableObservableList().remove(0));
+        assertThrows(UnsupportedOperationException.class, () -> uniqueLessonList.asUnmodifiableObservableList()
+                                                                                .remove(0));
     }
 }
