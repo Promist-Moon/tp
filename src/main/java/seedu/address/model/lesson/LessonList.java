@@ -65,19 +65,6 @@ public class LessonList {
         return this.getSize() == 0;
     }
 
-    /**
-     * Returns a string representation of the lesson list, with
-     * each lesson prefixed by its index.
-     *
-     * @return the formatted string representation of the lesson list.
-     */
-    public String getListString() {
-        StringBuilder sb = new StringBuilder();
-        for (int i = 0; i < lessons.size(); i++) {
-            sb.append(i + 1).append(". ").append(lessons.get(i)).append("\n");
-        }
-        return sb.toString();
-    }
 
     /**
      * Returns the total duration of {@code Lesson} hours in a month.

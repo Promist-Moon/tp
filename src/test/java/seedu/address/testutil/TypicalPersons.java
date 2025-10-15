@@ -20,7 +20,7 @@ import seedu.address.model.person.Person;
 import seedu.address.model.person.student.Student;
 
 /**
- * A utility class containing a list of {@code Person} objects to be used in tests.
+ * A utility class containing a list of {@link Person} objects to be used in tests.
  */
 public class TypicalPersons {
 
@@ -43,6 +43,7 @@ public class TypicalPersons {
     public static final Student GEORGE = new StudentBuilder().withName("George Best").withPhone("9482442")
             .withEmail("anna@example.com").withAddress("4th street").build();
 
+
     // Manually added
     public static final Student HOON = new StudentBuilder().withName("Hoon Meier").withPhone("8482424")
             .withEmail("stefan@example.com").withAddress("little india").build();
@@ -61,7 +62,7 @@ public class TypicalPersons {
     private TypicalPersons() {} // prevents instantiation
 
     /**
-     * Returns an {@code AddressBook} with all the typical persons.
+     * Returns an {@link AddressBook} with all the typical persons.
      */
     public static AddressBook getTypicalAddressBook() {
         AddressBook ab = new AddressBook();
