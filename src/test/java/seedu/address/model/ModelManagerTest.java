@@ -156,7 +156,6 @@ public class ModelManagerTest {
                 .withPerson(carlOverdue)
                 .withPerson(danielUnpaid).build();
         UserPrefs userPrefs = new UserPrefs();
-        ModelManager tempModelManager = new ModelManager(addressBook, userPrefs);
 
         // different filteredList (by paymentStatus PAID)-> returns false
         modelManager.updateFilteredPersonListByPaymentStatus(
