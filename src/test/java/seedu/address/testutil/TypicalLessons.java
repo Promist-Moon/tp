@@ -6,6 +6,9 @@ import java.util.List;
 
 import seedu.address.model.lesson.Lesson;
 
+/**
+ * A utility class containing a list of {@link Lesson} objects to be used in tests.
+ */
 public class TypicalLessons {
     public static final Lesson Y3_MATH = new LessonBuilder()
             .withSubject("Math")
