@@ -131,6 +131,20 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public void updateFilteredPersonListByPaymentStatus(Predicate<Student> predicate) {
+        requireNonNull(predicate);
+        filteredPersons.setPredicate(person -> {
+            // Check if the person is a Student
+            if (person instanceof Student) {
+                // Apply the predicate to the Student
+                return predicate.test((Student) person);
+            }
+            // If not a Student, exclude from the filtered list
+            return false;
+        });
+    }
+
+    @Override
     public boolean equals(Object other) {
         if (other == this) {
             return true;

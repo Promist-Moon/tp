@@ -88,14 +88,15 @@ public interface Model {
     void updateFilteredPersonList(Predicate<Person> predicate);
 
     /**
-     * Returns true if a lesson with the same identity {@code lesson} exists in the address book.
+     * Updates the filter of the filtered student list to filter by the given {@code predicate}.
+     * @throws NullPointerException if {@code predicate} is null.
      */
-    boolean hasLesson(Lesson lesson);
+    void updateFilteredPersonListByPaymentStatus(Predicate<Student> predicate);
 
     /**
      * Returns true if a lesson with the same timeslot as {@code lesson} exists in the address book.
      */
-    boolean hasLessonClash(Lesson lesson);
+    boolean hasLesson(Lesson lesson);
 
     /**
      * Adds the given lesson.
