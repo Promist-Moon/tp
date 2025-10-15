@@ -7,6 +7,8 @@ import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.BENSON;
+import static seedu.address.testutil.TypicalPersons.CARL;
+import static seedu.address.testutil.TypicalPersons.DANIEL;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -16,7 +18,11 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
+import seedu.address.model.person.student.PaymentStatus;
+import seedu.address.model.person.student.Student;
+import seedu.address.model.person.student.StudentMatchesPaymentStatusPredicate;
 import seedu.address.testutil.AddressBookBuilder;
+import seedu.address.testutil.StudentBuilder;
 
 public class ModelManagerTest {
 
@@ -121,6 +127,8 @@ public class ModelManagerTest {
         modelManager.updateFilteredPersonList(new NameContainsKeywordsPredicate(Arrays.asList(keywords)));
         assertFalse(modelManager.equals(new ModelManager(addressBook, userPrefs)));
 
+
+
         // resets modelManager to initial state for upcoming tests
         modelManager.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
 
@@ -128,5 +136,40 @@ public class ModelManagerTest {
         UserPrefs differentUserPrefs = new UserPrefs();
         differentUserPrefs.setAddressBookFilePath(Paths.get("differentFilePath"));
         assertFalse(modelManager.equals(new ModelManager(addressBook, differentUserPrefs)));
+    }
+
+    @Test
+    public void updateFilteredPersonListByPaymentStatus() {
+        Student alicePaid = new StudentBuilder(ALICE).build();
+        alicePaid.setPaymentStatus(PaymentStatus.PAID);
+        Student bensonPaid = new StudentBuilder(BENSON).build();
+        bensonPaid.setPaymentStatus(PaymentStatus.PAID);
+
+        Student carlOverdue = new StudentBuilder(CARL).build();
+        carlOverdue.setPaymentStatus(PaymentStatus.OVERDUE);
+        Student danielUnpaid = new StudentBuilder(DANIEL).build();
+        danielUnpaid.setPaymentStatus(PaymentStatus.UNPAID);
+
+        AddressBook addressBook = new AddressBookBuilder()
+                .withPerson(alicePaid)
+                .withPerson(bensonPaid)
+                .withPerson(carlOverdue)
+                .withPerson(danielUnpaid).build();
+        UserPrefs userPrefs = new UserPrefs();
+
+        // different filteredList (by paymentStatus PAID)-> returns false
+        modelManager.updateFilteredPersonListByPaymentStatus(
+                new StudentMatchesPaymentStatusPredicate(PaymentStatus.UNPAID));
+        assertFalse(modelManager.equals(new ModelManager(addressBook, userPrefs)));
+
+        // different filteredList (by paymentStatus PAID)-> returns false
+        modelManager.updateFilteredPersonListByPaymentStatus(
+                new StudentMatchesPaymentStatusPredicate(PaymentStatus.PAID));
+        assertFalse(modelManager.equals(new ModelManager(addressBook, userPrefs)));
+
+        // different filteredList (by paymentStatus OVERDUE)-> returns false
+        modelManager.updateFilteredPersonListByPaymentStatus(
+                new StudentMatchesPaymentStatusPredicate(PaymentStatus.OVERDUE));
+        assertFalse(modelManager.equals(new ModelManager(addressBook, userPrefs)));
     }
 }
