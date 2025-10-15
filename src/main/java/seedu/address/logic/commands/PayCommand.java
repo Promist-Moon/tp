@@ -43,21 +43,15 @@ public class PayCommand extends Command {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 
-        Person studentToPay = lastShownList.get(targetIndex.getZeroBased());
+        Person personToPay = lastShownList.get(targetIndex.getZeroBased());
 
-        return new CommandResult(String.format(MESSAGE_PAYMENT_SUCCESS, Messages.format(studentToPay)));
-    }
-
-    private static Person setPaymentStatus(Person studentToPay) {
-        assert studentToPay != null;
-
-        // edit for future iterations to accept only student objects straightaway
-        if (studentToPay instanceof Student s) {
-            return setPaymentStatus(s);
+        if (!(personToPay instanceof Student studentToPay)) {
+            throw new CommandException("Only students can have payment statuses.");
         }
 
-        // if not Student (or Parent in future additions)
-        throw new IllegalArgumentException("Unsupported person: " + studentToPay.getClass().getSimpleName());
+        Student paidStudent = setPaymentStatus(studentToPay);
+
+        return new CommandResult(String.format(MESSAGE_PAYMENT_SUCCESS, Messages.format(paidStudent)));
     }
 
     private static Student setPaymentStatus(Student studentToPay) {
