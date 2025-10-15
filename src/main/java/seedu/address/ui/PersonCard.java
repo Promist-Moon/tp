@@ -41,6 +41,8 @@ public class PersonCard extends UiPart<Region> {
     private Label email;
     @FXML
     private FlowPane tags;
+    @FXML
+    private Label paymentStatus;
 
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
@@ -63,6 +65,20 @@ public class PersonCard extends UiPart<Region> {
             student.getTags().stream()
                     .sorted(Comparator.comparing(tag -> tag.tagName))
                     .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+            paymentStatus.setText(((Student) person).getPaymentStatus().toString());
+            switch (student.getPaymentStatus()) {
+            case PAID:
+                paymentStatus.getStyleClass().add("payment-status-paid");
+                break;
+            case UNPAID:
+                paymentStatus.getStyleClass().add("payment-status-unpaid");
+                break;
+            case OVERDUE:
+                paymentStatus.getStyleClass().add("payment-status-overdue");
+                break;
+            default:
+                break;
+            }
         } else {
             // Fallback: hide address and tags if not a Student
             address.setVisible(false);
