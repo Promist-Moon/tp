@@ -45,7 +45,9 @@ public class LessonList {
      * Overloaded method to take in current lesson instead of creating new lesson object.
      */
     public void addLesson(Lesson lesson) {
-        lessons.add(lesson);
+        if (!hasLesson(lesson)) {
+            lessons.add(lesson);
+        }
     }
 
     /**
@@ -75,6 +77,29 @@ public class LessonList {
             sb.append(i + 1).append(". ").append(lessons.get(i)).append("\n");
         }
         return sb.toString();
+    }
+
+    /**
+     * Checks if the specified lesson exists in this lesson list.
+     *
+     * <p>Iterates through all lessons starting from index 1 up to the size of the list,
+     * and compares each lesson with the given lesson for equality.</p>
+     *
+     * @param lesson the Lesson to check for existence in this list
+     * @return true if the lesson is found in the list; false otherwise or if an exception occurs
+     */
+    public boolean hasLesson(Lesson lesson) {
+        int i = 1;
+        while (i <= getSize()) {
+            try {
+                if (this.getLesson(i).equals(lesson)) {
+                    return true;
+                } else i++;
+            } catch (LessonException e) {
+                return false;
+            }
+        }
+        return false;
     }
 
     /**

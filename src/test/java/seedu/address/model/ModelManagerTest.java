@@ -15,8 +15,10 @@ import java.util.Arrays;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.model.lesson.Lesson;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.testutil.AddressBookBuilder;
+import seedu.address.testutil.LessonBuilder;
 
 public class ModelManagerTest {
 
@@ -91,6 +93,61 @@ public class ModelManagerTest {
     @Test
     public void getFilteredPersonList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, () -> modelManager.getFilteredPersonList().remove(0));
+    }
+
+    @Test
+    public void hasLesson_lessonNotInAddressBook_returnsFalse() {
+        Lesson lesson = new LessonBuilder().build();
+        assertFalse(modelManager.hasLesson(lesson));
+    }
+
+    @Test
+    public void hasLesson_lessonInAddressBook_returnsTrue() {
+        Lesson lesson = new LessonBuilder().build();
+        modelManager.addLesson(ALICE, lesson);
+        assertTrue(modelManager.hasLesson(lesson));
+    }
+
+    @Test
+    public void hasLesson_nullLesson_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> modelManager.hasLesson(null));
+    }
+
+    @Test
+    public void addLesson_validLesson_success() {
+        Lesson lesson = new LessonBuilder().build();
+        modelManager.addLesson(ALICE, lesson);
+        assertTrue(modelManager.hasLesson(lesson));
+    }
+
+    @Test
+    public void addLesson_nullStudent_throwsNullPointerException() {
+        Lesson lesson = new LessonBuilder().build();
+        assertThrows(NullPointerException.class, () -> modelManager.addLesson(null, lesson));
+    }
+
+    @Test
+    public void deleteLesson_existingLesson_success() {
+        Lesson lesson = new LessonBuilder().build();
+        modelManager.addLesson(ALICE, lesson);
+        modelManager.deleteLesson(ALICE, lesson);
+        assertFalse(modelManager.hasLesson(lesson));
+    }
+
+    @Test
+    public void deleteLesson_nullStudent_throwsNullPointerException() {
+        Lesson lesson = new LessonBuilder().build();
+        assertThrows(NullPointerException.class, () -> modelManager.deleteLesson(null, lesson));
+    }
+
+    @Test
+    public void deleteLesson_nullLesson_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> modelManager.deleteLesson(ALICE, null));
+    }
+
+    @Test
+    public void addLesson_nullLesson_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> modelManager.addLesson(ALICE, null));
     }
 
     @Test

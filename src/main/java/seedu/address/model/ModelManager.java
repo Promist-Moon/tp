@@ -154,10 +154,8 @@ public class ModelManager implements Model {
 
     @Override
     public boolean hasLesson(Lesson lesson) {
-        // TO BE IMPLEMENTED
         requireNonNull(lesson);
-        //return addressBook.hasLesson(lesson);
-        return false;
+        return addressBook.hasLesson(lesson);
     }
 
     @Override
@@ -168,8 +166,10 @@ public class ModelManager implements Model {
         requireNonNull(student);
         requireNonNull(lesson);
 
+        addressBook.addLesson(lesson);
         LessonList ls = student.getLessonList();
         ls.addLesson(lesson);
+        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
     }
 
     @Override
@@ -177,8 +177,10 @@ public class ModelManager implements Model {
         requireNonNull(student);
         requireNonNull(lesson);
 
+        addressBook.removeLesson(lesson);
         LessonList ls = student.getLessonList();
         ls.deleteLesson(lesson);
+        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
     }
 
 }
