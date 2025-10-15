@@ -44,6 +44,19 @@ public class Student extends Person {
         this.paymentStatus = PaymentStatus.UNPAID;
     }
 
+    /**
+     * Every field must be present and not null.
+     */
+    public Student(Name name, Phone phone, Email email, Address address, Set<Tag> tags, LessonList ll) {
+        super(name, phone, email);
+        requireAllNonNull(address, tags);
+        this.address = address;
+        this.tags.addAll(tags);
+        this.lessons = ll;
+        this.payments = new PaymentList();
+        this.paymentStatus = PaymentStatus.UNPAID;
+    }
+
     public Address getAddress() {
         return address;
     }
