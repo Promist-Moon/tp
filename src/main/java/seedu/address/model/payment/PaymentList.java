@@ -16,11 +16,44 @@ public class PaymentList {
     private final ArrayList<Payment> payments;
     private YearMonth latestUnpaidYearmonth;
 
+    private ArrayList<Payment> unpaidList;
+
+    private PaymentStatus status;
+
     /**
-     * Constructs a new lesson list by creating an empty array list.
+     * Constructs a new payment list by creating an empty array list.
      */
     public PaymentList() {
         this.payments = new ArrayList<>();
+        this.unpaidList = new ArrayList<>();
+    }
+
+    /**
+     * Constructs a new payment list by adding a payment.
+     * Assumes added payment is unpaid.
+     */
+    public PaymentList(Payment payment) {
+        this.payments = new ArrayList<>();
+        this.payments.add(payment);
+
+        // implement later what latestUnpaidYearmonth is if all paid
+        if (payment.isPaid()) {
+            status = PaymentStatus.PAID;
+        } else {
+            // overdue logic later
+            status = PaymentStatus.UNPAID;
+        }
+
+        this.unpaidList = new ArrayList<>();
+    }
+
+    /**
+     * Constructs a new payment list by adding an arraylist of payments.
+     */
+    public PaymentList(ArrayList<Payment> payments) {
+        this.payments = payments;
+
+        this.unpaidList = new ArrayList<>();
     }
 
     public int getSize() {
@@ -72,7 +105,47 @@ public class PaymentList {
         payments.add(payment);
     }
 
+    /**
+     * Find unpaid payments in a payment list.
+     * @return
+     */
+    public ArrayList<Payment> findUnpaids() {
+        for (Payment p : payments) {
+            if (!p.isPaid()) {
+                unpaidList.add(p);
+            }
+        }
 
+        return this.unpaidList;
+    }
+
+    /**
+     * Updates payment status according to the size of unpaid list.
+     */
+    public void updateStatus() {
+        if (unpaidList.isEmpty()) {
+            setPaymentStatus(PaymentStatus.PAID);
+        } else if (unpaidList.size() == 1) {
+            setPaymentStatus(PaymentStatus.UNPAID);
+        } else {
+            setPaymentStatus(PaymentStatus.OVERDUE);
+        }
+    }
+
+    /**
+     * Returns list of unpaid payments
+     * @return ArrayList of unpaid items
+     */
+    public ArrayList<Payment> getUnpaidList() {
+        return this.unpaidList;
+    }
+
+    /**
+     * Clears unpaid.
+     */
+    public void clearUnpaids() {
+        this.unpaidList = new ArrayList<>();
+    }
 
     /**
      * Returns a string representation of the payment list, with
@@ -87,6 +160,14 @@ public class PaymentList {
             sb.append(i + 1).append(". ").append(payments.get(i)).append("\n");
         }
         return sb.toString();
+    }
+
+    private void setPaymentStatus(PaymentStatus status) {
+        this.status = status;
+    }
+
+    private void setLatestUnpaidYearmonth(YearMonth month) {
+        this.latestUnpaidYearmonth = month;
     }
 
 }
