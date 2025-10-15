@@ -23,6 +23,13 @@ public class Rate {
     }
 
     /**
+     * Returns the rate as a float
+     */
+    public float getRate() {
+        return this.rate;
+    }
+
+    /**
      * Checks if the given float is a valid rate.
      */
     public static boolean isValidRate(String str) {

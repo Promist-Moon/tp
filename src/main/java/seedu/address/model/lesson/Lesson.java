@@ -85,6 +85,16 @@ public class Lesson {
     }
 
     /**
+     * Returns the amount earned in $ from one lesson per week.
+     * This is the product of the hourly rate and the duration of the class in hours.
+     *
+     * @return product of the hourly rate and the duration of the class in hours as a float
+     */
+    public float getAmountEarned() {
+        return getDurationLong() * rate.getRate();
+    }
+
+    /**
      * Adds a student to the student field and adds the address of the student in the address field
      * @param student The student to be added.
      */
