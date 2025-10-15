@@ -23,8 +23,9 @@ import seedu.address.model.person.student.PaymentStatus;
 import seedu.address.model.person.student.Student;
 import seedu.address.model.person.student.StudentMatchesPaymentStatusPredicate;
 import seedu.address.testutil.AddressBookBuilder;
-import seedu.address.testutil.StudentBuilder;
 import seedu.address.testutil.LessonBuilder;
+import seedu.address.testutil.StudentBuilder;
+
 
 public class ModelManagerTest {
 

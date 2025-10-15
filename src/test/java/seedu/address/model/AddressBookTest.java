@@ -107,7 +107,10 @@ public class AddressBookTest {
         }
 
         @Override
-        public ObservableList<Lesson> getLessonList() {return lessons;}
+        public ObservableList<Lesson> getLessonList() {
+            return lessons;
+        }
+
     }
 
 }
