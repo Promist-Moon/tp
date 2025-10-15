@@ -10,7 +10,6 @@ import java.util.Set;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.lesson.LessonList;
-import seedu.address.model.lesson.LessonTime;
 import seedu.address.model.payment.PaymentList;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;

@@ -3,9 +3,17 @@ package seedu.address.storage;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import seedu.address.model.lesson.*;
+import seedu.address.model.lesson.Day;
+import seedu.address.model.lesson.Lesson;
+import seedu.address.model.lesson.LessonTime;
+import seedu.address.model.lesson.Level;
+import seedu.address.model.lesson.Rate;
+import seedu.address.model.lesson.Subject;
 
 
+/**
+ * Jackson-friendly version of {@link Lesson}.
+ */
 public class JsonAdaptedLesson {
 
     private final String subject;
