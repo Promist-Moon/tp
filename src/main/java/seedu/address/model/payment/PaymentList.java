@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 
 import java.time.YearMonth;
 import java.util.ArrayList;
+import java.util.Comparator;
 
 import seedu.address.model.payment.exceptions.PaymentException;
 
@@ -16,8 +17,6 @@ public class PaymentList {
     private final ArrayList<Payment> payments;
     private YearMonth latestUnpaidYearmonth;
 
-    private ArrayList<Payment> unpaidList;
-
     private PaymentStatus status;
 
     /**
@@ -25,7 +24,8 @@ public class PaymentList {
      */
     public PaymentList() {
         this.payments = new ArrayList<>();
-        this.unpaidList = new ArrayList<>();
+
+        latestUnpaidYearmonth = null;
     }
 
     /**
@@ -36,15 +36,8 @@ public class PaymentList {
         this.payments = new ArrayList<>();
         this.payments.add(payment);
 
-        // implement later what latestUnpaidYearmonth is if all paid
-        if (payment.isPaid()) {
-            status = PaymentStatus.PAID;
-        } else {
-            // overdue logic later
-            status = PaymentStatus.UNPAID;
-        }
-
-        this.unpaidList = new ArrayList<>();
+        updateStatus();
+        this.latestUnpaidYearmonth = findLatestUnpaidYearMonth();
     }
 
     /**
@@ -52,8 +45,10 @@ public class PaymentList {
      */
     public PaymentList(ArrayList<Payment> payments) {
         this.payments = payments;
+        sortByYearMonth();
 
-        this.unpaidList = new ArrayList<>();
+        updateStatus();
+        setLatestUnpaidYearmonth(findLatestUnpaidYearMonth());
     }
 
     public int getSize() {
@@ -103,6 +98,8 @@ public class PaymentList {
      */
     public void addPayment(Payment payment) {
         payments.add(payment);
+
+        sortByYearMonth();
     }
 
     /**
@@ -110,19 +107,21 @@ public class PaymentList {
      * @return
      */
     public ArrayList<Payment> findUnpaids() {
+        ArrayList<Payment> unpaidList = new ArrayList<>();
         for (Payment p : payments) {
             if (!p.isPaid()) {
                 unpaidList.add(p);
             }
         }
 
-        return this.unpaidList;
+        return unpaidList;
     }
 
     /**
      * Updates payment status according to the size of unpaid list.
      */
     public void updateStatus() {
+        ArrayList<Payment> unpaidList = findUnpaids();
         if (unpaidList.isEmpty()) {
             setPaymentStatus(PaymentStatus.PAID);
         } else if (unpaidList.size() == 1) {
@@ -133,18 +132,23 @@ public class PaymentList {
     }
 
     /**
-     * Returns list of unpaid payments
-     * @return ArrayList of unpaid items
+     * Returns the latest (max YearMonth) unpaid payment's month, or null if none.
+     * Manual method.
      */
-    public ArrayList<Payment> getUnpaidList() {
-        return this.unpaidList;
-    }
-
-    /**
-     * Clears unpaid.
-     */
-    public void clearUnpaids() {
-        this.unpaidList = new ArrayList<>();
+    public YearMonth findLatestUnpaidYearMonth() {
+        YearMonth latest = null;
+        for (Payment p : payments) {
+            if (!p.isPaid()) {
+                YearMonth ym = p.getYearMonth();
+                if (latest == null || ym.isAfter(latest)) {
+                    latest = ym;
+                }
+            }
+        }
+        if (latest != latestUnpaidYearmonth) {
+            setLatestUnpaidYearmonth(latest);
+        }
+        return latest;
     }
 
     /**
@@ -160,6 +164,10 @@ public class PaymentList {
             sb.append(i + 1).append(". ").append(payments.get(i)).append("\n");
         }
         return sb.toString();
+    }
+
+    private void sortByYearMonth() {
+        payments.sort(Comparator.comparing(Payment::getYearMonth));
     }
 
     private void setPaymentStatus(PaymentStatus status) {
