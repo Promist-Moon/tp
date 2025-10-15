@@ -10,6 +10,7 @@ import java.util.Set;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.lesson.LessonList;
+import seedu.address.model.lesson.LessonTime;
 import seedu.address.model.payment.PaymentList;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
@@ -40,6 +41,19 @@ public class Student extends Person {
         this.address = address;
         this.tags.addAll(tags);
         this.lessons = new LessonList();
+        this.payments = new PaymentList();
+        this.paymentStatus = PaymentStatus.UNPAID;
+    }
+
+    /**
+     * Every field must be present and not null.
+     */
+    public Student(Name name, Phone phone, Email email, Address address, Set<Tag> tags, LessonList ll) {
+        super(name, phone, email);
+        requireAllNonNull(address, tags);
+        this.address = address;
+        this.tags.addAll(tags);
+        this.lessons = ll;
         this.payments = new PaymentList();
         this.paymentStatus = PaymentStatus.UNPAID;
     }

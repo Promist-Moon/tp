@@ -21,6 +21,14 @@ public class LessonList {
         this.lessons = new ArrayList<>();
     }
 
+    /**
+     * Constructs a new lesson list by copying from another array list.
+     */
+    public LessonList(ArrayList ll) {
+        this.lessons = ll;
+    }
+
+
     public int getSize() {
         return lessons.size();
     }
@@ -101,7 +109,9 @@ public class LessonList {
             try {
                 if (this.getLesson(i).equals(lesson)) {
                     return true;
-                } else i++;
+                } else {
+                    i++;
+                }
             } catch (LessonException e) {
                 return false;
             }
