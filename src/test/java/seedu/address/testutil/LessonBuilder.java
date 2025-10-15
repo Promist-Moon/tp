@@ -136,7 +136,7 @@ public class LessonBuilder {
 
     /**
      * Associates a {@link Student} with this lesson.
-     * The student's address is automatically recorded in the builder.
+     *
      *
      * @param student the student to associate.
      * @return this builder for chaining.
@@ -147,6 +147,18 @@ public class LessonBuilder {
         if (student != null) {
             this.address = student.getAddress();
         }
+        return this;
+    }
+
+    /**
+     * Associates a {@link Address} with this lesson.
+     * The student's address is automatically recorded in the builder.
+     *
+     * @param address the address to associate.
+     * @return this builder for chaining.
+     */
+    public LessonBuilder withAddress(Address address) {
+        this.address = address;
         return this;
     }
 

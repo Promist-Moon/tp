@@ -12,6 +12,7 @@ import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.lesson.Lesson;
+import seedu.address.model.lesson.LessonList;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.student.Student;
 
@@ -167,10 +168,8 @@ public class ModelManager implements Model {
 
     @Override
     public boolean hasLesson(Lesson lesson) {
-        // TO BE IMPLEMENTED
         requireNonNull(lesson);
-        //return addressBook.hasLesson(lesson);
-        return false;
+        return addressBook.hasLesson(lesson);
     }
 
     @Override
@@ -178,8 +177,24 @@ public class ModelManager implements Model {
         // TO BE IMPLEMENTED WITH STUDENT
         //addressBook.addLesson(lesson);
         //updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-        lesson.addStudent(student);
+        requireNonNull(student);
+        requireNonNull(lesson);
+
+        addressBook.addLesson(lesson);
+        LessonList ls = student.getLessonList();
+        ls.addLesson(lesson);
+        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
     }
 
+    @Override
+    public void deleteLesson(Student student, Lesson lesson) {
+        requireNonNull(student);
+        requireNonNull(lesson);
+
+        addressBook.removeLesson(lesson);
+        LessonList ls = student.getLessonList();
+        ls.deleteLesson(lesson);
+        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+    }
 
 }

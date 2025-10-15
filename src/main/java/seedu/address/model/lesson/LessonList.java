@@ -21,6 +21,14 @@ public class LessonList {
         this.lessons = new ArrayList<>();
     }
 
+    /**
+     * Constructs a new lesson list by copying from another array list.
+     */
+    public LessonList(ArrayList ll) {
+        this.lessons = ll;
+    }
+
+
     public int getSize() {
         return lessons.size();
     }
@@ -36,8 +44,31 @@ public class LessonList {
     /**
      * Adds a new lesson to the lesson list.
      */
-    public void addLesson(Subject subject, Level level, Day day, LessonTime lessonTime, Rate rate) {
+    public LessonList addLesson(Subject subject, Level level, Day day, LessonTime lessonTime, Rate rate) {
         lessons.add(new Lesson(subject, level, day, lessonTime, rate));
+        return this;
+    }
+
+    /**
+     * Adds a new lesson to the lesson list.
+     * Overloaded method to take in current lesson instead of creating new lesson object.
+     */
+    public LessonList addLesson(Lesson lesson) {
+        if (!hasLesson(lesson)) {
+            lessons.add(lesson);
+        }
+        return this;
+    }
+
+    /**
+     * Deletes a lesson from the lesson List.
+     * @param lesson
+     */
+    public void deleteLesson(Lesson lesson) {
+        int ind = lessons.indexOf(lesson);
+        if (ind != -1) {
+            lessons.remove(ind);
+        }
     }
 
     public boolean isEmpty() {
@@ -63,6 +94,31 @@ public class LessonList {
             totalHours += hoursPerMonth;
         }
         return totalHours;
+    }
+
+    /**
+     * Checks if the specified lesson exists in this lesson list.
+     *
+     * <p>Iterates through all lessons starting from index 1 up to the size of the list,
+     * and compares each lesson with the given lesson for equality.</p>
+     *
+     * @param lesson the Lesson to check for existence in this list
+     * @return true if the lesson is found in the list; false otherwise or if an exception occurs
+     */
+    public boolean hasLesson(Lesson lesson) {
+        int i = 1;
+        while (i <= getSize()) {
+            try {
+                if (this.getLesson(i).equals(lesson)) {
+                    return true;
+                } else {
+                    i++;
+                }
+            } catch (LessonException e) {
+                return false;
+            }
+        }
+        return false;
     }
 
     /**
