@@ -152,6 +152,7 @@ public class Student extends Person {
     public String toDisplayString() {
         final StringBuilder builder = new StringBuilder(super.toDisplayString());
         builder.append("; Address: ").append(address)
+                .append("; Lessons: ").append(this.getLessonList().toString())
                 .append("; Tags: ");
         this.getTags().forEach(builder::append);
         return builder.toString();
@@ -164,6 +165,7 @@ public class Student extends Person {
                 .add("phone", getPhone())
                 .add("email", getEmail())
                 .add("address", address)
+                .add("lessons", lessons)
                 .add("tags", tags)
                 .toString();
     }

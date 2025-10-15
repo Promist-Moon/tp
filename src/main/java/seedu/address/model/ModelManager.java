@@ -180,6 +180,7 @@ public class ModelManager implements Model {
         addressBook.addLesson(lesson);
         LessonList ls = student.getLessonList();
         ls.addLesson(lesson);
+        lesson.addStudent(student);
         updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
     }
 
