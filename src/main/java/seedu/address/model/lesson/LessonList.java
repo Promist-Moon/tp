@@ -44,18 +44,20 @@ public class LessonList {
     /**
      * Adds a new lesson to the lesson list.
      */
-    public void addLesson(Subject subject, Level level, Day day, LessonTime lessonTime, Rate rate) {
+    public LessonList addLesson(Subject subject, Level level, Day day, LessonTime lessonTime, Rate rate) {
         lessons.add(new Lesson(subject, level, day, lessonTime, rate));
+        return this;
     }
 
     /**
      * Adds a new lesson to the lesson list.
      * Overloaded method to take in current lesson instead of creating new lesson object.
      */
-    public void addLesson(Lesson lesson) {
+    public LessonList addLesson(Lesson lesson) {
         if (!hasLesson(lesson)) {
             lessons.add(lesson);
         }
+        return this;
     }
 
     /**

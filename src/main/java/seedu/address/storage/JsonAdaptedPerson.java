@@ -38,24 +38,6 @@ class JsonAdaptedPerson {
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
      */
     @JsonCreator
-    public JsonAdaptedPerson(@JsonProperty("type") String type, @JsonProperty("name") String name,
-                             @JsonProperty("phone") String phone, @JsonProperty("email") String email,
-                             @JsonProperty("address") String address, @JsonProperty("tags") List<JsonAdaptedTag> tags,
-                             @JsonProperty("lessonList") ArrayList<JsonAdaptedLesson> lessons) {
-        this.type = type;
-        this.name = name;
-        this.phone = phone;
-        this.email = email;
-        this.address = address;
-        if (tags != null) {
-            this.tags.addAll(tags);
-        }
-        if (lessons != null) {
-            this.lessons.addAll(lessons);
-        }
-    }
-
-    @JsonCreator
     public JsonAdaptedPerson(@JsonProperty("type") String type,
                              @JsonProperty("name") String name, @JsonProperty("phone") String phone,
                              @JsonProperty("email") String email, @JsonProperty("address") String address,
