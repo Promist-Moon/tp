@@ -167,17 +167,8 @@ public class ModelManager implements Model {
 
     @Override
     public boolean hasLesson(Lesson lesson) {
-        // TO BE IMPLEMENTED
         requireNonNull(lesson);
-        //return addressBook.hasLesson(lesson);
-        return false;
-    }
-
-    @Override
-    public boolean hasLessonClash(Lesson lesson) {
-        requireNonNull(lesson);
-        // TO BE IMPLEMENTED
-        return false;
+        return addressBook.hasLesson(lesson);
     }
 
     @Override

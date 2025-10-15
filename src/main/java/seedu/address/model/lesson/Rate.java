@@ -22,10 +22,6 @@ public class Rate {
         this.rate = rate;
     }
 
-    public float getRate() {
-        return this.rate;
-    }
-
     /**
      * Returns the rate as a float
      */
