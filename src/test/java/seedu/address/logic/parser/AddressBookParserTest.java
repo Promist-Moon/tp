@@ -22,6 +22,9 @@ import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.ListOverdueCommand;
+import seedu.address.logic.commands.ListPaidCommand;
+import seedu.address.logic.commands.ListUnpaidCommand;
 import seedu.address.logic.commands.PayCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
@@ -95,6 +98,24 @@ public class AddressBookParserTest {
     public void parseCommand_list() throws Exception {
         assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD) instanceof ListCommand);
         assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD + " 3") instanceof ListCommand);
+    }
+
+    @Test
+    public void parseCommand_listUnpaid() throws Exception {
+        assertTrue(parser.parseCommand(ListUnpaidCommand.COMMAND_WORD) instanceof ListUnpaidCommand);
+        assertTrue(parser.parseCommand(ListUnpaidCommand.COMMAND_WORD + " 3") instanceof ListUnpaidCommand);
+    }
+
+    @Test
+    public void parseCommand_listPaid() throws Exception {
+        assertTrue(parser.parseCommand(ListPaidCommand.COMMAND_WORD) instanceof ListPaidCommand);
+        assertTrue(parser.parseCommand(ListPaidCommand.COMMAND_WORD + " 3") instanceof ListPaidCommand);
+    }
+
+    @Test
+    public void parseCommand_listOverdue() throws Exception {
+        assertTrue(parser.parseCommand(ListOverdueCommand.COMMAND_WORD) instanceof ListOverdueCommand);
+        assertTrue(parser.parseCommand(ListOverdueCommand.COMMAND_WORD + " 3") instanceof ListOverdueCommand);
     }
 
     @Test
