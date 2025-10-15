@@ -15,7 +15,7 @@ import seedu.address.model.payment.exceptions.PaymentException;
  */
 public class PaymentList {
     private final ArrayList<Payment> payments;
-    private YearMonth latestUnpaidYearmonth;
+    private YearMonth earliestUnpaidYearmonth;
 
     private PaymentStatus status;
 
@@ -25,7 +25,8 @@ public class PaymentList {
     public PaymentList() {
         this.payments = new ArrayList<>();
 
-        latestUnpaidYearmonth = null;
+        earliestUnpaidYearmonth = null;
+        setPaymentStatus(PaymentStatus.PAID);
     }
 
     /**
@@ -37,7 +38,7 @@ public class PaymentList {
         this.payments.add(payment);
 
         updateStatus();
-        this.latestUnpaidYearmonth = findLatestUnpaidYearMonth();
+        setEarliestUnpaidYearmonth(findAndSetLatestUnpaidYearMonth());
     }
 
     /**
@@ -48,7 +49,7 @@ public class PaymentList {
         sortByYearMonth();
 
         updateStatus();
-        setLatestUnpaidYearmonth(findLatestUnpaidYearMonth());
+        setEarliestUnpaidYearmonth(findAndSetLatestUnpaidYearMonth());
     }
 
     public int getSize() {
@@ -99,6 +100,12 @@ public class PaymentList {
     public void addPayment(Payment payment) {
         payments.add(payment);
 
+        if (status == PaymentStatus.PAID && !payment.isPaid()) {
+            setPaymentStatus(PaymentStatus.UNPAID);
+            setEarliestUnpaidYearmonth(payment.getYearMonth());
+        } else if (status == PaymentStatus.UNPAID && !payment.isPaid()) {
+            setPaymentStatus(PaymentStatus.OVERDUE);
+        }
         sortByYearMonth();
     }
 
@@ -135,7 +142,7 @@ public class PaymentList {
      * Returns the latest (max YearMonth) unpaid payment's month, or null if none.
      * Manual method.
      */
-    public YearMonth findLatestUnpaidYearMonth() {
+    public YearMonth findAndSetLatestUnpaidYearMonth() {
         YearMonth latest = null;
         for (Payment p : payments) {
             if (!p.isPaid()) {
@@ -145,8 +152,8 @@ public class PaymentList {
                 }
             }
         }
-        if (latest != latestUnpaidYearmonth) {
-            setLatestUnpaidYearmonth(latest);
+        if (latest != earliestUnpaidYearmonth) {
+            setEarliestUnpaidYearmonth(latest);
         }
         return latest;
     }
@@ -174,8 +181,8 @@ public class PaymentList {
         this.status = status;
     }
 
-    private void setLatestUnpaidYearmonth(YearMonth month) {
-        this.latestUnpaidYearmonth = month;
+    private void setEarliestUnpaidYearmonth(YearMonth month) {
+        this.earliestUnpaidYearmonth = month;
     }
 
 }
