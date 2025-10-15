@@ -3,7 +3,13 @@ package seedu.address.testutil;
 import java.util.HashSet;
 import java.util.Set;
 
-import seedu.address.model.lesson.*;
+import seedu.address.model.lesson.Day;
+import seedu.address.model.lesson.Lesson;
+import seedu.address.model.lesson.LessonList;
+import seedu.address.model.lesson.LessonTime;
+import seedu.address.model.lesson.Level;
+import seedu.address.model.lesson.Subject;
+import seedu.address.model.lesson.Rate;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
@@ -99,6 +105,9 @@ public class StudentBuilder {
         return this;
     }
 
+    /**
+     * Sets the {@code Lessonlist} of the {@code Person} that we are building.
+     */
     public StudentBuilder withLessonList(LessonList ll) {
         this.ll = ll;
         return this;

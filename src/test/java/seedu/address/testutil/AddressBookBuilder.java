@@ -29,6 +29,9 @@ public class AddressBookBuilder {
         return this;
     }
 
+    /**
+     * Adds a new {@code Lesson} to the {@code AddressBook} that we are building.
+     */
     public AddressBookBuilder withLessonList(Lesson l) {
         addressBook.addLesson(l);
         return this;
