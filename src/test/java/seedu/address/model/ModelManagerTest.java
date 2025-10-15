@@ -17,12 +17,15 @@ import java.util.Arrays;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.model.lesson.Lesson;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.student.PaymentStatus;
 import seedu.address.model.person.student.Student;
 import seedu.address.model.person.student.StudentMatchesPaymentStatusPredicate;
 import seedu.address.testutil.AddressBookBuilder;
+import seedu.address.testutil.LessonBuilder;
 import seedu.address.testutil.StudentBuilder;
+
 
 public class ModelManagerTest {
 
@@ -100,6 +103,61 @@ public class ModelManagerTest {
     }
 
     @Test
+    public void hasLesson_lessonNotInAddressBook_returnsFalse() {
+        Lesson lesson = new LessonBuilder().build();
+        assertFalse(modelManager.hasLesson(lesson));
+    }
+
+    @Test
+    public void hasLesson_lessonInAddressBook_returnsTrue() {
+        Lesson lesson = new LessonBuilder().build();
+        modelManager.addLesson(ALICE, lesson);
+        assertTrue(modelManager.hasLesson(lesson));
+    }
+
+    @Test
+    public void hasLesson_nullLesson_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> modelManager.hasLesson(null));
+    }
+
+    @Test
+    public void addLesson_validLesson_success() {
+        Lesson lesson = new LessonBuilder().build();
+        modelManager.addLesson(ALICE, lesson);
+        assertTrue(modelManager.hasLesson(lesson));
+    }
+
+    @Test
+    public void addLesson_nullStudent_throwsNullPointerException() {
+        Lesson lesson = new LessonBuilder().build();
+        assertThrows(NullPointerException.class, () -> modelManager.addLesson(null, lesson));
+    }
+
+    @Test
+    public void deleteLesson_existingLesson_success() {
+        Lesson lesson = new LessonBuilder().build();
+        modelManager.addLesson(ALICE, lesson);
+        modelManager.deleteLesson(ALICE, lesson);
+        assertFalse(modelManager.hasLesson(lesson));
+    }
+
+    @Test
+    public void deleteLesson_nullStudent_throwsNullPointerException() {
+        Lesson lesson = new LessonBuilder().build();
+        assertThrows(NullPointerException.class, () -> modelManager.deleteLesson(null, lesson));
+    }
+
+    @Test
+    public void deleteLesson_nullLesson_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> modelManager.deleteLesson(ALICE, null));
+    }
+
+    @Test
+    public void addLesson_nullLesson_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> modelManager.addLesson(ALICE, null));
+    }
+
+    @Test
     public void equals() {
         AddressBook addressBook = new AddressBookBuilder().withPerson(ALICE).withPerson(BENSON).build();
         AddressBook differentAddressBook = new AddressBook();
@@ -126,8 +184,6 @@ public class ModelManagerTest {
         String[] keywords = ALICE.getName().fullName.split("\\s+");
         modelManager.updateFilteredPersonList(new NameContainsKeywordsPredicate(Arrays.asList(keywords)));
         assertFalse(modelManager.equals(new ModelManager(addressBook, userPrefs)));
-
-
 
         // resets modelManager to initial state for upcoming tests
         modelManager.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
