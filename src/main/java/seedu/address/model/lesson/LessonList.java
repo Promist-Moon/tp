@@ -80,7 +80,6 @@ public class LessonList {
     }
 
     /**
-     * Returns the total duration of all classes in a month.
      * Returns the total duration of {@code Lesson} hours in a month.
      * @param month of the query.
      * @return the total number of {@code Lesson} hours.
