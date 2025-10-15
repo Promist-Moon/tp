@@ -1,10 +1,11 @@
 package seedu.address.model.payment;
 
+import static java.util.Objects.requireNonNull;
+
 import java.time.YearMonth;
-import java.util.NavigableMap;
-import java.util.Objects;
-import java.util.Optional;
-import java.util.TreeMap;
+import java.util.ArrayList;
+
+import seedu.address.model.payment.exceptions.PaymentException;
 
 /**
  * Represents a list of payments.
@@ -12,67 +13,80 @@ import java.util.TreeMap;
  * It supports adding, retrieving, deleting, and printing payments.
  */
 public class PaymentList {
-
-    private final NavigableMap<YearMonth, Payment> byMonth;
+    private final ArrayList<Payment> payments;
+    private YearMonth latestUnpaidYearmonth;
 
     /**
-     * Constructs an empty PaymentList.
+     * Constructs a new lesson list by creating an empty array list.
      */
     public PaymentList() {
-        this.byMonth = new TreeMap<>();
-    }
-
-
-    /**
-     * Add Payment object to PaymentList.
-     * @param payment for current month.
-     * @return true if successfully added.
-     */
-    public boolean add(Payment payment) {
-        Objects.requireNonNull(payment);
-        YearMonth m = payment.getYearMonth();
-        // return false if duplicate month (don’t overwrite silently)
-        return byMonth.putIfAbsent(m, payment) == null;
-    }
-
-    /**
-     * Returns the Payment corresponding to the requested YearMonth.
-     *
-     * @param month YearMonth month of payment
-     * @return Payment corresponding to month
-     */
-    public Optional<Payment> getPayment(YearMonth month) {
-        return Optional.ofNullable(byMonth.get(month));
-    }
-
-    /**
-     * Returns the latest Payment in the paymentList
-     * @return payment in paymentList corresponding to current date
-     */
-    public Optional<Payment> getLatestPayment() {
-        var e = byMonth.lastEntry();
-        return Optional.ofNullable(e == null ? null : e.getValue());
-    }
-
-    public boolean remove(YearMonth month) {
-        return byMonth.remove(month) != null;
-    }
-
-    /**
-     * Gets latest unpaid or overdue Payment in payment list
-     * @return Payment object that has false isPaid
-     */
-    public Optional<Payment> getLatestUnpaidOrOverdue() {
-        return byMonth.descendingMap().values().stream()
-                .filter(p -> !p.isPaid())
-                .findFirst();
+        this.payments = new ArrayList<>();
     }
 
     public int getSize() {
-        return byMonth.size();
+        return payments.size();
     }
 
     public boolean isEmpty() {
-        return byMonth.isEmpty();
+        return this.getSize() == 0;
     }
+
+    /**
+     * Returns payment by index.
+     *
+     * @param indexOneBased index of payment object, one based.
+     * @return a Payment object
+     * @throws PaymentException when no payment corresponding to yearmonth found.
+     */
+    public Payment getPaymentByIndex(int indexOneBased) throws PaymentException {
+        int idx = indexOneBased - 1;
+        if (idx < 0 || idx >= payments.size()) {
+            throw new PaymentException("No such payment: " + indexOneBased);
+        }
+        return payments.get(idx);
+    }
+
+    /**
+     * Returns payment by month.
+     *
+     * @param month a YearMonth object
+     * @return a Payment object corresponding to YearMonth
+     * @throws PaymentException when no payment corresponding to yearmonth found.
+     */
+    public Payment getPaymentByMonth(YearMonth month) throws PaymentException {
+        requireNonNull(month, "Month must not be null.");
+
+        for (Payment p : payments) {
+            if (month.equals(p.getYearMonth())) {
+                return p;
+            }
+        }
+
+        throw new PaymentException("No payment found for " + month);
+    }
+
+    /**
+     * Adds a new payment to the payment list.
+     */
+    public void addPayment(Payment payment) {
+        payments.add(payment);
+    }
+
+
+
+    /**
+     * Returns a string representation of the payment list, with
+     * each lesson prefixed by its index.
+     *
+     * @return the formatted string representation of the payment list.
+     */
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < payments.size(); i++) {
+            sb.append(i + 1).append(". ").append(payments.get(i)).append("\n");
+        }
+        return sb.toString();
+    }
+
 }
