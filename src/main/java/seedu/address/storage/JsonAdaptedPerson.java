@@ -79,7 +79,7 @@ class JsonAdaptedPerson {
             lessons.addAll(student.getLessonList().getLessons().stream()
                     .map(JsonAdaptedLesson::new)
                     .collect(Collectors.toList()));
-            payments.addAll(student.getPaymentList().getPayments().stream()
+            payments.addAll(student.getPayments().getPayments().stream()
                     .map(JsonAdaptedPayment::new)
                     .collect(Collectors.toList()));
         } else {
