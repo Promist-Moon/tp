@@ -4,6 +4,8 @@ import java.time.YearMonth;
 import java.util.Objects;
 
 import seedu.address.model.Model;
+import seedu.address.model.person.Person;
+import seedu.address.model.person.student.Student;
 import seedu.address.model.util.DateTimeUtil;
 
 /**
@@ -13,6 +15,12 @@ import seedu.address.model.util.DateTimeUtil;
 public class MonthlyRollover {
     private final Model model;
 
+    /**
+     * Creates a new MonthlyRollover instance and associates it with the given Model
+     * to access and update data for rollover.
+     *
+     * @param model the {@code Model} used for accessing and modifying address book data during rollover
+     */
     public MonthlyRollover(Model model) {
         Objects.requireNonNull(model);
         this.model = model;
@@ -46,9 +54,26 @@ public class MonthlyRollover {
      * @param month the {@code YearMonth} to perform rollover for
      */
     private void rolloverForMonth(YearMonth month) {
-        // TODO: Implement how payments roll over month-by-month.
-        // Example: iterate through all students, duplicate unpaid payments,
-        // mark overdue payments, etc.
+        for (Person person : model.getFilteredPersonList()) {
+            if (!(person instanceof Student)) {
+                continue;
+            }
+
+            Student student = (Student) person;
+
+            // Calculate the total amount earned for this month from all lessons
+            float value = student.getLessons().getTotalAmountEarned(month);
+            TotalAmount totalAmount = new TotalAmount(value);
+
+            // Create a new Payment for this month
+            Payment newPayment = new Payment(student, month, totalAmount);
+
+            // Add or replace the payment in the student's PaymentList
+            student.getPayments().addPayment(newPayment);
+
+            // TODO: check implementation of this
+            // Update the model to reflect the change
+            model.setPerson(student, student);
+        }
     }
 }
-

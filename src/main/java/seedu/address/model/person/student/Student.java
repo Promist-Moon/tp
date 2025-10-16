@@ -73,14 +73,14 @@ public class Student extends Person {
     /**
      * Returns an mutable ArrayList of Lessons.
      */
-    public LessonList getLessonList() {
+    public LessonList getLessons() {
         return this.lessons;
     }
 
     /**
      * Returns an mutable TreeMap of Payments.
      */
-    public PaymentList getPaymentList() {
+    public PaymentList getPayments() {
         return this.payments;
     }
 
