@@ -80,7 +80,7 @@ public class Student extends Person {
     /**
      * Returns a mutable ArrayList of Payments.
      */
-    public PaymentList getPaymentList() {
+    public PaymentList getPayments() {
         return this.payments;
     }
 

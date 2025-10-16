@@ -4,9 +4,11 @@ import static java.util.Objects.requireNonNull;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.time.YearMonth;
 import java.util.Objects;
 
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.model.util.DateTimeUtil;
 
 /**
  * Represents User's preferences.
@@ -15,6 +17,7 @@ public class UserPrefs implements ReadOnlyUserPrefs {
 
     private GuiSettings guiSettings = new GuiSettings();
     private Path addressBookFilePath = Paths.get("data" , "addressbook.json");
+    private YearMonth lastOpened = DateTimeUtil.currentYearMonth();
 
     /**
      * Creates a {@code UserPrefs} with default values.
@@ -36,6 +39,7 @@ public class UserPrefs implements ReadOnlyUserPrefs {
         requireNonNull(newUserPrefs);
         setGuiSettings(newUserPrefs.getGuiSettings());
         setAddressBookFilePath(newUserPrefs.getAddressBookFilePath());
+        setLastOpened(newUserPrefs.getLastOpened());
     }
 
     public GuiSettings getGuiSettings() {
@@ -56,6 +60,15 @@ public class UserPrefs implements ReadOnlyUserPrefs {
         this.addressBookFilePath = addressBookFilePath;
     }
 
+    public YearMonth getLastOpened() {
+        return lastOpened;
+    }
+
+    public void setLastOpened(YearMonth lastOpened) {
+        requireNonNull(lastOpened);
+        this.lastOpened = lastOpened;
+    }
+
     @Override
     public boolean equals(Object other) {
         if (other == this) {
@@ -69,12 +82,13 @@ public class UserPrefs implements ReadOnlyUserPrefs {
 
         UserPrefs otherUserPrefs = (UserPrefs) other;
         return guiSettings.equals(otherUserPrefs.guiSettings)
-                && addressBookFilePath.equals(otherUserPrefs.addressBookFilePath);
+                && addressBookFilePath.equals(otherUserPrefs.addressBookFilePath)
+                && lastOpened.equals(otherUserPrefs.lastOpened);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(guiSettings, addressBookFilePath);
+        return Objects.hash(guiSettings, addressBookFilePath, lastOpened);
     }
 
     @Override
@@ -82,6 +96,7 @@ public class UserPrefs implements ReadOnlyUserPrefs {
         StringBuilder sb = new StringBuilder();
         sb.append("Gui Settings : " + guiSettings);
         sb.append("\nLocal data file location : " + addressBookFilePath);
+        sb.append("\nLast opened month : " + lastOpened);
         return sb.toString();
     }
 
