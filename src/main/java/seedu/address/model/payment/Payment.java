@@ -5,8 +5,6 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import java.time.YearMonth;
 import java.util.Objects;
 
-import seedu.address.model.person.student.Student;
-
 
 /**
  * Represents a Payment a Student makes in a month/year.
