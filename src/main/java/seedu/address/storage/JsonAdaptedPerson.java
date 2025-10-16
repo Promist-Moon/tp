@@ -44,7 +44,8 @@ class JsonAdaptedPerson {
     public JsonAdaptedPerson(@JsonProperty("type") String type, @JsonProperty("name") String name,
                              @JsonProperty("phone") String phone, @JsonProperty("email") String email,
                              @JsonProperty("address") String address, @JsonProperty("tags") List<JsonAdaptedTag> tags,
-                             @JsonProperty("lessonList") ArrayList<JsonAdaptedLesson> lessons) {
+                             @JsonProperty("lessonList") ArrayList<JsonAdaptedLesson> lessons,
+                             @JsonProperty("paymentList") ArrayList<JsonAdaptedPayment> payments) {
         this.type = type;
         this.name = name;
         this.phone = phone;
@@ -55,6 +56,9 @@ class JsonAdaptedPerson {
         }
         if (lessons != null) {
             this.lessons.addAll(lessons);
+        }
+        if (payments != null) {
+            this.payments.addAll(payments);
         }
     }
 
@@ -74,6 +78,9 @@ class JsonAdaptedPerson {
                     .collect(Collectors.toList()));
             lessons.addAll(student.getLessonList().getLessons().stream()
                     .map(JsonAdaptedLesson::new)
+                    .collect(Collectors.toList()));
+            payments.addAll(student.getPaymentList().getPayments().stream()
+                    .map(JsonAdaptedPayment::new)
                     .collect(Collectors.toList()));
         } else {
             // For now only Student is supported; non-student persons will fail during toModelType() validation

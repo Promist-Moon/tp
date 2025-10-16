@@ -75,6 +75,10 @@ public class PaymentList {
         return payments.get(idx);
     }
 
+    public ArrayList<Payment> getPayments() {
+        return this.payments;
+    }
+
     public Status getStatus() {
         return this.status;
     }
