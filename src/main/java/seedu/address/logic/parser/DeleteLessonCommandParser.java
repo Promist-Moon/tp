@@ -7,13 +7,17 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_STUDENT_INDEX;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.DeleteLessonCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.lesson.Subject;
 
 /**
  * Parses input arguments and creates a new DeleteLessonCommand object
  */
 public class DeleteLessonCommandParser implements Parser {
 
+    /**
+     * Parses the given {@code String} of arguments in the context of the DeleteLessonCommand
+     * and returns an DeleteLessonCommand object for execution.
+     * @throws ParseException if the user input does not conform the expected format
+     */
     public DeleteLessonCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_STUDENT_INDEX, PREFIX_LESSON_INDEX);
         if (!arePrefixesPresent(argMultimap, PREFIX_STUDENT_INDEX, PREFIX_LESSON_INDEX)
