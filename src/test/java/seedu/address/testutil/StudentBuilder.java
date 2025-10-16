@@ -1,16 +1,12 @@
 package seedu.address.testutil;
 
 import java.time.YearMonth;
+import static seedu.address.testutil.TypicalLessons.Y3_MATH;
+
 import java.util.HashSet;
 import java.util.Set;
 
-import seedu.address.model.lesson.Day;
-import seedu.address.model.lesson.Lesson;
 import seedu.address.model.lesson.LessonList;
-import seedu.address.model.lesson.LessonTime;
-import seedu.address.model.lesson.Level;
-import seedu.address.model.lesson.Rate;
-import seedu.address.model.lesson.Subject;
 import seedu.address.model.payment.Payment;
 import seedu.address.model.payment.PaymentList;
 import seedu.address.model.payment.TotalAmount;
@@ -31,13 +27,6 @@ public class StudentBuilder {
     public static final String DEFAULT_PHONE = "85355255";
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
-    public static final Lesson DEFAULT_LESSON = new Lesson(
-            Subject.fromString("Math"),
-            Level.fromString("1"),
-            new Day("1"),
-            LessonTime.ofLessonTime("10:00", "12:00"),
-            new Rate("40")
-    );
     public static final Payment DEFAULT_PAYMENT = new Payment(
             YearMonth.parse("2025-10"),
             new TotalAmount(400f)
@@ -59,7 +48,7 @@ public class StudentBuilder {
         email = new Email(DEFAULT_EMAIL);
         address = new Address(DEFAULT_ADDRESS);
         tags = new HashSet<>();
-        ll.addLesson(DEFAULT_LESSON);
+        ll.addLesson(Y3_MATH);
         pl.addPayment(DEFAULT_PAYMENT);
     }
 
@@ -120,7 +109,7 @@ public class StudentBuilder {
      * Sets the {@code Lessonlist} of the {@code Person} that we are building.
      */
     public StudentBuilder withLessonList(LessonList ll) {
-        this.ll = ll;
+        this.ll = new LessonList(ll.getLessons());
         return this;
     }
 

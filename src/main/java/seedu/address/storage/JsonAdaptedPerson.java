@@ -41,10 +41,10 @@ class JsonAdaptedPerson {
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
      */
     @JsonCreator
-    public JsonAdaptedPerson(@JsonProperty("type") String type,
-                             @JsonProperty("name") String name, @JsonProperty("phone") String phone,
-                             @JsonProperty("email") String email, @JsonProperty("address") String address,
-                             @JsonProperty("tags") List<JsonAdaptedTag> tags) {
+    public JsonAdaptedPerson(@JsonProperty("type") String type, @JsonProperty("name") String name,
+                             @JsonProperty("phone") String phone, @JsonProperty("email") String email,
+                             @JsonProperty("address") String address, @JsonProperty("tags") List<JsonAdaptedTag> tags,
+                             @JsonProperty("lessonList") ArrayList<JsonAdaptedLesson> lessons) {
         this.type = type;
         this.name = name;
         this.phone = phone;
@@ -53,7 +53,11 @@ class JsonAdaptedPerson {
         if (tags != null) {
             this.tags.addAll(tags);
         }
+        if (lessons != null) {
+            this.lessons.addAll(lessons);
+        }
     }
+
 
     /**
      * Converts a given {@code Person} into this class for Jackson use.
@@ -67,6 +71,9 @@ class JsonAdaptedPerson {
             address = student.getAddress().value;
             tags.addAll(student.getTags().stream()
                     .map(JsonAdaptedTag::new)
+                    .collect(Collectors.toList()));
+            lessons.addAll(student.getLessonList().getLessons().stream()
+                    .map(JsonAdaptedLesson::new)
                     .collect(Collectors.toList()));
         } else {
             // For now only Student is supported; non-student persons will fail during toModelType() validation
