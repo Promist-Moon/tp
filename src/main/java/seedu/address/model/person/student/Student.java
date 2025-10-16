@@ -11,6 +11,7 @@ import java.util.Set;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.lesson.LessonList;
 import seedu.address.model.payment.PaymentList;
+import seedu.address.model.payment.exceptions.PaymentException;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
@@ -102,6 +103,16 @@ public class Student extends Person {
     public void setPaymentStatus(PaymentStatus paymentStatus) {
         requireNonNull(paymentStatus);
         this.paymentStatus = paymentStatus;
+    }
+
+    /**
+     * Marks all the payments in the student's PaymentList as paid.
+     *
+     * @throws PaymentException
+     */
+    public void pay() throws PaymentException {
+        payments.markAllPaid();
+        setPaymentStatus(PaymentStatus.PAID);
     }
 
     /**
