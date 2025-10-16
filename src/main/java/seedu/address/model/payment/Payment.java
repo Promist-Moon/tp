@@ -29,6 +29,21 @@ public class Payment {
         this.isPaid = false;
     }
 
+    /**
+     * Constructs a new {@code Payment} object for a specified student.
+     * This constructor includes the boolean isPaid
+     *
+     * @param yearMonth
+     * @param totalAmount
+     * @param isPaid
+     */
+    public Payment(YearMonth yearMonth, TotalAmount totalAmount, boolean isPaid) {
+        requireAllNonNull(yearMonth, totalAmount);
+        this.totalAmount = totalAmount;
+        this.yearMonth = yearMonth;
+        this.isPaid = isPaid;
+    }
+
     public YearMonth getYearMonth() {
         return this.yearMonth;
     }
@@ -51,6 +66,14 @@ public class Payment {
      */
     public void markPaid() {
         isPaid = true;
+    }
+
+    @Override
+    public String toString() {
+        return String.format("Payment[Month=%s, Amount=%.2f, Paid=%s]",
+                yearMonth,
+                totalAmount.getAsFloat(),
+                isPaid ? "Paid" : "Unpaid");
     }
 
     @Override

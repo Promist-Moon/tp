@@ -17,7 +17,6 @@ public class PaymentBuilder {
     public static final float DEFAULT_AMOUNT = 600f;
     public static final boolean DEFAULT_ISPAID = false;
 
-    private Student student;
     private YearMonth yearMonth;
     private TotalAmount totalAmount;
     private boolean isPaid;
@@ -74,6 +73,6 @@ public class PaymentBuilder {
     }
 
     public Payment build() {
-        return new Payment(yearMonth, totalAmount);
+        return new Payment(yearMonth, totalAmount, isPaid);
     }
 }

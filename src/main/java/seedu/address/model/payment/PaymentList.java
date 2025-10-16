@@ -75,6 +75,14 @@ public class PaymentList {
         return payments.get(idx);
     }
 
+    public Status getStatus() {
+        return this.status;
+    }
+
+    public YearMonth getEarliestUnpaidYearmonth() {
+        return this.earliestUnpaidYearmonth;
+    }
+
     /**
      * Returns payment by month.
      *
@@ -98,6 +106,7 @@ public class PaymentList {
      * Adds a new payment to the payment list.
      */
     public void addPayment(Payment payment) {
+        requireNonNull(payment);
         payments.add(payment);
 
         if (status == Status.PAID && !payment.isPaid()) {
@@ -127,7 +136,7 @@ public class PaymentList {
     /**
      * Updates payment status according to the size of unpaid list.
      */
-    public void updateStatus() {
+    private void updateStatus() {
         ArrayList<Payment> unpaidList = findUnpaids();
         if (unpaidList.isEmpty()) {
             setPaymentStatus(Status.PAID);
