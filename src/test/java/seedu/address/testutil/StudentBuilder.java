@@ -1,5 +1,7 @@
 package seedu.address.testutil;
 
+import static seedu.address.testutil.TypicalLessons.Y3_MATH;
+
 import java.util.HashSet;
 import java.util.Set;
 
@@ -11,8 +13,6 @@ import seedu.address.model.person.student.Address;
 import seedu.address.model.person.student.Student;
 import seedu.address.model.person.student.tag.Tag;
 import seedu.address.model.util.SampleDataUtil;
-
-import static seedu.address.testutil.TypicalLessons.Y3_MATH;
 
 /**
  * A utility class to help with building Student objects.
