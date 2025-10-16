@@ -52,7 +52,7 @@ public class ListUnpaidCommandTest {
     public void execute_listIsNotFiltered_showsUnpaidStudentOnly() {
         //check with updateFilteredPersonList func
         //that should work the same way
-        expectedModel.updateFilteredPersonList( person ->
+        expectedModel.updateFilteredPersonList(person ->
                 person instanceof Student && ((Student) person).getPaymentStatus() == PaymentStatus.UNPAID);
         assertCommandSuccess(new ListUnpaidCommand(), model, ListUnpaidCommand.MESSAGE_SUCCESS, expectedModel);
 
@@ -60,7 +60,7 @@ public class ListUnpaidCommandTest {
 
     @Test
     public void execute_listIsFiltered_showsUnpaidStudentOnly() {
-        expectedModel.updateFilteredPersonList( person ->
+        expectedModel.updateFilteredPersonList(person ->
                 person instanceof Student && ((Student) person).getPaymentStatus() == PaymentStatus.UNPAID);
         assertCommandSuccess(new ListUnpaidCommand(), model, ListUnpaidCommand.MESSAGE_SUCCESS, expectedModel);
     }

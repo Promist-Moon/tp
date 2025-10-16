@@ -14,8 +14,8 @@ import seedu.address.model.person.student.Student;
 public class PaymentBuilder {
 
     public static final Student DEFAULT_STUDENT = ALICE;
-    public static final YearMonth DEFAULT_YEARMONTH = YearMonth.of(2025, 10);
-    public static final TotalAmount DEFAULT_AMOUNT = new TotalAmount(600);
+    public static final String DEFAULT_YEARMONTH = "2025-10";
+    public static final float DEFAULT_AMOUNT = 600f;
     public static final boolean DEFAULT_ISPAID = false;
 
     private Student student;
@@ -28,8 +28,8 @@ public class PaymentBuilder {
      */
     public PaymentBuilder() {
         student = DEFAULT_STUDENT;
-        yearMonth = DEFAULT_YEARMONTH;
-        totalAmount = DEFAULT_AMOUNT;
+        yearMonth = YearMonth.parse(DEFAULT_YEARMONTH);
+        totalAmount = new TotalAmount(DEFAULT_AMOUNT);
         isPaid = DEFAULT_ISPAID;
     }
 
@@ -54,16 +54,25 @@ public class PaymentBuilder {
     /**
      * Sets the {@code YearMonth} of the {@code Payment} that we are building.
      */
-    public PaymentBuilder withYearMonth(YearMonth yearMonth) {
-        this.yearMonth = yearMonth;
+    public PaymentBuilder withYearMonth(String yearMonth) {
+        this.yearMonth = YearMonth.parse(yearMonth);
         return this;
     }
 
     /**
      * Sets the {@code totalAmount} of the {@code Payment} that we are building.
      */
-    public PaymentBuilder withTotalAmount(TotalAmount totalAmount) {
-        this.totalAmount = totalAmount;
+    public PaymentBuilder withTotalAmount(float totalAmount) {
+        this.totalAmount = new TotalAmount(totalAmount);
+        return this;
+    }
+
+    /**
+     * Sets the {@code totalAmount} of the {@link Payment} using a String.
+     */
+    public PaymentBuilder withTotalAmount(String amount) {
+        float parsed = Float.parseFloat(amount);
+        this.totalAmount = new TotalAmount(parsed);
         return this;
     }
 
