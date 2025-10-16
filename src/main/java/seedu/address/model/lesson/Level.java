@@ -20,6 +20,10 @@ public enum Level {
         this.level = level;
     }
 
+    public int getLevel() {
+        return this.level;
+    }
+
     /**
      * Checks if the given integer corresponds to a valid level code.
      *

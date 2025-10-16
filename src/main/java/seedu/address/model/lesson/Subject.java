@@ -26,6 +26,9 @@ public enum Subject {
         this.displayName = displayName;
     }
 
+    public String getSubject() {
+        return this.displayName;
+    }
     /**
      * Checks if the given string corresponds to a valid subject.
      *

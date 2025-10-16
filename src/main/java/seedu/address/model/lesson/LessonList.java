@@ -1,5 +1,6 @@
 package seedu.address.model.lesson;
 
+import java.lang.reflect.Array;
 import java.time.YearMonth;
 import java.util.ArrayList;
 
@@ -39,6 +40,10 @@ public class LessonList {
             throw new LessonException("No such lesson: " + indexOneBased);
         }
         return lessons.get(idx);
+    }
+
+    public ArrayList<Lesson> getLessons() {
+        return new ArrayList<>(lessons);  // Defensive copy
     }
 
     /**

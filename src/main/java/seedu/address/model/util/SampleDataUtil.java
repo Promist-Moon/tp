@@ -6,6 +6,12 @@ import java.util.stream.Collectors;
 
 import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.lesson.Day;
+import seedu.address.model.lesson.Lesson;
+import seedu.address.model.lesson.LessonTime;
+import seedu.address.model.lesson.Level;
+import seedu.address.model.lesson.Rate;
+import seedu.address.model.lesson.Subject;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
@@ -37,6 +43,17 @@ public class SampleDataUtil {
             new Student(new Name("Roy Balakrishnan"), new Phone("92624417"), new Email("royb@example.com"),
                 new Address("Blk 45 Aljunied Street 85, #11-31"),
                 getTagSet("colleagues"))
+        };
+    }
+
+    public static Lesson[] getSampleLessons() {
+        return new Lesson[] {
+                new Lesson(Subject.fromString("English"), Level.fromString("1"), new Day("1"),
+                        LessonTime.ofLessonTime("11:00", "14:00"), new Rate("56.07")),
+                new Lesson(Subject.fromString("geography"), Level.fromString("2"), new Day("3"),
+                        LessonTime.ofLessonTime("09:00", "12:00"), new Rate("30.00")),
+                new Lesson(Subject.fromString("biology"), Level.fromString("5"), new Day("6"),
+                        LessonTime.ofLessonTime("15:30", "19:45"), new Rate("69.69"))
         };
     }
 
