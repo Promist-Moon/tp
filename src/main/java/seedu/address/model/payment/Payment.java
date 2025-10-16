@@ -1,8 +1,12 @@
 package seedu.address.model.payment;
 
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+
 import java.time.YearMonth;
+import java.util.Objects;
 
 import seedu.address.model.person.student.Student;
+
 
 /**
  * Represents a Payment a Student makes in a month/year.
@@ -23,6 +27,7 @@ public class Payment {
      * @param totalAmount  the total amount due per month by a student
      */
     public Payment(Student student, YearMonth yearMonth, TotalAmount totalAmount) {
+        requireAllNonNull(student, yearMonth, totalAmount);
         this.student = student;
         this.totalAmount = totalAmount;
         this.yearMonth = yearMonth;
@@ -49,4 +54,32 @@ public class Payment {
         return isPaid;
     }
 
+    /**
+     * Marks current payment as paid
+     * If the payment is already marked as paid, this method has no effect.
+     */
+    public void markPaid() {
+        isPaid = true;
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        if (!(other instanceof Payment)) {
+            return false;
+        }
+
+        Payment otherPayment = (Payment) other;
+        return student.equals(otherPayment.student)
+                && yearMonth.equals(otherPayment.yearMonth)
+                && totalAmount.equals(otherPayment.totalAmount); // exclusion of isPaid is intentional
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(student, yearMonth, totalAmount); // exclusion of isPaid is intentional
+    }
 }
