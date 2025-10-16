@@ -62,7 +62,7 @@ public class MonthlyRollover {
             Student student = (Student) person;
 
             // Calculate the total amount earned for this month from all lessons
-            float value = student.getLessons().getTotalAmountEarned(month);
+            float value = student.getLessonList().getTotalAmountEarned(month);
             TotalAmount totalAmount = new TotalAmount(value);
 
             // Create a new Payment for this month

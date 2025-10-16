@@ -181,8 +181,23 @@ public class ModelManager implements Model {
         requireNonNull(lesson);
 
         addressBook.addLesson(lesson);
-        LessonList ls = student.getLessons();
+        LessonList ls = student.getLessonList();
         ls.addLesson(lesson);
+
+        LessonList oldLessonList = student.getLessonList();
+        LessonList newLessonList = new LessonList(oldLessonList.getLessons());
+        newLessonList.addLesson(lesson);
+
+        Student editedStudent = new Student(
+                student.getName(),
+                student.getPhone(),
+                student.getEmail(),
+                student.getAddress(),
+                student.getTags(),
+                newLessonList
+        );
+
+        setPerson(student, editedStudent);
         updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
     }
 
@@ -192,7 +207,7 @@ public class ModelManager implements Model {
         requireNonNull(lesson);
 
         addressBook.removeLesson(lesson);
-        LessonList ls = student.getLessons();
+        LessonList ls = student.getLessonList();
         ls.deleteLesson(lesson);
         updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
     }

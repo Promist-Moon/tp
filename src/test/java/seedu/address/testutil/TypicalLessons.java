@@ -12,42 +12,49 @@ import seedu.address.model.lesson.Lesson;
 public class TypicalLessons {
     public static final Lesson Y3_MATH = new LessonBuilder()
             .withSubject("Math")
+            .withLevel("3")
             .withDay("3")
             .withLessonTime("09:00", "11:00")
             .build();
 
     public static final Lesson Y1_PHYSICS = new LessonBuilder()
             .withSubject("Physics")
+            .withLevel("1")
             .withDay("1")
             .withLessonTime("10:00", "11:30")
             .build();
 
     public static final Lesson Y4_ENGLISH = new LessonBuilder()
             .withSubject("English")
+            .withLevel("4")
             .withDay("4")
             .withLessonTime("09:30", "11:00")
             .build();
 
     public static final Lesson Y2_CHEMISTRY = new LessonBuilder()
             .withSubject("Chemistry")
+            .withLevel("2")
             .withDay("2")
             .withLessonTime("19:30", "21:00")
             .build();
 
     public static final Lesson Y1_ENGLISH = new LessonBuilder()
             .withSubject("English")
+            .withLevel("1")
             .withDay("1")
             .withLessonTime("12:30", "14:00")
             .build();
 
     public static final Lesson Y3_HISTORY = new LessonBuilder()
             .withSubject("History")
+            .withLevel("3")
             .withDay("3")
             .withLessonTime("16:30", "18:00")
             .build();
 
     public static final Lesson Y3_GEOGRAPHY = new LessonBuilder()
-            .withSubject("History")
+            .withSubject("Geography")
+            .withLevel("3")
             .withDay("5")
             .withLessonTime("19:30", "21:00")
             .build();

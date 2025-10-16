@@ -1,15 +1,11 @@
 package seedu.address.testutil;
 
+import static seedu.address.testutil.TypicalLessons.Y3_MATH;
+
 import java.util.HashSet;
 import java.util.Set;
 
-import seedu.address.model.lesson.Day;
-import seedu.address.model.lesson.Lesson;
 import seedu.address.model.lesson.LessonList;
-import seedu.address.model.lesson.LessonTime;
-import seedu.address.model.lesson.Level;
-import seedu.address.model.lesson.Rate;
-import seedu.address.model.lesson.Subject;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
@@ -27,13 +23,6 @@ public class StudentBuilder {
     public static final String DEFAULT_PHONE = "85355255";
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
-    public static final Lesson DEFAULT_LESSON = new Lesson(
-            Subject.fromString("Math"),
-            Level.fromString("1"),
-            new Day("1"),
-            LessonTime.ofLessonTime("10:00", "12:00"),
-            new Rate("40")
-    );
 
     private Name name;
     private Phone phone;
@@ -50,7 +39,7 @@ public class StudentBuilder {
         email = new Email(DEFAULT_EMAIL);
         address = new Address(DEFAULT_ADDRESS);
         tags = new HashSet<>();
-        ll.addLesson(DEFAULT_LESSON);
+        ll.addLesson(Y3_MATH);
     }
 
     /**
@@ -62,7 +51,7 @@ public class StudentBuilder {
         email = personToCopy.getEmail();
         address = personToCopy.getAddress();
         tags = new HashSet<>(personToCopy.getTags());
-        ll = personToCopy.getLessons();
+        ll = personToCopy.getLessonList();
     }
 
     /**
@@ -109,7 +98,7 @@ public class StudentBuilder {
      * Sets the {@code Lessonlist} of the {@code Person} that we are building.
      */
     public StudentBuilder withLessonList(LessonList ll) {
-        this.ll = ll;
+        this.ll = new LessonList(ll.getLessons());
         return this;
     }
 

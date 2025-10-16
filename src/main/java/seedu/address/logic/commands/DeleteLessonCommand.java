@@ -33,8 +33,8 @@ public class DeleteLessonCommand extends Command {
             + " for the student identified by the index number used in the displayed student list.\n"
             + "Parameters: STUDENT_INDEX (must be a positive integer)"
             + "LESSON_INDEX (must be a positive integer)\n"
-            + "Example: " + COMMAND_WORD
-            + PREFIX_STUDENT_INDEX + " 1"
+            + "Example: " + COMMAND_WORD + " "
+            + PREFIX_STUDENT_INDEX + " 1 "
             + PREFIX_LESSON_INDEX + "2";
 
     public static final String MESSAGE_DELETE_LESSON_SUCCESS = "Deleted Lesson: %1$s";
@@ -80,9 +80,9 @@ public class DeleteLessonCommand extends Command {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 
-        LessonList lls = currStudent.getLessons();
+        LessonList lls = currStudent.getLessonList();
 
-        if (lessonIndex.getOneBased() >= lls.getSize()) {
+        if (lessonIndex.getOneBased() > lls.getSize()) {
             throw new CommandException(MESSAGE_INVALID_DISPLAYED);
         }
 
