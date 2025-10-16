@@ -56,7 +56,7 @@ public class ListPaidCommandTest {
     public void execute_listIsNotFiltered_showsPaidStudentOnly() {
         //check with updateFilteredPersonList func
         //that should work the same way
-        expectedModel.updateFilteredPersonList( person ->
+        expectedModel.updateFilteredPersonList(person ->
                 person instanceof Student && ((Student) person).getPaymentStatus() == PaymentStatus.PAID);
 
 
@@ -66,7 +66,7 @@ public class ListPaidCommandTest {
     @Test
     public void execute_listIsFiltered_showsPaidStudentOnly() {
         showPersonAtIndex(model, INDEX_FIRST_PERSON);
-        expectedModel.updateFilteredPersonList( person ->
+        expectedModel.updateFilteredPersonList(person ->
                 person instanceof Student && ((Student) person).getPaymentStatus() == PaymentStatus.PAID);
         assertCommandSuccess(new ListPaidCommand(), model, ListPaidCommand.MESSAGE_SUCCESS, expectedModel);
     }
