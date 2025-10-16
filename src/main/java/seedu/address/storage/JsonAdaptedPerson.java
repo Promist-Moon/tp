@@ -12,6 +12,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.lesson.Lesson;
 import seedu.address.model.lesson.LessonList;
+import seedu.address.model.payment.Payment;
+import seedu.address.model.payment.PaymentList;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
@@ -34,6 +36,7 @@ class JsonAdaptedPerson {
     private final String address;
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
     private final List<JsonAdaptedLesson> lessons = new ArrayList<>();
+    private final List<JsonAdaptedPayment> payments = new ArrayList<>();
     /**
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
      */
@@ -41,7 +44,8 @@ class JsonAdaptedPerson {
     public JsonAdaptedPerson(@JsonProperty("type") String type, @JsonProperty("name") String name,
                              @JsonProperty("phone") String phone, @JsonProperty("email") String email,
                              @JsonProperty("address") String address, @JsonProperty("tags") List<JsonAdaptedTag> tags,
-                             @JsonProperty("lessonList") ArrayList<JsonAdaptedLesson> lessons) {
+                             @JsonProperty("lessonList") ArrayList<JsonAdaptedLesson> lessons,
+                             @JsonProperty("paymentList") ArrayList<JsonAdaptedPayment> payments) {
         this.type = type;
         this.name = name;
         this.phone = phone;
@@ -52,6 +56,9 @@ class JsonAdaptedPerson {
         }
         if (lessons != null) {
             this.lessons.addAll(lessons);
+        }
+        if (payments != null) {
+            this.payments.addAll(payments);
         }
     }
 
@@ -71,6 +78,9 @@ class JsonAdaptedPerson {
                     .collect(Collectors.toList()));
             lessons.addAll(student.getLessonList().getLessons().stream()
                     .map(JsonAdaptedLesson::new)
+                    .collect(Collectors.toList()));
+            payments.addAll(student.getPaymentList().getPayments().stream()
+                    .map(JsonAdaptedPayment::new)
                     .collect(Collectors.toList()));
         } else {
             // For now only Student is supported; non-student persons will fail during toModelType() validation
@@ -93,6 +103,12 @@ class JsonAdaptedPerson {
         for (JsonAdaptedLesson lesson : lessons) {
             personLessons.add(lesson.toModelType());
         }
+
+        final ArrayList<Payment> personPayments = new ArrayList<>();
+        for (JsonAdaptedPayment payment : payments) {
+            personPayments.add(payment.toModelType());
+        }
+
         if (name == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Name.class.getSimpleName()));
         }
@@ -131,7 +147,8 @@ class JsonAdaptedPerson {
             final Address modelAddress = new Address(address);
             final Set<Tag> modelTags = new HashSet<>(personTags);
             final LessonList ll = new LessonList(personLessons);
-            return new Student(modelName, modelPhone, modelEmail, modelAddress, modelTags, ll);
+            final PaymentList pl = new PaymentList(personPayments);
+            return new Student(modelName, modelPhone, modelEmail, modelAddress, modelTags, ll, pl);
         }
         case "parent": {
             // TODO: When Parent is implemented, validate Parent-specific fields here and return new Parent(...)

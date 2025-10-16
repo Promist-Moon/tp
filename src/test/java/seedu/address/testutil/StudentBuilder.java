@@ -2,10 +2,14 @@ package seedu.address.testutil;
 
 import static seedu.address.testutil.TypicalLessons.Y3_MATH;
 
+import java.time.YearMonth;
 import java.util.HashSet;
 import java.util.Set;
 
 import seedu.address.model.lesson.LessonList;
+import seedu.address.model.payment.Payment;
+import seedu.address.model.payment.PaymentList;
+import seedu.address.model.payment.TotalAmount;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
@@ -23,6 +27,10 @@ public class StudentBuilder {
     public static final String DEFAULT_PHONE = "85355255";
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
+    public static final Payment DEFAULT_PAYMENT = new Payment(
+            YearMonth.parse("2025-10"),
+            new TotalAmount(400f)
+    );
 
     private Name name;
     private Phone phone;
@@ -30,6 +38,7 @@ public class StudentBuilder {
     private Address address;
     private Set<Tag> tags;
     private LessonList ll = new LessonList();
+    private PaymentList pl = new PaymentList();
     /**
      * Creates a {@code StudentBuilder} with the default details.
      */
@@ -40,6 +49,7 @@ public class StudentBuilder {
         address = new Address(DEFAULT_ADDRESS);
         tags = new HashSet<>();
         ll.addLesson(Y3_MATH);
+        pl.addPayment(DEFAULT_PAYMENT);
     }
 
     /**
@@ -52,6 +62,7 @@ public class StudentBuilder {
         address = personToCopy.getAddress();
         tags = new HashSet<>(personToCopy.getTags());
         ll = personToCopy.getLessonList();
+        pl = personToCopy.getPaymentList();
     }
 
     /**
@@ -102,8 +113,16 @@ public class StudentBuilder {
         return this;
     }
 
+    /**
+     * Sets the {@code Paymentlist} of the {@code Person} that we are building.
+     */
+    public StudentBuilder withPaymentList(PaymentList pl) {
+        this.pl = pl;
+        return this;
+    }
+
     public Student build() {
-        return new Student(name, phone, email, address, tags, ll);
+        return new Student(name, phone, email, address, tags, ll, pl);
     }
 
 }

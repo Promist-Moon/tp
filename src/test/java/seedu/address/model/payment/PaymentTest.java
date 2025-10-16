@@ -9,16 +9,12 @@ import static seedu.address.testutil.TypicalPayments.FEB_25;
 import static seedu.address.testutil.TypicalPayments.JAN_24_600;
 import static seedu.address.testutil.TypicalPayments.JAN_24_800;
 import static seedu.address.testutil.TypicalPayments.JAN_25;
-import static seedu.address.testutil.TypicalPayments.MAR_25_ALICE;
-import static seedu.address.testutil.TypicalPayments.MAR_25_BOB;
 
 import java.time.YearMonth;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.model.person.student.Student;
 import seedu.address.testutil.PaymentBuilder;
-import seedu.address.testutil.StudentBuilder;
 
 
 
@@ -26,7 +22,6 @@ public class PaymentTest {
 
     @Test
     public void constructor_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new PaymentBuilder().withStudent(null).build());
         assertThrows(NullPointerException.class, () -> new PaymentBuilder().withYearMonth(null).build());
         assertThrows(NullPointerException.class, () -> new PaymentBuilder().withTotalAmount(null).build());
     }
@@ -36,23 +31,14 @@ public class PaymentTest {
      */
     @Test
     public void constructor_validArgs_success() {
-        Student student = new StudentBuilder().build();
         YearMonth ym = YearMonth.of(2025, 10);
         TotalAmount total = new TotalAmount(600f);
 
-        Payment p = new Payment(student, ym, total);
+        Payment p = new Payment(ym, total);
 
-        assertEquals(student, p.getStudent());
         assertEquals(ym, p.getYearMonth());
         assertEquals(total, p.getTotalAmount());
         assertFalse(p.isPaid());
-    }
-
-    @Test
-    public void getStudent_returnsCorrectStudent() {
-        Student student = new StudentBuilder().withName("Alice").build();
-        Payment payment = new PaymentBuilder().withStudent(student).build();
-        assertEquals(student, payment.getStudent());
     }
 
     @Test
@@ -101,9 +87,6 @@ public class PaymentTest {
         // different type -> false
         assertFalse(JAN_25.equals("not a payment"));
 
-        // different student -> false
-        assertFalse(MAR_25_ALICE.equals(MAR_25_BOB));
-
         // different YearMonth -> false
         assertFalse(JAN_25.equals(FEB_25));
 
@@ -131,9 +114,6 @@ public class PaymentTest {
 
     @Test
     public void hashCode_differs() {
-        // different name -> different hash codes
-        assertNotEquals(MAR_25_ALICE.hashCode(), MAR_25_BOB.hashCode());
-
         // different year month -> different hash codes
         assertNotEquals(FEB_25.hashCode(), JAN_25.hashCode());
 

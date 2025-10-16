@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
+import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
@@ -37,18 +38,18 @@ public class PayCommandTest {
     }
 
     // Commented out as current person is marked as PAID
-    //    @Test
-    //    public void execute_validIndexUnfilteredList_success() {
-    //        Person personToPay = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-    //        PayCommand payCommand = new PayCommand(INDEX_FIRST_PERSON);
-    //
-    //        String expectedMessage = String.format(PayCommand.MESSAGE_PAYMENT_SUCCESS,
-    //                Messages.format(personToPay));
-    //
-    //        ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
-    //
-    //        assertCommandSuccess(payCommand, model, expectedMessage, expectedModel);
-    //    }
+    @Test
+    public void execute_validIndexUnfilteredList_success() {
+        Person personToPay = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        PayCommand payCommand = new PayCommand(INDEX_FIRST_PERSON);
+
+        String expectedMessage = String.format(PayCommand.MESSAGE_PAYMENT_SUCCESS,
+                Messages.format(personToPay));
+
+        ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+
+        assertCommandSuccess(payCommand, model, expectedMessage, expectedModel);
+    }
 
     @Test
     public void execute_invalidIndexUnfilteredList_throwsCommandException() {

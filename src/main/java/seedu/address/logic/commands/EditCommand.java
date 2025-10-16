@@ -22,6 +22,7 @@ import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.lesson.LessonList;
+import seedu.address.model.payment.PaymentList;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
@@ -115,7 +116,8 @@ public class EditCommand extends Command {
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(studentToEdit.getAddress());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(studentToEdit.getTags());
         LessonList lessons = studentToEdit.getLessonList();
-        return new Student(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags, lessons);
+        PaymentList payments = studentToEdit.getPaymentList();
+        return new Student(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags, lessons, payments);
     }
 
     @Override
@@ -153,6 +155,7 @@ public class EditCommand extends Command {
         private Address address;
         private Set<Tag> tags;
         private LessonList lessons;
+        private PaymentList payments;
 
         public EditPersonDescriptor() {}
 
@@ -215,6 +218,14 @@ public class EditCommand extends Command {
             return Optional.ofNullable(lessons);
         }
 
+        public void setPayments(PaymentList payments) {
+            this.payments = payments;
+        }
+
+        public Optional<PaymentList> getPayments() {
+            return Optional.ofNullable(payments);
+        }
+
         /**
          * Sets {@code tags} to this object's {@code tags}.
          * A defensive copy of {@code tags} is used internally.
@@ -249,7 +260,8 @@ public class EditCommand extends Command {
                     && Objects.equals(email, otherEditPersonDescriptor.email)
                     && Objects.equals(address, otherEditPersonDescriptor.address)
                     && Objects.equals(tags, otherEditPersonDescriptor.tags)
-                    && Objects.equals(lessons, otherEditPersonDescriptor.lessons);
+                    && Objects.equals(lessons, otherEditPersonDescriptor.lessons)
+                    && Objects.equals(payments, otherEditPersonDescriptor.payments);
         }
 
         @Override
