@@ -82,7 +82,7 @@ public class PersonCard extends UiPart<Region> {
             default:
                 break;
             }
-            // lessonList.getChildren().add(new LessonListCard(student.getLessons()).getRoot());
+            lessonList.getChildren().add(new LessonListCard(student.getLessonList().getLessons()).getRoot());
         } else {
             // Fallback: hide address and tags if not a Student
             address.setVisible(false);
