@@ -1,13 +1,9 @@
 package seedu.address.testutil;
 
-import static seedu.address.testutil.TypicalPersons.ALICE;
-import static seedu.address.testutil.TypicalPersons.BOB;
-
 import java.util.ArrayList;
 import java.util.List;
 
 import seedu.address.model.payment.Payment;
-import seedu.address.model.payment.PaymentList;
 
 /**
  * A utility class containing a list of {@code Payment} objects to be used in tests.

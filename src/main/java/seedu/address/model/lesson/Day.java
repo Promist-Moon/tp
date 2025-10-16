@@ -60,6 +60,10 @@ public class Day {
         return day;
     }
 
+    /**
+     * Returns an array of the days of the week.
+     * @return an array of Strings
+     */
     public static Day[] values() {
         Day[] days = new Day[7];
         for (int i = 1; i <= 7; i++) {

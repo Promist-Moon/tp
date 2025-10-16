@@ -1,8 +1,8 @@
 package seedu.address.testutil;
 
-import java.time.YearMonth;
 import static seedu.address.testutil.TypicalLessons.Y3_MATH;
 
+import java.time.YearMonth;
 import java.util.HashSet;
 import java.util.Set;
 

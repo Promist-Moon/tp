@@ -6,8 +6,8 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.payment.TotalAmount;
 import seedu.address.model.payment.Payment;
+import seedu.address.model.payment.TotalAmount;
 
 /**
  * Jackson-friendly version of {@link Payment}.
@@ -21,8 +21,9 @@ public class JsonAdaptedPayment {
      * Constructs a {@code JsonAdaptedPayment} with the given person details.
      */
     @JsonCreator
-    public JsonAdaptedPayment(@JsonProperty("yearMonth") String yearMonth, @JsonProperty("totalAmount") String totalAmount,
-                             @JsonProperty("isPaid") boolean isPaid) {
+    public JsonAdaptedPayment(@JsonProperty("yearMonth") String yearMonth,
+                              @JsonProperty("totalAmount") String totalAmount,
+                              @JsonProperty("isPaid") boolean isPaid) {
         this.yearMonth = yearMonth;
         this.totalAmount = totalAmount;
         this.isPaid = isPaid;

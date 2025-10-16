@@ -1,12 +1,9 @@
 package seedu.address.testutil;
 
-import static seedu.address.testutil.TypicalPersons.ALICE;
-
 import java.time.YearMonth;
 
 import seedu.address.model.payment.Payment;
 import seedu.address.model.payment.TotalAmount;
-import seedu.address.model.person.student.Student;
 
 /**
  * A utility class to help with building Payment objects.

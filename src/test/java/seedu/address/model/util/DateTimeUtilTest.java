@@ -16,8 +16,9 @@ class DateTimeUtilTest {
     void countDaysOfWeekInMonth_februaryNonLeap_allFour() {
         YearMonth feb2023 = YearMonth.of(2023, 2); // 2023-02 has 28 days
         for (Day d : Day.values()) {
-            assertEquals(4, DateTimeUtil.countDaysOfWeekInMonth(feb2023, d),
-                    () -> "Expected 4 for " + d + " in " + feb2023);
+            assertEquals(4,
+                    DateTimeUtil.countDaysOfWeekInMonth(feb2023, d), () ->
+                            "Expected 4 for " + d + " in " + feb2023);
         }
     }
 
@@ -28,8 +29,9 @@ class DateTimeUtilTest {
         // Thursday should be 5; others 4
         for (Day d : Day.values()) {
             int expected = (d.getDayOfWeek() == feb2024.atDay(1).getDayOfWeek()) ? 5 : 4;
-            assertEquals(expected, DateTimeUtil.countDaysOfWeekInMonth(feb2024, d),
-                    () -> "Unexpected count for " + d + " in " + feb2024);
+            assertEquals(expected,
+                    DateTimeUtil.countDaysOfWeekInMonth(feb2024, d), () ->
+                            "Unexpected count for " + d + " in " + feb2024);
         }
     }
 
@@ -38,13 +40,14 @@ class DateTimeUtilTest {
     void countDaysOfWeekInMonth_thirtyDayMonth_twoFives() {
         YearMonth apr2023 = YearMonth.of(2023, 4); // 30 days; starts on Saturday (2023-04-01)
         // For a 30-day month, the weekday of the 1st and the next weekday have 5 occurrences.
-        var firstDow = apr2023.atDay(1).getDayOfWeek();          // Saturday
-        var secondDow = firstDow.plus(1);                        // Sunday
+        var firstDow = apr2023.atDay(1).getDayOfWeek(); // Saturday
+        var secondDow = firstDow.plus(1); // Sunday
 
         for (Day d : Day.values()) {
             int expected = (d.getDayOfWeek() == firstDow || d.getDayOfWeek() == secondDow) ? 5 : 4;
-            assertEquals(expected, DateTimeUtil.countDaysOfWeekInMonth(apr2023, d),
-                    () -> "Unexpected count for " + d + " in " + apr2023);
+            assertEquals(expected,
+                    DateTimeUtil.countDaysOfWeekInMonth(apr2023, d), () ->
+                            "Unexpected count for " + d + " in " + apr2023);
         }
     }
 
@@ -62,8 +65,9 @@ class DateTimeUtilTest {
                     || d.getDayOfWeek() == secondDow
                     || d.getDayOfWeek() == thirdDow;
             int expected = five ? 5 : 4;
-            assertEquals(expected, DateTimeUtil.countDaysOfWeekInMonth(oct2025, d),
-                    () -> "Unexpected count for " + d + " in " + oct2025);
+            assertEquals(expected,
+                    DateTimeUtil.countDaysOfWeekInMonth(oct2025, d), () ->
+                            "Unexpected count for " + d + " in " + oct2025);
         }
     }
 }

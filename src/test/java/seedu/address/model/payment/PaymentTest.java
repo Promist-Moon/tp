@@ -9,16 +9,12 @@ import static seedu.address.testutil.TypicalPayments.FEB_25;
 import static seedu.address.testutil.TypicalPayments.JAN_24_600;
 import static seedu.address.testutil.TypicalPayments.JAN_24_800;
 import static seedu.address.testutil.TypicalPayments.JAN_25;
-import static seedu.address.testutil.TypicalPayments.MAR_25_ALICE;
-import static seedu.address.testutil.TypicalPayments.MAR_25_BOB;
 
 import java.time.YearMonth;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.model.person.student.Student;
 import seedu.address.testutil.PaymentBuilder;
-import seedu.address.testutil.StudentBuilder;
 
 
 
