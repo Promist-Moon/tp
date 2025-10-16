@@ -17,7 +17,7 @@ public class PaymentList {
     private final ArrayList<Payment> payments;
     private YearMonth earliestUnpaidYearmonth;
 
-    private PaymentStatus status;
+    private Status status;
 
     /**
      * Constructs a new payment list by creating an empty array list.
@@ -26,7 +26,7 @@ public class PaymentList {
         this.payments = new ArrayList<>();
 
         earliestUnpaidYearmonth = null;
-        setPaymentStatus(PaymentStatus.PAID);
+        setPaymentStatus(Status.PAID);
     }
 
     /**
@@ -100,11 +100,11 @@ public class PaymentList {
     public void addPayment(Payment payment) {
         payments.add(payment);
 
-        if (status == PaymentStatus.PAID && !payment.isPaid()) {
-            setPaymentStatus(PaymentStatus.UNPAID);
+        if (status == Status.PAID && !payment.isPaid()) {
+            setPaymentStatus(Status.UNPAID);
             setEarliestUnpaidYearmonth(payment.getYearMonth());
-        } else if (status == PaymentStatus.UNPAID && !payment.isPaid()) {
-            setPaymentStatus(PaymentStatus.OVERDUE);
+        } else if (status == Status.UNPAID && !payment.isPaid()) {
+            setPaymentStatus(Status.OVERDUE);
         }
         sortByYearMonth();
     }
@@ -130,11 +130,11 @@ public class PaymentList {
     public void updateStatus() {
         ArrayList<Payment> unpaidList = findUnpaids();
         if (unpaidList.isEmpty()) {
-            setPaymentStatus(PaymentStatus.PAID);
+            setPaymentStatus(Status.PAID);
         } else if (unpaidList.size() == 1) {
-            setPaymentStatus(PaymentStatus.UNPAID);
+            setPaymentStatus(Status.UNPAID);
         } else {
-            setPaymentStatus(PaymentStatus.OVERDUE);
+            setPaymentStatus(Status.OVERDUE);
         }
     }
 
@@ -172,7 +172,7 @@ public class PaymentList {
             p.markPaid();
         }
 
-        setPaymentStatus(PaymentStatus.PAID);
+        setPaymentStatus(Status.PAID);
         setEarliestUnpaidYearmonth(null);
 
     }
@@ -196,7 +196,7 @@ public class PaymentList {
         payments.sort(Comparator.comparing(Payment::getYearMonth));
     }
 
-    private void setPaymentStatus(PaymentStatus status) {
+    private void setPaymentStatus(Status status) {
         this.status = status;
     }
 

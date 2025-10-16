@@ -9,7 +9,7 @@ package seedu.address.model.payment;
  * *   {@code UNPAID} — The most recent payment in payment list is unpaid.
  * *   {@code OVERDUE} — There exists payments prior to most recent payment that are unpaid.
  */
-public enum PaymentStatus {
+public enum Status {
     PAID,
     UNPAID,
     OVERDUE;
