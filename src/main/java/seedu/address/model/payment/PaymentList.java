@@ -162,8 +162,12 @@ public class PaymentList {
      * Mark all outstanding payments as paid by iterating through
      * list of unpaid payments and marking them as paid.
      */
-    public void markAllPaid() {
+    public void markAllPaid() throws PaymentException {
         ArrayList<Payment> unpaidList = findUnpaids();
+        if (unpaidList.isEmpty()) {
+            throw new PaymentException("All lessons paid for already.");
+        }
+
         for (Payment p : unpaidList) {
             p.markPaid();
         }
