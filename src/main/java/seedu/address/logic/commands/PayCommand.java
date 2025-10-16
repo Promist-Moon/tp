@@ -9,11 +9,9 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.payment.Status;
-import seedu.address.model.payment.PaymentList;
+import seedu.address.model.payment.exceptions.PaymentException;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.student.Student;
-import seedu.address.model.person.student.PaymentStatus;
 
 /**
  * Marks all payments associated with the specified person as paid.
@@ -29,6 +27,7 @@ public class PayCommand extends Command {
             + "Example: " + COMMAND_WORD + "1";
 
     public static final String MESSAGE_PAYMENT_SUCCESS = "Paid: %1$s";
+    public static final String MESSAGE_NOT_PAID = "Student has paid already.";
 
     private final Index targetIndex;
 
@@ -46,25 +45,29 @@ public class PayCommand extends Command {
         }
 
         Person studentToPay = lastShownList.get(targetIndex.getZeroBased());
-
-        return new CommandResult(String.format(MESSAGE_PAYMENT_SUCCESS, Messages.format(studentToPay)));
+        try {
+            Person paidStudent = makePayment(studentToPay);
+            model.setPerson(studentToPay, paidStudent);
+            return new CommandResult(String.format(MESSAGE_PAYMENT_SUCCESS, Messages.format(paidStudent)));
+        } catch (PaymentException e) {
+            throw new CommandException(String.format(MESSAGE_NOT_PAID, Messages.format(studentToPay)));
+        }
     }
 
-    private static Person setPaymentStatus(Person studentToPay) {
+    private static Person makePayment(Person studentToPay) throws PaymentException {
         assert studentToPay != null;
 
         // edit for future iterations to accept only student objects straightaway
         if (studentToPay instanceof Student s) {
-            return setPaymentStatus(s);
+            return makePayment(s);
         }
 
         // if not Student (or Parent in future additions)
         throw new IllegalArgumentException("Unsupported person: " + studentToPay.getClass().getSimpleName());
     }
 
-    private static Student setPaymentStatus(Student studentToPay) {
-        studentToPay.setPaymentStatus(PaymentStatus.PAID);
-
+    private static Student makePayment(Student studentToPay) throws PaymentException {
+        studentToPay.pay();
         return studentToPay;
     }
 

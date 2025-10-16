@@ -172,7 +172,7 @@ public class PaymentList {
             p.markPaid();
         }
 
-        setPaymentStatus(PaymentStatus.PAID);
+        setPaymentStatus(Status.PAID);
         setEarliestUnpaidYearmonth(null);
 
     }
