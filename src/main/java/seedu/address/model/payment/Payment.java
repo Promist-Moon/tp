@@ -12,7 +12,6 @@ import seedu.address.model.person.student.Student;
  * Represents a Payment a Student makes in a month/year.
  */
 public class Payment {
-    private final Student student;
     private YearMonth yearMonth;
     private TotalAmount totalAmount;
     private boolean isPaid;
@@ -22,20 +21,14 @@ public class Payment {
      * This constructor initializes the payment details including
      * the associated student, total number of hours worked, and the hourly rate.
      *
-     * @param student        the student receiving the payment
      * @param yearMonth      the year and month corresponding to payment
      * @param totalAmount  the total amount due per month by a student
      */
-    public Payment(Student student, YearMonth yearMonth, TotalAmount totalAmount) {
-        requireAllNonNull(student, yearMonth, totalAmount);
-        this.student = student;
+    public Payment(YearMonth yearMonth, TotalAmount totalAmount) {
+        requireAllNonNull(yearMonth, totalAmount);
         this.totalAmount = totalAmount;
         this.yearMonth = yearMonth;
         this.isPaid = false;
-    }
-
-    public Student getStudent() {
-        return this.student;
     }
 
     public YearMonth getYearMonth() {
@@ -73,13 +66,12 @@ public class Payment {
         }
 
         Payment otherPayment = (Payment) other;
-        return student.equals(otherPayment.student)
-                && yearMonth.equals(otherPayment.yearMonth)
+        return yearMonth.equals(otherPayment.yearMonth)
                 && totalAmount.equals(otherPayment.totalAmount); // exclusion of isPaid is intentional
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(student, yearMonth, totalAmount); // exclusion of isPaid is intentional
+        return Objects.hash(yearMonth, totalAmount); // exclusion of isPaid is intentional
     }
 }

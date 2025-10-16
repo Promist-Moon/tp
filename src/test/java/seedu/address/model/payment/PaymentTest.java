@@ -26,7 +26,6 @@ public class PaymentTest {
 
     @Test
     public void constructor_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new PaymentBuilder().withStudent(null).build());
         assertThrows(NullPointerException.class, () -> new PaymentBuilder().withYearMonth(null).build());
         assertThrows(NullPointerException.class, () -> new PaymentBuilder().withTotalAmount(null).build());
     }
@@ -40,19 +39,11 @@ public class PaymentTest {
         YearMonth ym = YearMonth.of(2025, 10);
         TotalAmount total = new TotalAmount(600f);
 
-        Payment p = new Payment(student, ym, total);
+        Payment p = new Payment(ym, total);
 
-        assertEquals(student, p.getStudent());
         assertEquals(ym, p.getYearMonth());
         assertEquals(total, p.getTotalAmount());
         assertFalse(p.isPaid());
-    }
-
-    @Test
-    public void getStudent_returnsCorrectStudent() {
-        Student student = new StudentBuilder().withName("Alice").build();
-        Payment payment = new PaymentBuilder().withStudent(student).build();
-        assertEquals(student, payment.getStudent());
     }
 
     @Test

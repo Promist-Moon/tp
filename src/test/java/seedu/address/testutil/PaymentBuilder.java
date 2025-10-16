@@ -13,7 +13,6 @@ import seedu.address.model.person.student.Student;
  */
 public class PaymentBuilder {
 
-    public static final Student DEFAULT_STUDENT = ALICE;
     public static final String DEFAULT_YEARMONTH = "2025-10";
     public static final float DEFAULT_AMOUNT = 600f;
     public static final boolean DEFAULT_ISPAID = false;
@@ -27,7 +26,6 @@ public class PaymentBuilder {
      * Creates a {@code StudentBuilder} with the default details.
      */
     public PaymentBuilder() {
-        student = DEFAULT_STUDENT;
         yearMonth = YearMonth.parse(DEFAULT_YEARMONTH);
         totalAmount = new TotalAmount(DEFAULT_AMOUNT);
         isPaid = DEFAULT_ISPAID;
@@ -37,18 +35,9 @@ public class PaymentBuilder {
      * Initializes the StudentBuilder with the data of {@code paymentToCopy}.
      */
     public PaymentBuilder(Payment paymentToCopy) {
-        student = paymentToCopy.getStudent();
         yearMonth = paymentToCopy.getYearMonth();
         totalAmount = paymentToCopy.getTotalAmount();
         isPaid = paymentToCopy.isPaid();
-    }
-
-    /**
-     * Sets the {@code Student} of the {@code Payment} that we are building.
-     */
-    public PaymentBuilder withStudent(Student student) {
-        this.student = student;
-        return this;
     }
 
     /**
@@ -85,6 +74,6 @@ public class PaymentBuilder {
     }
 
     public Payment build() {
-        return new Payment(student, yearMonth, totalAmount);
+        return new Payment(yearMonth, totalAmount);
     }
 }
