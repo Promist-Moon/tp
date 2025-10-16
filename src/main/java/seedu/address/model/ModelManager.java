@@ -195,7 +195,7 @@ public class ModelManager implements Model {
                 student.getAddress(),
                 student.getTags(),
                 newLessonList,
-                student.getPaymentList()
+                student.getPayments()
         );
 
         setPerson(student, editedStudent);

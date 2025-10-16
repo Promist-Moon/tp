@@ -66,7 +66,7 @@ public class MonthlyRollover {
             TotalAmount totalAmount = new TotalAmount(value);
 
             // Create a new Payment for this month
-            Payment newPayment = new Payment(student, month, totalAmount);
+            Payment newPayment = new Payment(month, totalAmount);
 
             // Add or replace the payment in the student's PaymentList
             student.getPayments().addPayment(newPayment);
