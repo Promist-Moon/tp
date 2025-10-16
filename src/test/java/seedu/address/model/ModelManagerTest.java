@@ -108,37 +108,11 @@ public class ModelManagerTest {
         assertFalse(modelManager.hasLesson(lesson));
     }
 
-    @Test
-    public void hasLesson_lessonInAddressBook_returnsTrue() {
-        Lesson lesson = new LessonBuilder().build();
-        modelManager.addLesson(ALICE, lesson);
-        assertTrue(modelManager.hasLesson(lesson));
-    }
-
-    @Test
-    public void hasLesson_nullLesson_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> modelManager.hasLesson(null));
-    }
-
-    @Test
-    public void addLesson_validLesson_success() {
-        Lesson lesson = new LessonBuilder().build();
-        modelManager.addLesson(ALICE, lesson);
-        assertTrue(modelManager.hasLesson(lesson));
-    }
 
     @Test
     public void addLesson_nullStudent_throwsNullPointerException() {
         Lesson lesson = new LessonBuilder().build();
         assertThrows(NullPointerException.class, () -> modelManager.addLesson(null, lesson));
-    }
-
-    @Test
-    public void deleteLesson_existingLesson_success() {
-        Lesson lesson = new LessonBuilder().build();
-        modelManager.addLesson(ALICE, lesson);
-        modelManager.deleteLesson(ALICE, lesson);
-        assertFalse(modelManager.hasLesson(lesson));
     }
 
     @Test

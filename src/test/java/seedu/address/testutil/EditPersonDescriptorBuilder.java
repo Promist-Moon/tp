@@ -5,6 +5,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
+import seedu.address.model.lesson.LessonList;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
@@ -42,6 +43,7 @@ public class EditPersonDescriptorBuilder {
         if (person instanceof Student student) {
             descriptor.setAddress(student.getAddress());
             descriptor.setTags(student.getTags());
+            descriptor.setLessons(student.getLessonList());
         }
         // NOTE: Parent not yet implemented; when added, extend here with its fields.
     }
