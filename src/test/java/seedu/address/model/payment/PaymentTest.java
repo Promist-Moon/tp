@@ -35,7 +35,6 @@ public class PaymentTest {
      */
     @Test
     public void constructor_validArgs_success() {
-        Student student = new StudentBuilder().build();
         YearMonth ym = YearMonth.of(2025, 10);
         TotalAmount total = new TotalAmount(600f);
 
@@ -92,9 +91,6 @@ public class PaymentTest {
         // different type -> false
         assertFalse(JAN_25.equals("not a payment"));
 
-        // different student -> false
-        assertFalse(MAR_25_ALICE.equals(MAR_25_BOB));
-
         // different YearMonth -> false
         assertFalse(JAN_25.equals(FEB_25));
 
@@ -122,9 +118,6 @@ public class PaymentTest {
 
     @Test
     public void hashCode_differs() {
-        // different name -> different hash codes
-        assertNotEquals(MAR_25_ALICE.hashCode(), MAR_25_BOB.hashCode());
-
         // different year month -> different hash codes
         assertNotEquals(FEB_25.hashCode(), JAN_25.hashCode());
 
