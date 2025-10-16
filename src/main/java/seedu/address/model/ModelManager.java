@@ -190,7 +190,8 @@ public class ModelManager implements Model {
                 student.getEmail(),
                 student.getAddress(),
                 student.getTags(),
-                newLessonList
+                newLessonList,
+                student.getPaymentList()
         );
 
         setPerson(student, editedStudent);
