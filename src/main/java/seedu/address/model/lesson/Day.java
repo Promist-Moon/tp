@@ -1,8 +1,9 @@
 package seedu.address.model.lesson;
 
+import static seedu.address.commons.util.AppUtil.checkArgument;
+
 import java.time.DayOfWeek;
 
-import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**
  * Represents the day of a Lesson.
