@@ -55,7 +55,7 @@ public class ListOverdueCommandTest {
     public void execute_listIsNotFiltered_showsOverdueStudentOnly() {
         //check with updateFilteredPersonList func
         //that should work the same way
-        expectedModel.updateFilteredPersonList( person ->
+        expectedModel.updateFilteredPersonList(person ->
                 person instanceof Student && ((Student) person).getPaymentStatus() == PaymentStatus.OVERDUE);
 
 
@@ -65,7 +65,7 @@ public class ListOverdueCommandTest {
     @Test
     public void execute_listIsFiltered_showsOverdueStudentOnly() {
         showPersonAtIndex(model, INDEX_FIRST_PERSON);
-        expectedModel.updateFilteredPersonList( person ->
+        expectedModel.updateFilteredPersonList(person ->
                 person instanceof Student && ((Student) person).getPaymentStatus() == PaymentStatus.OVERDUE);
         assertCommandSuccess(new ListOverdueCommand(), model, ListOverdueCommand.MESSAGE_SUCCESS, expectedModel);
     }
