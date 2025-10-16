@@ -49,4 +49,11 @@ public class Payment {
         return isPaid;
     }
 
+    /**
+     * Sets payment to paid.
+     */
+    public void markPaid() {
+        this.isPaid = true;
+    }
+
 }

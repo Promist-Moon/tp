@@ -143,19 +143,38 @@ public class PaymentList {
      * Manual method.
      */
     public YearMonth findAndSetEarliestUnpaidYearMonth() {
-        YearMonth latest = null;
+        YearMonth earliest = null;
         for (Payment p : payments) {
             if (!p.isPaid()) {
                 YearMonth ym = p.getYearMonth();
-                if (latest == null || ym.isBefore(latest)) {
-                    latest = ym;
+                if (earliest == null || ym.isBefore(earliest)) {
+                    earliest = ym;
                 }
             }
         }
-        if (latest != earliestUnpaidYearmonth) {
-            setEarliestUnpaidYearmonth(latest);
+        if (earliest != earliestUnpaidYearmonth) {
+            setEarliestUnpaidYearmonth(earliest);
         }
-        return latest;
+        return earliest;
+    }
+
+    /**
+     * Mark all outstanding payments as paid by iterating through
+     * list of unpaid payments and marking them as paid.
+     */
+    public void markAllPaid() throws PaymentException {
+        ArrayList<Payment> unpaidList = findUnpaids();
+        if (unpaidList.isEmpty()) {
+            throw new PaymentException("All lessons paid for already.");
+        }
+
+        for (Payment p : unpaidList) {
+            p.markPaid();
+        }
+
+        setPaymentStatus(PaymentStatus.PAID);
+        setEarliestUnpaidYearmonth(null);
+
     }
 
     /**
