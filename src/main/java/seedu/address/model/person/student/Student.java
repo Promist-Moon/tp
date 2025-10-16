@@ -106,12 +106,13 @@ public class Student extends Person {
     }
 
     /**
-     * Marks all the payments in the student's PaymentList as paid
+     * Marks all the payments in the student's PaymentList as paid.
      *
      * @throws PaymentException
      */
     public void pay() throws PaymentException {
         payments.markAllPaid();
+        setPaymentStatus(PaymentStatus.PAID);
     }
 
     /**
