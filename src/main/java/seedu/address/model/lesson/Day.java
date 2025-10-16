@@ -4,6 +4,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 
 import java.time.DayOfWeek;
 
+
 /**
  * Represents the day of a Lesson.
  * Guarantees: immutable; is valid as declared in {@link #isValidDay(String)}
@@ -22,9 +23,20 @@ public class Day {
      * @param str A valid string representing an integer day.
      */
     public Day(String str) {
-        checkArgument(isValidDay(str), MESSAGE_CONSTRAINTS);
-        int integerDay = Integer.parseInt(str);
-        this.day = DayOfWeek.of(integerDay);
+        str = str.trim().toUpperCase();
+
+        if (str.matches("\\d")) {
+            checkArgument(isValidDay(str), MESSAGE_CONSTRAINTS);
+            int integerDay = Integer.parseInt(str);
+            this.day = DayOfWeek.of(integerDay);
+        } else {
+            //for interpreting of Day from json (TUESDAY->2)
+            try {
+                this.day = DayOfWeek.valueOf(str);
+            } catch (IllegalArgumentException e) {
+                throw new IllegalArgumentException("Invalid day format. Use integer 1–7 or day name like MONDAY.");
+            }
+        }
     }
 
     /**
@@ -34,8 +46,14 @@ public class Day {
         if (test.matches(VALIDATION_REGEX)) {
             int integerDay = Integer.parseInt(test);
             return integerDay >= 1 && integerDay <= 7;
+        } else {
+            for (DayOfWeek day : DayOfWeek.values()) {
+                if (day.name().equals(test.toUpperCase())) {
+                    return true;
+                }
+            }
+            return false;
         }
-        return false;
     }
 
     public DayOfWeek getDayOfWeek() {

@@ -41,6 +41,10 @@ public class LessonList {
         return lessons.get(idx);
     }
 
+    public ArrayList<Lesson> getLessons() {
+        return new ArrayList<>(lessons);
+    }
+
     /**
      * Adds a new lesson to the lesson list.
      */

@@ -174,15 +174,26 @@ public class ModelManager implements Model {
 
     @Override
     public void addLesson(Student student, Lesson lesson) {
-        // TO BE IMPLEMENTED WITH STUDENT
-        //addressBook.addLesson(lesson);
-        //updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         requireNonNull(student);
         requireNonNull(lesson);
 
+        lesson.addStudent(student);
         addressBook.addLesson(lesson);
-        LessonList ls = student.getLessonList();
-        ls.addLesson(lesson);
+
+        LessonList oldLessonList = student.getLessonList();
+        LessonList newLessonList = new LessonList(oldLessonList.getLessons());
+        newLessonList.addLesson(lesson);
+
+        Student editedStudent = new Student(
+                student.getName(),
+                student.getPhone(),
+                student.getEmail(),
+                student.getAddress(),
+                student.getTags(),
+                newLessonList
+        );
+
+        setPerson(student, editedStudent);
         updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
     }
 

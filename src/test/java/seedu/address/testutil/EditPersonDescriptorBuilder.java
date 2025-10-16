@@ -42,6 +42,7 @@ public class EditPersonDescriptorBuilder {
         if (person instanceof Student student) {
             descriptor.setAddress(student.getAddress());
             descriptor.setTags(student.getTags());
+            descriptor.setLessons(student.getLessonList());
         }
         // NOTE: Parent not yet implemented; when added, extend here with its fields.
     }
