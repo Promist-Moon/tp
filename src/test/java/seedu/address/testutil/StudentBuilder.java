@@ -62,7 +62,7 @@ public class StudentBuilder {
         email = personToCopy.getEmail();
         address = personToCopy.getAddress();
         tags = new HashSet<>(personToCopy.getTags());
-        ll = personToCopy.getLessonList();
+        ll = personToCopy.getLessons();
     }
 
     /**

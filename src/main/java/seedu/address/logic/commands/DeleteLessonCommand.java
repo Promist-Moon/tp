@@ -80,7 +80,7 @@ public class DeleteLessonCommand extends Command {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 
-        LessonList lls = currStudent.getLessonList();
+        LessonList lls = currStudent.getLessons();
 
         if (lessonIndex.getOneBased() >= lls.getSize()) {
             throw new CommandException(MESSAGE_INVALID_DISPLAYED);
