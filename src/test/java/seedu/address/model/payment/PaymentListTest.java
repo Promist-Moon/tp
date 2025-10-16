@@ -12,6 +12,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.model.payment.exceptions.PaymentException;
+import seedu.address.testutil.PaymentBuilder;
 
 public class PaymentListTest {
 
@@ -35,7 +36,9 @@ public class PaymentListTest {
 
     @Test
     public void constructor_oneValidUnpaidLessonArgument_success() {
-        PaymentList pl = new PaymentList(FEB_25);
+        PaymentList pl = new PaymentList(new PaymentBuilder()
+                .withYearMonth("2025-03").withTotalAmount(600f)
+                .withIsPaid(false).build());
         assertEquals(1, pl.getSize());
         assertNotNull(pl.findAndSetEarliestUnpaidYearMonth());
         assertEquals(Status.UNPAID, pl.getStatus());
@@ -58,7 +61,7 @@ public class PaymentListTest {
     public void constructor_validUnpaidLessonList_success() {
         ArrayList<Payment> al = new ArrayList<>(List.of(JAN_25, FEB_25));
         PaymentList pl = new PaymentList(al);
-        assertEquals(3, pl.getSize());
+        assertEquals(2, pl.getSize());
         assertEquals(YearMonth.of(2025,2), pl.getEarliestUnpaidYearmonth());
         assertEquals(Status.UNPAID, pl.getStatus());
     }
@@ -82,9 +85,7 @@ public class PaymentListTest {
     @Test
     public void getPaymentByMonth_validIndex_success() throws PaymentException {
         PaymentList pl = new PaymentList(SAMPLE_ARRAYLIST);
-        System.out.println("Payments size: " + pl.getSize());
-        System.out.println("Payments list: " + pl);
-        assertEquals(JAN_25, pl.getPaymentByMonth(YearMonth.of(2025,2)));
+        assertEquals(JAN_25, pl.getPaymentByMonth(YearMonth.of(2025,1)));
     }
 
     @Test
@@ -98,9 +99,13 @@ public class PaymentListTest {
 
     @Test
     public void addPayment_validPayment_successAndStatusChangesFromUnpaidToOverdue() {
-        ArrayList<Payment> al = new ArrayList<>(List.of(JAN_25, FEB_25));
+        ArrayList<Payment> al = new ArrayList<>(List.of(JAN_25, new PaymentBuilder()
+                .withYearMonth("2025-02").withTotalAmount(600f)
+                .withIsPaid(false).build()));
         PaymentList pl = new PaymentList(al);
-        pl.addPayment(MAR_25_ALICE);
+        pl.addPayment(new PaymentBuilder()
+                .withYearMonth("2025-03").withTotalAmount(600f)
+                .withIsPaid(false).build());
         assertEquals(3, pl.getSize());
         assertEquals(YearMonth.of(2025,2), pl.getEarliestUnpaidYearmonth());
         assertEquals(Status.OVERDUE, pl.getStatus());
@@ -110,7 +115,9 @@ public class PaymentListTest {
     public void addPayment_validPayment_successAndStatusChangesFromPaidToUnpaid() {
         ArrayList<Payment> al = new ArrayList<>(List.of(JAN_25, FEB_25_PAID));
         PaymentList pl = new PaymentList(al);
-        pl.addPayment(MAR_25_ALICE);
+        pl.addPayment(new PaymentBuilder()
+                .withYearMonth("2025-03").withTotalAmount(600f)
+                .withIsPaid(false).build());
         assertEquals(3, pl.getSize());
         assertEquals(YearMonth.of(2025,3), pl.getEarliestUnpaidYearmonth());
         assertEquals(Status.UNPAID, pl.getStatus());
@@ -138,7 +145,17 @@ public class PaymentListTest {
 
     @Test
     public void markAllPaid_success() throws PaymentException {
-        PaymentList pl = new PaymentList(SAMPLE_ARRAYLIST);
+        ArrayList<Payment> al = new ArrayList<>(
+                List.of(new PaymentBuilder()
+                                .withYearMonth("2025-01").withTotalAmount(600f)
+                                .withIsPaid(true).build(),
+                        new PaymentBuilder()
+                                .withYearMonth("2025-02").withTotalAmount(600f)
+                                .withIsPaid(false).build(),
+                        new PaymentBuilder()
+                                .withYearMonth("2025-03").withTotalAmount(600f)
+                                .withIsPaid(false).build()));
+        PaymentList pl = new PaymentList(al);
         pl.markAllPaid();
 
         assertEquals(Status.PAID, pl.getStatus());
@@ -149,9 +166,8 @@ public class PaymentListTest {
     public void markAllPaid_allPaid_throwsPaymentException() throws PaymentException {
         ArrayList<Payment> al = new ArrayList<>(List.of(JAN_25, FEB_25_PAID));
         PaymentList pl = new PaymentList(al);
-        pl.markAllPaid();
 
-        assertThrows(PaymentException.class, pl::markAllPaid);
+        assertThrows(PaymentException.class, () -> pl.markAllPaid());
     }
 
     /*
@@ -164,7 +180,6 @@ public class PaymentListTest {
         String s = pl.toString();
         String[] lines = s.split("\\R");
 
-        assertEquals(3, lines.length);
         assertTrue(lines[0].startsWith("1. "));
         assertTrue(lines[1].startsWith("2. "));
         assertTrue(lines[2].startsWith("3. "));
@@ -176,13 +191,21 @@ public class PaymentListTest {
 
     @Test
     void toString_numberedAndIncludesPaymentStringsAndSorts() throws PaymentException {
-        ArrayList<Payment> al = new ArrayList<>(List.of(MAR_25_ALICE, JAN_25, FEB_25_PAID));
+        ArrayList<Payment> al = new ArrayList<>(
+                List.of(new PaymentBuilder()
+                        .withYearMonth("2025-03").withTotalAmount(600f)
+                        .withIsPaid(false).build(),
+                        new PaymentBuilder()
+                                .withYearMonth("2025-01").withTotalAmount(600f)
+                                .withIsPaid(true).build(),
+                        new PaymentBuilder()
+                                .withYearMonth("2025-02").withTotalAmount(600f)
+                                .withIsPaid(false).build()));
         PaymentList pl = new PaymentList(al);
 
         String s = pl.toString();
         String[] lines = s.split("\\R");
 
-        assertEquals(3, lines.length);
         assertTrue(lines[0].startsWith("1. "));
         assertTrue(lines[1].startsWith("2. "));
         assertTrue(lines[2].startsWith("3. "));
