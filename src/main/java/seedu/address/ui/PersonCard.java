@@ -7,6 +7,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
+import javafx.scene.layout.VBox;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.student.Student;
 
@@ -43,6 +44,8 @@ public class PersonCard extends UiPart<Region> {
     private FlowPane tags;
     @FXML
     private Label paymentStatus;
+    @FXML
+    private VBox lessonList;
 
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
@@ -79,6 +82,7 @@ public class PersonCard extends UiPart<Region> {
             default:
                 break;
             }
+//            lessonList.getChildren().add(new LessonListCard(student.getLessons()).getRoot());
         } else {
             // Fallback: hide address and tags if not a Student
             address.setVisible(false);

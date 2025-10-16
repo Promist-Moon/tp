@@ -3,13 +3,13 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.ColumnConstraints?>
-<?import javafx.scene.layout.FlowPane?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.VBox?>
 
 <HBox id="cardPane" fx:id="cardPane" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+  <!-- Improve in future to become table view -->
   <GridPane HBox.hgrow="ALWAYS">
     <columnConstraints>
       <ColumnConstraints hgrow="SOMETIMES" minWidth="10" prefWidth="150" />
@@ -25,18 +25,12 @@
             <Region fx:constant="USE_PREF_SIZE" />
           </minWidth>
         </Label>
-        <Label fx:id="name" text="\$first" styleClass="cell_big_label" />
+        <Label fx:id="subject" text="\$subject" styleClass="cell_big_label" />
       </HBox>
-      <FlowPane fx:id="tags" />
-      <HBox spacing="50" >
-        <Label fx:id="phone" styleClass="cell_small_label" HBox.hgrow="ALWAYS" alignment="CENTER_LEFT"/>
-        <Region HBox.hgrow="ALWAYS" />
-        <Label fx:id="paymentStatus" styleClass="cell_small_label" HBox.hgrow="ALWAYS" alignment="CENTER_RIGHT" />
-      </HBox>
-      <Label fx:id="address" styleClass="cell_small_label" text="\$address" />
-      <Label fx:id="email" styleClass="cell_small_label" text="\$email" />
-      <!-- Lesson List -->
-      <VBox fx:id="lessonList" spacing="5" alignment="CENTER_LEFT" />
+      <Label fx:id="level" styleClass="cell_small_label" HBox.hgrow="ALWAYS" text="\$level" alignment="CENTER_LEFT"/>
+      <Label fx:id="day" styleClass="cell_small_label" HBox.hgrow="ALWAYS" text="\$day" alignment="CENTER_RIGHT" />
+      <Label fx:id="lessonTime" styleClass="cell_small_label" text="\$lessonTime" />
+      <Label fx:id="rate" styleClass="cell_small_label" text="\$rate" />
     </VBox>
   </GridPane>
 </HBox>
