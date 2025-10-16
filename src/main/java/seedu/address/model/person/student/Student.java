@@ -48,13 +48,13 @@ public class Student extends Person {
     /**
      * Every field must be present and not null.
      */
-    public Student(Name name, Phone phone, Email email, Address address, Set<Tag> tags, LessonList ll) {
+    public Student(Name name, Phone phone, Email email, Address address, Set<Tag> tags, LessonList ll, PaymentList pl) {
         super(name, phone, email);
         requireAllNonNull(address, tags);
         this.address = address;
         this.tags.addAll(tags);
         this.lessons = ll;
-        this.payments = new PaymentList();
+        this.payments = pl;
         this.paymentStatus = PaymentStatus.UNPAID;
     }
 
@@ -78,7 +78,7 @@ public class Student extends Person {
     }
 
     /**
-     * Returns an mutable TreeMap of Payments.
+     * Returns a mutable ArrayList of Payments.
      */
     public PaymentList getPaymentList() {
         return this.payments;
