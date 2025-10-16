@@ -1,10 +1,8 @@
 package seedu.address.model.lesson;
 
-import seedu.address.commons.exceptions.IllegalValueException;
+import java.time.DayOfWeek;
 
 import static seedu.address.commons.util.AppUtil.checkArgument;
-
-import java.time.DayOfWeek;
 
 /**
  * Represents the day of a Lesson.

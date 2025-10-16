@@ -48,12 +48,12 @@ public class SampleDataUtil {
 
     public static Lesson[] getSampleLessons() {
         return new Lesson[] {
-                new Lesson(Subject.fromString("English"), Level.fromString("1"), new Day("1"),
-                        LessonTime.ofLessonTime("11:00", "14:00"), new Rate("56.07")),
-                new Lesson(Subject.fromString("geography"), Level.fromString("2"), new Day("3"),
-                        LessonTime.ofLessonTime("09:00", "12:00"), new Rate("30.00")),
-                new Lesson(Subject.fromString("biology"), Level.fromString("5"), new Day("6"),
-                        LessonTime.ofLessonTime("15:30", "19:45"), new Rate("69.69"))
+            new Lesson(Subject.fromString("English"), Level.fromString("1"), new Day("1"),
+                    LessonTime.ofLessonTime("11:00", "14:00"), new Rate("56.07")),
+            new Lesson(Subject.fromString("geography"), Level.fromString("2"), new Day("3"),
+                    LessonTime.ofLessonTime("09:00", "12:00"), new Rate("30.00")),
+            new Lesson(Subject.fromString("biology"), Level.fromString("5"), new Day("6"),
+                    LessonTime.ofLessonTime("15:30", "19:45"), new Rate("69.69"))
         };
     }
 

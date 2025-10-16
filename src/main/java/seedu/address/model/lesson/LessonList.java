@@ -1,6 +1,5 @@
 package seedu.address.model.lesson;
 
-import java.lang.reflect.Array;
 import java.time.YearMonth;
 import java.util.ArrayList;
 
@@ -43,7 +42,7 @@ public class LessonList {
     }
 
     public ArrayList<Lesson> getLessons() {
-        return new ArrayList<>(lessons);  // Defensive copy
+        return new ArrayList<>(lessons);
     }
 
     /**
