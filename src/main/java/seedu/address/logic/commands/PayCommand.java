@@ -9,9 +9,11 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.payment.Status;
+import seedu.address.model.payment.PaymentList;
 import seedu.address.model.person.Person;
-import seedu.address.model.person.student.PaymentStatus;
 import seedu.address.model.person.student.Student;
+import seedu.address.model.person.student.PaymentStatus;
 
 /**
  * Marks all payments associated with the specified person as paid.
