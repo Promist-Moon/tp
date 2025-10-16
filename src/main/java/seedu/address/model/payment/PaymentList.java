@@ -38,7 +38,7 @@ public class PaymentList {
         this.payments.add(payment);
 
         updateStatus();
-        setEarliestUnpaidYearmonth(findAndSetLatestUnpaidYearMonth());
+        setEarliestUnpaidYearmonth(findAndSetEarliestUnpaidYearMonth());
     }
 
     /**
@@ -49,7 +49,7 @@ public class PaymentList {
         sortByYearMonth();
 
         updateStatus();
-        setEarliestUnpaidYearmonth(findAndSetLatestUnpaidYearMonth());
+        setEarliestUnpaidYearmonth(findAndSetEarliestUnpaidYearMonth());
     }
 
     public int getSize() {
@@ -139,15 +139,15 @@ public class PaymentList {
     }
 
     /**
-     * Returns the latest (max YearMonth) unpaid payment's month, or null if none.
+     * Returns the earlier (max YearMonth) unpaid payment's month, or null if none.
      * Manual method.
      */
-    public YearMonth findAndSetLatestUnpaidYearMonth() {
+    public YearMonth findAndSetEarliestUnpaidYearMonth() {
         YearMonth latest = null;
         for (Payment p : payments) {
             if (!p.isPaid()) {
                 YearMonth ym = p.getYearMonth();
-                if (latest == null || ym.isAfter(latest)) {
+                if (latest == null || ym.isBefore(latest)) {
                     latest = ym;
                 }
             }
