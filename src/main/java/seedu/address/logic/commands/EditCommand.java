@@ -218,14 +218,6 @@ public class EditCommand extends Command {
             return Optional.ofNullable(lessons);
         }
 
-        public void setPayments(PaymentList payments) {
-            this.payments = payments;
-        }
-
-        public Optional<PaymentList> getPayments() {
-            return Optional.ofNullable(payments);
-        }
-
         /**
          * Sets {@code tags} to this object's {@code tags}.
          * A defensive copy of {@code tags} is used internally.
