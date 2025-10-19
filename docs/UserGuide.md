@@ -97,9 +97,13 @@ Examples:
 * `add.class /i 4 /s Math /l 3 /d Tuesday s/13:00 e/15:00 /r 40`
 
 ### Making payment: `pay`
-Tracks that a student has made payment
+Tracks that a student has made payment for that month. 
 
 Format: `pay <student index>`
+
+* Marks payment for the student at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
+* Marking an **unpaid** or **overdue** student as paid will change their status to **paid**.
+* A student who has **paid** cannot make payment until the next month.
 
 ### Listing all persons : `list`
 
@@ -108,17 +112,17 @@ Shows a list of all persons in the address book.
 Format: `list`
 
 ### Listing all payments: `list.paid`
-Lists all students that have paid the fees
+Lists all students that have **paid** their fees for the month.
 
 Format: `list.paid`
 
 ### Listing all unpaid fees: `list.unpaid`
-Lists all students that have unpaid fees
+Lists all students that have **unpaid** fees for the month.
 
 Format: `list.unpaid`
 
 ### Listing all overdue fees: `list.overdue` 
-Lists all students that have overdue fees
+Lists all students that have **overdue** fees from previous months.
 
 Format: `list.overdue`
 
