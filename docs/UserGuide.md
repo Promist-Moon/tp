@@ -87,14 +87,14 @@ Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
 * `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
 
-### Adding a class: `add.class`
+### Adding a lesson: `add.lesson`
 
-Adds a class to the specific student.
+Adds a lesson to the specific student.
 
-Format: `add.class /i <student index> /s <subject> /l <level> /d <day> /s <start time> /e <end time> /r <hourly rate>`
+Format: `add.lesson /i <student index> /s <subject> /l <level> /d <day> /s <start time> /e <end time> /r <hourly rate>`
 
 Examples:
-* `add.class /i 4 /s Math /l 3 /d Tuesday s/13:00 e/15:00 /r 40`
+* `add.lesson /i 4 /s Math /l 3 /d Tuesday s/13:00 e/15:00 /r 40`
 
 ### Making payment: `pay`
 Tracks that a student has made payment for that month. 
@@ -102,8 +102,8 @@ Tracks that a student has made payment for that month.
 Format: `pay <student index>`
 
 * Marks payment for the student at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
-* Marking an **unpaid** or **overdue** student as paid will change their status to **paid**.
-* A student who has **paid** cannot make payment until the next month.
+* When you mark an **unpaid** or **overdue** student as paid, their status becomes **paid**.
+* A **paid** student cannot make payment until the next month.
 
 ### Listing all persons : `list`
 
@@ -175,14 +175,14 @@ Examples:
 * `list` followed by `delete 2` deletes the 2nd student in the address book.
 * `find Betsy` followed by `delete 1` deletes the 1st student in the results of the `find` command.
 
-### Deleting a Class: `delete.class`
+### Deleting a Lesson: `delete.lesson`
 
-Deletes an existing class from a specific student.
+Deletes an existing lesson from a specific student.
 
-Format:`delete.class /i <student index> /c <class index>`
+Format:`delete.lesson /i <student index> /c <lesson index>`
 
 Examples:
-* `delete.class /i 20 /c 2`
+* `delete.lesson /i 20 /c 2`
 
 ### Clearing all entries : `clear`
 
