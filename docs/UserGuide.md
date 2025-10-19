@@ -3,7 +3,7 @@ layout: page
 title: User Guide
 ---
 
-Tuiniverse is a **desktop app for managing contacts, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AB3 can get your contact management tasks done faster than traditional GUI apps.
+Tuiniverse is a **desktop app for managing contacts, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, Tuiniverse can get your contact management tasks done faster than traditional GUI apps.
 
 * Table of Contents
 {:toc}
@@ -215,6 +215,22 @@ _Details coming soon ..._
 
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous Tuiniverse home folder.
+
+--------------------------------------------------------------------------------------------------------------------
+
+## Glossary
+
+* **Person**: A person can either be a student or a parent
+    * Student - A student studies a subject under a tutor for an hourly rate. 
+    * Parent - The parent of the student.
+* **Payment Status**: Each student has a payment status which updates every month.
+    * Paid - The student has paid within the month
+    * Unpaid - The student has not paid within the month
+    * Overdue - The student has outstanding bills from previous months
+* **Bill**: The payment amount owed by a student
+* **Subjects**: Math, English, Physics, Chemistry, Biology, Geography, History, Mother tongue, Social Studies, Literature
+* **Note**: A comment located in a student's information
+* **Schedule**: A timetable for classes containing the time, location, subject of the class and the student taking the class
 
 --------------------------------------------------------------------------------------------------------------------
 
