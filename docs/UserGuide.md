@@ -260,5 +260,5 @@ Action | Format, Examples
 **List Paid** | `list.paid`
 **List Unpaid** | `list.unpaid`
 **List Overdue** | `list.overdue`
-**Pay** | `pay <student index>`
+**Pay** | `pay INDEX`<br> e.g., `pay 3`
 **Help** | `help`
