@@ -3,7 +3,8 @@ layout: page
 title: User Guide
 ---
 
-Tuiniverse is a **desktop app for managing contacts, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, Tuiniverse can get your contact management tasks done faster than traditional GUI apps.
+Tuiniverse is a **desktop app for private freelance one-on-one tuition tutors to manage the contacts of their students. It keeps track of the student contact details, lesson details, and payment statuses per student and bills outstanding per month.
+Tuiniverse is optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, Tuiniverse can get your contact management tasks done faster than traditional GUI apps.
 
 * Table of Contents
 {:toc}
@@ -91,15 +92,15 @@ Examples:
 
 Adds a lesson to the specific student.
 
-Format: `add.lesson /i <student index> /s <subject> /l <level> /d <day> /s <start time> /e <end time> /r <hourly rate>`
+Format: `add.lesson i/STUDENT_INDEX s/SUBJECT l/LEVEL d/DAY s/START_TIME e/END_TIME r/HOURLY RATE`
 
 Examples:
-* `add.lesson /i 4 /s Math /l 3 /d Tuesday s/13:00 e/15:00 /r 40`
+* `add.lesson i/4 s/Math l/3 d/Tuesday s/13:00 e/15:00 r/40`
 
 ### Making payment: `pay`
 Tracks that a student has made payment for that month. 
 
-Format: `pay <student index>`
+Format: `pay INDEX`
 
 * Marks payment for the student at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
 * When you mark an **unpaid** or **overdue** student as paid, their status becomes **paid**.
@@ -179,10 +180,10 @@ Examples:
 
 Deletes an existing lesson from a specific student.
 
-Format:`delete.lesson /i <student index> /c <lesson index>`
+Format:`delete.lesson i/STUDENT_INDEX c/LESSON_INDEX…​`
 
 Examples:
-* `delete.lesson /i 20 /c 2`
+* `delete.lesson i/2 c/1`
 
 ### Clearing all entries : `clear`
 
