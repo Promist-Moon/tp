@@ -10,12 +10,16 @@ import java.util.Set;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.lesson.LessonList;
+import seedu.address.model.payment.Payment;
 import seedu.address.model.payment.PaymentList;
+import seedu.address.model.payment.TotalAmount;
+import seedu.address.model.payment.exceptions.PaymentException;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.student.tag.Tag;
+import seedu.address.model.util.DateTimeUtil;
 
 /**
  * Represents a Student in the address book.
@@ -40,20 +44,20 @@ public class Student extends Person {
         this.address = address;
         this.tags.addAll(tags);
         this.lessons = new LessonList();
-        this.payments = new PaymentList();
+        this.payments = new PaymentList(new Payment(DateTimeUtil.currentYearMonth(), getTotalAmount()));
         this.paymentStatus = PaymentStatus.UNPAID;
     }
 
     /**
      * Every field must be present and not null.
      */
-    public Student(Name name, Phone phone, Email email, Address address, Set<Tag> tags, LessonList ll) {
+    public Student(Name name, Phone phone, Email email, Address address, Set<Tag> tags, LessonList ll, PaymentList pl) {
         super(name, phone, email);
         requireAllNonNull(address, tags);
         this.address = address;
         this.tags.addAll(tags);
-        this.lessons = ll;
-        this.payments = new PaymentList();
+        this.lessons = new LessonList(ll.getLessons());
+        this.payments = pl;
         this.paymentStatus = PaymentStatus.UNPAID;
     }
 
@@ -77,9 +81,9 @@ public class Student extends Person {
     }
 
     /**
-     * Returns an mutable TreeMap of Payments.
+     * Returns a mutable ArrayList of Payments.
      */
-    public PaymentList getPaymentList() {
+    public PaymentList getPayments() {
         return this.payments;
     }
 
@@ -88,6 +92,11 @@ public class Student extends Person {
      */
     public PaymentStatus getPaymentStatus() {
         return this.paymentStatus;
+    }
+
+    public TotalAmount getTotalAmount() {
+        float f = lessons.getTotalAmountEarned(DateTimeUtil.currentYearMonth());
+        return new TotalAmount(f);
     }
 
     /**
@@ -102,6 +111,16 @@ public class Student extends Person {
     public void setPaymentStatus(PaymentStatus paymentStatus) {
         requireNonNull(paymentStatus);
         this.paymentStatus = paymentStatus;
+    }
+
+    /**
+     * Marks all the payments in the student's PaymentList as paid.
+     *
+     * @throws PaymentException
+     */
+    public void pay() throws PaymentException {
+        payments.markAllPaid();
+        setPaymentStatus(PaymentStatus.PAID);
     }
 
     /**

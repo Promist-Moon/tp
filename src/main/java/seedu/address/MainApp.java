@@ -3,6 +3,7 @@ package seedu.address;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.time.Clock;
+import java.time.YearMonth;
 import java.util.Optional;
 import java.util.logging.Logger;
 
@@ -22,6 +23,8 @@ import seedu.address.model.ModelManager;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.payment.MonthlyRollover;
+import seedu.address.model.util.DateTimeUtil;
 import seedu.address.model.util.SampleDataUtil;
 import seedu.address.storage.AddressBookStorage;
 import seedu.address.storage.JsonAddressBookStorage;
@@ -37,7 +40,7 @@ import seedu.address.ui.UiManager;
  */
 public class MainApp extends Application {
 
-    public static final Version VERSION = new Version(0, 2, 2, true);
+    public static final Version VERSION = new Version(1, 3, 2, true);
 
     private static final Logger logger = LogsCenter.getLogger(MainApp.class);
 
@@ -62,6 +65,14 @@ public class MainApp extends Application {
         storage = new StorageManager(addressBookStorage, userPrefsStorage);
 
         model = initModelManager(storage, userPrefs);
+
+        // === Monthly payment rollover on app startup ===
+        YearMonth now = DateTimeUtil.currentYearMonth();
+        new MonthlyRollover(model).compute(userPrefs.getLastOpened(), now);
+
+        // Update and persist last opened month after rollover has completed
+        userPrefs.setLastOpened(now);
+        storage.saveUserPrefs(userPrefs);
 
         logic = new LogicManager(model, storage, Clock.systemDefaultZone());
 

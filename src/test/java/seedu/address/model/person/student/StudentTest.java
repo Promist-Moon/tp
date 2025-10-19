@@ -112,6 +112,7 @@ public class StudentTest {
                 + ", phone=" + ALICE.getPhone()
                 + ", email=" + ALICE.getEmail()
                 + ", address=" + ALICE.getAddress()
+                + ", lessons=" + ALICE.getLessonList()
                 + ", tags=" + ALICE.getTags() + "}";
         assertEquals(expected, ALICE.toString());
     }
@@ -128,6 +129,7 @@ public class StudentTest {
                 + "; Phone: " + VALID_PHONE_AMY
                 + "; Email: " + VALID_EMAIL_AMY
                 + "; Address: " + VALID_ADDRESS_AMY
+                + "; Lessons: " + amy.getLessonList().toString()
                 + "; Tags: [" + VALID_TAG_FRIEND + "]";
         assertEquals(expectedMessage, amy.toDisplayString());
 

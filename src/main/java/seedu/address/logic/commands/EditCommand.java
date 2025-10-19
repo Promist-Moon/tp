@@ -21,6 +21,8 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.lesson.LessonList;
+import seedu.address.model.payment.PaymentList;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
@@ -113,8 +115,9 @@ public class EditCommand extends Command {
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(studentToEdit.getEmail());
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(studentToEdit.getAddress());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(studentToEdit.getTags());
-
-        return new Student(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags);
+        LessonList lessons = studentToEdit.getLessonList();
+        PaymentList payments = studentToEdit.getPayments();
+        return new Student(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags, lessons, payments);
     }
 
     @Override
@@ -151,6 +154,8 @@ public class EditCommand extends Command {
         private Email email;
         private Address address;
         private Set<Tag> tags;
+        private LessonList lessons;
+        private PaymentList payments;
 
         public EditPersonDescriptor() {}
 
@@ -205,6 +210,22 @@ public class EditCommand extends Command {
             return Optional.ofNullable(address);
         }
 
+        public void setLessons(LessonList lessons) {
+            this.lessons = lessons;
+        }
+
+        public Optional<LessonList> getLessons() {
+            return Optional.ofNullable(lessons);
+        }
+
+        public void setPayments(PaymentList payments) {
+            this.payments = payments;
+        }
+
+        public Optional<PaymentList> getPayments() {
+            return Optional.ofNullable(payments);
+        }
+
         /**
          * Sets {@code tags} to this object's {@code tags}.
          * A defensive copy of {@code tags} is used internally.
@@ -238,7 +259,9 @@ public class EditCommand extends Command {
                     && Objects.equals(phone, otherEditPersonDescriptor.phone)
                     && Objects.equals(email, otherEditPersonDescriptor.email)
                     && Objects.equals(address, otherEditPersonDescriptor.address)
-                    && Objects.equals(tags, otherEditPersonDescriptor.tags);
+                    && Objects.equals(tags, otherEditPersonDescriptor.tags)
+                    && Objects.equals(lessons, otherEditPersonDescriptor.lessons)
+                    && Objects.equals(payments, otherEditPersonDescriptor.payments);
         }
 
         @Override

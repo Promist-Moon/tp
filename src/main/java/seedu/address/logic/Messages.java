@@ -44,20 +44,20 @@ public class Messages {
      */
     public static String formatLesson(Lesson lesson) {
         final StringBuilder builder = new StringBuilder();
-        builder.append(lesson.getSubject())
-                .append("; Subject: ")
-                .append(lesson.getLevel())
+        builder.append(" Subject: ")
+                .append(lesson.getSubject())
                 .append("; Secondary: ")
-                .append(lesson.getDay())
+                .append(lesson.getLevel())
                 .append("; Day: ")
-                .append(lesson.getStartTime())
+                .append(lesson.getDay())
                 .append("; Start: ")
-                .append(lesson.getEndTime())
+                .append(lesson.getStartTime())
                 .append("; End: ")
-                .append(lesson.getAddress())
+                .append(lesson.getEndTime())
                 .append("; Address: ")
-                .append(lesson.getRate())
-                .append("; Rate: $");
+                .append(lesson.getAddress())
+                .append("; Rate: $")
+                .append(lesson.getRate());
         return builder.toString();
     }
 

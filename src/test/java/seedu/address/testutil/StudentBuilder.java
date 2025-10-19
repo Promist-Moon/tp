@@ -1,15 +1,15 @@
 package seedu.address.testutil;
 
+import static seedu.address.testutil.TypicalLessons.Y3_MATH;
+
+import java.time.YearMonth;
 import java.util.HashSet;
 import java.util.Set;
 
-import seedu.address.model.lesson.Day;
-import seedu.address.model.lesson.Lesson;
 import seedu.address.model.lesson.LessonList;
-import seedu.address.model.lesson.LessonTime;
-import seedu.address.model.lesson.Level;
-import seedu.address.model.lesson.Rate;
-import seedu.address.model.lesson.Subject;
+import seedu.address.model.payment.Payment;
+import seedu.address.model.payment.PaymentList;
+import seedu.address.model.payment.TotalAmount;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
@@ -27,12 +27,9 @@ public class StudentBuilder {
     public static final String DEFAULT_PHONE = "85355255";
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
-    public static final Lesson DEFAULT_LESSON = new Lesson(
-            Subject.fromString("Math"),
-            Level.fromString("1"),
-            new Day("1"),
-            LessonTime.ofLessonTime("10:00", "12:00"),
-            new Rate("40")
+    public static final Payment DEFAULT_PAYMENT = new Payment(
+            YearMonth.parse("2025-10"),
+            new TotalAmount(400f)
     );
 
     private Name name;
@@ -41,6 +38,7 @@ public class StudentBuilder {
     private Address address;
     private Set<Tag> tags;
     private LessonList ll = new LessonList();
+    private PaymentList pl = new PaymentList();
     /**
      * Creates a {@code StudentBuilder} with the default details.
      */
@@ -50,7 +48,8 @@ public class StudentBuilder {
         email = new Email(DEFAULT_EMAIL);
         address = new Address(DEFAULT_ADDRESS);
         tags = new HashSet<>();
-        ll.addLesson(DEFAULT_LESSON);
+        ll.addLesson(Y3_MATH);
+        pl.addPayment(DEFAULT_PAYMENT);
     }
 
     /**
@@ -63,6 +62,7 @@ public class StudentBuilder {
         address = personToCopy.getAddress();
         tags = new HashSet<>(personToCopy.getTags());
         ll = personToCopy.getLessonList();
+        pl = personToCopy.getPayments();
     }
 
     /**
@@ -109,12 +109,20 @@ public class StudentBuilder {
      * Sets the {@code Lessonlist} of the {@code Person} that we are building.
      */
     public StudentBuilder withLessonList(LessonList ll) {
-        this.ll = ll;
+        this.ll = new LessonList(ll.getLessons());
+        return this;
+    }
+
+    /**
+     * Sets the {@code Paymentlist} of the {@code Person} that we are building.
+     */
+    public StudentBuilder withPaymentList(PaymentList pl) {
+        this.pl = pl;
         return this;
     }
 
     public Student build() {
-        return new Student(name, phone, email, address, tags, ll);
+        return new Student(name, phone, email, address, tags, ll, pl);
     }
 
 }
