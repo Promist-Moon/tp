@@ -54,26 +54,34 @@ public class MonthlyRollover {
      * @param month the {@code YearMonth} to perform rollover for
      */
     private void rolloverForMonth(YearMonth month) {
-        for (Person person : model.getFilteredPersonList()) {
+        // Iterate over the full backing list to avoid filters hiding persons
+        for (Person person : model.getAddressBook().getPersonList()) {
             if (!(person instanceof Student)) {
                 continue;
             }
 
             Student student = (Student) person;
-
-            // Calculate the total amount earned for this month from all lessons
             float value = student.getLessonList().getTotalAmountEarned(month);
             TotalAmount totalAmount = new TotalAmount(value);
-
-            // Create a new Payment for this month
             Payment newPayment = new Payment(month, totalAmount);
 
-            // Add or replace the payment in the student's PaymentList
-            student.getPayments().addPayment(newPayment);
+            // Copy payments and add the new one
+            PaymentList oldPayments = student.getPayments();
+            PaymentList copiedPayments = new PaymentList(new java.util.ArrayList<>(oldPayments.getPayments()));
+            copiedPayments.addPayment(newPayment);
 
-            // TODO: check implementation of this
-            // Update the model to reflect the change
-            model.setPerson(student, student);
+            // Replace student with a new instance so the model list actually updates
+            Student editedStudent = new Student(
+                    student.getName(),
+                    student.getPhone(),
+                    student.getEmail(),
+                    student.getAddress(),
+                    student.getTags(),
+                    student.getLessonList(),
+                    copiedPayments
+            );
+
+            model.setPerson(student, editedStudent);
         }
     }
 }

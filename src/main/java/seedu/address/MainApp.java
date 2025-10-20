@@ -70,6 +70,12 @@ public class MainApp extends Application {
         YearMonth now = DateTimeUtil.currentYearMonth();
         new MonthlyRollover(model).compute(userPrefs.getLastOpened(), now);
 
+        try {
+            storage.saveAddressBook(model.getAddressBook());
+        } catch (IOException e) {
+            logger.warning("Failed to save AddressBook after rollover: " + StringUtil.getDetails(e));
+        }
+
         // Update and persist last opened month after rollover has completed
         userPrefs.setLastOpened(now);
         storage.saveUserPrefs(userPrefs);
