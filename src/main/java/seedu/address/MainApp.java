@@ -2,7 +2,6 @@ package seedu.address;
 
 import java.io.IOException;
 import java.nio.file.Path;
-import java.time.Clock;
 import java.time.YearMonth;
 import java.util.Optional;
 import java.util.logging.Logger;
@@ -80,7 +79,7 @@ public class MainApp extends Application {
         userPrefs.setLastOpened(now);
         storage.saveUserPrefs(userPrefs);
 
-        logic = new LogicManager(model, storage, Clock.systemDefaultZone());
+        logic = new LogicManager(model, storage);
 
         ui = new UiManager(logic);
     }

@@ -3,8 +3,6 @@ package seedu.address.logic;
 import java.io.IOException;
 import java.nio.file.AccessDeniedException;
 import java.nio.file.Path;
-import java.time.Clock;
-import java.time.YearMonth;
 import java.util.logging.Logger;
 
 import javafx.collections.ObservableList;
@@ -33,17 +31,15 @@ public class LogicManager implements Logic {
 
     private final Model model;
     private final Storage storage;
-    private final YearMonth currentYearMonth;
     private final AddressBookParser addressBookParser;
 
     /**
      * Constructs a {@code LogicManager} with the given {@code Model}, {@code Storage} and
      * {@code Clock}.
      */
-    public LogicManager(Model model, Storage storage, Clock clock) {
+    public LogicManager(Model model, Storage storage) {
         this.model = model;
         this.storage = storage;
-        this.currentYearMonth = YearMonth.now(clock);
         addressBookParser = new AddressBookParser();
     }
 
@@ -89,10 +85,5 @@ public class LogicManager implements Logic {
     @Override
     public void setGuiSettings(GuiSettings guiSettings) {
         model.setGuiSettings(guiSettings);
-    }
-
-    @Override
-    public YearMonth getCurrentYearMonth() {
-        return currentYearMonth;
     }
 }

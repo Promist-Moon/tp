@@ -52,7 +52,7 @@ public class LogicManagerTest {
                 new JsonAddressBookStorage(temporaryFolder.resolve("addressBook.json"));
         JsonUserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(temporaryFolder.resolve("userPrefs.json"));
         StorageManager storage = new StorageManager(addressBookStorage, userPrefsStorage);
-        logic = new LogicManager(model, storage, Clock.fixed(Instant.parse("2025-10-01T00:00:00Z"), ZoneOffset.UTC));
+        logic = new LogicManager(model, storage);
     }
 
     @Test
@@ -165,7 +165,7 @@ public class LogicManagerTest {
                 new JsonUserPrefsStorage(temporaryFolder.resolve("ExceptionUserPrefs.json"));
         StorageManager storage = new StorageManager(addressBookStorage, userPrefsStorage);
 
-        logic = new LogicManager(model, storage, Clock.fixed(Instant.parse("2025-10-01T00:00:00Z"), ZoneOffset.UTC));
+        logic = new LogicManager(model, storage);
 
         // Triggers the saveAddressBook method by executing an add command
         String addCommand = AddCommand.COMMAND_WORD + NAME_DESC_AMY + PHONE_DESC_AMY
