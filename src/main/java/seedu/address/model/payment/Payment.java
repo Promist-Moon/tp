@@ -44,6 +44,19 @@ public class Payment {
         this.isPaid = isPaid;
     }
 
+    /**
+     * Copy constructor that creates a deep copy of another Payment.
+     *
+     * @param other the Payment to copy from
+     */
+    public Payment(Payment other) {
+        requireAllNonNull(other);
+        this.yearMonth = other.yearMonth;
+        this.totalAmount = other.totalAmount;
+        this.isPaid = other.isPaid;
+    }
+
+
     public YearMonth getYearMonth() {
         return this.yearMonth;
     }

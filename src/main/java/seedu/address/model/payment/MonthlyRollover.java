@@ -37,23 +37,28 @@ public class MonthlyRollover {
         Objects.requireNonNull(lastOpened, "lastOpened cannot be null");
         Objects.requireNonNull(now, "now cannot be null");
 
+        // Defensive programming against corrupted pref or clock rollback
+        if (now.isBefore(lastOpened)) {
+            throw new IllegalArgumentException("System clock moved backwards: " + lastOpened + " → " + now);
+        }
+
         long monthsElapsed = DateTimeUtil.monthsBetweenInclusive(lastOpened, now);
         if (monthsElapsed <= 0) {
             return; // No rollover needed
         }
 
         for (int i = 0; i < monthsElapsed; i++) {
-            YearMonth rolloverMonth = lastOpened.plusMonths(i + 1);
-            rolloverForMonth(rolloverMonth);
+            YearMonth yearMonth = lastOpened.plusMonths(i + 1);
+            rolloverForMonth(yearMonth);
         }
     }
 
     /**
      * Applies rollover logic for a specific month.
      *
-     * @param month the {@code YearMonth} to perform rollover for
+     * @param yearMonth the {@code YearMonth} to perform rollover for
      */
-    private void rolloverForMonth(YearMonth month) {
+    private void rolloverForMonth(YearMonth yearMonth) {
         // Iterate over the full backing list to avoid filters hiding persons
         for (Person person : model.getAddressBook().getPersonList()) {
             if (!(person instanceof Student)) {
@@ -61,11 +66,10 @@ public class MonthlyRollover {
             }
 
 
-
             Student student = (Student) person;
-            float value = student.getLessonList().getTotalAmountEarned(month);
+            float value = student.getLessonList().getTotalAmountEarned(yearMonth);
             TotalAmount totalAmount = new TotalAmount(value);
-            Payment newPayment = new Payment(month, totalAmount);
+            Payment newPayment = new Payment(yearMonth, totalAmount);
 
             // Copy payments and add the new one
             PaymentList oldPayments = student.getPayments();

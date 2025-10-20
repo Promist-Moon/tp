@@ -217,4 +217,15 @@ public class PaymentList {
         this.earliestUnpaidYearmonth = month;
     }
 
+    /**
+     * Returns a defensive deep copy of this PaymentList.
+     * Each Payment is also copied to prevent external mutation.
+     */
+    public PaymentList copy() {
+        ArrayList<Payment> copiedPayments = new ArrayList<>();
+        for (Payment p : payments) {
+            copiedPayments.add(new Payment(p));
+        }
+        return new PaymentList(copiedPayments);
+    }
 }
