@@ -15,6 +15,7 @@ import static seedu.address.testutil.TypicalLessons.Y3_GEOGRAPHY;
 import static seedu.address.testutil.TypicalLessons.Y3_HISTORY;
 import static seedu.address.testutil.TypicalLessons.Y3_MATH;
 import static seedu.address.testutil.TypicalLessons.Y4_ENGLISH;
+import static seedu.address.testutil.TypicalLessons.getTypicalLessons;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -79,6 +80,7 @@ public class TypicalPersons {
         for (Person person : getTypicalPersons()) {
             ab.addPerson(person);
         }
+        ab.setLessons(getTypicalLessons());
         return ab;
     }
 
