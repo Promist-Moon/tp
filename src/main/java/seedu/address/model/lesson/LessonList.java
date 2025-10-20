@@ -61,7 +61,6 @@ public class LessonList {
         lessons.removeListener(listener);
     }
 
-
     /*
     Getters
      */
