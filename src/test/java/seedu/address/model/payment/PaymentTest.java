@@ -5,7 +5,11 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalPayments.*;
+import static seedu.address.testutil.TypicalPayments.feb25Paid;
+import static seedu.address.testutil.TypicalPayments.feb25Unpaid;
+import static seedu.address.testutil.TypicalPayments.jan24Paid600;
+import static seedu.address.testutil.TypicalPayments.jan24Unpaid800;
+import static seedu.address.testutil.TypicalPayments.jan25Paid;
 
 import java.time.YearMonth;
 
