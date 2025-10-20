@@ -10,6 +10,8 @@ import seedu.address.model.payment.Payment;
  */
 public class TypicalPayments {
 
+    private TypicalPayments() {} // prevents instantiation
+
     /**
      * Creates a Payment object in January 2025 with total amount 600
      * and payment status Paid.
@@ -118,6 +120,4 @@ public class TypicalPayments {
     public static ArrayList<Payment> sampleArrayList() {
         return new ArrayList<>(List.of(jan25Paid(), feb25Unpaid(), mar25Unpaid()));
     }
-
-    private TypicalPayments() {} // prevents instantiation
 }

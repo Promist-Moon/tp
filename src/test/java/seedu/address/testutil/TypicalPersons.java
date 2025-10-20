@@ -15,8 +15,8 @@ import static seedu.address.testutil.TypicalLessons.Y3_GEOGRAPHY;
 import static seedu.address.testutil.TypicalLessons.Y3_HISTORY;
 import static seedu.address.testutil.TypicalLessons.Y3_MATH;
 import static seedu.address.testutil.TypicalLessons.Y4_ENGLISH;
-import static seedu.address.testutil.TypicalPayments.feb25Unpaid;
 import static seedu.address.testutil.TypicalPayments.feb25Paid;
+import static seedu.address.testutil.TypicalPayments.feb25Unpaid;
 import static seedu.address.testutil.TypicalPayments.jan25Paid;
 import static seedu.address.testutil.TypicalPayments.sampleArrayList;
 
