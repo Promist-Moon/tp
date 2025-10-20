@@ -7,7 +7,6 @@ import javafx.scene.control.ListView;
 import javafx.scene.layout.Region;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.lesson.Lesson;
-import seedu.address.model.person.Person;
 
 import java.util.logging.Logger;
 
@@ -43,7 +42,7 @@ public class LessonListPanel extends UiPart<Region> {
                 setGraphic(null);
                 setText(null);
             } else {
-                setGraphic(new LessonCard(lesson, getIndex() + 1).getRoot());
+                setGraphic(new TodayLessonCard(lesson, getIndex() + 1).getRoot());
             }
         }
     }

@@ -8,7 +8,7 @@ import seedu.address.model.lesson.Lesson;
 /**
  * An UI component that displays information of a {@code Lesson}.
  */
-public class LessonCard extends UiPart<Region> {
+public class TodayLessonCard extends UiPart<Region> {
 
     private static final String FXML = "LessonListCard.fxml";
 
@@ -23,25 +23,23 @@ public class LessonCard extends UiPart<Region> {
     @FXML
     private Label level;
     @FXML
-    private Label day;
-    @FXML
     private Label lessonTime;
     @FXML
     private Label rate;
 
 
     /**
-     * Creates a {@code LessonCode} with the given {@code Lesson} and index to display.
+     * Creates a {@code LessonCode} with the given {@code Lesson} and index to display. All lesson card
+     * created are for the day that the application is open specifically.
      */
-    public LessonCard(Lesson lesson, int index) {
+    public TodayLessonCard(Lesson lesson, int index) {
         super(FXML);
         this.lesson = lesson;
         id.setText(index + ". ");
         subject.setText(lesson.getSubject().toString());
-        level.setText(lesson.getLevel().toString());
-        day.setText(lesson.getDay().toString());
-        lessonTime.setText(lesson.getLessonTime().toString());
-        rate.setText(lesson.getRate().toString());
+        level.setText("Level: Secondary" + lesson.getLevel().toString());
+        lessonTime.setText("Time (24H): " + lesson.getLessonTime().toString());
+        rate.setText("Rate (per hr): $" + lesson.getRate().toString());
 
     }
 }
