@@ -65,6 +65,10 @@ public class TypicalPersons {
             .withEmail("anna@example.com").withAddress("4th street")
             .withLessonList(new LessonList().addLesson(Y3_GEOGRAPHY))
             .withPaymentList(new PaymentList()).build();
+    public static final Student HANNAH = new StudentBuilder().withName("HANNAH MONTANA").withPhone("94823224")
+            .withEmail("mileycyrus@example.com").withAddress("usa ave")
+            .withLessonList(new LessonList().addLesson(Y1_ENGLISH))
+            .withPaymentList(new PaymentList(jan25Paid())).build();
 
 
     // Manually added
