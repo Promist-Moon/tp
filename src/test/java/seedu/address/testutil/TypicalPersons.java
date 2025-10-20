@@ -8,7 +8,6 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
-import static seedu.address.testutil.TypicalLessons.getTypicalLessons;
 import static seedu.address.testutil.TypicalLessons.Y1_ENGLISH;
 import static seedu.address.testutil.TypicalLessons.Y1_PHYSICS;
 import static seedu.address.testutil.TypicalLessons.Y2_CHEMISTRY;
@@ -16,6 +15,7 @@ import static seedu.address.testutil.TypicalLessons.Y3_GEOGRAPHY;
 import static seedu.address.testutil.TypicalLessons.Y3_HISTORY;
 import static seedu.address.testutil.TypicalLessons.Y3_MATH;
 import static seedu.address.testutil.TypicalLessons.Y4_ENGLISH;
+import static seedu.address.testutil.TypicalLessons.getTypicalLessons;
 
 
 import java.util.ArrayList;
