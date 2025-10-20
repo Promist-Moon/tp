@@ -45,7 +45,8 @@ public class PaymentList {
      * Constructs a new payment list by adding an arraylist of payments.
      */
     public PaymentList(ArrayList<Payment> payments) {
-        this.payments = payments;
+        requireNonNull(payments);
+        this.payments = new ArrayList<>(payments);
         sortByYearMonth();
 
         updateStatus();
@@ -107,6 +108,26 @@ public class PaymentList {
     }
 
     /**
+     * Returns the index of the payment with the given YearMonth, or -1 if absent.
+     */
+    public int indexOfMonth(YearMonth month) {
+        requireNonNull(month, "Month must not be null.");
+        for (int i = 0; i < payments.size(); i++) {
+            if (month.equals(payments.get(i).getYearMonth())) {
+                return i;
+            }
+        }
+        return -1;
+    }
+
+    /**
+     * Returns true if there exists a payment for the given YearMonth.
+     */
+    public boolean containsMonth(YearMonth month) {
+        return indexOfMonth(month) >= 0;
+    }
+
+    /**
      * Adds a new payment to the payment list.
      */
     public void addPayment(Payment payment) {
@@ -120,11 +141,53 @@ public class PaymentList {
             setPaymentStatus(Status.OVERDUE);
         }
         sortByYearMonth();
+        updateStatus();
+        setEarliestUnpaidYearmonth(findAndSetEarliestUnpaidYearMonth());
+    }
+
+    /**
+     * Adds the payment only if there is no existing entry for the same YearMonth.
+     * Keeps the list sorted and updates status/earliest unpaid when added.
+     *
+     * @return true if added, false if a payment for the same YearMonth already exists.
+     */
+    public boolean addPaymentIfAbsent(Payment payment) {
+        requireNonNull(payment);
+        if (containsMonth(payment.getYearMonth())) {
+            return false;
+        }
+        payments.add(payment);
+        sortByYearMonth();
+        updateStatus();
+        setEarliestUnpaidYearmonth(findAndSetEarliestUnpaidYearMonth());
+        return true;
+    }
+
+    /**
+     * Inserts or replaces a payment by YearMonth (upsert semantics).
+     * If an entry for the same YearMonth exists, it is overwritten.
+     *
+     * @return the previously stored Payment for that YearMonth, or null if none existed.
+     */
+    public Payment putPaymentForMonth(Payment payment) {
+        requireNonNull(payment);
+        YearMonth month = payment.getYearMonth();
+        int idx = indexOfMonth(month);
+        Payment replaced = null;
+        if (idx >= 0) {
+            replaced = payments.set(idx, payment);
+        } else {
+            payments.add(payment);
+        }
+        sortByYearMonth();
+        updateStatus();
+        setEarliestUnpaidYearmonth(findAndSetEarliestUnpaidYearMonth());
+        return replaced;
     }
 
     /**
      * Find unpaid payments in a payment list.
-     * @return
+     * @return ArrayList<Payment> of unpaid payments</Payment>.
      */
     public ArrayList<Payment> findUnpaids() {
         ArrayList<Payment> unpaidList = new ArrayList<>();
