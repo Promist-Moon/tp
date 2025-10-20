@@ -80,7 +80,12 @@ public class LessonListTest {
         final boolean[] fired = { false };
 
         ListChangeListener<Lesson> listener = change -> {
-            while (change.next()) if (change.wasAdded() || change.wasRemoved()) { fired[0] = true; break; }
+            while (change.next()) {
+                if (change.wasAdded() || change.wasRemoved()) {
+                    fired[0] = true;
+                    break;
+                }
+            }
         };
 
         list.addListener(listener);

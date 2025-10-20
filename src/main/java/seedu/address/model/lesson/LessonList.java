@@ -8,7 +8,6 @@ import java.util.Objects;
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
-
 import seedu.address.model.lesson.exceptions.LessonException;
 import seedu.address.model.util.DateTimeUtil;
 
