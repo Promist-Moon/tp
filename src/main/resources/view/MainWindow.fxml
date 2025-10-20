@@ -45,7 +45,7 @@
             <Insets top="5" right="10" bottom="5" left="10" />
           </padding>
         </StackPane>
-        <AnchorPane>
+        <AnchorPane VBox.vgrow="ALWAYS">
           <VBox fx:id="personList" styleClass="pane-with-border" minWidth="450" prefWidth="450" VBox.vgrow="ALWAYS"
                 AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="350.0" AnchorPane.topAnchor="0.0">
             <padding>

@@ -30,7 +30,7 @@ public class LessonListPanel extends UiPart<Region> {
      */
     public LessonListPanel(ObservableList<Lesson> LessonList, DayOfWeek day) {
         super(FXML);
-        title.setText(day.toString() + "'s Schedule");
+        title.setText(day.toString() + "'S SCHEDULE");
         lessonListView.setItems(LessonList);
         lessonListView.setCellFactory(listView -> new LessonListViewCell());
     }

@@ -10,6 +10,7 @@ import java.time.YearMonth;
 import java.util.logging.Logger;
 
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.SortedList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.Command;
@@ -87,10 +88,10 @@ public class LogicManager implements Logic {
         return model.getFilteredLessonList();
     }
     @Override
-    public ObservableList<Lesson> getTodayLessonList() {
+    public SortedList<Lesson> getTodayLessonList() {
         //by default, we show the lesson for today only
         model.updateFilteredLessonList(new TodaysLessonPredicate(currentDay));
-        return model.getFilteredLessonList();
+        return model.getSortedFilteredLessons();
     }
 
     @Override
