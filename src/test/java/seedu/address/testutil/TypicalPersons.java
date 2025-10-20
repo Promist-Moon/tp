@@ -17,7 +17,6 @@ import static seedu.address.testutil.TypicalLessons.Y3_MATH;
 import static seedu.address.testutil.TypicalLessons.Y4_ENGLISH;
 import static seedu.address.testutil.TypicalLessons.getTypicalLessons;
 
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
