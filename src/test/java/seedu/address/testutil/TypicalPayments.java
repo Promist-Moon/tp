@@ -37,7 +37,8 @@ public class TypicalPayments {
 
     public static final ArrayList<Payment> SAMPLE_ARRAYLIST = new ArrayList<>(List.of(JAN_25, FEB_25, MAR_25_ALICE));
 
-    public static final ArrayList<Payment> SAMPLE_ARRAYLIST_FOR_STUDENT = new ArrayList<>(List.of(JAN_25, FEB_25, MAR_25_ALICE));
+    public static final ArrayList<Payment> SAMPLE_ARRAYLIST_FOR_STUDENT =
+            new ArrayList<>(List.of(JAN_25, FEB_25, MAR_25_ALICE));
 
     private TypicalPayments() {} // prevents instantiation
 }
