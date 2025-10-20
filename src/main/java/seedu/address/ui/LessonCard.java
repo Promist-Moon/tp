@@ -36,7 +36,7 @@ public class LessonCard extends UiPart<Region> {
     public LessonCard(Lesson lesson, int index) {
         super(FXML);
         this.lesson = lesson;
-        id.setText(index);
+        id.setText(index + ". ");
         subject.setText(lesson.getSubject().toString());
         level.setText(lesson.getLevel().toString());
         day.setText(lesson.getDay().toString());

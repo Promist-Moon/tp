@@ -25,6 +25,7 @@ public class ModelManager implements Model {
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
+    private final FilteredList<Lesson> filteredLessons;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -37,6 +38,7 @@ public class ModelManager implements Model {
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
+        filteredLessons = new FilteredList<>(this.addressBook.getLessonList());
     }
 
     public ModelManager() {
@@ -143,6 +145,17 @@ public class ModelManager implements Model {
             // If not a Student, exclude from the filtered list
             return false;
         });
+    }
+
+    //=========== Filtered Person List Accessors =============================================================
+
+    /**
+     * Returns an unmodifiable view of the list of {@code Person} backed by the internal list of
+     * {@code versionedAddressBook}
+     */
+    @Override
+    public ObservableList<Lesson> getFilteredLessonList() {
+        return filteredLessons;
     }
 
     @Override
