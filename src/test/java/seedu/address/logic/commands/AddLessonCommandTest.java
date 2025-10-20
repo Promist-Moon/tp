@@ -65,12 +65,11 @@ public class AddLessonCommandTest {
     @Test
     public void equals() {
         Student alice = new StudentBuilder().withName("Alice").build();
-        Student bob = new StudentBuilder().withName("Bob").build();
-        Lesson lessonA = new LessonBuilder().withSubject("Math").withStudent(alice).build();
-        Lesson lessonB = new LessonBuilder().withSubject("Physics").withStudent(bob).build();
+        Lesson lessonA = new LessonBuilder().withStudent(alice).withLessonTime("10:00", "12:00").build();
+        Lesson lessonB = new LessonBuilder().withStudent(alice).withLessonTime("12:00", "14:00").build();
 
         AddLessonCommand addLessonACommand = new AddLessonCommand(Index.fromZeroBased(0), lessonA);
-        AddLessonCommand addLessonBCommand = new AddLessonCommand(Index.fromZeroBased(0), lessonB);
+        AddLessonCommand addLessonBCommand = new AddLessonCommand(Index.fromZeroBased(1), lessonB);
 
         // same object -> returns true
         assertTrue(addLessonACommand.equals(addLessonACommand));
