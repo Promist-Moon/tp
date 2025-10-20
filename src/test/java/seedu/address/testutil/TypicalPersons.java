@@ -15,7 +15,10 @@ import static seedu.address.testutil.TypicalLessons.Y3_GEOGRAPHY;
 import static seedu.address.testutil.TypicalLessons.Y3_HISTORY;
 import static seedu.address.testutil.TypicalLessons.Y3_MATH;
 import static seedu.address.testutil.TypicalLessons.Y4_ENGLISH;
-import static seedu.address.testutil.TypicalPayments.*;
+import static seedu.address.testutil.TypicalPayments.FEB_25;
+import static seedu.address.testutil.TypicalPayments.FEB_25_PAID;
+import static seedu.address.testutil.TypicalPayments.JAN_25;
+import static seedu.address.testutil.TypicalPayments.SAMPLE_ARRAYLIST_FOR_STUDENT;
 
 import java.util.ArrayList;
 import java.util.Arrays;

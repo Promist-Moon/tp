@@ -1,6 +1,9 @@
 package seedu.address.model.person.student;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_AMY;
@@ -17,7 +20,6 @@ import static seedu.address.testutil.TypicalPersons.BENSON;
 import static seedu.address.testutil.TypicalPersons.BOB;
 import static seedu.address.testutil.TypicalPersons.CARL;
 import static seedu.address.testutil.TypicalPersons.ELLE;
-import static seedu.address.testutil.TypicalPersons.GEORGE;
 
 import org.junit.jupiter.api.Test;
 
@@ -38,7 +40,6 @@ public class StudentTest {
 
     @Test
     void constructor_allFields_correctPaymentStatus() {
-
         // correctly identifies overdue
         assertEquals(Status.OVERDUE, ALICE.getPaymentListStatus());
         assertEquals(PaymentStatus.OVERDUE, ALICE.getPaymentStatus());
