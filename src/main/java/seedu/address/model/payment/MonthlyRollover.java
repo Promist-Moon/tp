@@ -60,6 +60,8 @@ public class MonthlyRollover {
                 continue;
             }
 
+
+
             Student student = (Student) person;
             float value = student.getLessonList().getTotalAmountEarned(month);
             TotalAmount totalAmount = new TotalAmount(value);

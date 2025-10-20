@@ -67,17 +67,35 @@ public class MainApp extends Application {
 
         // === Monthly payment rollover on app startup ===
         YearMonth now = DateTimeUtil.currentYearMonth();
-        new MonthlyRollover(model).compute(userPrefs.getLastOpened(), now);
+        YearMonth lastOpened = userPrefs.getLastOpened();
 
-        try {
-            storage.saveAddressBook(model.getAddressBook());
-        } catch (IOException e) {
-            logger.warning("Failed to save AddressBook after rollover: " + StringUtil.getDetails(e));
+        if (lastOpened == null) {
+            // First-time launch: skip rollover and initialize lastOpened
+            logger.info("First-time launch detected — skipping rollover and initializing lastOpened to " + now + ".");
+            userPrefs.setLastOpened(now);
+            try {
+                storage.saveUserPrefs(userPrefs);
+            } catch (IOException e) {
+                logger.warning("Failed to save UserPrefs during first-time initialization: "
+                        + StringUtil.getDetails(e));
+            }
+        } else {
+            new MonthlyRollover(model).compute(lastOpened, now);
+
+            try {
+                storage.saveAddressBook(model.getAddressBook());
+            } catch (IOException e) {
+                logger.warning("Failed to save AddressBook after rollover: " + StringUtil.getDetails(e));
+            }
+
+            // Update and persist last opened month after rollover has completed
+            userPrefs.setLastOpened(now);
+            try {
+                storage.saveUserPrefs(userPrefs);
+            } catch (IOException e) {
+                logger.warning("Failed to save UserPrefs after rollover: " + StringUtil.getDetails(e));
+            }
         }
-
-        // Update and persist last opened month after rollover has completed
-        userPrefs.setLastOpened(now);
-        storage.saveUserPrefs(userPrefs);
 
         logic = new LogicManager(model, storage);
 
