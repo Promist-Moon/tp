@@ -2,6 +2,7 @@ package seedu.address.model.person.student;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
@@ -14,11 +15,22 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.testutil.TypicalLessons.Y1_ENGLISH;
+import static seedu.address.testutil.TypicalPayments.feb25Unpaid;
 import static seedu.address.testutil.TypicalPersons.ALICE;
+import static seedu.address.testutil.TypicalPersons.BENSON;
 import static seedu.address.testutil.TypicalPersons.BOB;
+import static seedu.address.testutil.TypicalPersons.CARL;
+import static seedu.address.testutil.TypicalPersons.ELLE;
+import static seedu.address.testutil.TypicalPersons.FIONA;
+import static seedu.address.testutil.TypicalPersons.HANNAH;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.model.lesson.LessonList;
+import seedu.address.model.payment.PaymentList;
+import seedu.address.model.payment.Status;
+import seedu.address.model.payment.exceptions.PaymentException;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.PersonBuilder;
 import seedu.address.testutil.StudentBuilder;
@@ -26,9 +38,80 @@ import seedu.address.testutil.StudentBuilder;
 public class StudentTest {
 
     @Test
+    void constructor_minimalFields_initializesDefaultFields() {
+        assertNotNull(BOB.getLessonList());
+        assertNotNull(BOB.getPayments());
+        assertEquals(Status.UNPAID, BOB.getPaymentListStatus());
+        assertEquals(PaymentStatus.UNPAID, BOB.getPaymentStatus());
+    }
+
+    @Test
+    void constructor_allFields_correctPaymentStatus() {
+        // correctly identifies overdue
+        assertEquals(Status.OVERDUE, FIONA.getPaymentListStatus());
+        assertEquals(PaymentStatus.OVERDUE, FIONA.getPaymentStatus());
+
+        // correctly identifies unpaid
+        assertEquals(Status.UNPAID, BENSON.getPaymentListStatus());
+        assertEquals(PaymentStatus.UNPAID, BENSON.getPaymentStatus());
+
+        // correctly identifies paid
+        assertEquals(Status.PAID, CARL.getPaymentListStatus());
+        assertEquals(PaymentStatus.PAID, CARL.getPaymentStatus());
+
+        // initialises payment list for constructor with one payment object and identifies unpaid
+        assertNotNull(BOB.getLessonList());
+        assertNotNull(BOB.getPayments());
+        assertEquals(Status.UNPAID, ELLE.getPaymentListStatus());
+        assertEquals(PaymentStatus.UNPAID, ELLE.getPaymentStatus());
+
+    }
+
+    @Test
     public void asObservableList_modifyList_throwsUnsupportedOperationException() {
         Student student = new StudentBuilder().build();
         assertThrows(UnsupportedOperationException.class, () -> student.getTags().remove(0));
+    }
+
+    @Test
+    public void checkIsStatusSame_whenAlreadySame_noChange() {
+        // Sanity before
+        assertEquals(Status.UNPAID, ELLE.getPaymentListStatus());
+        assertEquals(PaymentStatus.UNPAID, ELLE.getPaymentStatus());
+
+        // Should be a no-op
+        ELLE.checkIsStatusSame();
+
+        assertEquals(PaymentStatus.UNPAID, ELLE.getPaymentStatus());
+    }
+
+    @Test
+    public void checkIsStatusSame_whenStudentDiffers_updatesToPaymentList() {
+        // Force mismatch on Paid Student
+        HANNAH.setPaymentStatus(PaymentStatus.UNPAID);
+
+        // Sync should update Student to PAID
+        HANNAH.checkIsStatusSame();
+
+        assertEquals(PaymentStatus.PAID, HANNAH.getPaymentStatus());
+    }
+
+    @Test
+    void checkIsStatusSame_afterPaymentListMutates_syncsToNewStatus() throws PaymentException {
+        Student elle = new StudentBuilder().withName("Elle Meyer").withPhone("9482224")
+                .withEmail("werner@example.com").withAddress("michegan ave")
+                .withLessonList(new LessonList().addLesson(Y1_ENGLISH))
+                .withPaymentList(new PaymentList(feb25Unpaid())).build();
+
+        // Sanity before
+        assertEquals(PaymentStatus.UNPAID, elle.getPaymentStatus());
+
+        // Mutate underlying PaymentList: mark all paid
+        elle.getPayments().markAllPaid(); // PaymentList becomes PAID
+
+        // Sync should update Student to PAID
+        elle.checkIsStatusSame();
+        assertEquals(PaymentStatus.PAID, elle.getPaymentStatus());
     }
 
     @Test
