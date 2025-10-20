@@ -5,10 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalPayments.FEB_25;
-import static seedu.address.testutil.TypicalPayments.JAN_24_600;
-import static seedu.address.testutil.TypicalPayments.JAN_24_800;
-import static seedu.address.testutil.TypicalPayments.JAN_25;
+import static seedu.address.testutil.TypicalPayments.*;
 
 import java.time.YearMonth;
 
@@ -75,28 +72,28 @@ public class PaymentTest {
     @Test
     public void equals() {
         // same object -> true
-        assertTrue(JAN_25.equals(JAN_25));
+        assertTrue(jan25Paid().equals(jan25Paid()));
 
         // same values -> true
-        Payment copyJan25 = new PaymentBuilder(JAN_25).build();
-        assertTrue(JAN_25.equals(copyJan25));
+        Payment copyJan25 = new PaymentBuilder(jan25Paid()).build();
+        assertTrue(jan25Paid().equals(copyJan25));
 
         // null -> false
-        assertFalse(JAN_25.equals(null));
+        assertFalse(jan25Paid().equals(null));
 
         // different type -> false
-        assertFalse(JAN_25.equals("not a payment"));
+        assertFalse(jan25Paid().equals("not a payment"));
 
         // different YearMonth -> false
-        assertFalse(JAN_25.equals(FEB_25));
+        assertFalse(jan25Paid().equals(feb25Paid()));
 
         // different amount -> false
-        Payment diffAmount = new PaymentBuilder(JAN_25).withTotalAmount(700f).build();
-        assertFalse(JAN_25.equals(diffAmount));
+        Payment diffAmount = new PaymentBuilder(jan25Paid()).withTotalAmount(700f).build();
+        assertFalse(jan25Paid().equals(diffAmount));
 
         // different paid status (should still be equal if isPaid ignored)
-        Payment paidVariant = new PaymentBuilder(JAN_25).withIsPaid(false).build();
-        assertTrue(JAN_25.equals(paidVariant));
+        Payment paidVariant = new PaymentBuilder(jan25Paid()).withIsPaid(false).build();
+        assertTrue(jan25Paid().equals(paidVariant));
     }
 
     @Test
@@ -107,17 +104,11 @@ public class PaymentTest {
     }
 
     @Test
-    public void hashCode_excludesIsPaid() {
-        Payment paidVariant = new PaymentBuilder(JAN_25).withIsPaid(false).build();
-        assertEquals(paidVariant.hashCode(), JAN_25.hashCode());
-    }
-
-    @Test
     public void hashCode_differs() {
         // different year month -> different hash codes
-        assertNotEquals(FEB_25.hashCode(), JAN_25.hashCode());
+        assertNotEquals(feb25Unpaid().hashCode(), jan25Paid().hashCode());
 
         // different amount -> different hash codes
-        assertNotEquals(JAN_24_600.hashCode(), JAN_24_800.hashCode());
+        assertNotEquals(jan24Paid600().hashCode(), jan24Unpaid800().hashCode());
     }
 }

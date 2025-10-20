@@ -20,6 +20,7 @@ import static seedu.address.testutil.TypicalPersons.BENSON;
 import static seedu.address.testutil.TypicalPersons.BOB;
 import static seedu.address.testutil.TypicalPersons.CARL;
 import static seedu.address.testutil.TypicalPersons.ELLE;
+import static seedu.address.testutil.TypicalPersons.FIONA;
 
 import org.junit.jupiter.api.Test;
 
@@ -41,8 +42,8 @@ public class StudentTest {
     @Test
     void constructor_allFields_correctPaymentStatus() {
         // correctly identifies overdue
-        assertEquals(Status.OVERDUE, ALICE.getPaymentListStatus());
-        assertEquals(PaymentStatus.OVERDUE, ALICE.getPaymentStatus());
+        assertEquals(Status.OVERDUE, FIONA.getPaymentListStatus());
+        assertEquals(PaymentStatus.OVERDUE, FIONA.getPaymentStatus());
 
         // correctly identifies unpaid
         assertEquals(Status.UNPAID, BENSON.getPaymentListStatus());

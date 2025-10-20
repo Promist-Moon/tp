@@ -15,10 +15,10 @@ import static seedu.address.testutil.TypicalLessons.Y3_GEOGRAPHY;
 import static seedu.address.testutil.TypicalLessons.Y3_HISTORY;
 import static seedu.address.testutil.TypicalLessons.Y3_MATH;
 import static seedu.address.testutil.TypicalLessons.Y4_ENGLISH;
-import static seedu.address.testutil.TypicalPayments.FEB_25;
-import static seedu.address.testutil.TypicalPayments.FEB_25_PAID;
-import static seedu.address.testutil.TypicalPayments.JAN_25;
-import static seedu.address.testutil.TypicalPayments.SAMPLE_ARRAYLIST_FOR_STUDENT;
+import static seedu.address.testutil.TypicalPayments.feb25Unpaid;
+import static seedu.address.testutil.TypicalPayments.feb25Paid;
+import static seedu.address.testutil.TypicalPayments.jan25Paid;
+import static seedu.address.testutil.TypicalPayments.sampleArrayList;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -39,28 +39,28 @@ public class TypicalPersons {
             .withAddress("123, Jurong West Ave 6, #08-111").withEmail("alice@example.com")
             .withPhone("94351253")
             .withLessonList(new LessonList().addLesson(Y3_MATH))
-            .withPaymentList(new PaymentList(SAMPLE_ARRAYLIST_FOR_STUDENT)).build();
+            .withPaymentList(new PaymentList(sampleArrayList())).build();
     public static final Student BENSON = new StudentBuilder().withName("Benson Meier")
             .withAddress("311, Clementi Ave 2, #02-25")
             .withEmail("johnd@example.com").withPhone("98765432")
             .withLessonList(new LessonList().addLesson(Y1_PHYSICS))
-            .withPaymentList(new PaymentList(new ArrayList<>(List.of(JAN_25, FEB_25)))).build();
+            .withPaymentList(new PaymentList(new ArrayList<>(List.of(jan25Paid(), feb25Unpaid())))).build();
     public static final Student CARL = new StudentBuilder().withName("Carl Kurz").withPhone("95352563")
             .withEmail("heinz@example.com").withAddress("wall street")
             .withLessonList(new LessonList().addLesson(Y4_ENGLISH))
-            .withPaymentList(new PaymentList(new ArrayList<>(List.of(JAN_25, FEB_25_PAID)))).build();
+            .withPaymentList(new PaymentList(new ArrayList<>(List.of(jan25Paid(), feb25Paid())))).build();
     public static final Student DANIEL = new StudentBuilder().withName("Daniel Meier").withPhone("87652533")
             .withEmail("cornelia@example.com").withAddress("10th street")
             .withLessonList(new LessonList().addLesson(Y2_CHEMISTRY))
-            .withPaymentList(new PaymentList(new ArrayList<>(List.of(JAN_25)))).build();
+            .withPaymentList(new PaymentList(new ArrayList<>(List.of(jan25Paid())))).build();
     public static final Student ELLE = new StudentBuilder().withName("Elle Meyer").withPhone("9482224")
             .withEmail("werner@example.com").withAddress("michegan ave")
             .withLessonList(new LessonList().addLesson(Y1_ENGLISH))
-            .withPaymentList(new PaymentList(FEB_25)).build();
+            .withPaymentList(new PaymentList(feb25Unpaid())).build();
     public static final Student FIONA = new StudentBuilder().withName("Fiona Kunz").withPhone("9482427")
             .withEmail("lydia@example.com").withAddress("little tokyo")
             .withLessonList(new LessonList().addLesson(Y3_HISTORY))
-            .withPaymentList(new PaymentList(SAMPLE_ARRAYLIST_FOR_STUDENT)).build();
+            .withPaymentList(new PaymentList(sampleArrayList())).build();
     public static final Student GEORGE = new StudentBuilder().withName("George Best").withPhone("9482442")
             .withEmail("anna@example.com").withAddress("4th street")
             .withLessonList(new LessonList().addLesson(Y3_GEOGRAPHY))
