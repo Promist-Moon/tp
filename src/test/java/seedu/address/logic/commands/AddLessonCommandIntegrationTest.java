@@ -13,9 +13,9 @@ import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.lesson.Lesson;
 import seedu.address.model.person.student.Student;
+import seedu.address.commons.core.index.Index;
 import seedu.address.testutil.LessonBuilder;
 import seedu.address.testutil.StudentBuilder;
-import seedu.address.commons.core.index.Index;
 
 /**
  * Contains integration tests (interaction with the Model) for {@code AddCommand}.
