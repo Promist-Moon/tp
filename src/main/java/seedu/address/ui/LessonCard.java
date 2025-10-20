@@ -33,10 +33,10 @@ public class LessonCard extends UiPart<Region> {
     /**
      * Creates a {@code LessonCode} with the given {@code Lesson} and index to display.
      */
-    public LessonCard(Lesson lesson) {
+    public LessonCard(Lesson lesson, int index) {
         super(FXML);
         this.lesson = lesson;
-        // id.setText(lesson.getLessonIndex());
+        id.setText(index);
         subject.setText(lesson.getSubject().toString());
         level.setText(lesson.getLevel().toString());
         day.setText(lesson.getDay().toString());

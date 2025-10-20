@@ -22,7 +22,7 @@ public class LessonListCard extends UiPart<VBox> {
     public LessonListCard(List<Lesson> lessons) {
         super(FXML);
         for (Lesson lesson : lessons) {
-            lessonList.getChildren().add(new LessonCard(lesson).getRoot());
+            lessonList.getChildren().add(new LessonCard(lesson, 1).getRoot());
         }
     }
 }
