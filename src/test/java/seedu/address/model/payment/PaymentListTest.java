@@ -195,8 +195,8 @@ public class PaymentListTest {
         Payment p = new PaymentBuilder().withYearMonth(nov.toString()).withTotalAmount(500f).build();
         PaymentList pl = new PaymentList(p);
 
-        assertThrows(PaymentException.class,
-                () -> pl.updateExistingPayment(ym, 123f),
+        assertThrows(PaymentException.class, () ->
+                        pl.updateExistingPayment(ym, 123f),
                 "should throw when target month is absent");
     }
 
