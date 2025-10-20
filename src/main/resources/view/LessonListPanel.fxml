@@ -2,7 +2,9 @@
 
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.Label?>
 
 <VBox xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+    <Label fx:id="title" styleClass="cell_big_label" text="\$title" />
     <ListView fx:id="lessonListView" VBox.vgrow="ALWAYS" />
 </VBox>

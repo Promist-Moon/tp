@@ -47,22 +47,23 @@
         </StackPane>
         <AnchorPane>
           <VBox fx:id="personList" styleClass="pane-with-border" minWidth="450" prefWidth="450" VBox.vgrow="ALWAYS"
-                AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="350.0">
+                AnchorPane.bottomAnchor="20" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="350.0">
             <padding>
               <Insets top="10" right="10" bottom="10" left="10" />
             </padding>
             <StackPane fx:id="personListPanelPlaceholder" VBox.vgrow="ALWAYS"/>
           </VBox>
           <VBox fx:id="lessonList" styleClass="pane-with-border" minWidth="300" prefWidth="350" VBox.vgrow="ALWAYS"
-                AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0">
+                AnchorPane.bottomAnchor="20.0" AnchorPane.rightAnchor="0.0">
 
             <padding>
               <Insets top="10" right="10" bottom="10" left="10" />
             </padding>
             <StackPane fx:id="lessonListPanelPlaceholder" VBox.vgrow="ALWAYS"/>
           </VBox>
+
+          <StackPane fx:id="statusbarPlaceholder" VBox.vgrow="NEVER" AnchorPane.bottomAnchor="0.0"/>
         </AnchorPane>
-        <StackPane fx:id="statusbarPlaceholder" VBox.vgrow="NEVER" />
       </VBox>
     </Scene>
   </scene>
