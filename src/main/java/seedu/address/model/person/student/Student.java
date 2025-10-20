@@ -13,7 +13,6 @@ import seedu.address.model.lesson.LessonList;
 import seedu.address.model.payment.Payment;
 import seedu.address.model.payment.PaymentList;
 import seedu.address.model.payment.Status;
-import seedu.address.model.util.mapping.StatusMapper;
 import seedu.address.model.payment.TotalAmount;
 import seedu.address.model.payment.exceptions.PaymentException;
 import seedu.address.model.person.Email;
@@ -22,6 +21,7 @@ import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.student.tag.Tag;
 import seedu.address.model.util.DateTimeUtil;
+import seedu.address.model.util.mapping.StatusMapper;
 
 /**
  * Represents a Student in the address book.
@@ -105,8 +105,7 @@ public class Student extends Person {
 
     /**
      * Checks whether payment list status corresponds to student status
-     * A defensive check to ensure no incongruencies in status
-     * @return
+     * A defensive check to ensure no difference in status.
      */
     public void checkIsStatusSame() {
         PaymentStatus plStatus = mapStatus(getPaymentListStatus());
