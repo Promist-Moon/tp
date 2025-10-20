@@ -121,12 +121,8 @@ public class Lesson {
 
         Lesson otherLesson = (Lesson) other;
 
-        if (day.getDayOfWeek().equals(otherLesson.day.getDayOfWeek())
-                && lessonTime.hasTimeClash(otherLesson.lessonTime)) {
-
-        }
-        return false;
-
+        return day.getDayOfWeek().equals(otherLesson.day.getDayOfWeek())
+                && lessonTime.hasTimeClash(otherLesson.lessonTime);
     }
 
     @Override
