@@ -13,6 +13,7 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.lesson.Lesson;
 import seedu.address.model.lesson.LessonList;
+import seedu.address.model.lesson.TodaysLessonPredicate;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.student.Student;
 
@@ -147,7 +148,7 @@ public class ModelManager implements Model {
         });
     }
 
-    //=========== Filtered Person List Accessors =============================================================
+    //=========== Filtered Lesson List Accessors =============================================================
 
     /**
      * Returns an unmodifiable view of the list of {@code Person} backed by the internal list of
@@ -157,6 +158,14 @@ public class ModelManager implements Model {
     public ObservableList<Lesson> getFilteredLessonList() {
         return filteredLessons;
     }
+
+    @Override
+    public void updateFilteredLessonList(Predicate<Lesson> predicate) {
+        requireNonNull(predicate);
+        filteredLessons.setPredicate(predicate);
+    }
+
+    //====================================================================================================
 
     @Override
     public boolean equals(Object other) {

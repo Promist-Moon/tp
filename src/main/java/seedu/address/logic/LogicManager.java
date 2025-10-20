@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.nio.file.AccessDeniedException;
 import java.nio.file.Path;
 import java.time.Clock;
+import java.time.DayOfWeek;
+import java.time.LocalDate;
 import java.time.YearMonth;
 import java.util.logging.Logger;
 
@@ -18,6 +20,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.lesson.Lesson;
+import seedu.address.model.lesson.TodaysLessonPredicate;
 import seedu.address.model.person.Person;
 import seedu.address.storage.Storage;
 
@@ -35,6 +38,7 @@ public class LogicManager implements Logic {
     private final Model model;
     private final Storage storage;
     private final YearMonth currentYearMonth;
+    private final DayOfWeek currentDay;
     private final AddressBookParser addressBookParser;
 
     /**
@@ -45,6 +49,7 @@ public class LogicManager implements Logic {
         this.model = model;
         this.storage = storage;
         this.currentYearMonth = YearMonth.now(clock);
+        this.currentDay = LocalDate.now(clock).getDayOfWeek();
         addressBookParser = new AddressBookParser();
     }
 
@@ -81,6 +86,12 @@ public class LogicManager implements Logic {
     public ObservableList<Lesson> getFilteredLessonList() {
         return model.getFilteredLessonList();
     }
+    @Override
+    public ObservableList<Lesson> getTodayLessonList() {
+        //by default, we show the lesson for today only
+        model.updateFilteredLessonList(new TodaysLessonPredicate(currentDay));
+        return model.getFilteredLessonList();
+    }
 
     @Override
     public Path getAddressBookFilePath() {
@@ -100,5 +111,10 @@ public class LogicManager implements Logic {
     @Override
     public YearMonth getCurrentYearMonth() {
         return currentYearMonth;
+    }
+
+    @Override
+    public DayOfWeek getCurrentDay() {
+        return currentDay;
     }
 }

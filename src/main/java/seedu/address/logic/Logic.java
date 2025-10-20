@@ -1,6 +1,7 @@
 package seedu.address.logic;
 
 import java.nio.file.Path;
+import java.time.DayOfWeek;
 import java.time.YearMonth;
 
 import javafx.collections.ObservableList;
@@ -38,6 +39,9 @@ public interface Logic {
     /** Returns an unmodifiable view of the filtered list of lessons */
     ObservableList<Lesson> getFilteredLessonList();
 
+    /** Returns an unmodifiable view of the filtered list of today's lessons */
+    ObservableList<Lesson> getTodayLessonList();
+
     /**
      * Returns the user prefs' address book file path.
      */
@@ -54,8 +58,12 @@ public interface Logic {
     void setGuiSettings(GuiSettings guiSettings);
 
     /**
-     * Gets current year/month
-     * @return
+     * Return current year/month.
      */
     YearMonth getCurrentYearMonth();
+
+    /**
+     * Return current day of the week.
+     */
+    DayOfWeek getCurrentDay();
 }
