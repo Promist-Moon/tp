@@ -24,7 +24,7 @@ public class LessonList {
     /**
      * Constructs a new lesson list by copying from another array list.
      */
-    public LessonList(ArrayList ll) {
+    public LessonList(ArrayList<Lesson> ll) {
         this.lessons = ll;
     }
 
@@ -66,7 +66,7 @@ public class LessonList {
 
     /**
      * Deletes a lesson from the lesson List.
-     * @param lesson
+     * @param lesson: A lesson object
      */
     public void deleteLesson(Lesson lesson) {
         int ind = lessons.indexOf(lesson);

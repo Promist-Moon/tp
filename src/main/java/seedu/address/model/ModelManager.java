@@ -154,10 +154,6 @@ public class ModelManager implements Model {
 
     //=========== Filtered Lesson List Accessors =============================================================
 
-    /**
-     * Returns an unmodifiable view of the list of {@code Person} backed by the internal list of
-     * {@code versionedAddressBook}
-     */
     @Override
     public ObservableList<Lesson> getFilteredLessonList() {
         return filteredLessons;
