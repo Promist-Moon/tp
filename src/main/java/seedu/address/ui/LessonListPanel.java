@@ -14,7 +14,7 @@ import seedu.address.model.lesson.Lesson;
 
 //Solution below adapted from @@author {Damith C.} - PersonListPanel.java
 /**
- * Panel containing the list of persons.
+ * Panel containing the list of lessons.
  */
 public class LessonListPanel extends UiPart<Region> {
     private static final String FXML = "LessonListPanel.fxml";
@@ -26,17 +26,17 @@ public class LessonListPanel extends UiPart<Region> {
     private Label title;
 
     /**
-     * Creates a {@code PersonListPanel} with the given {@code ObservableList}.
+     * Creates a {@code LessonListPanel} with the given {@code ObservableList}.
      */
-    public LessonListPanel(ObservableList<Lesson> lessonList, DayOfWeek day) {
+    public LessonListPanel(ObservableList<Lesson> lessonList, String titleText) {
         super(FXML);
-        title.setText(day.toString() + "'S SCHEDULE");
+        title.setText(titleText);
         lessonListView.setItems(lessonList);
         lessonListView.setCellFactory(listView -> new LessonListViewCell());
     }
 
     /**
-     * Custom {@code ListCell} that displays the graphics of a {@code Person} using a {@code PersonCard}.
+     * Custom {@code ListCell} that displays the graphics of a {@code Lesson} using a {@code LessonCard}.
      */
     class LessonListViewCell extends ListCell<Lesson> {
         @Override

@@ -22,6 +22,8 @@ public class TodayLessonCard extends UiPart<Region> {
     private Label subject;
     @FXML
     private Label level;
+    // @FXML
+    // private Label student;
     @FXML
     private Label lessonTime;
     @FXML
@@ -37,6 +39,7 @@ public class TodayLessonCard extends UiPart<Region> {
         this.lesson = lesson;
         id.setText(index + ". ");
         subject.setText(lesson.getSubject().toString());
+        // student.setText("Student: " + lesson.getStudent().getName());
         level.setText("Level: Secondary " + lesson.getLevel().toString());
         lessonTime.setText("Time (24H): " + lesson.getLessonTime().toString());
         rate.setText("Rate (per hr): $" + lesson.getRate().toString());
