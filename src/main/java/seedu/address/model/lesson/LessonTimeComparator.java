@@ -2,6 +2,10 @@ package seedu.address.model.lesson;
 
 import java.util.Comparator;
 
+/**
+ * Represents a Comparator that compare two lesson
+ * based on the start time of lessonTime.
+ */
 public class LessonTimeComparator implements Comparator<Lesson> {
 
     @Override

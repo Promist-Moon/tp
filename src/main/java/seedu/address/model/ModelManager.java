@@ -15,7 +15,6 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.lesson.Lesson;
 import seedu.address.model.lesson.LessonList;
 import seedu.address.model.lesson.LessonTimeComparator;
-import seedu.address.model.lesson.TodaysLessonPredicate;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.student.Student;
 

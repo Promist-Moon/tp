@@ -1,5 +1,8 @@
 package seedu.address.ui;
 
+import java.time.DayOfWeek;
+import java.util.logging.Logger;
+
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -8,9 +11,6 @@ import javafx.scene.control.ListView;
 import javafx.scene.layout.Region;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.lesson.Lesson;
-
-import java.time.DayOfWeek;
-import java.util.logging.Logger;
 
 //Solution below adapted from @@author {Damith C.} - PersonListPanel.java
 /**
@@ -28,10 +28,10 @@ public class LessonListPanel extends UiPart<Region> {
     /**
      * Creates a {@code PersonListPanel} with the given {@code ObservableList}.
      */
-    public LessonListPanel(ObservableList<Lesson> LessonList, DayOfWeek day) {
+    public LessonListPanel(ObservableList<Lesson> lessonList, DayOfWeek day) {
         super(FXML);
         title.setText(day.toString() + "'S SCHEDULE");
-        lessonListView.setItems(LessonList);
+        lessonListView.setItems(lessonList);
         lessonListView.setCellFactory(listView -> new LessonListViewCell());
     }
 
