@@ -174,9 +174,6 @@ public class ModelManager implements Model {
 
     @Override
     public void addLesson(Student student, Lesson lesson) {
-        // TO BE IMPLEMENTED WITH STUDENT
-        //addressBook.addLesson(lesson);
-        //updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         requireNonNull(student);
         requireNonNull(lesson);
 

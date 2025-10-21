@@ -75,7 +75,7 @@ public class FindCommandTest {
     }
 
     @Test
-    public void execute_multipleKeywordTypes_PersonsFound() {
+    public void execute_multipleKeywordTypes_personsFound() {
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 3);
         NameContainsKeywordsPredicate predicate = preparePredicate("Kurz 9482224 tokyo");
         FindCommand command = new FindCommand(predicate);
