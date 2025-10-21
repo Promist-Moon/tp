@@ -12,14 +12,14 @@
 <?import javafx.scene.layout.AnchorPane?>
 
 <fx:root type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
-         title="Address App" minWidth="450" minHeight="600" onCloseRequest="#handleExit">
+         title="Tuiniverse" minWidth="450" minHeight="600" onCloseRequest="#handleExit">
   <icons>
     <Image url="@/images/address_book_32.png" />
   </icons>
   <scene>
     <Scene>
       <stylesheets>
-        <URL value="@DarkTheme.css" />
+        <URL value="@BrightTheme.css" />
         <URL value="@Extensions.css" />
       </stylesheets>
 
@@ -51,14 +51,14 @@
             <padding>
               <Insets top="10" right="10" bottom="10" left="10" />
             </padding>
-            <StackPane fx:id="personListPanelPlaceholder" VBox.vgrow="ALWAYS"/>
+            <StackPane fx:id="personListPanelPlaceholder" VBox.vgrow="ALWAYS" style="-fx-background-color: #f4f9fd;"/>
           </VBox>
           <VBox fx:id="lessonList" styleClass="pane-with-border" minWidth="300" prefWidth="350" VBox.vgrow="ALWAYS"
                 AnchorPane.bottomAnchor="0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <padding>
               <Insets top="10" right="10" bottom="10" left="10" />
             </padding>
-            <StackPane fx:id="lessonListPanelPlaceholder" VBox.vgrow="ALWAYS"/>
+            <StackPane fx:id="lessonListPanelPlaceholder" VBox.vgrow="ALWAYS" style="-fx-background-color: #f4f9fd;"/>
           </VBox>
         </AnchorPane>
         <StackPane fx:id="statusbarPlaceholder" VBox.vgrow="NEVER"/>
