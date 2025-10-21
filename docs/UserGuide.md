@@ -98,7 +98,7 @@ Examples:
 * `add.lesson i/4 s/Math l/3 d/Tuesday s/13:00 e/15:00 r/40`
 
 ### Making payment: `pay`
-Tracks that a student has made payment for that month. 
+Tracks that a student has made payment for that month.
 
 Format: `pay INDEX`
 
@@ -122,7 +122,7 @@ Lists all students that have **unpaid** fees for the month.
 
 Format: `list.unpaid`
 
-### Listing all overdue fees: `list.overdue` 
+### Listing all overdue fees: `list.overdue`
 Lists all students that have **overdue** fees from previous months.
 
 Format: `list.overdue`
@@ -226,7 +226,7 @@ _Details coming soon ..._
 ## Glossary
 
 * **Person**: A person can either be a student or a parent
-    * Student - A student studies a subject under a tutor for an hourly rate. 
+    * Student - A student studies a subject under a tutor for an hourly rate.
     * Parent - The parent of the student.
 * **Payment Status**: Each student has a payment status which updates every month.
     * Paid - The student has paid within the month

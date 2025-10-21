@@ -344,7 +344,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 3. TSMS validates the details:
     - Name, address, contact number, and parent fields are non-blank.
     - Contact number must contain only numerical digits.
-4. TSMS creates the student and displays a message confirming successful creation. 
+4. TSMS creates the student and displays a message confirming successful creation.
    **Use case ends.**
 
 ### **Extensions**
@@ -640,7 +640,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * **GUI**: Graphical User Interface
 * **CLI**: Command Line Interface
 * **Person**: Student or parent
-* **Payment Status**: 
+* **Payment Status**:
   * Paid - The student has paid within the month
   * Unpaid - Payment has been requested less than 2 weeks ago but has not been paid
   * Overdue - Payment has been requested more than 2 weeks ago but has not been paid
