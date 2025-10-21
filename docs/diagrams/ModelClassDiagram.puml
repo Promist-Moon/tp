@@ -59,7 +59,7 @@ Address -[hidden]right-> Email
 
 PaymentList *--> "*" Payment
 Payment *--> YearMonth
-Payment *--> Total
+Payment *--> TotalAmount
 Payment *--> Status
 
 ModelManager --> "~* filtered" Person
