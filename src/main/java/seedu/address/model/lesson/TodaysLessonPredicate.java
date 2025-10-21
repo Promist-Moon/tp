@@ -1,6 +1,6 @@
 package seedu.address.model.lesson;
 
-import java.time.DayOfWeek;
+
 import java.util.function.Predicate;
 
 import seedu.address.commons.util.ToStringBuilder;
@@ -9,15 +9,15 @@ import seedu.address.commons.util.ToStringBuilder;
  * Tests that a {@code Person}'s {@code Name} matches any of the keywords given.
  */
 public class TodaysLessonPredicate implements Predicate<Lesson> {
-    private final DayOfWeek day;
+    private final Day day;
 
-    public TodaysLessonPredicate(DayOfWeek day) {
+    public TodaysLessonPredicate(Day day) {
         this.day = day;
     }
 
     @Override
     public boolean test(Lesson lesson) {
-        return lesson.getDay().getDayOfWeek().equals(day);
+        return lesson.getDay().equals(day);
     }
 
     @Override
@@ -35,7 +35,7 @@ public class TodaysLessonPredicate implements Predicate<Lesson> {
         return day.equals(otherTodaysLessonPredicate.getDay());
     }
 
-    public DayOfWeek getDay() {
+    public Day getDay() {
         return day;
     }
 

@@ -1,7 +1,6 @@
 package seedu.address.logic;
 
 import java.nio.file.Path;
-import java.time.DayOfWeek;
 import java.time.YearMonth;
 
 import javafx.collections.ObservableList;
@@ -10,6 +9,7 @@ import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.lesson.Day;
 import seedu.address.model.lesson.Lesson;
 import seedu.address.model.person.Person;
 
@@ -65,5 +65,5 @@ public interface Logic {
     /**
      * Return current day of the week.
      */
-    DayOfWeek getCurrentDay();
+    Day getCurrentDay();
 }

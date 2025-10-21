@@ -4,8 +4,8 @@ import java.io.IOException;
 import java.nio.file.AccessDeniedException;
 import java.nio.file.Path;
 import java.time.Clock;
-import java.time.DayOfWeek;
 import java.time.LocalDate;
+import java.time.DayOfWeek;
 import java.time.YearMonth;
 import java.util.logging.Logger;
 
@@ -20,6 +20,7 @@ import seedu.address.logic.parser.AddressBookParser;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.lesson.Day;
 import seedu.address.model.lesson.Lesson;
 import seedu.address.model.lesson.TodaysLessonPredicate;
 import seedu.address.model.person.Person;
@@ -39,7 +40,7 @@ public class LogicManager implements Logic {
     private final Model model;
     private final Storage storage;
     private final YearMonth currentYearMonth;
-    private final DayOfWeek currentDay;
+    private final Day currentDay;
     private final AddressBookParser addressBookParser;
 
     /**
@@ -50,7 +51,8 @@ public class LogicManager implements Logic {
         this.model = model;
         this.storage = storage;
         this.currentYearMonth = YearMonth.now(clock);
-        this.currentDay = LocalDate.now(clock).getDayOfWeek();
+        DayOfWeek today = LocalDate.now(clock).getDayOfWeek();
+        this.currentDay = new Day(today.toString());
         addressBookParser = new AddressBookParser();
     }
 
@@ -115,7 +117,7 @@ public class LogicManager implements Logic {
     }
 
     @Override
-    public DayOfWeek getCurrentDay() {
+    public Day getCurrentDay() {
         return currentDay;
     }
 }
