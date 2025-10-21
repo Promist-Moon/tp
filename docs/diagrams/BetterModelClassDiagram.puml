@@ -22,4 +22,5 @@ Person *--> Address
 PaymentList *--> "*" Payment
 Payment *--> YearMonth
 Payment *--> Total
+Payment *--> Status
 @enduml
