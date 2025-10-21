@@ -38,7 +38,7 @@ public class PaymentList {
         this.payments.add(payment);
 
         updateStatus();
-        setEarliestUnpaidYearmonth(findAndSetEarliestUnpaidYearMonth());
+        findAndSetEarliestUnpaidYearMonth();
     }
 
     /**
@@ -49,7 +49,7 @@ public class PaymentList {
         sortByYearMonth();
 
         updateStatus();
-        setEarliestUnpaidYearmonth(findAndSetEarliestUnpaidYearMonth());
+        findAndSetEarliestUnpaidYearMonth();
     }
 
     public int getSize() {
