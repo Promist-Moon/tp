@@ -3,6 +3,7 @@ package seedu.address.logic.parser;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
 import seedu.address.commons.core.index.Index;
+import seedu.address.logic.commands.Command;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
@@ -10,7 +11,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
  *
  * @param <T> the command type
  */
-public abstract class IndexCommandParser<T> implements Parser<T> {
+public abstract class IndexCommandParser<T extends Command> implements Parser<T> {
 
     private final String messageUsage;
 
