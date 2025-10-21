@@ -3,6 +3,7 @@ package seedu.address.model.person.student;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.time.YearMonth;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Objects;
@@ -12,14 +13,17 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.lesson.LessonList;
 import seedu.address.model.payment.Payment;
 import seedu.address.model.payment.PaymentList;
+import seedu.address.model.payment.Status;
 import seedu.address.model.payment.TotalAmount;
 import seedu.address.model.payment.exceptions.PaymentException;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.exceptions.PaymentStatusUpdateException;
 import seedu.address.model.person.student.tag.Tag;
 import seedu.address.model.util.DateTimeUtil;
+import seedu.address.model.util.mapping.StatusMapper;
 
 /**
  * Represents a Student in the address book.
@@ -46,6 +50,7 @@ public class Student extends Person {
         this.lessons = new LessonList();
         this.payments = new PaymentList(new Payment(DateTimeUtil.currentYearMonth(), getTotalAmount()));
         this.paymentStatus = PaymentStatus.UNPAID;
+        wireLessonListeners();
     }
 
     /**
@@ -58,7 +63,8 @@ public class Student extends Person {
         this.tags.addAll(tags);
         this.lessons = new LessonList(ll.getLessons());
         this.payments = pl;
-        this.paymentStatus = PaymentStatus.UNPAID;
+        this.paymentStatus = mapStatus(getPaymentListStatus());
+        wireLessonListeners();
     }
 
     public Address getAddress() {
@@ -94,6 +100,24 @@ public class Student extends Person {
         return this.paymentStatus;
     }
 
+    /**
+     * Returns the status of the student from the payment list the month
+     */
+    public Status getPaymentListStatus() {
+        return getPayments().getStatus();
+    }
+
+    /**
+     * Checks whether payment list status corresponds to student status
+     * A defensive check to ensure no difference in status.
+     */
+    public void checkIsStatusSame() {
+        PaymentStatus plStatus = mapStatus(getPaymentListStatus());
+        if (getPaymentStatus() != plStatus) {
+            setPaymentStatus(plStatus);
+        }
+    }
+
     public TotalAmount getTotalAmount() {
         float f = lessons.getTotalAmountEarned(DateTimeUtil.currentYearMonth());
         return new TotalAmount(f);
@@ -121,6 +145,10 @@ public class Student extends Person {
     public void pay() throws PaymentException {
         payments.markAllPaid();
         setPaymentStatus(PaymentStatus.PAID);
+    }
+
+    public PaymentStatus mapStatus(Status status) {
+        return StatusMapper.toPaymentStatus(status);
     }
 
     /**
@@ -161,6 +189,7 @@ public class Student extends Person {
                 && tags.equals(otherStudent.tags);
     }
 
+
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
@@ -187,6 +216,39 @@ public class Student extends Person {
                 .add("lessons", lessons)
                 .add("tags", tags)
                 .toString();
+    }
+
+    /*
+    Private methods
+     */
+
+    private void wireLessonListeners() {
+        // Recompute whenever lessons change (add/remove/edit).
+        this.lessons.addListener(change -> {
+            while (change.next()) {
+                if (change.wasAdded() || change.wasRemoved() || change.wasUpdated() || change.wasReplaced()) {
+                    refreshCurrentMonthPayment();
+                    break;
+                }
+            }
+        });
+    }
+
+    /**
+     * Recomputes the current month’s total from lessons and syncs PaymentList + Student status.
+     **/
+    private void refreshCurrentMonthPayment() throws PaymentStatusUpdateException {
+        try {
+            YearMonth ym = DateTimeUtil.currentYearMonth();
+            float newTotal = lessons.getTotalAmountEarned(ym);
+            payments.updateExistingPayment(ym, newTotal);
+
+            System.out.println("New payment updated: new total: " + newTotal);
+
+            setPaymentStatus(mapStatus(getPaymentListStatus()));
+        } catch (PaymentException e) {
+            throw new PaymentStatusUpdateException();
+        }
     }
 
 }
