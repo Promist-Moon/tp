@@ -19,6 +19,12 @@ Class Email
 Class Name
 Class Phone
 Class Tag
+Class LessonList
+Class PaymentList
+
+Class Payment
+Class YearMonth
+Class TotalAmount
 
 Class I #FFFFFF
 }
@@ -49,6 +55,10 @@ UniquePersonList -[hidden]right-> I
 Name -[hidden]right-> Phone
 Phone -[hidden]right-> Address
 Address -[hidden]right-> Email
+
+PaymentList *--> "*" Payment
+Payment *--> YearMonth
+Payment *--> Total
 
 ModelManager --> "~* filtered" Person
 @enduml
