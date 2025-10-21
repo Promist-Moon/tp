@@ -14,6 +14,7 @@ import static seedu.address.testutil.TypicalLessons.Y3_GEOGRAPHY;
 import static seedu.address.testutil.TypicalLessons.Y3_HISTORY;
 import static seedu.address.testutil.TypicalLessons.Y3_MATH;
 import static seedu.address.testutil.TypicalLessons.Y4_ENGLISH;
+import static seedu.address.testutil.TypicalLessons.getTypicalLessons;
 import static seedu.address.testutil.TypicalPayments.currentYmUnpaid0;
 import static seedu.address.testutil.TypicalPayments.feb25Paid;
 import static seedu.address.testutil.TypicalPayments.feb25Unpaid;
@@ -95,6 +96,7 @@ public class TypicalPersons {
         for (Person person : getTypicalPersons()) {
             ab.addPerson(person);
         }
+        ab.setLessons(getTypicalLessons());
         return ab;
     }
 
