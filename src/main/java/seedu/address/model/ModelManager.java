@@ -183,6 +183,7 @@ public class ModelManager implements Model {
         addressBook.addLesson(lesson);
         LessonList ls = student.getLessonList();
         ls.addLesson(lesson);
+        lesson.addStudent(student);
 
         LessonList oldLessonList = student.getLessonList();
         LessonList newLessonList = new LessonList(oldLessonList.getLessons());
