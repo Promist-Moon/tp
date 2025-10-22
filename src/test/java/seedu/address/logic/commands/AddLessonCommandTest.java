@@ -1,15 +1,16 @@
 package seedu.address.logic.commands;
 
-import static java.util.Objects.requireNonNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.logic.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
+import static seedu.address.logic.commands.AddLessonCommand.MESSAGE_SUCCESS;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalPersons.ALICE;
 
 import java.nio.file.Path;
 import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.List;
 import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
@@ -17,78 +18,80 @@ import org.junit.jupiter.api.Test;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.SortedList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.lesson.Lesson;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.student.Student;
+import seedu.address.testutil.LessonBuilder;
 import seedu.address.testutil.StudentBuilder;
 
-public class AddCommandTest {
+public class AddLessonCommandTest {
 
     @Test
-    public void constructor_nullPerson_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new AddCommand(null));
+    public void constructor_nullLesson_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> new AddLessonCommand(Index.fromZeroBased(0), null));
     }
 
     @Test
-    public void execute_personAcceptedByModel_addSuccessful() throws Exception {
-        ModelStubAcceptingPersonAdded modelStub = new ModelStubAcceptingPersonAdded();
-        Person validPerson = new StudentBuilder().build();
+    public void execute_validLessonAndStudentIndex_addSuccessful() throws Exception {
+        Lesson validLesson = new LessonBuilder().build();
+        Student targetStudent = new StudentBuilder().build();
 
-        CommandResult commandResult = new AddCommand(validPerson).execute(modelStub);
+        ModelStubAcceptingLessonAdded modelStub = new ModelStubAcceptingLessonAdded(targetStudent);
 
-        assertEquals(String.format(AddCommand.MESSAGE_SUCCESS, Messages.format(validPerson)),
-                commandResult.getFeedbackToUser());
-        assertEquals(Arrays.asList(validPerson), modelStub.personsAdded);
+        AddLessonCommand command = new AddLessonCommand(Index.fromZeroBased(0), validLesson);
+        CommandResult result = command.execute(modelStub);
+
+        assertEquals(String.format(MESSAGE_SUCCESS, Messages.formatLesson(validLesson)), result.getFeedbackToUser());
+        assertEquals(1, modelStub.lessonsAdded.size());
+        assertEquals(validLesson, modelStub.lessonsAdded.get(0));
     }
 
     @Test
-    public void execute_duplicatePerson_throwsCommandException() {
-        Person validPerson = new StudentBuilder().build();
-        AddCommand addCommand = new AddCommand(validPerson);
-        ModelStub modelStub = new ModelStubWithPerson(validPerson);
+    public void execute_invalidStudentIndex_throwsCommandException() {
+        Lesson validLesson = new LessonBuilder().build();
 
-        assertThrows(CommandException.class, AddCommand.MESSAGE_DUPLICATE_PERSON, () -> addCommand.execute(modelStub));
+        ModelStubAcceptingLessonAdded modelStub = new ModelStubAcceptingLessonAdded();
+
+        AddLessonCommand command = new AddLessonCommand(Index.fromZeroBased(5), validLesson);
+
+        assertThrows(CommandException.class, MESSAGE_INVALID_PERSON_DISPLAYED_INDEX, () -> command.execute(modelStub));
     }
 
     @Test
     public void equals() {
-        Person alice = new StudentBuilder().withName("Alice").build();
-        Person bob = new StudentBuilder().withName("Bob").build();
-        AddCommand addAliceCommand = new AddCommand(alice);
-        AddCommand addBobCommand = new AddCommand(bob);
+        Student alice = new StudentBuilder().withName("Alice").build();
+        Lesson lessonA = new LessonBuilder().withStudent(alice).withLessonTime("10:00", "12:00").build();
+        Lesson lessonB = new LessonBuilder().withStudent(alice).withLessonTime("12:00", "14:00").build();
+
+        AddLessonCommand addLessonACommand = new AddLessonCommand(Index.fromZeroBased(0), lessonA);
+        AddLessonCommand addLessonBCommand = new AddLessonCommand(Index.fromZeroBased(1), lessonB);
 
         // same object -> returns true
-        assertTrue(addAliceCommand.equals(addAliceCommand));
+        assertTrue(addLessonACommand.equals(addLessonACommand));
 
         // same values -> returns true
-        AddCommand addAliceCommandCopy = new AddCommand(alice);
-        assertTrue(addAliceCommand.equals(addAliceCommandCopy));
+        AddLessonCommand addLessonACommandCopy = new AddLessonCommand(Index.fromZeroBased(0), lessonA);
+        assertTrue(addLessonACommand.equals(addLessonACommandCopy));
 
         // different types -> returns false
-        assertFalse(addAliceCommand.equals(1));
+        assertFalse(addLessonACommand.equals(1));
 
         // null -> returns false
-        assertFalse(addAliceCommand.equals(null));
+        assertFalse(addLessonACommand.equals(null));
 
-        // different person -> returns false
-        assertFalse(addAliceCommand.equals(addBobCommand));
-    }
+        // different lesson -> returns false
+        assertFalse(addLessonACommand.equals(addLessonBCommand));
 
-    @Test
-    public void toStringMethod() {
-        AddCommand addCommand = new AddCommand(ALICE);
-        String expected = AddCommand.class.getCanonicalName() + "{toAdd=" + ALICE + "}";
-        assertEquals(expected, addCommand.toString());
     }
 
     /**
-     * A default model stub that have all of the methods failing.
+     * A base Model stub that throws AssertionError for all methods.
      */
     private class ModelStub implements Model {
         @Override
@@ -157,7 +160,22 @@ public class AddCommandTest {
         }
 
         @Override
+        public ObservableList<Lesson> getFilteredLessonList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public SortedList<Lesson> getSortedFilteredLessons() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void updateFilteredPersonList(Predicate<Person> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void updateFilteredLessonList(Predicate<Lesson> predicate) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -172,11 +190,6 @@ public class AddCommandTest {
         }
 
         @Override
-        public boolean hasLessonClash(Lesson lesson) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
         public void addLesson(Student student, Lesson lesson) {
             throw new AssertionError("This method should not be called.");
         }
@@ -185,64 +198,36 @@ public class AddCommandTest {
         public void deleteLesson(Student student, Lesson lesson) {
             throw new AssertionError("This method should not be called");
         }
-
-        @Override
-        public ObservableList<Lesson> getFilteredLessonList() {
-            throw new AssertionError("This method should not be called");
-        }
-
-        @Override
-        public void updateFilteredLessonList(Predicate<Lesson> predicate) {
-            throw new AssertionError("This method should not be called");
-
-        }
-
-        @Override
-        public SortedList<Lesson> getSortedFilteredLessons() {
-            throw new AssertionError("This method should not be called");
-        }
     }
 
     /**
-     * A Model stub that contains a single person.
+     * A Model stub that always accepts the added lesson.
      */
-    private class ModelStubWithPerson extends ModelStub {
-        private final Person person;
+    private class ModelStubAcceptingLessonAdded extends ModelStub {
+        final List<Lesson> lessonsAdded = new ArrayList<>();
+        final List<Student> students;
 
-        ModelStubWithPerson(Person person) {
-            requireNonNull(person);
-            this.person = person;
+        ModelStubAcceptingLessonAdded(Student... students) {
+            this.students = List.of(students);
+        }
+
+        ModelStubAcceptingLessonAdded() {
+            this.students = List.of();
         }
 
         @Override
-        public boolean hasPerson(Person person) {
-            requireNonNull(person);
-            return this.person.isSamePerson(person);
+        public ObservableList<Person> getFilteredPersonList() {
+            return javafx.collections.FXCollections.observableArrayList(students);
+        }
+
+        @Override
+        public boolean hasLesson(Lesson lesson) {
+            return lessonsAdded.stream().anyMatch(lesson::equals);
+        }
+
+        @Override
+        public void addLesson(Student target, Lesson lesson) {
+            lessonsAdded.add(lesson);
         }
     }
-
-    /**
-     * A Model stub that always accept the person being added.
-     */
-    private class ModelStubAcceptingPersonAdded extends ModelStub {
-        final ArrayList<Person> personsAdded = new ArrayList<>();
-
-        @Override
-        public boolean hasPerson(Person person) {
-            requireNonNull(person);
-            return personsAdded.stream().anyMatch(person::isSamePerson);
-        }
-
-        @Override
-        public void addPerson(Person person) {
-            requireNonNull(person);
-            personsAdded.add(person);
-        }
-
-        @Override
-        public ReadOnlyAddressBook getAddressBook() {
-            return new AddressBook();
-        }
-    }
-
 }

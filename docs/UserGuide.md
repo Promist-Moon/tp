@@ -3,7 +3,8 @@ layout: page
 title: User Guide
 ---
 
-Tuiniverse is a **desktop app for managing contacts, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AB3 can get your contact management tasks done faster than traditional GUI apps.
+Tuiniverse is a **desktop app for private freelance one-on-one tuition tutors to manage the contacts of their students. It keeps track of the student contact details, lesson details, and payment statuses per student and bills outstanding per month.
+Tuiniverse is optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, Tuiniverse can get your contact management tasks done faster than traditional GUI apps.
 
 * Table of Contents
 {:toc}
@@ -87,19 +88,23 @@ Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
 * `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
 
-### Adding a class: `add.class`
+### Adding a lesson: `add.lesson`
 
-Adds a class to the specific student.
+Adds a lesson to the specific student.
 
-Format: `add.class /i <student index> /s <subject> /l <level> /d <day> /s <start time> /e <end time> /r <hourly rate>`
+Format: `add.lesson i/STUDENT_INDEX s/SUBJECT l/LEVEL d/DAY s/START_TIME e/END_TIME r/HOURLY RATE`
 
 Examples:
-* `add.class /i 4 /s Math /l 3 /d Tuesday s/13:00 e/15:00 /r 40`
+* `add.lesson i/4 s/Math l/3 d/Tuesday s/13:00 e/15:00 r/40`
 
 ### Making payment: `pay`
-Tracks that a student has made payment
+Tracks that a student has made payment for that month. 
 
-Format: `pay <student index>`
+Format: `pay INDEX`
+
+* Marks payment for the student at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
+* When you mark an **unpaid** or **overdue** student as paid, their status becomes **paid**.
+* A **paid** student cannot make payment until the next month.
 
 ### Listing all persons : `list`
 
@@ -108,17 +113,17 @@ Shows a list of all persons in the address book.
 Format: `list`
 
 ### Listing all payments: `list.paid`
-Lists all students that have paid the fees
+Lists all students that have **paid** their fees for the month.
 
 Format: `list.paid`
 
 ### Listing all unpaid fees: `list.unpaid`
-Lists all students that have unpaid fees
+Lists all students that have **unpaid** fees for the month.
 
 Format: `list.unpaid`
 
 ### Listing all overdue fees: `list.overdue` 
-Lists all students that have overdue fees
+Lists all students that have **overdue** fees from previous months.
 
 Format: `list.overdue`
 
@@ -147,14 +152,14 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
 
 * The search is case-insensitive. e.g `hans` will match `Hans`
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-* Only the name is searched.
-* Only full words will be matched e.g. `Han` will not match `Hans`
+* The name, address, email and phone number can be searched.
+* Any substring of a word will be matched e.g. `Han` will match `Hans`
 * Students matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 
 Examples:
 * `find John` returns `john` and `John Doe`
-* `find alex david` returns `Alex Yeoh`, `David Li`<br>
+* `find alex 91031282` returns `Alex Yeoh`, `David Li`<br>
   ![result for 'find alex david'](images/findAlexDavidResult.png)
 
 ### Deleting a person : `delete`
@@ -171,14 +176,14 @@ Examples:
 * `list` followed by `delete 2` deletes the 2nd student in the address book.
 * `find Betsy` followed by `delete 1` deletes the 1st student in the results of the `find` command.
 
-### Deleting a Class: `delete.class`
+### Deleting a Lesson: `delete.lesson`
 
-Deletes an existing class from a specific student.
+Deletes an existing lesson from a specific student.
 
-Format:`delete.class /i <student index> /c <class index>`
+Format:`delete.lesson i/STUDENT_INDEX c/LESSON_INDEX…​`
 
 Examples:
-* `delete.class /i 20 /c 2`
+* `delete.lesson i/2 c/1`
 
 ### Clearing all entries : `clear`
 
@@ -218,6 +223,22 @@ _Details coming soon ..._
 
 --------------------------------------------------------------------------------------------------------------------
 
+## Glossary
+
+* **Person**: A person can either be a student or a parent
+    * Student - A student studies a subject under a tutor for an hourly rate. 
+    * Parent - The parent of the student.
+* **Payment Status**: Each student has a payment status which updates every month.
+    * Paid - The student has paid within the month
+    * Unpaid - The student has not paid within the month
+    * Overdue - The student has outstanding bills from previous months
+* **Bill**: The payment amount owed by a student
+* **Subjects**: Math, English, Physics, Chemistry, Biology, Geography, History, Mother tongue, Social Studies, Literature
+* **Note**: A comment located in a student's information
+* **Schedule**: A timetable for classes containing the time, location, subject of the class and the student taking the class
+
+--------------------------------------------------------------------------------------------------------------------
+
 ## Known issues
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
@@ -230,15 +251,14 @@ _Details coming soon ..._
 Action | Format, Examples
 --------|------------------
 **Add** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
-**Add class** | `add.class /i <student index> /s <subject> /l <level> /d <day> /s <start time> /e <end time> /r <hourly rate>` <br> e.g., `add.class /i 4 /s Math /l 3 /d Tuesday s/13:00 e/15:00 /r 40`
-**Pay** | `pay <student index>`
+**Add Lesson** | `add.lesson i/STUDENT_INDEX s/SUBJECT l/LEVEL d/DAY s/START_TIME e/END_TIME r/HOURLY RATE` <br> e.g., `add.lesson i/4 s/Math l/3 d/Tuesday s/13:00 e/15:00 r/40`
+**Clear** | `clear`
+**Delete** | `delete INDEX`<br> e.g., `delete 3`
+**Delete Lesson** | `delete.lesson i/STUDENT_INDEX c/LESSON_INDEX…​`<br> e.g.,`delete.lesson i/2 c/1`
+**Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
+**List** | `list`
 **List Paid** | `list.paid`
 **List Unpaid** | `list.unpaid`
 **List Overdue** | `list.overdue`
-**Clear** | `clear`
-**Delete** | `delete INDEX`<br> e.g., `delete 3`
-**Delete Class** | `delete.class /i <student index> /c <class index>` <br> e.g.,`delete.class /i 20 /c 2`
-**Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
-**Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
-**List** | `list`
+**Pay** | `pay INDEX`<br> e.g., `pay 3`
 **Help** | `help`

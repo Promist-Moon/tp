@@ -60,21 +60,21 @@ public class PayCommandTest {
     }
 
     // Commented out as current person is marked as PAID
-    //    @Test
-    //    public void execute_validIndexFilteredList_success() {
-    //        showPersonAtIndex(model, INDEX_FIRST_PERSON);
+    //        @Test
+    //        public void execute_validIndexFilteredList_success() {
+    //            showPersonAtIndex(model, INDEX_FIRST_PERSON);
     //
-    //        Person personToPay = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-    //        PayCommand payCommand = new PayCommand(INDEX_FIRST_PERSON);
+    //            Person personToPay = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+    //            PayCommand payCommand = new PayCommand(INDEX_FIRST_PERSON);
     //
-    //        String expectedMessage = String.format(PayCommand.MESSAGE_PAYMENT_SUCCESS,
-    //                Messages.format(personToPay));
+    //            String expectedMessage = String.format(PayCommand.MESSAGE_PAYMENT_SUCCESS,
+    //                    Messages.format(personToPay));
     //
-    //        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
-    //        showPersonAtIndex(expectedModel, INDEX_FIRST_PERSON);
+    //            Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+    //            showPersonAtIndex(expectedModel, INDEX_FIRST_PERSON);
     //
-    //        assertCommandSuccess(payCommand, model, expectedMessage, expectedModel);
-    //    }
+    //            assertCommandSuccess(payCommand, model, expectedMessage, expectedModel);
+    //        }
 
     @Test
     public void execute_invalidIndexFilteredList_throwsCommandException() {

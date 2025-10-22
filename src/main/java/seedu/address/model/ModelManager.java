@@ -9,10 +9,12 @@ import java.util.logging.Logger;
 
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.lesson.Lesson;
 import seedu.address.model.lesson.LessonList;
+import seedu.address.model.lesson.LessonTimeComparator;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.student.Student;
 
@@ -25,6 +27,8 @@ public class ModelManager implements Model {
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
+    private final FilteredList<Lesson> filteredLessons;
+    private final SortedList<Lesson> sortedFilteredLessons;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -37,6 +41,9 @@ public class ModelManager implements Model {
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
+        filteredLessons = new FilteredList<>(this.addressBook.getLessonList());
+        sortedFilteredLessons = new SortedList<>(filteredLessons, new LessonTimeComparator());
+
     }
 
     public ModelManager() {
@@ -145,6 +152,27 @@ public class ModelManager implements Model {
         });
     }
 
+    //=========== Filtered Lesson List Accessors =============================================================
+
+    @Override
+    public ObservableList<Lesson> getFilteredLessonList() {
+        return filteredLessons;
+    }
+
+    @Override
+    public void updateFilteredLessonList(Predicate<Lesson> predicate) {
+        requireNonNull(predicate);
+        filteredLessons.setPredicate(predicate);
+
+    }
+
+    @Override
+    public SortedList<Lesson> getSortedFilteredLessons() {
+        return sortedFilteredLessons;
+    }
+
+    //====================================================================================================
+
     @Override
     public boolean equals(Object other) {
         if (other == this) {
@@ -174,15 +202,13 @@ public class ModelManager implements Model {
 
     @Override
     public void addLesson(Student student, Lesson lesson) {
-        // TO BE IMPLEMENTED WITH STUDENT
-        //addressBook.addLesson(lesson);
-        //updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         requireNonNull(student);
         requireNonNull(lesson);
 
         addressBook.addLesson(lesson);
         LessonList ls = student.getLessonList();
         ls.addLesson(lesson);
+        lesson.addStudent(student);
 
         LessonList oldLessonList = student.getLessonList();
         LessonList newLessonList = new LessonList(oldLessonList.getLessons());
