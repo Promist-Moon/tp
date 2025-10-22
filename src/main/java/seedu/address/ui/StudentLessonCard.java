@@ -5,10 +5,11 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import seedu.address.model.lesson.Lesson;
+
 /**
  * An UI component that displays information of a {@code Lesson}.
  */
-public class LessonCard extends UiPart<Region> {
+public class StudentLessonCard extends UiPart<Region> {
 
     private static final String FXML = "LessonListCard.fxml";
 
@@ -31,17 +32,18 @@ public class LessonCard extends UiPart<Region> {
 
 
     /**
-     * Creates a {@code LessonCode} with the given {@code Lesson} and index to display.
+     * Creates a {@code LessonCode} with the given {@code Lesson} and index to display. All lesson card
+     * created are for the day that the application is open specifically.
      */
-    public LessonCard(Lesson lesson) {
+    public StudentLessonCard(Lesson lesson, int index) {
         super(FXML);
         this.lesson = lesson;
-        // id.setText(lesson.getLessonIndex());
+        id.setText(index + ". ");
         subject.setText(lesson.getSubject().toString());
-        level.setText(lesson.getLevel().toString());
-        day.setText(lesson.getDay().toString());
-        lessonTime.setText(lesson.getLessonTime().toString());
-        rate.setText(lesson.getRate().toString());
+        level.setText("Level: Secondary" + lesson.getLevel().toString());
+        day.setText("Scheduled every: " + lesson.getLevel().toString());
+        lessonTime.setText("Time (24H): " + lesson.getLessonTime().toString());
+        rate.setText("Rate (per hr): $" + lesson.getRate().toString());
 
     }
 }
