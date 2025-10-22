@@ -1,5 +1,7 @@
 package seedu.address.model.lesson;
 
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+
 import java.time.YearMonth;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -8,7 +10,9 @@ import java.util.Objects;
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
+import seedu.address.model.lesson.exceptions.DuplicateLessonException;
 import seedu.address.model.lesson.exceptions.LessonException;
+import seedu.address.model.lesson.exceptions.LessonNotFoundException;
 import seedu.address.model.util.DateTimeUtil;
 
 /**
@@ -106,7 +110,31 @@ public class LessonList {
         int ind = lessons.indexOf(lesson);
         if (ind != -1) {
             lessons.remove(ind);
+        } else {
+            throw new LessonNotFoundException();
         }
+    }
+
+    /**
+     *
+     * @param target
+     * @param editedLesson
+     */
+    public void setLesson(Lesson target, Lesson editedLesson) {
+        requireAllNonNull(target, editedLesson);
+
+        int index = lessons.indexOf(target);
+
+        if (index == -1) {
+            throw new LessonNotFoundException();
+        }
+
+        if (!target.equals(editedLesson) && hasLesson(editedLesson)) {
+            throw new DuplicateLessonException();
+        }
+
+        lessons.set(index, editedLesson);
+
     }
 
     public boolean isEmpty() {

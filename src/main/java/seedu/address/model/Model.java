@@ -124,6 +124,9 @@ public interface Model {
     void deleteLesson(Student student, Lesson lesson);
 
     /**
-     * Adds the
+     * Replaces the given lesson {@code target} with {@code editedLesson}.
+     * {@code target} must exist in the address book.
+     * The lesson identity of {@code editedLesson} must not be the same as another existing lesson in the address book.
      */
+    void setLesson(Student student, Lesson lesson, Lesson editedLesson);
 }
