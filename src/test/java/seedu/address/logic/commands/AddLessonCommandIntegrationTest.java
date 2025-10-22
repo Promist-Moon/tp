@@ -22,16 +22,17 @@ import seedu.address.testutil.StudentBuilder;
  */
 public class AddLessonCommandIntegrationTest {
     private Model model;
-    private Lesson newLesson = new LessonBuilder()
-            .withSubject("Math")
-            .withLevel("4")
-            .withDay("6")
-            .withLessonTime("12:00", "14:00")
-            .build();
+    private Lesson newLesson;
 
     @BeforeEach
     public void setUp() {
         model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+        newLesson = new LessonBuilder()
+                .withSubject("Math")
+                .withLevel("4")
+                .withDay("6")
+                .withLessonTime("12:00", "14:00")
+                .build();
     }
 
     @Test
@@ -44,7 +45,7 @@ public class AddLessonCommandIntegrationTest {
         expectedModel.setPerson(student, expectedStudent);
 
         AddLessonCommand addLessonCommand = new AddLessonCommand(Index.fromZeroBased(0), newLesson);
-
+        newLesson.addStudent(expectedStudent);
         String expectedMessage = String.format(AddLessonCommand.MESSAGE_SUCCESS, Messages.formatLesson(newLesson));
         assertCommandSuccess(addLessonCommand, model, expectedMessage, expectedModel);
     }
