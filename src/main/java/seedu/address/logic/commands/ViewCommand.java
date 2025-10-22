@@ -3,13 +3,16 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 
 import java.util.List;
+import java.util.function.Predicate;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.lesson.Lesson;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.student.Student;
 
 /**
  * Views all lessons taken by a student.
@@ -41,7 +44,12 @@ public class ViewCommand extends Command {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 
-        Person studentToViewLessons = lastShownList.get(targetIndex.getZeroBased());
+        Student studentToViewLessons = (Student) lastShownList.get(targetIndex.getZeroBased());
+
+        Predicate<Lesson> belongsToStudent =
+                lesson -> studentToViewLessons.getLessonList().hasLesson(lesson);;
+
+        model.updateFilteredLessonList(belongsToStudent);
 
         return new CommandResult(String.format(MESSAGE_VIEW_SUCCESS, Messages.format(studentToViewLessons)));
 
