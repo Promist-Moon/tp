@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.Messages.MESSAGE_INVALID_DISPLAYED_LESSON_INDEX;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LESSON_INDEX;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STUDENT_INDEX;
 
@@ -38,7 +39,6 @@ public class DeleteLessonCommand extends Command {
             + PREFIX_LESSON_INDEX + "2";
 
     public static final String MESSAGE_DELETE_LESSON_SUCCESS = "Deleted Lesson: %1$s";
-    public static final String MESSAGE_INVALID_DISPLAYED = "The lesson index provided is invalid";
     private final Index studentIndex;
     private final Index lessonIndex;
 
@@ -83,7 +83,7 @@ public class DeleteLessonCommand extends Command {
         LessonList lls = currStudent.getLessonList();
 
         if (lessonIndex.getOneBased() > lls.getSize()) {
-            throw new CommandException(MESSAGE_INVALID_DISPLAYED);
+            throw new CommandException(MESSAGE_INVALID_DISPLAYED_LESSON_INDEX);
         }
 
         try {
@@ -91,7 +91,7 @@ public class DeleteLessonCommand extends Command {
             model.deleteLesson(currStudent, deleteLesson);
             return new CommandResult(String.format(MESSAGE_DELETE_LESSON_SUCCESS, Messages.formatLesson(deleteLesson)));
         } catch (LessonException e) {
-            throw new CommandException(MESSAGE_INVALID_DISPLAYED);
+            throw new CommandException(MESSAGE_INVALID_DISPLAYED_LESSON_INDEX);
         }
 
     }

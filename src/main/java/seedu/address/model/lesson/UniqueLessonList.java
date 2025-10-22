@@ -55,7 +55,7 @@ public class UniqueLessonList implements Iterable<Lesson> {
      * {@code target} must exist in the list.
      * The lesson identity of {@code editedLesson} must not be the same as another existing lesson in the list.
      */
-    public void setLesson(Lesson target, Lesson editedLesson) {
+    public void setLesson(Lesson target, Lesson editedLesson) throws DuplicateLessonException {
         requireAllNonNull(target, editedLesson);
 
         int index = internalList.indexOf(target);

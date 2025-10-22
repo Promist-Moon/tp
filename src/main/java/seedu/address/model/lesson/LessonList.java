@@ -116,11 +116,13 @@ public class LessonList {
     }
 
     /**
+     * Replaces the lesson {@code target} in the list with {@code editedLesson}.
+     * {@code target} must exist in the list.
+     * The lesson identity of {@code editedLesson} must not be the same as another existing lesson in the list.
      *
-     * @param target
-     * @param editedLesson
+     * @throws DuplicateLessonException when there are time clashes.
      */
-    public void setLesson(Lesson target, Lesson editedLesson) {
+    public void setLesson(Lesson target, Lesson editedLesson) throws DuplicateLessonException {
         requireAllNonNull(target, editedLesson);
 
         int index = lessons.indexOf(target);
