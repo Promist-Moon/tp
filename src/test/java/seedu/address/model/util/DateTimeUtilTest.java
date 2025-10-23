@@ -44,7 +44,7 @@ class DateTimeUtilTest {
         assertEquals(2, DateTimeUtil.monthsBetweenInclusive(YearMonth.of(2026, 2),
                 YearMonth.of(2026, 4)));
         assertEquals(11, DateTimeUtil.monthsBetweenInclusive(YearMonth.of(2025, 1),
-                YearMonth.of(2025,12)));
+                YearMonth.of(2025, 12)));
     }
 
     @Test

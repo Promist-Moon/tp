@@ -1,5 +1,8 @@
 package seedu.address.testutil.stubs;
 
+import java.nio.file.Path;
+import java.util.function.Predicate;
+
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.SortedList;
 import seedu.address.commons.core.GuiSettings;
@@ -10,8 +13,7 @@ import seedu.address.model.lesson.Lesson;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.student.Student;
 
-import java.nio.file.Path;
-import java.util.function.Predicate;
+
 
 /**
  * A base Model stub that throws AssertionError for all methods.
