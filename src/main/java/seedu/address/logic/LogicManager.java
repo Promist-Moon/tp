@@ -16,10 +16,10 @@ import seedu.address.logic.parser.AddressBookParser;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
-import seedu.address.model.lesson.Day;
 import seedu.address.model.lesson.Lesson;
 import seedu.address.model.lesson.TodaysLessonPredicate;
 import seedu.address.model.person.Person;
+import seedu.address.model.util.DateTimeUtil;
 import seedu.address.storage.Storage;
 
 /**
@@ -83,7 +83,7 @@ public class LogicManager implements Logic {
     @Override
     public SortedList<Lesson> getTodayLessonList() {
         //by default, we show the lesson for today only
-        model.updateFilteredLessonList(new TodaysLessonPredicate(currentDay));
+        model.updateFilteredLessonList(new TodaysLessonPredicate(DateTimeUtil.currentDay()));
         return model.getSortedFilteredLessons();
     }
 
