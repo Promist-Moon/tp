@@ -4,10 +4,13 @@ import java.io.IOException;
 import java.nio.file.AccessDeniedException;
 import java.nio.file.Path;
 import java.time.Clock;
+import java.time.DayOfWeek;
+import java.time.LocalDate;
 import java.time.YearMonth;
 import java.util.logging.Logger;
 
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.SortedList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.Command;
@@ -17,6 +20,9 @@ import seedu.address.logic.parser.AddressBookParser;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.lesson.Day;
+import seedu.address.model.lesson.Lesson;
+import seedu.address.model.lesson.TodaysLessonPredicate;
 import seedu.address.model.person.Person;
 import seedu.address.storage.Storage;
 
@@ -34,6 +40,7 @@ public class LogicManager implements Logic {
     private final Model model;
     private final Storage storage;
     private final YearMonth currentYearMonth;
+    private final Day currentDay;
     private final AddressBookParser addressBookParser;
 
     /**
@@ -44,6 +51,8 @@ public class LogicManager implements Logic {
         this.model = model;
         this.storage = storage;
         this.currentYearMonth = YearMonth.now(clock);
+        DayOfWeek today = LocalDate.now(clock).getDayOfWeek();
+        this.currentDay = new Day(today.toString());
         addressBookParser = new AddressBookParser();
     }
 
@@ -77,6 +86,17 @@ public class LogicManager implements Logic {
     }
 
     @Override
+    public ObservableList<Lesson> getFilteredLessonList() {
+        return model.getFilteredLessonList();
+    }
+    @Override
+    public SortedList<Lesson> getTodayLessonList() {
+        //by default, we show the lesson for today only
+        model.updateFilteredLessonList(new TodaysLessonPredicate(currentDay));
+        return model.getSortedFilteredLessons();
+    }
+
+    @Override
     public Path getAddressBookFilePath() {
         return model.getAddressBookFilePath();
     }
@@ -94,5 +114,10 @@ public class LogicManager implements Logic {
     @Override
     public YearMonth getCurrentYearMonth() {
         return currentYearMonth;
+    }
+
+    @Override
+    public Day getCurrentDay() {
+        return currentDay;
     }
 }

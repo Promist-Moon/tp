@@ -10,7 +10,7 @@ import java.time.format.DateTimeFormatter;
  * Represents a Lesson's end time.
  * Guarantees: immutable; is valid as declared in {@link #isValidLessonTime(String, String)}
  */
-public class LessonTime {
+public class LessonTime implements Comparable<LessonTime> {
 
     public static final String MESSAGE_CONSTRAINTS = "Time must be given in the format HH:MM, "
             + "and the start time should be before the end time";
@@ -135,6 +135,15 @@ public class LessonTime {
 
         LessonTime otherTime = (LessonTime) other;
         return this.start.isBefore(otherTime.end) && otherTime.start.isBefore(this.end);
+    }
+
+    @Override
+    public int compareTo(LessonTime other) {
+        return this.start.isBefore(other.getStart())
+                ? -1
+                : this.start.equals(other.getStart())
+                ? 0
+                : 1;
     }
 
     @Override
