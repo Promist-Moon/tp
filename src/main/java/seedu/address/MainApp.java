@@ -2,7 +2,6 @@ package seedu.address;
 
 import java.io.IOException;
 import java.nio.file.Path;
-import java.time.YearMonth;
 import java.util.Optional;
 import java.util.logging.Logger;
 
@@ -22,8 +21,7 @@ import seedu.address.model.ModelManager;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.payment.MonthlyRollover;
-import seedu.address.model.util.DateTimeUtil;
+import seedu.address.model.payment.StartupRolloverHandler;
 import seedu.address.model.util.SampleDataUtil;
 import seedu.address.storage.AddressBookStorage;
 import seedu.address.storage.JsonAddressBookStorage;
@@ -65,37 +63,8 @@ public class MainApp extends Application {
 
         model = initModelManager(storage, userPrefs);
 
-        // === Monthly payment rollover on app startup ===
-        YearMonth now = DateTimeUtil.currentYearMonth();
-        YearMonth lastOpened = userPrefs.getLastOpened();
-
-        if (lastOpened == null) {
-            // First-time launch: skip rollover and initialize lastOpened
-            logger.info("First-time launch detected — skipping rollover and initializing lastOpened to " + now + ".");
-            userPrefs.setLastOpened(now);
-            try {
-                storage.saveUserPrefs(userPrefs);
-            } catch (IOException e) {
-                logger.warning("Failed to save UserPrefs during first-time initialization: "
-                        + StringUtil.getDetails(e));
-            }
-        } else {
-            new MonthlyRollover(model).compute(lastOpened, now);
-
-            try {
-                storage.saveAddressBook(model.getAddressBook());
-            } catch (IOException e) {
-                logger.warning("Failed to save AddressBook after rollover: " + StringUtil.getDetails(e));
-            }
-
-            // Update and persist last opened month after rollover has completed
-            userPrefs.setLastOpened(now);
-            try {
-                storage.saveUserPrefs(userPrefs);
-            } catch (IOException e) {
-                logger.warning("Failed to save UserPrefs after rollover: " + StringUtil.getDetails(e));
-            }
-        }
+        // === Monthly payment rollover on app statup ===
+        new StartupRolloverHandler(model, storage).perform(userPrefs);
 
         logic = new LogicManager(model, storage);
 
