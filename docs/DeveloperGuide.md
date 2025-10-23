@@ -274,9 +274,9 @@ _{Explain here how the data archiving feature will be implemented}_
 
 
 **Value proposition**: manage contacts faster than a typical mouse/GUI driven app
-Tuiniverse is built for freelance secondary school tutors to stay organized. 
-It manages student and parent contacts, tracks attendance, student's progress and payments effortlessly. 
-Tuiniverse enables tutors to schedule classes and prevent clashes. 
+Tuiniverse is built for freelance secondary school tutors to stay organized.
+It manages student and parent contacts, tracks attendance, student's progress and payments effortlessly.
+Tuiniverse enables tutors to schedule classes and prevent clashes.
 In addition, tutors can check lessons scheduled for the day to help plan their day more productively.
 
 
@@ -334,8 +334,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ## **UC-AddStudent**
 
-**System:** Tuiniverse Student Management System (TSMS)  
-**Use case:** UC-AddStudent  
+**System:** Tuiniverse Student Management System (TSMS)
+**Use case:** UC-AddStudent
 **Actor:** Tutor
 
 ### **MSS**
@@ -344,26 +344,26 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 3. TSMS validates the details:
     - Name, address, contact number, and parent fields are non-blank.
     - Contact number must contain only numerical digits.
-4. TSMS creates the student and displays a message confirming successful creation.  
+4. TSMS creates the student and displays a message confirming successful creation.
    **Use case ends.**
 
 ### **Extensions**
 - **3a.** TSMS detects an error in a field.
     - **3a1.** TSMS returns an error message.
-    - **3a2.** TSMS clears user input.  
+    - **3a2.** TSMS clears user input.
       **Use case ends.**
 
 - **3b.** TSMS detects unknown command markers.
     - **3b1.** TSMS returns an error message.
-    - **3b2.** TSMS clears user input.  
+    - **3b2.** TSMS clears user input.
       **Use case ends.**
 
 ---
 
 ## **UC-AddClass**
 
-**System:** Tuiniverse Student Management System (TSMS)  
-**Use case:** UC-AddClass  
+**System:** Tuiniverse Student Management System (TSMS)
+**Use case:** UC-AddClass
 **Actor:** Tutor
 
 ### **MSS**
@@ -376,33 +376,33 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     - Time is valid.
     - Hourly rate is a number.
 4. TSMS checks for clashes in the timetable.
-5. TSMS creates and saves the class, linking it to the student.  
+5. TSMS creates and saves the class, linking it to the student.
    **Use case ends.**
 
 ### **Extensions**
 - **1a.** Tutor omits a field.
     - **1a1.** TSMS returns an error message.
-    - **1a2.** TSMS clears user input.  
-      Steps **1a1–1a2** repeat until valid input is entered.  
+    - **1a2.** TSMS clears user input.
+      Steps **1a1–1a2** repeat until valid input is entered.
       **Use case ends.**
 
 - **2a.** TSMS cannot find a student with that index.
     - **2a1.** TSMS returns an error message.
-    - **2a2.** TSMS clears user input.  
-      Steps **2a1–2a2** repeat until valid input is entered.  
+    - **2a2.** TSMS clears user input.
+      Steps **2a1–2a2** repeat until valid input is entered.
       **Use case ends.**
 
 - **4a.** TSMS detects a timetable clash.
     - **4a1.** TSMS returns an error message.
-    - **4a2.** TSMS clears user input.  
+    - **4a2.** TSMS clears user input.
       **Use case ends.**
 
 ---
 
 ## **UC-Pay**
 
-**System:** Tuiniverse Student Management System (TSMS)  
-**Use case:** UC-Pay  
+**System:** Tuiniverse Student Management System (TSMS)
+**Use case:** UC-Pay
 **Actor:** Tutor
 
 **Guarantees:**
@@ -413,32 +413,32 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 1. Tutor chooses a student who has paid.
 2. TSMS validates the student index.
 3. TSMS verifies that the student has outstanding payment.
-4. TSMS updates the student’s payment status to *Paid*.  
+4. TSMS updates the student’s payment status to *Paid*.
    **Use case ends.**
 
 ### **Extensions**
 - **1a.** Tutor omits input.
     - **1a1.** TSMS returns an error message.
-    - **1a2.** TSMS clears user input.  
-      Steps **1a1–1a2** repeat until valid input is entered.  
+    - **1a2.** TSMS clears user input.
+      Steps **1a1–1a2** repeat until valid input is entered.
       **Use case ends.**
 
 - **2a.** TSMS cannot find a student with that index.
     - **2a1.** TSMS returns an error message.
-    - **2a2.** TSMS clears user input.  
-      Steps **2a1–2a2** repeat until valid input is entered.  
+    - **2a2.** TSMS clears user input.
+      Steps **2a1–2a2** repeat until valid input is entered.
       **Use case ends.**
 
 - **3a.** Student has no outstanding payment.
-    - **3a1.** TSMS returns an error message.  
+    - **3a1.** TSMS returns an error message.
       **Use case ends.**
 
 ---
 
 ## **UC-DeleteStudent**
 
-**System:** Tuiniverse Student Management System (TSMS)  
-**Use case:** UC-DeleteStudent  
+**System:** Tuiniverse Student Management System (TSMS)
+**Use case:** UC-DeleteStudent
 **Actor:** Tutor
 
 ### **MSS**
@@ -446,60 +446,60 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 2. TSMS validates whether the student exists.
 3. TSMS displays a confirmation prompt.
 4. Tutor confirms the deletion.
-5. TSMS deletes the student and all associated data (e.g., classes).  
+5. TSMS deletes the student and all associated data (e.g., classes).
    **Use case ends.**
 
 ### **Extensions**
 - **1a.** Tutor omits the student index.
     - **1a1.** TSMS returns an error message.
-    - **1a2.** TSMS clears user input.  
-      Steps **1a1–1a2** repeat until valid input is entered.  
+    - **1a2.** TSMS clears user input.
+      Steps **1a1–1a2** repeat until valid input is entered.
       **Use case ends.**
 
 - **2a.** TSMS cannot find a student with that index.
     - **2a1.** TSMS returns an error message.
-    - **2a2.** TSMS clears user input.  
-      Steps **2a1–2a2** repeat until valid input is entered.  
+    - **2a2.** TSMS clears user input.
+      Steps **2a1–2a2** repeat until valid input is entered.
       **Use case ends.**
 
 - **3a.** Tutor chooses not to confirm deletion.
     - **3a1.** TSMS closes the prompt.
-    - **3a2.** TSMS clears user input.  
+    - **3a2.** TSMS clears user input.
       **Use case ends.**
 
 ---
 
 ## **UC-DeleteClass**
 
-**System:** Tuiniverse Student Management System (TSMS)  
-**Use case:** UC-DeleteClass  
+**System:** Tuiniverse Student Management System (TSMS)
+**Use case:** UC-DeleteClass
 **Actor:** Tutor
 
 ### **MSS**
 1. User deletes a class with the command.
 2. TSMS checks that the student index exists.
-3. TSMS removes the class from the timetable and unlinks it from the student.  
+3. TSMS removes the class from the timetable and unlinks it from the student.
    **Use case ends.**
 
 ### **Extensions**
 - **1a.** Tutor omits a field.
     - **1a1.** TSMS returns an error message.
-    - **1a2.** TSMS clears user input.  
-      Steps **1a1–1a2** repeat until valid input is entered.  
+    - **1a2.** TSMS clears user input.
+      Steps **1a1–1a2** repeat until valid input is entered.
       **Use case ends.**
 
 - **2a.** TSMS cannot find a student with that index.
     - **2a1.** TSMS returns an error message.
-    - **2a2.** TSMS clears user input.  
-      Steps **2a1–2a2** repeat until valid input is entered.  
+    - **2a2.** TSMS clears user input.
+      Steps **2a1–2a2** repeat until valid input is entered.
       **Use case ends.**
 
 ---
 
 ## **UC-ListPaid**
 
-**System:** Tuiniverse Student Management System (TSMS)  
-**Use case:** UC-ListPaid  
+**System:** Tuiniverse Student Management System (TSMS)
+**Use case:** UC-ListPaid
 **Actor:** Tutor
 
 **Guarantees:**
@@ -509,7 +509,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 ### **MSS**
 1. Tutor chooses to list paid students.
 2. TSMS retrieves all students marked *Paid* for the current month.
-3. TSMS displays the list of students and their amounts.  
+3. TSMS displays the list of students and their amounts.
    **Use case ends.**
 
 ### **Extensions**
@@ -521,8 +521,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ## **UC-ListUnpaid**
 
-**System:** Tuiniverse Student Management System (TSMS)  
-**Use case:** UC-ListUnpaid  
+**System:** Tuiniverse Student Management System (TSMS)
+**Use case:** UC-ListUnpaid
 **Actor:** Tutor
 
 **Guarantees:**
@@ -532,20 +532,20 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 ### **MSS**
 1. Tutor chooses to list unpaid students.
 2. TSMS retrieves all students not marked *Paid* for the current month.
-3. TSMS displays the list of students and their owed amounts.  
+3. TSMS displays the list of students and their owed amounts.
    **Use case ends.**
 
 ### **Extensions**
 - **2a.** All students have paid.
-    - **2a1.** TSMS displays a message in the console.  
+    - **2a1.** TSMS displays a message in the console.
       **Use case ends.**
 
 ---
 
 ## **UC-ListOverdue**
 
-**System:** Tuiniverse Student Management System (TSMS)  
-**Use case:** UC-ListOverdue  
+**System:** Tuiniverse Student Management System (TSMS)
+**Use case:** UC-ListOverdue
 **Actor:** Tutor
 
 **Guarantees:**
@@ -555,20 +555,20 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 ### **MSS**
 1. Tutor chooses to list overdue students.
 2. TSMS retrieves all students who have unpaid fees from past months.
-3. TSMS displays the list of overdue students and their owed amounts.  
+3. TSMS displays the list of overdue students and their owed amounts.
    **Use case ends.**
 
 ### **Extensions**
 - **2a.** All students have paid for previous months.
-    - **2a1.** TSMS displays a message in the console.  
+    - **2a1.** TSMS displays a message in the console.
       **Use case ends.**
 
 ---
 
 ## **UC-AddAndBillStudent**
 
-**System:** Tuiniverse Student Management System (TSMS)  
-**Use case:** UC-AddAndBillStudent  
+**System:** Tuiniverse Student Management System (TSMS)
+**Use case:** UC-AddAndBillStudent
 **Actor:** Tutor, Student, Parent
 
 ### **Preconditions**
@@ -582,15 +582,15 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 4. Tutor <ins>adds a student (UC-AddStudent)</ins>.
 5. Tutor <ins>adds a parent (UC-AddParent)</ins>.
 6. Tutor <ins>adds a class for the student (UC-AddClass)</ins>.
-7. Tutor <ins>marks payment received (UC-Pay)</ins>.  
+7. Tutor <ins>marks payment received (UC-Pay)</ins>.
    **Use case ends.**
 
 ---
 
 ## **UC-QuitStudent**
 
-**System:** Tuiniverse Student Management System (TSMS)  
-**Use case:** UC-QuitStudent  
+**System:** Tuiniverse Student Management System (TSMS)
+**Use case:** UC-QuitStudent
 **Actor:** Tutor, Student
 
 ### **Precondition**
@@ -598,28 +598,28 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### **MSS**
 1. Student terminates classes with the tutor.
-2. Tutor <ins>deletes the student (UC-DeleteStudent)</ins>.  
+2. Tutor <ins>deletes the student (UC-DeleteStudent)</ins>.
    **Use case ends.**
 
 ### **Extensions**
 - **2b.** Student has unpaid fees.
     - **2b1.** TSMS displays an additional confirmation prompt.
     - **2b2.** Tutor confirms the deletion.
-    - **2b3.** TSMS updates owed amount and total earnings.  
+    - **2b3.** TSMS updates owed amount and total earnings.
       **Use case ends.**
 
 ---
 
 ## **UC-SeeSummaryForMonth**
 
-**System:** Tuiniverse Student Management System (TSMS)  
-**Use case:** UC-SeeSummaryForMonth  
+**System:** Tuiniverse Student Management System (TSMS)
+**Use case:** UC-SeeSummaryForMonth
 **Actor:** Tutor
 
 ### **MSS**
 1. Tutor <ins>views list of paid students (UC-ListPaid)</ins>.
 2. Tutor <ins>views list of unpaid students (UC-ListUnpaid)</ins>.
-3. Tutor <ins>views list of overdue students (UC-ListOverdue)</ins>.  
+3. Tutor <ins>views list of overdue students (UC-ListOverdue)</ins>.
    **Use case ends.**
 
 ---
@@ -640,7 +640,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * **GUI**: Graphical User Interface
 * **CLI**: Command Line Interface
 * **Person**: Student or parent
-* **Payment Status**: 
+* **Payment Status**:
   * Paid - The student has paid within the month
   * Unpaid - Payment has been requested less than 2 weeks ago but has not been paid
   * Overdue - Payment has been requested more than 2 weeks ago but has not been paid

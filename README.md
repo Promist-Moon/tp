@@ -15,11 +15,11 @@
 ---
 
 ## About
-*Tuiniverse* is built for freelance secondary school tutors to stay organized. 
+*Tuiniverse* is built for freelance secondary school tutors to stay organized.
 
 What it does
 - Manage student and parent contacts
-- Track attendance, student's progress and payments 
+- Track attendance, student's progress and payments
 - Schedule classes and prevent clashes
 - Check scheduled lessons
 
