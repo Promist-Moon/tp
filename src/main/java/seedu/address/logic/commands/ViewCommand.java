@@ -47,7 +47,7 @@ public class ViewCommand extends Command {
         Student studentToViewLessons = (Student) lastShownList.get(targetIndex.getZeroBased());
 
         Predicate<Lesson> belongsToStudent =
-                lesson -> studentToViewLessons.getLessonList().hasLesson(lesson);;
+                lesson -> studentToViewLessons.getLessonList().hasLesson(lesson);
 
         model.updateFilteredLessonList(belongsToStudent);
 
