@@ -171,10 +171,13 @@ public class AddCommandTest {
             throw new AssertionError("This method should not be called.");
         }
 
+        /*
         @Override
         public boolean hasLessonClash(Lesson lesson) {
             throw new AssertionError("This method should not be called.");
         }
+
+         */
 
         @Override
         public void addLesson(Student student, Lesson lesson) {
@@ -199,6 +202,11 @@ public class AddCommandTest {
 
         @Override
         public SortedList<Lesson> getSortedFilteredLessons() {
+            throw new AssertionError("This method should not be called");
+        }
+
+        @Override
+        public void setLesson(Student student, Lesson lesson, Lesson editedLesson) {
             throw new AssertionError("This method should not be called");
         }
     }
