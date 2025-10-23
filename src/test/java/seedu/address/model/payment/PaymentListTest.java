@@ -257,11 +257,11 @@ public class PaymentListTest {
     // ---------- addPaymentIfAbsent ----------
 
     @Test
-    public void addPaymentIfAbsent_absent_addsTrue_keepsSorted_andUpdatesStatus() throws Exception {
+    public void addPaymentIfAbsent_addsAndSorts_updatesStatus() throws Exception {
         PaymentList pl = new PaymentList();
         // add in non-sorted order and mix paid/unpaid
         assertTrue(pl.addPaymentIfAbsent(mar25Unpaid())); // unpaid
-        assertTrue(pl.addPaymentIfAbsent(jan25Paid()));   // paid
+        assertTrue(pl.addPaymentIfAbsent(jan25Paid())); // paid
         assertTrue(pl.addPaymentIfAbsent(feb25Unpaid())); // unpaid
 
         // Sorted by YearMonth
@@ -275,7 +275,7 @@ public class PaymentListTest {
     }
 
     @Test
-    public void addPaymentIfAbsent_present_sameMonth_returnsFalse_andNoDuplicate() throws Exception {
+    public void addPaymentIfAbsent_noDuplicate() throws Exception {
         PaymentList pl = new PaymentList();
         assertTrue(pl.addPaymentIfAbsent(feb25Unpaid()));
         int size = pl.size();
@@ -295,7 +295,7 @@ public class PaymentListTest {
     // ---------- putPaymentForMonth (upsert) ----------
 
     @Test
-    public void putPaymentForMonth_absent_inserts_andReturnsNull_updatesState() throws Exception {
+    public void putPaymentForMonth_updatesStatus() throws Exception {
         PaymentList pl = new PaymentList();
         Payment previous = pl.putPaymentForMonth(mar25Unpaid()); // insert
         assertNull(previous);
@@ -307,16 +307,24 @@ public class PaymentListTest {
     }
 
     @Test
-    public void putPaymentForMonth_present_overwrites_andReturnsPrevious_keepsSortedAndStatus() throws Exception {
+    public void putPaymentForMonth_overwrites() throws Exception {
         // Start with Jan paid, Feb unpaid
         PaymentList pl = new PaymentList(new ArrayList<>(List.of(jan25Paid(), feb25Unpaid())));
 
         // Overwrite Feb with a PAID payment and different amount
-        Payment overwrite = new PaymentBuilder().withYearMonth("2025-02").withTotalAmount(321.0f).withIsPaid(true).build();
+        Payment overwrite = new PaymentBuilder().withYearMonth("2025-02")
+                .withTotalAmount(321.0f).withIsPaid(true).build();
         Payment prev = pl.putPaymentForMonth(overwrite);
 
-        assertNotNull(prev, "should return previous value when overwriting existing month");
-        assertEquals(feb25Unpaid(), prev, "previous should equal the original stored value");
+        assertNotNull(
+                prev,
+                "should return previous value when overwriting existing month"
+        );
+        assertEquals(
+                feb25Unpaid(),
+                prev,
+                "previous should equal the original stored value"
+        );
 
         // Now Feb should be PAID with new amount; both months paid => PAID status and null earliest
         Payment feb = pl.getPaymentByMonth(YearMonth.of(2025, 2));
@@ -334,10 +342,12 @@ public class PaymentListTest {
     // ---------- copy (deep defensive copy) ----------
 
     @Test
-    public void copy_returnsDeepCopy_mutationsDoNotLeakAcross() throws Exception {
+    public void copy_returnsDeepCopy() throws Exception {
         // Build original with a specific unpaid Jan and paid Feb using PaymentBuilder for explicit amounts
-        Payment janUnpaid10 = new PaymentBuilder().withYearMonth("2025-01").withTotalAmount(10f).withIsPaid(false).build();
-        Payment febPaid20 = new PaymentBuilder().withYearMonth("2025-02").withTotalAmount(20f).withIsPaid(true).build();
+        Payment janUnpaid10 = new PaymentBuilder().withYearMonth("2025-01")
+                .withTotalAmount(10f).withIsPaid(false).build();
+        Payment febPaid20 = new PaymentBuilder().withYearMonth("2025-02")
+                .withTotalAmount(20f).withIsPaid(true).build();
         PaymentList original = new PaymentList(new ArrayList<>(List.of(janUnpaid10, febPaid20)));
 
         PaymentList cloned = original.copy();
