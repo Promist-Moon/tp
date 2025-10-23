@@ -5,8 +5,8 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_DISPLAYED_LESSON_INDEX;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DAY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_END_TIME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_LEVEL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LESSON_INDEX;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_LEVEL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_RATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_START_TIME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STUDENT_INDEX;
@@ -65,6 +65,11 @@ public class EditLessonCommand extends Command {
     private final Index lessonIndex;
     private final EditLessonDescriptor editLessonDescriptor;
 
+    /**
+     * @param studentIndex of the student in the filtered person list whose lesson to edit
+     * @param lessonIndex of the lesson in the displayed lesson list of the student to edit
+     * @param editLessonDescriptor details to edit the lesson with
+     */
     public EditLessonCommand(Index studentIndex, Index lessonIndex, EditLessonDescriptor editLessonDescriptor) {
         requireAllNonNull(studentIndex, lessonIndex, editLessonDescriptor);
 
