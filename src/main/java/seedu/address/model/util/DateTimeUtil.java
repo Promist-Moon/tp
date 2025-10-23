@@ -1,5 +1,6 @@
 package seedu.address.model.util;
 
+import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.YearMonth;
 import java.time.ZoneId;
@@ -11,6 +12,14 @@ import seedu.address.model.lesson.Day;
  * Contains utility methods for calculations on datetime functions.
  */
 public class DateTimeUtil {
+
+    /**
+     * Returns the current {@link Day} based on the system's default time zone
+     */
+    public static Day currentDay() {
+        DayOfWeek today = LocalDate.now(ZoneId.systemDefault()).getDayOfWeek();
+        return new Day(today.toString());
+    }
 
     /**
      * Returns the current {@code YearMonth} based on the system's default time zone.

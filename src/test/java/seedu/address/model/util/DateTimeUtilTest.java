@@ -2,7 +2,9 @@ package seedu.address.model.util;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import java.time.LocalDate;
 import java.time.YearMonth;
+import java.time.ZoneId;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -10,6 +12,58 @@ import org.junit.jupiter.api.Test;
 import seedu.address.model.lesson.Day;
 
 class DateTimeUtilTest {
+
+    @Test
+    @DisplayName("currentYearMonth matches system YearMonth (system default zone)")
+    void currentYearMonth_matchesSystemNow() {
+        YearMonth expected = YearMonth.from(LocalDate.now(ZoneId.systemDefault()));
+        assertEquals(expected, DateTimeUtil.currentYearMonth(),
+                "currentYearMonth() should equal YearMonth.from(LocalDate.now(systemDefault))");
+    }
+
+    @Test
+    @DisplayName("currentDay(): DayOfWeek equals system LocalDate.now() (system default zone)")
+    void currentDay_matchesSystemDayOfWeek() {
+        var expectedDow = LocalDate.now(ZoneId.systemDefault()).getDayOfWeek();
+        assertEquals(expectedDow, DateTimeUtil.currentDay().getDayOfWeek(),
+                "currentDay().getDayOfWeek() should equal LocalDate.now(systemDefault).getDayOfWeek()");
+    }
+
+    @Test
+    @DisplayName("monthsBetweenInclusive: same month -> 0")
+    void monthsBetween_sameMonth_zero() {
+        YearMonth m = YearMonth.of(2025, 5);
+        assertEquals(0, DateTimeUtil.monthsBetweenInclusive(m, m));
+    }
+
+    @Test
+    @DisplayName("monthsBetweenInclusive: increasing months within year")
+    void monthsBetween_increasingWithinYear() {
+        assertEquals(1, DateTimeUtil.monthsBetweenInclusive(YearMonth.of(2025, 1),
+                YearMonth.of(2025, 2)));
+        assertEquals(2, DateTimeUtil.monthsBetweenInclusive(YearMonth.of(2026, 2),
+                YearMonth.of(2026, 4)));
+        assertEquals(11, DateTimeUtil.monthsBetweenInclusive(YearMonth.of(2025, 1),
+                YearMonth.of(2025, 12)));
+    }
+
+    @Test
+    @DisplayName("monthsBetweenInclusive: across year boundary")
+    void monthsBetween_acrossYearBoundary() {
+        assertEquals(1, DateTimeUtil.monthsBetweenInclusive(YearMonth.of(2024, 12),
+                YearMonth.of(2025, 1)));
+        assertEquals(14, DateTimeUtil.monthsBetweenInclusive(YearMonth.of(2024, 1),
+                YearMonth.of(2025, 3)));
+    }
+
+    @Test
+    @DisplayName("monthsBetweenInclusive: to before from -> clamped to 0")
+    void monthsBetween_toBeforeFrom_zero() {
+        assertEquals(0, DateTimeUtil.monthsBetweenInclusive(YearMonth.of(2025, 5),
+                YearMonth.of(2025, 4)));
+        assertEquals(0, DateTimeUtil.monthsBetweenInclusive(YearMonth.of(2025, 1),
+                YearMonth.of(2024, 12)));
+    }
 
     @Test
     @DisplayName("Non-leap February (28 days): every weekday appears exactly 4 times")
