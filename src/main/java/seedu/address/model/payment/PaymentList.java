@@ -53,12 +53,12 @@ public class PaymentList {
         findAndSetEarliestUnpaidYearMonth();
     }
 
-    public int getSize() {
+    public int size() {
         return payments.size();
     }
 
     public boolean isEmpty() {
-        return this.getSize() == 0;
+        return this.size() == 0;
     }
 
     /**
@@ -312,4 +312,5 @@ public class PaymentList {
         }
         return new PaymentList(copiedPayments);
     }
+
 }

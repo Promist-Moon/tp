@@ -3,7 +3,6 @@ package seedu.address.model.payment;
 import static java.util.Objects.requireNonNull;
 
 import java.time.YearMonth;
-import java.util.Objects;
 import java.util.logging.Logger;
 
 import seedu.address.commons.core.LogsCenter;
@@ -28,7 +27,7 @@ public class MonthlyRollover {
      * @param model the {@code Model} used for accessing and modifying address book data during rollover
      */
     public MonthlyRollover(Model model) {
-        Objects.requireNonNull(model);
+        requireNonNull(model);
         this.model = model;
     }
 
