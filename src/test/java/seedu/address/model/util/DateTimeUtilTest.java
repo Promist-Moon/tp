@@ -22,6 +22,14 @@ class DateTimeUtilTest {
     }
 
     @Test
+    @DisplayName("currentDay(): DayOfWeek equals system LocalDate.now() (system default zone)")
+    void currentDay_matchesSystemDayOfWeek() {
+        var expectedDow = LocalDate.now(ZoneId.systemDefault()).getDayOfWeek();
+        assertEquals(expectedDow, DateTimeUtil.currentDay().getDayOfWeek(),
+                "currentDay().getDayOfWeek() should equal LocalDate.now(systemDefault).getDayOfWeek()");
+    }
+
+    @Test
     @DisplayName("monthsBetweenInclusive: same month -> 0")
     void monthsBetween_sameMonth_zero() {
         YearMonth m = YearMonth.of(2025, 5);
