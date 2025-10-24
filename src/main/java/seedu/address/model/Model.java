@@ -123,7 +123,4 @@ public interface Model {
      */
     void deleteLesson(Student student, Lesson lesson);
 
-    /**
-     * Adds the
-     */
 }
