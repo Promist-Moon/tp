@@ -108,7 +108,7 @@ public class Lesson {
      * Returns true if both lessons have the same day and their lesson times clash.
      * This defines a stronger notion of time clashes between two lessons.
      */
-    public boolean hasClash(Object other) {
+    public boolean hasTimeClash(Object other) {
         if (other == this) {
             return true;
         }
@@ -141,6 +141,24 @@ public class Lesson {
         Lesson otherLesson = (Lesson) other;
 
         return day.getDayOfWeek().equals(otherLesson.day.getDayOfWeek())
+                && lessonTime.hasTimeClash(otherLesson.lessonTime);
+    }
+
+    /*
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof Lesson)) {
+            return false;
+        }
+
+        Lesson otherLesson = (Lesson) other;
+
+        return day.getDayOfWeek().equals(otherLesson.day.getDayOfWeek())
                 && lessonTime.equals(otherLesson.lessonTime)
                 && student.equals(otherLesson.student)
                 && subject.equals(otherLesson.subject)
@@ -148,6 +166,8 @@ public class Lesson {
                 && rate.equals(otherLesson.rate)
                 && address.equals(otherLesson.address);
     }
+
+     */
 
     @Override
     public int hashCode() {
