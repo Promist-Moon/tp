@@ -1,9 +1,13 @@
 package seedu.address.model.payment;
 
-import java.time.YearMonth;
-import java.util.Objects;
+import static java.util.Objects.requireNonNull;
 
+import java.time.YearMonth;
+import java.util.logging.Logger;
+
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.Model;
+import seedu.address.model.payment.exceptions.PaymentException;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.student.Student;
 import seedu.address.model.util.DateTimeUtil;
@@ -13,6 +17,7 @@ import seedu.address.model.util.DateTimeUtil;
  * after one or more months have passed since the last session
  */
 public class MonthlyRollover {
+    private static final Logger logger = LogsCenter.getLogger(MonthlyRollover.class);
     private final Model model;
 
     /**
@@ -22,7 +27,7 @@ public class MonthlyRollover {
      * @param model the {@code Model} used for accessing and modifying address book data during rollover
      */
     public MonthlyRollover(Model model) {
-        Objects.requireNonNull(model);
+        requireNonNull(model);
         this.model = model;
     }
 
@@ -34,8 +39,13 @@ public class MonthlyRollover {
      * @param now the current {@code YearMonth}
      */
     public void compute(YearMonth lastOpened, YearMonth now) {
-        Objects.requireNonNull(lastOpened, "lastOpened cannot be null");
-        Objects.requireNonNull(now, "now cannot be null");
+        requireNonNull(now, "now cannot be null");
+        requireNonNull(lastOpened, "lastOpened cannot be null");
+
+        // Defensive programming against corrupted pref or clock rollback
+        if (now.isBefore(lastOpened)) {
+            throw new IllegalArgumentException("System clock moved backwards: " + lastOpened + " → " + now);
+        }
 
         long monthsElapsed = DateTimeUtil.monthsBetweenInclusive(lastOpened, now);
         if (monthsElapsed <= 0) {
@@ -43,37 +53,88 @@ public class MonthlyRollover {
         }
 
         for (int i = 0; i < monthsElapsed; i++) {
-            YearMonth rolloverMonth = lastOpened.plusMonths(i + 1);
-            rolloverForMonth(rolloverMonth);
+            YearMonth yearMonth = lastOpened.plusMonths(i + 1);
+            rolloverForMonth(yearMonth);
         }
     }
 
     /**
      * Applies rollover logic for a specific month.
      *
-     * @param month the {@code YearMonth} to perform rollover for
+     * @param yearMonth the {@code YearMonth} to perform rollover for
      */
-    private void rolloverForMonth(YearMonth month) {
-        for (Person person : model.getFilteredPersonList()) {
+    private void rolloverForMonth(YearMonth yearMonth) {
+        // Iterate over the full backing list to avoid filters hiding persons
+        for (Person person : model.getAddressBook().getPersonList()) {
             if (!(person instanceof Student)) {
                 continue;
             }
 
             Student student = (Student) person;
 
-            // Calculate the total amount earned for this month from all lessons
-            float value = student.getLessonList().getTotalAmountEarned(month);
+            // Compute amount earned for this YearMonth; skip zero-value months
+            float value = student.getLessonList().getTotalAmountEarned(yearMonth);
+            if (value <= 0f) {
+                continue;
+            }
             TotalAmount totalAmount = new TotalAmount(value);
 
-            // Create a new Payment for this month
-            Payment newPayment = new Payment(month, totalAmount);
+            PaymentList oldPayments = student.getPayments();
 
-            // Add or replace the payment in the student's PaymentList
-            student.getPayments().addPayment(newPayment);
+            // === Duplicate handling (idempotent by YearMonth) ===
+            if (oldPayments.containsMonth(yearMonth)) {
+                // Upsert policy: if the existing payment is UNPAID and the amount has changed,
+                // replace it to keep data consistent with lesson history.
+                try {
+                    Payment existing = oldPayments.getPaymentByMonth(yearMonth);
+                    float existingAmt = existing.getTotalAmount().getAsFloat();
+                    float newAmt = totalAmount.getAsFloat();
+                    boolean amountDiffers = Float.compare(existingAmt, newAmt) != 0;
 
-            // TODO: check implementation of this
-            // Update the model to reflect the change
-            model.setPerson(student, student);
+                    if (amountDiffers && !existing.isPaid()) {
+                        // upsert: overwrite the month with recomputed amount (only if not yet paid)
+                        PaymentList copied = oldPayments.copy();
+                        copied.putPaymentForMonth(new Payment(yearMonth, totalAmount));
+
+                        Student editedStudent = new Student(
+                                student.getName(),
+                                student.getPhone(),
+                                student.getEmail(),
+                                student.getAddress(),
+                                student.getTags(),
+                                student.getLessonList(),
+                                copied
+                        );
+                        model.setPerson(student, editedStudent);
+                    }
+                } catch (PaymentException e) {
+                    // Lookup failed despite containsMonth(): log and skip this student-month
+                    logger.warning("Rollover lookup failed for " + student.getName() + " " + yearMonth
+                            + ": " + e.getMessage());
+                    continue;
+                }
+                continue; // Either handled via upsert or intentionally skipped
+            }
+
+            // === Normal path: add if absent (idempotent add) ===
+            Payment newPayment = new Payment(yearMonth, totalAmount);
+            PaymentList copiedPayments = oldPayments.copy();
+            boolean added = copiedPayments.addPaymentIfAbsent(newPayment);
+            if (!added) {
+                continue;
+            }
+
+            Student editedStudent = new Student(
+                    student.getName(),
+                    student.getPhone(),
+                    student.getEmail(),
+                    student.getAddress(),
+                    student.getTags(),
+                    student.getLessonList(),
+                    copiedPayments
+            );
+
+            model.setPerson(student, editedStudent);
         }
     }
 }

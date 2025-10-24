@@ -16,6 +16,7 @@ import seedu.address.logic.Logic;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.util.DateTimeUtil;
 
 /**
  * The Main Window. Provides the basic application layout containing
@@ -118,7 +119,7 @@ public class MainWindow extends UiPart<Stage> {
         personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
 
         lessonListPanel = new LessonListPanel(
-                logic.getTodayLessonList(), logic.getCurrentDay() + "'S SCHEDULE");
+                logic.getTodayLessonList(), DateTimeUtil.currentDay() + "'S SCHEDULE");
         lessonListPanelPlaceholder.getChildren().add(lessonListPanel.getRoot());
 
         resultDisplay = new ResultDisplay();

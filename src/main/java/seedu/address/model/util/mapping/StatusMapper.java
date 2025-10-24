@@ -10,10 +10,10 @@ public final class StatusMapper {
     private StatusMapper() {}
 
     /**
-     * Converts a {@link Status} enum value into a {@link PaymentStatus} enum valye
+     * Converts a {@link Status} enum value into a {@link PaymentStatus} enum value
      *
-     * @param status a Status value in the payment package
-     * @return a PaymentStatus value from the student package
+     * @param status a Status value in the payment package.
+     * @return a PaymentStatus value from the student package.
      */
     public static PaymentStatus toPaymentStatus(Status status) {
         switch (status) {

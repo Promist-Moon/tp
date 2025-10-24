@@ -46,6 +46,7 @@ public class TypicalLessons {
             .withSubject("Chemistry")
             .withLevel("2")
             .withDay("2")
+            .withRate("1")
             .withLessonTime("19:30", "21:00")
             .withStudent(DANIEL)
             .build();
@@ -54,6 +55,7 @@ public class TypicalLessons {
             .withSubject("English")
             .withLevel("1")
             .withDay("1")
+            .withRate("4")
             .withLessonTime("12:30", "14:00")
             .withStudent(ELLE)
             .build();
@@ -62,6 +64,7 @@ public class TypicalLessons {
             .withSubject("History")
             .withLevel("3")
             .withDay("3")
+            .withRate("2")
             .withLessonTime("16:30", "18:00")
             .withStudent(FIONA)
             .build();
@@ -70,6 +73,7 @@ public class TypicalLessons {
             .withSubject("Geography")
             .withLevel("3")
             .withDay("5")
+            .withRate("1")
             .withLessonTime("19:30", "21:00")
             .withStudent(GEORGE)
             .build();
