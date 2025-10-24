@@ -104,10 +104,11 @@ public class Lesson {
         this.address = student.getAddress();
     }
 
-    /**
+
+    /*
      * Returns true if both lessons have the same day and their lesson times clash.
      * This defines a stronger notion of time clashes between two lessons.
-     */
+
     public boolean hasTimeClash(Object other) {
         if (other == this) {
             return true;
@@ -122,6 +123,8 @@ public class Lesson {
         return day.getDayOfWeek().equals(otherLesson.day.getDayOfWeek())
                 && lessonTime.hasTimeClash(otherLesson.lessonTime);
     }
+    */
+
 
     /**
      * Returns true if both lessons have the same day, lesson time, student, subject, level, rate and address.
