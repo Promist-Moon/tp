@@ -124,7 +124,7 @@ public class Lesson {
     }
 
     /**
-     * Returns true if both lessons have the same day and their lesson times clash.
+     * Returns true if both lessons have the same day, lesson time, student, subject, level, and address.
      * This defines a stronger notion of equality between two lessons.
      */
     @Override
@@ -145,7 +145,7 @@ public class Lesson {
                 && student.equals(otherLesson.student)
                 && subject.equals(otherLesson.subject)
                 && level.equals(otherLesson.level)
-                && rate.equals(otherLesson.rate)
+                //&& rate.equals(otherLesson.rate)
                 && address.equals(otherLesson.address);
     }
 

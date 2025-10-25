@@ -11,6 +11,7 @@ import static seedu.address.testutil.TypicalLessons.Y1_PHYSICS;
 import static seedu.address.testutil.TypicalLessons.Y3_GEOGRAPHY;
 import static seedu.address.testutil.TypicalLessons.Y3_HISTORY;
 import static seedu.address.testutil.TypicalLessons.Y3_MATH;
+import static seedu.address.testutil.TypicalPersons.ALICE;
 
 import java.time.YearMonth;
 import java.util.ArrayList;
@@ -21,6 +22,7 @@ import org.junit.jupiter.api.Test;
 
 import javafx.collections.ListChangeListener;
 import seedu.address.model.lesson.exceptions.LessonException;
+import seedu.address.model.lesson.exceptions.LessonNotFoundException;
 import seedu.address.model.util.DateTimeUtil;
 import seedu.address.testutil.LessonBuilder;
 
@@ -139,6 +141,7 @@ public class LessonListTest {
         // equal() but different instance
         Lesson a2 = new LessonBuilder().withSubject("Math").withLevel("3").withDay("3")
                 .withLessonTime("09:00", "11:00").build();
+        a2.addStudent(ALICE);
         list.addLesson(a2);
         assertEquals(1, list.getSize(), "Should not add duplicate equal() instance");
     }
@@ -176,7 +179,8 @@ public class LessonListTest {
         list.addLesson(Y3_HISTORY);
         assertEquals(1, list.getSize());
 
-        list.deleteLesson(Y3_GEOGRAPHY);
+        assertThrows(LessonNotFoundException.class, () -> list.deleteLesson(Y3_GEOGRAPHY),
+                "Deleting non-existent lesson should throw a LessonNotFoundException");
         assertEquals(1, list.getSize(), "Deleting non-existent lesson should not change size");
         assertTrue(list.hasLesson(Y3_HISTORY));
     }
@@ -203,6 +207,7 @@ public class LessonListTest {
         Lesson a1 = Y3_MATH;
         Lesson a2 = new LessonBuilder().withSubject("Math").withLevel("3").withDay("3")
                 .withLessonTime("09:00", "11:00").build();
+        a2.addStudent(ALICE);
         list.addLesson(a1);
         assertTrue(list.hasLesson(a2));
     }

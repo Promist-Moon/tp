@@ -85,18 +85,10 @@ public class LessonList {
 
     /**
      * Adds a new lesson to the lesson list.
-     */
-    public LessonList addLesson(Subject subject, Level level, Day day, LessonTime lessonTime, Rate rate) {
-        lessons.add(new Lesson(subject, level, day, lessonTime, rate));
-        return this;
-    }
-
-    /**
-     * Adds a new lesson to the lesson list.
      * Overloaded method to take in current lesson instead of creating new lesson object.
      */
     public LessonList addLesson(Lesson lesson) {
-        if (!hasLesson(lesson)) {
+        if (!hasLesson(lesson) && !hasTimeClash(lesson)) {
             lessons.add(lesson);
         }
         return this;
@@ -174,16 +166,44 @@ public class LessonList {
      * @return true if the lesson is found in the list; false otherwise or if an exception occurs
      */
     public boolean hasLesson(Lesson lesson) {
+        for (Lesson lesson1 : lessons) {
+            if (lesson1.equals(lesson)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /*
+    public boolean hasLesson(Lesson lesson) {
         int i = 1;
         while (i <= getSize()) {
             try {
                 if (this.getLesson(i).equals(lesson)) {
                     return true;
-                } else {
-                    i++;
                 }
+                i++;
             } catch (LessonException e) {
                 return false;
+            }
+        }
+        return false;
+    }
+     */
+
+    /**
+     * Checks if the specified lesson has time clashes with any lessons in this lesson list.
+     *
+     * <p>Iterates through all lessons starting from index 1 up to the size of the list,
+     * and compares each lesson with the given lesson for time clashes.</p>
+     *
+     * @param lesson the Lesson to check for existence in this list
+     * @return true if the lesson is found in the list; false otherwise or if an exception occurs
+     */
+    public boolean hasTimeClash(Lesson lesson) {
+        for (Lesson lesson1 : lessons) {
+            if (lesson1.hasTimeClash(lesson)) {
+                return true;
             }
         }
         return false;
