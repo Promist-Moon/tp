@@ -206,8 +206,7 @@ public class LessonListTest {
         LessonList list = new LessonList();
         Lesson a1 = Y3_MATH;
         Lesson a2 = new LessonBuilder().withSubject("Math").withLevel("3").withDay("3")
-                .withLessonTime("09:00", "11:00").build();
-        a2.addStudent(ALICE);
+                .withLessonTime("09:00", "11:00").withStudent(ALICE).build();
         list.addLesson(a1);
         assertTrue(list.hasLesson(a2));
     }
