@@ -229,4 +229,18 @@ public class LessonList {
         return sb.toString();
     }
 
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof LessonList)) {
+            return false;
+        }
+
+        LessonList otherLessonList = (LessonList) other;
+        return lessons.equals(otherLessonList.lessons);
+    }
 }

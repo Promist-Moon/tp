@@ -12,6 +12,7 @@ import static seedu.address.testutil.TypicalLessons.Y3_GEOGRAPHY;
 import static seedu.address.testutil.TypicalLessons.Y3_HISTORY;
 import static seedu.address.testutil.TypicalLessons.Y3_MATH;
 import static seedu.address.testutil.TypicalPersons.ALICE;
+import static seedu.address.testutil.TypicalPersons.BOB;
 
 import java.time.YearMonth;
 import java.util.ArrayList;
@@ -21,9 +22,11 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import javafx.collections.ListChangeListener;
+import seedu.address.model.lesson.exceptions.DuplicateLessonException;
 import seedu.address.model.lesson.exceptions.LessonException;
 import seedu.address.model.lesson.exceptions.LessonNotFoundException;
 import seedu.address.model.util.DateTimeUtil;
+import seedu.address.testutil.Assert;
 import seedu.address.testutil.LessonBuilder;
 
 public class LessonListTest {
@@ -216,6 +219,51 @@ public class LessonListTest {
         LessonList list = new LessonList();
         list.addLesson(Y3_GEOGRAPHY);
         assertFalse(list.hasLesson(Y3_HISTORY));
+    }
+
+    @Test
+    public void setLesson_nullTargetLesson_throwsNullPointerException() {
+        LessonList list = new LessonList();
+        Assert.assertThrows(NullPointerException.class, () -> list.setLesson(null, Y1_ENGLISH));
+    }
+
+    @Test
+    public void setLesson_nullEditedLesson_throwsNullPointerException() {
+        LessonList list = new LessonList();
+        Assert.assertThrows(NullPointerException.class, () -> list.setLesson(Y1_ENGLISH, null));
+    }
+
+    @Test
+    public void setLesson_targetLessonNotInList_throwsLessonNotFoundException() {
+        LessonList list = new LessonList();
+        Assert.assertThrows(LessonNotFoundException.class, () -> list.setLesson(Y1_ENGLISH, Y1_ENGLISH));
+    }
+
+    @Test
+    public void setLesson_editedLessonIsSameLesson_success() {
+        LessonList list = new LessonList();
+        list.addLesson(Y1_ENGLISH);
+        list.setLesson(Y1_ENGLISH, Y1_ENGLISH);
+        LessonList expectedList = new LessonList().addLesson(Y1_ENGLISH);
+        assertEquals(expectedList, list);
+    }
+
+    @Test
+    public void setLesson_editedLessonHasDifferentIdentity_success() {
+        LessonList list = new LessonList();
+        list.addLesson(Y3_GEOGRAPHY);
+        list.setLesson(Y3_GEOGRAPHY, Y1_ENGLISH);
+        LessonList expectedLessonList = new LessonList();
+        expectedLessonList.addLesson(Y1_ENGLISH);
+        assertEquals(expectedLessonList, list);
+    }
+
+    @Test
+    public void setLesson_editedLessonHasNonUniqueIdentity_throwsDuplicateLessonException() {
+        LessonList list = new LessonList();
+        list.addLesson(Y3_HISTORY);
+        list.addLesson(Y3_GEOGRAPHY);
+        Assert.assertThrows(DuplicateLessonException.class, () -> list.setLesson(Y3_GEOGRAPHY, Y3_HISTORY));
     }
 
     @Test
