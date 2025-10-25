@@ -88,7 +88,7 @@ public class LessonList {
      * Overloaded method to take in current lesson instead of creating new lesson object.
      */
     public LessonList addLesson(Lesson lesson) {
-        if (!hasLesson(lesson) && !hasTimeClash(lesson)) {
+        if (!this.hasLesson(lesson) && !this.hasTimeClash(lesson)) {
             lessons.add(lesson);
         }
         return this;
@@ -165,6 +165,7 @@ public class LessonList {
      * @param lesson the Lesson to check for existence in this list
      * @return true if the lesson is found in the list; false otherwise or if an exception occurs
      */
+    /*
     public boolean hasLesson(Lesson lesson) {
         try {
             for (int i = 1; i <= getSize(); i++) {
@@ -177,6 +178,8 @@ public class LessonList {
         }
         return false;
     }
+
+     */
     /*
     public boolean hasLesson(Lesson lesson) {
         for (Lesson lesson1 : lessons) {
@@ -189,7 +192,7 @@ public class LessonList {
 
      */
 
-    /*
+
     public boolean hasLesson(Lesson lesson) {
         int i = 1;
         while (i <= getSize()) {
@@ -204,7 +207,7 @@ public class LessonList {
         }
         return false;
     }
-     */
+
 
     /**
      * Checks if the specified lesson has time clashes with any lessons in this lesson list.

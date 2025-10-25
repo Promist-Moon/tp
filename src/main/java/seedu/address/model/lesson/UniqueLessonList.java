@@ -38,13 +38,23 @@ public class UniqueLessonList implements Iterable<Lesson> {
         return internalList.stream().anyMatch(toCheck::equals);
     }
 
+    public boolean hasTimeClash(Lesson lesson) {
+        for (Lesson lesson1 : internalList) {
+            if (lesson1.hasTimeClash(lesson)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     /**
      * Adds a lesson to the list.
      * The lesson must not already exist in the list.
      */
     public void add(Lesson toAdd) {
         requireNonNull(toAdd);
-        if (contains(toAdd)) {
+        if (contains(toAdd) || hasTimeClash(toAdd)) {
+            // to throw separate exception??
             throw new DuplicateLessonException();
         }
         internalList.add(toAdd);

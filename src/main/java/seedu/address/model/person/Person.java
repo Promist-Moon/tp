@@ -47,11 +47,18 @@ public abstract class Person {
      * @return true if both objects represent the same person with identical identity fields.
      */
     public boolean equals(Object other) {
-        if (this == other) {
+        if (other == this) {
             return true;
         }
 
+        /*
         if (other == null || this.getClass() != other.getClass()) {
+            return false;
+        }
+
+         */
+
+        if (other == null || !(other instanceof Person)) {
             return false;
         }
 

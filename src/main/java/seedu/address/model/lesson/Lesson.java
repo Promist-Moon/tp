@@ -142,32 +142,13 @@ public class Lesson {
 
         return day.getDayOfWeek().equals(otherLesson.day.getDayOfWeek())
                 && lessonTime.equals(otherLesson.lessonTime)
-                && student.equals(otherLesson.student)
                 && subject.equals(otherLesson.subject)
-                && level.equals(otherLesson.level)
-                && address.equals(otherLesson.address);
+                && level.equals(otherLesson.level);
+        //&& student.equals(otherLesson.student)
+                //&& address.equals(otherLesson.address);
         //&& rate.equals(otherLesson.rate)
 
     }
-
-    /*
-    @Override
-    public boolean equals(Object other) {
-        if (other == this) {
-            return true;
-        }
-
-        // instanceof handles nulls
-        if (!(other instanceof Lesson)) {
-            return false;
-        }
-
-        Lesson otherLesson = (Lesson) other;
-
-        return day.getDayOfWeek().equals(otherLesson.day.getDayOfWeek())
-                && lessonTime.hasTimeClash(otherLesson.lessonTime);
-    }
-     */
 
     @Override
     public int hashCode() {
