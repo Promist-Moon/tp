@@ -166,6 +166,21 @@ public class LessonList {
      * @return true if the lesson is found in the list; false otherwise or if an exception occurs
      */
     public boolean hasLesson(Lesson lesson) {
+        int i = 1;
+        while (i <= getSize()) {
+            try {
+                if (this.getLesson(i).equals(lesson)) {
+                    return true;
+                }
+                i++;
+            } catch (LessonException e) {
+                return false;
+            }
+        }
+        return false;
+    }
+    /*
+    public boolean hasLesson(Lesson lesson) {
         for (Lesson lesson1 : lessons) {
             if (lesson1.equals(lesson)) {
                 return true;
@@ -173,6 +188,8 @@ public class LessonList {
         }
         return false;
     }
+
+     */
 
     /*
     public boolean hasLesson(Lesson lesson) {

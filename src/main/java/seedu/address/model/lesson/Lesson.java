@@ -145,8 +145,9 @@ public class Lesson {
                 && student.equals(otherLesson.student)
                 && subject.equals(otherLesson.subject)
                 && level.equals(otherLesson.level)
-                //&& rate.equals(otherLesson.rate)
                 && address.equals(otherLesson.address);
+        //&& rate.equals(otherLesson.rate)
+
     }
 
     /*

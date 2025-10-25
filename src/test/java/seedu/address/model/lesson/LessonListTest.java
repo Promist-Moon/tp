@@ -140,8 +140,7 @@ public class LessonListTest {
 
         // equal() but different instance
         Lesson a2 = new LessonBuilder().withSubject("Math").withLevel("3").withDay("3")
-                .withLessonTime("09:00", "11:00").build();
-        a2.addStudent(ALICE);
+                .withLessonTime("09:00", "11:00").withStudent(ALICE).build();
         list.addLesson(a2);
         assertEquals(1, list.getSize(), "Should not add duplicate equal() instance");
     }
