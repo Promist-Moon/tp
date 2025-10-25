@@ -165,22 +165,6 @@ public class LessonList {
      * @param lesson the Lesson to check for existence in this list
      * @return true if the lesson is found in the list; false otherwise or if an exception occurs
      */
-    /*
-    public boolean hasLesson(Lesson lesson) {
-        try {
-            for (int i = 1; i <= getSize(); i++) {
-                if (this.getLesson(i).equals(lesson)) {
-                    return true;
-                }
-            }
-        } catch (LessonException e) {
-            return false;
-        }
-        return false;
-    }
-
-     */
-    /*
     public boolean hasLesson(Lesson lesson) {
         for (Lesson lesson1 : lessons) {
             if (lesson1.equals(lesson)) {
@@ -189,25 +173,6 @@ public class LessonList {
         }
         return false;
     }
-
-     */
-
-
-    public boolean hasLesson(Lesson lesson) {
-        int i = 1;
-        while (i <= getSize()) {
-            try {
-                if (this.getLesson(i).equals(lesson)) {
-                    return true;
-                }
-                i++;
-            } catch (LessonException e) {
-                return false;
-            }
-        }
-        return false;
-    }
-
 
     /**
      * Checks if the specified lesson has time clashes with any lessons in this lesson list.
@@ -219,20 +184,6 @@ public class LessonList {
      * @return true if the lesson is found in the list; false otherwise or if an exception occurs
      */
     public boolean hasTimeClash(Lesson lesson) {
-        try {
-            for (int i = 1; i <= getSize(); i++) {
-                if (this.getLesson(i).hasTimeClash(lesson)) {
-                    return true;
-                }
-            }
-        } catch (LessonException e) {
-            return false;
-        }
-        return false;
-    }
-
-    /*
-    public boolean hasTimeClash(Lesson lesson) {
         for (Lesson lesson1 : lessons) {
             if (lesson1.hasTimeClash(lesson)) {
                 return true;
@@ -240,8 +191,6 @@ public class LessonList {
         }
         return false;
     }
-
-     */
 
     /**
      * Returns the total amount earned per month for a list of lessons

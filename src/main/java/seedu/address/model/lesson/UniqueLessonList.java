@@ -38,6 +38,15 @@ public class UniqueLessonList implements Iterable<Lesson> {
         return internalList.stream().anyMatch(toCheck::equals);
     }
 
+    /**
+     * Checks if the specified lesson has time clashes with any lessons in this unique lesson list.
+     *
+     * <p>Iterates through all lessons starting from index 1 up to the size of the list,
+     * and compares each lesson with the given lesson for time clashes.</p>
+     *
+     * @param lesson the Lesson to check for existence in this list
+     * @return true if the lesson is found in the list; false otherwise or if an exception occurs
+     */
     public boolean hasTimeClash(Lesson lesson) {
         for (Lesson lesson1 : internalList) {
             if (lesson1.hasTimeClash(lesson)) {
