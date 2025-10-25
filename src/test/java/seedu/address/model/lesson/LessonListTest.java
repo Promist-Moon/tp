@@ -12,7 +12,6 @@ import static seedu.address.testutil.TypicalLessons.Y3_GEOGRAPHY;
 import static seedu.address.testutil.TypicalLessons.Y3_HISTORY;
 import static seedu.address.testutil.TypicalLessons.Y3_MATH;
 import static seedu.address.testutil.TypicalPersons.ALICE;
-import static seedu.address.testutil.TypicalPersons.BOB;
 
 import java.time.YearMonth;
 import java.util.ArrayList;
