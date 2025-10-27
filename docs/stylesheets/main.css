@@ -74,6 +74,9 @@ mark {
   width: 300px;
 }
 
+
+
+
 #site-nav {
   border-right: 1px solid lightgrey;
   padding-bottom: 20px;
@@ -166,5 +169,20 @@ h3,
 h4,
 h5,
 h6 {
-  color: #e46c0a;
+  color: #023e8a;
+}
+
+
+.nav-blue {
+  background-color: #03045e;
+}
+
+.nav-blue .nav-link,
+.nav-blue .navbar-brand {
+  color: white !important;
+}
+
+.nav-blue .nav-link:hover,
+.nav-blue .navbar-brand:hover {
+  color: #caf0f8 !important;
 }
