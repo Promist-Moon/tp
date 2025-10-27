@@ -139,6 +139,33 @@ public class PaymentListTest {
     }
 
     @Test
+    public void calculateUnpaidAmount_allPaymentsPaid_correctSum() {
+        ArrayList<Payment> al = new ArrayList<>(List.of(jan25Paid(), feb25Paid()));
+        PaymentList pl = new PaymentList(al);
+        TotalAmount total = pl.calculateUnpaidAmount();
+
+        assertEquals(new TotalAmount(0), total);
+    }
+
+    @Test
+    public void calculateUnpaidAmount_allPaymentsFullyUnpaid_correctSum() {
+        ArrayList<Payment> al = new ArrayList<>(List.of(feb25Unpaid(), mar25Unpaid()));
+        PaymentList pl = new PaymentList(al);
+        TotalAmount total = pl.calculateUnpaidAmount();
+
+        assertEquals(new TotalAmount(1200f), total);
+    }
+
+    @Test
+    public void calculateUnpaidAmount_somePartiallyPaid_correctSum() {
+        ArrayList<Payment> al = new ArrayList<>(List.of(mar25Unpaid(), sep25Unpaid()));
+        PaymentList pl = new PaymentList(al);
+        TotalAmount total = pl.calculateUnpaidAmount();
+
+        assertEquals(new TotalAmount(900f), total);
+    }
+
+    @Test
     public void updateExistingAmount_amountUpdatedAndMarkedUnpaid() throws Exception {
         YearMonth ym = YearMonth.of(2025, 10);
         Payment p = new PaymentBuilder().withYearMonth(ym.toString()).withTotalAmount(0f).build();

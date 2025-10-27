@@ -79,7 +79,7 @@ public class TypicalPayments {
         return new PaymentBuilder()
                 .withYearMonth("2025-09")
                 .withTotalAmount(600f)
-                .withUnpaidAmount(600f)
+                .withUnpaidAmount(300f)
                 .build();
     }
 
