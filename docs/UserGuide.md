@@ -45,11 +45,13 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 --------------------------------------------------------------------------------------------------------------------
 ## User Interface (UI) Overview
 ![interface overview](images/interfaceOverview.png)
-**Command Bar**:
-**Message Box**:
-**Contact List Panel**:
-**Lesson List Panel/Today Schedule**:
 
+| UI Element                           | Description                                                                                                         |
+|--------------------------------------|---------------------------------------------------------------------------------------------------------------------|
+| **Command Bar**                      | Primary input field for entering commands like find, list and add.                                                  |
+| **Message Box**                      | Displays temporary feedback, including success confirmations and error messages, following a user action.           |
+| **Contact List Panel**               | View students' contact details here.                                                                                |
+| **Lesson List Panel/Today Schedule** | Displays the scheduled lessons of the day. This panel can be toggled to show all the lessons of a selected student. |
 ## Features
 
 <box type="info" seamless>
@@ -83,16 +85,22 @@ Shows a message explaining how to access the help page.
 Format: `help`
 
 
-### Adding a student: `add
+### Adding a student: `add`
 
-Adds a student to the address book.
+Adds a student to the address book with these fields:
+* Name
+* Phone
+* Email
+* Address
+* Tag(s)
 
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
 
 <box type="tip" seamless>
 
-**Tip:** A student can have any number of tags (including 0)
+**Tip:** Tag is optional
 </box>
+
 ![add command](images/add.png)
 
 Examples:
@@ -101,7 +109,14 @@ Examples:
 
 ### Adding a lesson: `add.lesson`
 
-Adds a lesson to the specific student.
+Adds a lesson to the specific student with these fields:
+* Student Index
+* Subject 
+* Level (1,2,3, or 4)
+* Day of Lesson
+* Start Time
+* End Time
+* Hourly Rate
 
 Format: `add.lesson i/STUDENT_INDEX s/SUBJECT l/LEVEL d/DAY s/START_TIME e/END_TIME r/HOURLY RATE`
 
@@ -175,7 +190,6 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
 Examples:
 * `find John` returns `john` and `John Doe`
 * `find alex 91031282` returns `Alex Yeoh`, `David Li`<br>
-  ![result for 'find alex david'](images/findAlexDavidResult.png)
 
 ### Deleting a person : `delete`
 
