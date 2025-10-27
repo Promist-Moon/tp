@@ -1,43 +1,32 @@
 package seedu.address.model.payment;
 
-import static seedu.address.commons.util.AppUtil.checkArgument;
-
 /**
- * Represents the total amount in $ a student owes per month to a tutor.
- * Guarantees: immutable; is valid as declared in {@link #isValidTotalAmount(float)}
+ * Represents the total amount in $ a student should pay to a tutor in a month.
  */
-public class TotalAmount {
-
-    public static final String MESSAGE_CONSTRAINTS = "Total amount must be positive";
-
-    private final float totalAmount;
+public class TotalAmount extends Amount {
 
     /**
      * Constructs a {@code TotalAmount}.
      * @param amt A valid totalAmount.
      */
     public TotalAmount(float amt) {
-        checkArgument(isValidTotalAmount(amt), MESSAGE_CONSTRAINTS);
-        this.totalAmount = amt;
+        super(amt);
     }
 
     /**
-     * Checks if the given float is a valid totalAmount.
+     * Calculates and returns an updated unpaid amount based on a change in the total amount.
+     * This method computes the new unpaid amount using the formula:
+     * newUnpaid = max(currentUnpaid + newTotal - currentTotal, 0)
+     * to ensure that the result is never negative.
+     *
+     * @param unpaidAmount the current unpaid amount before the total is updated.
+     * @param newTotalAmount the new total amount after changes in lessons.
+     * @return a new {@code TotalAmount} instance representing the updated unpaid amount.
      */
-    public static boolean isValidTotalAmount(float amt) {
-        return amt >= 0;
-    }
-
-    /**
-     * Returns totalAmount as a float.
-     */
-    public float getAsFloat() {
-        return this.totalAmount;
-    }
-
-    @Override
-    public String toString() {
-        return String.format("%.2f", totalAmount);
+    public UnpaidAmount calculateNewUnpaidAmount(UnpaidAmount unpaidAmount, TotalAmount newTotalAmount) {
+        float calculatedUnpaid = unpaidAmount.getAsFloat() + newTotalAmount.getAsFloat() - getAsFloat();
+        float newUnpaid = Math.max(calculatedUnpaid, 0);
+        return new UnpaidAmount(newUnpaid);
     }
 
     @Override
@@ -52,6 +41,6 @@ public class TotalAmount {
         }
 
         TotalAmount otherTotalAmount = (TotalAmount) other;
-        return totalAmount == otherTotalAmount.getAsFloat();
+        return amount == otherTotalAmount.getAsFloat();
     }
 }

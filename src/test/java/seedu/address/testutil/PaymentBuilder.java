@@ -4,6 +4,7 @@ import java.time.YearMonth;
 
 import seedu.address.model.payment.Payment;
 import seedu.address.model.payment.TotalAmount;
+import seedu.address.model.payment.UnpaidAmount;
 
 /**
  * A utility class to help with building Payment objects.
@@ -11,20 +12,20 @@ import seedu.address.model.payment.TotalAmount;
 public class PaymentBuilder {
 
     public static final String DEFAULT_YEARMONTH = "2025-10";
-    public static final float DEFAULT_AMOUNT = 600f;
-    public static final boolean DEFAULT_ISPAID = false;
+    public static final float DEFAULT_TOTAL = 600f;
+    public static final float DEFAULT_UNPAID = 600f;
 
     private YearMonth yearMonth;
     private TotalAmount totalAmount;
-    private boolean isPaid;
+    private UnpaidAmount unpaidAmount;
 
     /**
      * Creates a {@code StudentBuilder} with the default details.
      */
     public PaymentBuilder() {
         yearMonth = YearMonth.parse(DEFAULT_YEARMONTH);
-        totalAmount = new TotalAmount(DEFAULT_AMOUNT);
-        isPaid = DEFAULT_ISPAID;
+        totalAmount = new TotalAmount(DEFAULT_TOTAL);
+        unpaidAmount = new UnpaidAmount(DEFAULT_UNPAID);
     }
 
     /**
@@ -33,7 +34,7 @@ public class PaymentBuilder {
     public PaymentBuilder(Payment paymentToCopy) {
         yearMonth = paymentToCopy.getYearMonth();
         totalAmount = paymentToCopy.getTotalAmount();
-        isPaid = paymentToCopy.isPaid();
+        unpaidAmount = paymentToCopy.getUnpaidAmount();
     }
 
     /**
@@ -62,14 +63,23 @@ public class PaymentBuilder {
     }
 
     /**
-     * Sets the {@code isPaid} of the {@code Payment} that we are building.
+     * Sets the {@code unpaidAmount} of the {@code Payment} that we are building.
      */
-    public PaymentBuilder withIsPaid(boolean isPaid) {
-        this.isPaid = isPaid;
+    public PaymentBuilder withUnpaidAmount(float unpaidAmount) {
+        this.unpaidAmount = new UnpaidAmount(unpaidAmount);
+        return this;
+    }
+
+    /**
+     * Sets the {@code unpaidAmount} of the {@link Payment} using a String.
+     */
+    public PaymentBuilder withUnpaidAmount(String amount) {
+        float parsed = Float.parseFloat(amount);
+        this.unpaidAmount = new UnpaidAmount(parsed);
         return this;
     }
 
     public Payment build() {
-        return new Payment(yearMonth, totalAmount, isPaid);
+        return new Payment(yearMonth, totalAmount, unpaidAmount);
     }
 }

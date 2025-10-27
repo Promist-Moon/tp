@@ -142,7 +142,7 @@ public class PaymentList {
         }
         sortByYearMonth();
         updateStatus();
-        setEarliestUnpaidYearmonth(findAndSetEarliestUnpaidYearMonth());
+        findAndSetEarliestUnpaidYearMonth();
     }
 
     /**
@@ -159,7 +159,7 @@ public class PaymentList {
         payments.add(payment);
         sortByYearMonth();
         updateStatus();
-        setEarliestUnpaidYearmonth(findAndSetEarliestUnpaidYearMonth());
+        findAndSetEarliestUnpaidYearMonth();
         return true;
     }
 
@@ -198,6 +198,20 @@ public class PaymentList {
         }
 
         return unpaidList;
+    }
+
+    /**
+     * Calculates the amount of money in $ a student still owes a tutor.
+     *
+     * @return a float representing the amount of money.
+     */
+    public TotalAmount calculateUnpaidAmount() {
+        float total = 0;
+        ArrayList<Payment> unpaidList = findUnpaids();
+        for (Payment p : unpaidList) {
+            total += p.getUnpaidAmountFloat();
+        }
+        return new TotalAmount(total);
     }
 
     /**
@@ -244,8 +258,8 @@ public class PaymentList {
     public void updateExistingPayment(YearMonth month, float totalAmount) throws PaymentException {
         try {
             Payment p = getPaymentByMonth(month);
-            p.setTotalAmount(totalAmount);
-            p.setPaid(false);
+
+            p.updatePayment(totalAmount);
 
             // reset status
             updateStatus();
