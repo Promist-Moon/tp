@@ -57,6 +57,25 @@ public class UniqueLessonList implements Iterable<Lesson> {
     }
 
     /**
+     * Checks if the specified lesson has time clashes with any lessons in the lesson list, excluding the target lesson.
+     *
+     * <p>Iterates through all lessons starting from index 1 up to the size of the list,
+     * and compares each lesson with the given lesson for time clashes, excluding the target lesson.</p>
+     *
+     * @param lesson the Lesson to check for time clashes in this list.
+     * @param target the Lesson to exclude from the time clash check.
+     * @return true if the lesson is found in the list; false otherwise or if an exception occurs
+     */
+    public boolean hasTimeClashExcludingTargetLesson(Lesson lesson, Lesson target) {
+        for (Lesson lesson1 : internalList) {
+            if (!lesson1.equals(target) && lesson1.hasTimeClash(lesson)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
      * Adds a lesson to the list.
      * The lesson must not already exist in the list.
      */
@@ -82,7 +101,8 @@ public class UniqueLessonList implements Iterable<Lesson> {
             throw new LessonNotFoundException();
         }
 
-        if (!target.equals(editedLesson) && contains(editedLesson)) {
+        if (!target.equals(editedLesson) && (
+                contains(editedLesson) || hasTimeClashExcludingTargetLesson(editedLesson, target))) {
             throw new DuplicateLessonException();
         }
 
