@@ -122,4 +122,5 @@ public interface Model {
      * {@code lesson} must exist in the address book.
      */
     void deleteLesson(Student student, Lesson lesson);
+
 }

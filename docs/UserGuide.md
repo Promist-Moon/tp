@@ -1,6 +1,7 @@
 ---
-layout: page
-title: User Guide
+  layout: default.md
+  title: "User Guide"
+  pageNav: 3
 ---
 
 ## Introduction
@@ -19,8 +20,10 @@ display of all the information you need.
 
 Our **guarantee** is that we can get your contact management tasks done **faster** than all the alternatives.
 
-* Table of Contents
-{:toc}
+AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized for use via a  Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AB3 can get your contact management tasks done faster than traditional GUI apps.
+
+<!-- * Table of Contents -->
+<page-nav-print />
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -85,9 +88,9 @@ Action | Format, Examples
 
 ## Features
 
-<div markdown="block" class="alert alert-info">
+<box type="info" seamless>
 
-**:information_source: Notes about the command format:**<br>
+**Notes about the command format:**<br>
 
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
@@ -105,7 +108,7 @@ Action | Format, Examples
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
-</div>
+</box>
 
 ### Viewing help : `help`
 
@@ -122,9 +125,10 @@ Adds a student to the address book.
 
 **Format:** `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
 
-<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-A student can have any number of tags (including 0)
-</div>
+<box type="tip" seamless>
+
+**Tip:** A student can have any number of tags (including 0)
+</box>
 
 **Examples:**
 * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
@@ -261,10 +265,12 @@ Tuiniverse data are saved in the hard disk automatically after any command that 
 
 Tuiniverse data are saved automatically as a JSON file `[JAR file location]/data/Tuiniverse.json`. Advanced users are welcome to update data directly by editing that data file.
 
-<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
-If your changes to the data file makes its format invalid, Tuiniverse will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.<br>
-Furthermore, certain edits can cause the Tuiniverse to behave in unexpected ways (e.g., if a value entered is outside of the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
-</div>
+<box type="warning" seamless>
+
+**Caution:**
+If your changes to the data file makes its format invalid, Tuiniverse will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.<br>
+Furthermore, certain edits can cause the Tuiniverse to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
+</box>
 
 ### Archiving data files `[coming in v2.0]`
 
