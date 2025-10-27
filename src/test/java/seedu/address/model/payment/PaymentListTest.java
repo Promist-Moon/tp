@@ -154,7 +154,7 @@ public class PaymentListTest {
     @Test
     public void updateExistingAmount_recomputesAggregateStatus() throws Exception {
         YearMonth ym = YearMonth.of(2025, 10);
-        Payment p = new PaymentBuilder().withYearMonth(ym.toString()).withTotalAmount(50f).build();
+        Payment p = new PaymentBuilder().withYearMonth(ym.toString()).withTotalAmount(50f).withUnpaidAmount(0f).build();
         PaymentList pl = new PaymentList(p);
 
         assertEquals(Status.PAID, pl.getStatus(), "precondition: list status starts as PAID");
@@ -312,7 +312,7 @@ public class PaymentListTest {
 
         // Overwrite Feb with a PAID payment and different amount
         Payment overwrite = new PaymentBuilder().withYearMonth("2025-02")
-                .withTotalAmount(321.0f).withUnpaidAmount(321.0f).build();
+                .withTotalAmount(321.0f).withUnpaidAmount(0f).build();
         Payment prev = pl.putPaymentForMonth(overwrite);
 
         assertNotNull(
