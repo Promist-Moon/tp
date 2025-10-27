@@ -201,6 +201,20 @@ public class PaymentList {
     }
 
     /**
+     * Calculates the amount of money in $ a student still owes a tutor.
+     *
+     * @return a float representing the amount of money.
+     */
+    public TotalAmount calculateUnpaidAmount() {
+        float total = 0;
+        ArrayList<Payment> unpaidList = findUnpaids();
+        for (Payment p : unpaidList) {
+            total += p.getUnpaidAmountFloat();
+        }
+        return new TotalAmount(total);
+    }
+
+    /**
      * Updates payment status according to the size of unpaid list.
      */
     private void updateStatus() {
