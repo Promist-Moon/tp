@@ -16,7 +16,6 @@ import seedu.address.model.payment.UnpaidAmount;
 public class JsonAdaptedPayment {
     private final String yearMonth;
     private final String totalAmount;
-    private final boolean isPaid;
     private final String unpaidAmount;
 
     /**
@@ -25,11 +24,9 @@ public class JsonAdaptedPayment {
     @JsonCreator
     public JsonAdaptedPayment(@JsonProperty("yearMonth") String yearMonth,
                               @JsonProperty("totalAmount") String totalAmount,
-                              @JsonProperty("isPaid") boolean isPaid,
                               @JsonProperty("unpaidAmount") String unpaidAmount) {
         this.yearMonth = yearMonth;
         this.totalAmount = totalAmount;
-        this.isPaid = isPaid;
         this.unpaidAmount = unpaidAmount;
     }
 
@@ -39,7 +36,6 @@ public class JsonAdaptedPayment {
     public JsonAdaptedPayment(Payment source) {
         yearMonth = source.getYearMonth().toString();
         totalAmount = source.getTotalAmount().toString();
-        isPaid = source.isPaid();
         unpaidAmount = source.getUnpaidAmount().toString();
     }
 
@@ -52,9 +48,6 @@ public class JsonAdaptedPayment {
                 YearMonth.parse(yearMonth),
                 new TotalAmount(Float.parseFloat(totalAmount)),
                 new UnpaidAmount(Float.parseFloat(unpaidAmount)));
-        if (isPaid) {
-            p.markPaid();
-        }
 
         return p;
     }
