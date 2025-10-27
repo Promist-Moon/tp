@@ -110,6 +110,8 @@ Action | Format, Examples
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 </box>
 
+<br>
+
 ### Viewing help : `help`
 
 Shows a message explaining how to access the help page.
@@ -118,6 +120,7 @@ Shows a message explaining how to access the help page.
 
 **Format:** `help`
 
+<br>
 
 ### Adding a student: `add`
 
@@ -134,6 +137,8 @@ Adds a student to the address book.
 * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
 * `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
 
+<br>
+
 ### Adding a lesson: `add.lesson`
 
 Adds a lesson to the specific student.
@@ -142,6 +147,8 @@ Adds a lesson to the specific student.
 
 **Examples:**
 * `add.lesson i/4 s/Math l/3 d/Tuesday s/13:00 e/15:00 r/40`
+
+<br>
 
 ### Making payment: `pay`
 Tracks that a student has made payment for that month.
@@ -152,26 +159,36 @@ Tracks that a student has made payment for that month.
 * When you mark an **unpaid** or **overdue** student as paid, their status becomes **paid**.
 * A **paid** student cannot make payment until the next month.
 
+<br>
+
 ### Listing all persons : `list`
 
 Shows a list of all persons in the address book.
 
 **Format:** `list`
 
+<br>
+
 ### Listing all payments: `list.paid`
 Lists all students that have **paid** their fees for the month.
 
 **Format:** `list.paid`
+
+<br>
 
 ### Listing all unpaid fees: `list.unpaid`
 Lists all students that have **unpaid** fees for the month.
 
 **Format:** `list.unpaid`
 
+<br>
+
 ### Listing all overdue fees: `list.overdue`
 Lists all students that have **overdue** fees from previous months.
 
 **Format:** `list.overdue`
+
+<br>
 
 ### Editing a person : `edit`
 
@@ -189,6 +206,8 @@ Edits an existing student in the address book.
 **Examples:**
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
 *  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
+
+<br>
 
 ### Searching for students by keyword: `find`
 
@@ -208,6 +227,8 @@ Finds students whose details contain any of the inputted keywords.
 * `find alex 91031282` returns `Alex Yeoh`, `David Li`<br>
   ![result for 'find alex david'](images/findAlexDavidResult.png)
 
+<br>
+
 ### List all lessons of a student: `view`
 
 Lists all the lessons taken by the specfied student.
@@ -221,6 +242,8 @@ Lists all the lessons taken by the specfied student.
 **Examples:**
 * `list` followed by `view 2` views the lessons of the 2nd student in the address book.
 * `find Betsy` followed by `view 1` views the 1st student in the results of the find command.
+
+<br>
 
 ### Deleting a person : `delete`
 
@@ -236,6 +259,8 @@ Deletes the specified student from the address book.
 * `list` followed by `delete 2` deletes the 2nd student in the address book.
 * `find Betsy` followed by `delete 1` deletes the 1st student in the results of the `find` command.
 
+<br>
+
 ### Deleting a Lesson: `delete.lesson`
 
 Deletes an existing lesson from a specific student.
@@ -245,11 +270,15 @@ Deletes an existing lesson from a specific student.
 **Examples:**
 * `delete.lesson i/2 c/1`
 
+<br>
+
 ### Clearing all entries : `clear`
 
 Clears all entries from the address book.
 
 **Format:** `clear`
+
+<br>
 
 ### Exiting the program : `exit`
 
@@ -257,9 +286,13 @@ Exits the program.
 
 **Format:** `exit`
 
+<br>
+
 ### Saving the data
 
 Tuiniverse data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+
+<br>
 
 ### Editing the data file
 
@@ -271,6 +304,8 @@ Tuiniverse data are saved automatically as a JSON file `[JAR file location]/data
 If your changes to the data file makes its format invalid, Tuiniverse will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.<br>
 Furthermore, certain edits can cause the Tuiniverse to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </box>
+
+<br>
 
 ### Archiving data files `[coming in v2.0]`
 
