@@ -432,6 +432,41 @@
     -fx-text-fill: #4CAF50;
 }
 
+.amount-panel {
+    -fx-background-color: -fx-base;
+    -fx-background-radius: 10;
+    -fx-padding: 8 12 8 12;
+}
+
+.amount-box {}
+
+.amount-title {
+    -fx-font-size: 11pt;
+    -fx-opacity: 0.8;
+}
+
+.amount-value {
+    -fx-font-size: 16pt;
+    -fx-font-weight: bold;
+}
+
+.amount-divider {
+    -fx-opacity: 0.35;
+    -fx-padding: 0 6 0 6;
+}
+
+.label.amount-earned {
+    -fx-text-fill: #4CAF50;
+}
+
+.label.amount-unpaid-zero  {
+    -fx-text-fill: #4CAF50;
+}
+
+.label.amount-unpaid-high {
+    -fx-text-fill: #F44336;
+}
+
 #resultDisplay {
     -fx-wrap-text: true;
 }

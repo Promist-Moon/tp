@@ -4,6 +4,7 @@ package seedu.address.model.lesson;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.time.YearMonth;
 import java.util.Iterator;
 import java.util.List;
 
@@ -12,6 +13,7 @@ import javafx.collections.ObservableList;
 import seedu.address.model.lesson.exceptions.DuplicateLessonException;
 import seedu.address.model.lesson.exceptions.LessonNotFoundException;
 import seedu.address.model.person.Person;
+import seedu.address.model.util.DateTimeUtil;
 
 /**
  * A list of lessons that enforces uniqueness between its elements and does not allow nulls.
@@ -116,6 +118,28 @@ public class UniqueLessonList implements Iterable<Lesson> {
         }
 
         internalList.setAll(lessons);
+    }
+
+    /**
+     * Returns the total amount earned per month for a list of lessons
+     *
+     * @return float representing the sum of all amounts earned per lesson.
+     */
+    public float getTotalAmountEarned() {
+        YearMonth current = DateTimeUtil.currentYearMonth();
+        float totalAmountEarned = 0;
+        for (Lesson l : internalList) {
+            Day day = l.getDay();
+
+            // count number of lessons in a month based on local month
+            int daysInMonth = DateTimeUtil.countDaysOfWeekInMonth(current, day);
+
+            float amountPerLesson = l.getAmountEarned();
+            float amountPerMonth = daysInMonth * amountPerLesson;
+
+            totalAmountEarned += amountPerMonth;
+        }
+        return totalAmountEarned;
     }
 
     /**

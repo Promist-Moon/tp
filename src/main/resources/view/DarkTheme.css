@@ -410,6 +410,18 @@
     -fx-text-fill: #4CAF50;
 }
 
+.amount-earned {
+    -fx-text-fill: #4CAF50;
+}
+
+.amount-unpaid-zero  {
+    -fx-text-fill: #4CAF50;
+}
+
+.amount-unpaid-high {
+    -fx-text-fill: #F44336;
+}
+
 #resultDisplay {
     -fx-wrap-text: true;
 }
