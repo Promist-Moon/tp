@@ -12,8 +12,6 @@ import java.util.Objects;
 public class Payment {
     private YearMonth yearMonth;
     private TotalAmount totalAmount;
-    private boolean isPaid;
-
     private UnpaidAmount unpaidAmount;
 
     /**
@@ -29,22 +27,6 @@ public class Payment {
         this.totalAmount = totalAmount;
         this.yearMonth = yearMonth;
         this.unpaidAmount = new UnpaidAmount(getTotalAmountFloat());
-        syncIsPaid();
-    }
-
-    /**
-     * Constructs a new {@code Payment} object for a specified student.
-     * This constructor includes the boolean isPaid
-     *
-     * @param yearMonth
-     * @param totalAmount
-     * @param isPaid
-     */
-    public Payment(YearMonth yearMonth, TotalAmount totalAmount, boolean isPaid) {
-        requireAllNonNull(yearMonth, totalAmount);
-        this.totalAmount = totalAmount;
-        this.yearMonth = yearMonth;
-        this.isPaid = isPaid;
     }
 
     /**
@@ -60,7 +42,6 @@ public class Payment {
         this.totalAmount = totalAmount;
         this.yearMonth = yearMonth;
         this.unpaidAmount = unpaidAmount;
-        syncIsPaid();
     }
 
     /**
@@ -73,7 +54,6 @@ public class Payment {
         this.yearMonth = other.yearMonth;
         this.totalAmount = other.totalAmount;
         this.unpaidAmount = other.unpaidAmount;
-        this.isPaid = other.isPaid;
     }
 
 
@@ -101,12 +81,8 @@ public class Payment {
         this.totalAmount = new TotalAmount(f);
     }
 
-    public void setPaid(boolean isPaid) {
-        this.isPaid = isPaid;
-    }
-
     public boolean isPaid() {
-        return isPaid;
+        return this.unpaidAmount.isZero();
     }
 
     /**
@@ -124,7 +100,6 @@ public class Payment {
                     this.unpaidAmount, newTotal);
 
             this.totalAmount = newTotal;
-            this.isPaid = this.unpaidAmount.isZero();
         }
     }
 
@@ -133,7 +108,6 @@ public class Payment {
      * If the payment is already marked as paid, this method has no effect.
      */
     public void markPaid() {
-        isPaid = true;
         this.unpaidAmount = new UnpaidAmount(0);
     }
 
@@ -142,7 +116,7 @@ public class Payment {
         return String.format("Payment[Month=%s, Amount=%.2f, Paid=%s]",
                 yearMonth,
                 totalAmount.getAsFloat(),
-                isPaid ? "Paid" : "Unpaid");
+                isPaid() ? "Paid" : "Unpaid");
     }
 
     @Override
@@ -163,10 +137,6 @@ public class Payment {
     @Override
     public int hashCode() {
         return Objects.hash(yearMonth, totalAmount); // exclusion of isPaid is intentional
-    }
-
-    private void syncIsPaid() {
-        this.isPaid = this.unpaidAmount.isZero();
     }
 
 }
