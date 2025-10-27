@@ -43,6 +43,8 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 1. Refer to the [Features](#features) below for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
+## User Interface (UI) Overview
+![Ui](images/Ui.png)
 
 ## Features
 
@@ -77,7 +79,7 @@ Shows a message explaining how to access the help page.
 Format: `help`
 
 
-### Adding a student: `add`
+### Adding a student: `add
 
 Adds a student to the address book.
 
@@ -87,6 +89,7 @@ Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
 
 **Tip:** A student can have any number of tags (including 0)
 </box>
+![add command](images/add.png)
 
 Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
@@ -115,16 +118,18 @@ Format: `pay INDEX`
 Shows a list of all persons in the address book.
 
 Format: `list`
-
+![list command](images/list.png)
 ### Listing all payments: `list.paid`
 Lists all students that have **paid** their fees for the month.
 
 Format: `list.paid`
+![list command](images/listpaid.png)
 
 ### Listing all unpaid fees: `list.unpaid`
 Lists all students that have **unpaid** fees for the month.
 
 Format: `list.unpaid`
+![list command](images/listunpaid.png)
 
 ### Listing all overdue fees: `list.overdue`
 Lists all students that have **overdue** fees from previous months.
@@ -153,6 +158,7 @@ Examples:
 Finds students whose names contain any of the given keywords.
 
 Format: `find KEYWORD [MORE_KEYWORDS]`
+![find command](images/find.png)
 
 * The search is case-insensitive. e.g `hans` will match `Hans`
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
@@ -171,6 +177,10 @@ Examples:
 Deletes the specified student from the address book.
 
 Format: `delete INDEX`
+Before delete:
+![before delete command](images/deleteBefore.png)
+After delete:
+![after delete command](images/deleteAfter.png)
 
 * Deletes the students at the specified `INDEX`.
 * The index refers to the index number shown in the displayed person list.
