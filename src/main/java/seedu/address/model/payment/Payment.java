@@ -99,22 +99,16 @@ public class Payment {
      * @param newTotalAmount a float representing the new total amount calculated from lessonList.
      */
     public void updatePayment(float newTotalAmount) {
-        if (newTotalAmount < getTotalAmountFloat()) {
-            // lesson is deleted -> total amount decreases
-            this.totalAmount = new TotalAmount(newTotalAmount);
-            float newUnpaidAmount = Math.max(getUnpaidAmountFloat() + newTotalAmount - getTotalAmountFloat(), 0);
-            this.unpaidAmount = new TotalAmount(newUnpaidAmount);
-            if (newTotalAmount == 0) {
-                this.isPaid = true;
-            }
-        } else if (newTotalAmount > getTotalAmountFloat()) {
-            // lesson is added -> total amount increases
-            this.totalAmount = new TotalAmount(newTotalAmount);
+        TotalAmount newTotal = new TotalAmount(newTotalAmount);
+        int cmp = newTotal.compareTo(this.totalAmount);
 
-            // set new unpaid amount
-            float newUnpaidAmount = getUnpaidAmountFloat() + newTotalAmount - getTotalAmountFloat();
-            this.unpaidAmount = new TotalAmount(newUnpaidAmount);
-            this.isPaid = false;
+        if (cmp != 0) {
+            // use the helper method inside TotalAmount
+            this.unpaidAmount = this.totalAmount.calculateNewUnpaidAmount(
+                    this.unpaidAmount, newTotal);
+
+            this.totalAmount = newTotal;
+            this.isPaid = this.unpaidAmount.isZero();
         }
     }
 
