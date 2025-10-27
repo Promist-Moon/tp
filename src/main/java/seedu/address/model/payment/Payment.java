@@ -14,7 +14,7 @@ public class Payment {
     private TotalAmount totalAmount;
     private boolean isPaid;
 
-    private TotalAmount unpaidAmount;
+    private UnpaidAmount unpaidAmount;
 
     /**
      * Constructs a new {@code Payment} object for a specified student.
@@ -28,9 +28,8 @@ public class Payment {
         requireAllNonNull(yearMonth, totalAmount);
         this.totalAmount = totalAmount;
         this.yearMonth = yearMonth;
-        this.isPaid = false;
-
-        this.unpaidAmount = totalAmount;
+        this.unpaidAmount = new UnpaidAmount(getTotalAmountFloat());
+        syncIsPaid();
     }
 
     /**
@@ -49,6 +48,22 @@ public class Payment {
     }
 
     /**
+     * Constructs a new {@code Payment} object for a specified student.
+     * This constructor includes the boolean isPaid
+     *
+     * @param yearMonth
+     * @param totalAmount
+     * @param unpaidAmount
+     */
+    public Payment(YearMonth yearMonth, TotalAmount totalAmount, UnpaidAmount unpaidAmount) {
+        requireAllNonNull(yearMonth, totalAmount);
+        this.totalAmount = totalAmount;
+        this.yearMonth = yearMonth;
+        this.unpaidAmount = unpaidAmount;
+        syncIsPaid();
+    }
+
+    /**
      * Copy constructor that creates a deep copy of another Payment.
      *
      * @param other the Payment to copy from
@@ -57,6 +72,7 @@ public class Payment {
         requireAllNonNull(other);
         this.yearMonth = other.yearMonth;
         this.totalAmount = other.totalAmount;
+        this.unpaidAmount = other.unpaidAmount;
         this.isPaid = other.isPaid;
     }
 
@@ -73,7 +89,7 @@ public class Payment {
         return this.totalAmount.getAsFloat();
     }
 
-    public TotalAmount getUnpaidAmount() {
+    public UnpaidAmount getUnpaidAmount() {
         return this.unpaidAmount;
     }
 
@@ -118,7 +134,7 @@ public class Payment {
      */
     public void markPaid() {
         isPaid = true;
-        this.unpaidAmount = new TotalAmount(0);
+        this.unpaidAmount = new UnpaidAmount(0);
     }
 
     @Override
@@ -149,5 +165,8 @@ public class Payment {
         return Objects.hash(yearMonth, totalAmount); // exclusion of isPaid is intentional
     }
 
+    private void syncIsPaid() {
+        this.isPaid = this.unpaidAmount.isZero();
+    }
 
 }
