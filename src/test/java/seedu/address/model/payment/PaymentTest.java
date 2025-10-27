@@ -96,7 +96,7 @@ public class PaymentTest {
         assertFalse(jan25Paid().equals(diffAmount));
 
         // different paid status (should still be equal if isPaid ignored)
-        Payment paidVariant = new PaymentBuilder(jan25Paid()).withIsPaid(false).build();
+        Payment paidVariant = new PaymentBuilder(jan25Paid()).withUnpaidAmount(500f).build();
         assertTrue(jan25Paid().equals(paidVariant));
     }
 

@@ -23,7 +23,7 @@ public class TypicalPayments {
         return new PaymentBuilder()
                 .withYearMonth("2025-01")
                 .withTotalAmount(600f)
-                .withIsPaid(true)
+                .withUnpaidAmount(0)
                 .build();
     }
 
@@ -37,7 +37,7 @@ public class TypicalPayments {
         return new PaymentBuilder()
                 .withYearMonth("2025-02")
                 .withTotalAmount(600f)
-                .withIsPaid(false)
+                .withUnpaidAmount(600f)
                 .build();
     }
 
@@ -51,7 +51,7 @@ public class TypicalPayments {
         return new PaymentBuilder()
                 .withYearMonth("2025-02")
                 .withTotalAmount(600f)
-                .withIsPaid(true)
+                .withUnpaidAmount(0)
                 .build();
     }
 
@@ -65,7 +65,7 @@ public class TypicalPayments {
         return new PaymentBuilder()
                 .withYearMonth("2025-03")
                 .withTotalAmount(600f)
-                .withIsPaid(false)
+                .withUnpaidAmount(600f)
                 .build();
     }
 
@@ -79,7 +79,7 @@ public class TypicalPayments {
         return new PaymentBuilder()
                 .withYearMonth("2025-09")
                 .withTotalAmount(600f)
-                .withIsPaid(false)
+                .withUnpaidAmount(600f)
                 .build();
     }
 
@@ -93,7 +93,7 @@ public class TypicalPayments {
         return new PaymentBuilder()
                 .withYearMonth("2024-01")
                 .withTotalAmount(600f)
-                .withIsPaid(true)
+                .withUnpaidAmount(0)
                 .build();
     }
 
@@ -107,7 +107,7 @@ public class TypicalPayments {
         return new PaymentBuilder()
                 .withYearMonth("2024-01")
                 .withTotalAmount(800f)
-                .withIsPaid(false)
+                .withUnpaidAmount(800f)
                 .build();
     }
 
@@ -121,7 +121,7 @@ public class TypicalPayments {
         return new PaymentBuilder()
                 .withYearMonth(DateTimeUtil.currentYearMonth().toString())
                 .withTotalAmount(0f)
-                .withIsPaid(false)
+                .withUnpaidAmount(0)
                 .build();
     }
 

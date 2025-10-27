@@ -39,7 +39,7 @@ public class PaymentListTest {
     public void constructor_oneValidUnpaidLessonArgument_success() {
         PaymentList pl = new PaymentList(new PaymentBuilder()
                 .withYearMonth("2025-03").withTotalAmount(600f)
-                .withIsPaid(false).build());
+                .withUnpaidAmount(600f).build());
         assertEquals(1, pl.size());
         assertNotNull(pl.findAndSetEarliestUnpaidYearMonth());
         assertEquals(Status.UNPAID, pl.getStatus());
@@ -155,7 +155,6 @@ public class PaymentListTest {
     public void updateExistingAmount_recomputesAggregateStatus() throws Exception {
         YearMonth ym = YearMonth.of(2025, 10);
         Payment p = new PaymentBuilder().withYearMonth(ym.toString()).withTotalAmount(50f).build();
-        p.setPaid(true);
         PaymentList pl = new PaymentList(p);
 
         assertEquals(Status.PAID, pl.getStatus(), "precondition: list status starts as PAID");
@@ -282,7 +281,7 @@ public class PaymentListTest {
 
         // Attempt to add same YearMonth again (even with different amount/paidness)
         Payment duplicateDifferentFields = new PaymentBuilder()
-                .withYearMonth("2025-02").withTotalAmount(999f).withIsPaid(true).build();
+                .withYearMonth("2025-02").withTotalAmount(999f).withUnpaidAmount(0).build();
         assertFalse(pl.addPaymentIfAbsent(duplicateDifferentFields));
         assertEquals(size, pl.size(), "must not duplicate entries for same YearMonth");
 
@@ -313,7 +312,7 @@ public class PaymentListTest {
 
         // Overwrite Feb with a PAID payment and different amount
         Payment overwrite = new PaymentBuilder().withYearMonth("2025-02")
-                .withTotalAmount(321.0f).withIsPaid(true).build();
+                .withTotalAmount(321.0f).withUnpaidAmount(321.0f).build();
         Payment prev = pl.putPaymentForMonth(overwrite);
 
         assertNotNull(
@@ -345,9 +344,9 @@ public class PaymentListTest {
     public void copy_returnsDeepCopy() throws Exception {
         // Build original with a specific unpaid Jan and paid Feb using PaymentBuilder for explicit amounts
         Payment janUnpaid10 = new PaymentBuilder().withYearMonth("2025-01")
-                .withTotalAmount(10f).withIsPaid(false).build();
+                .withTotalAmount(10f).withUnpaidAmount(10f).build();
         Payment febPaid20 = new PaymentBuilder().withYearMonth("2025-02")
-                .withTotalAmount(20f).withIsPaid(true).build();
+                .withTotalAmount(20f).withUnpaidAmount(0).build();
         PaymentList original = new PaymentList(new ArrayList<>(List.of(janUnpaid10, febPaid20)));
 
         PaymentList cloned = original.copy();
