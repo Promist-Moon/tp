@@ -19,4 +19,13 @@ public class AmountTest {
         assertTrue(TotalAmount.isValidAmount(911));
         assertTrue(TotalAmount.isValidAmount(93121534));
     }
+
+
+    @Test
+    public void equals_differentSubclass_sameValue_returnsFalse() {
+        TotalAmount total = new TotalAmount(15.0f);
+        UnpaidAmount unpaid = new UnpaidAmount(15.0f);
+        // currently true because your equals() checks only `amount == other.getAsFloat()`
+        assertFalse(total.equals(unpaid));
+    }
 }
