@@ -101,8 +101,8 @@ public class UniqueLessonList implements Iterable<Lesson> {
             throw new LessonNotFoundException();
         }
 
-        if (!target.equals(editedLesson) &&
-                (contains(editedLesson) || hasTimeClashExcludingTargetLesson(editedLesson, target))) {
+        if (!target.equals(editedLesson) && (
+                contains(editedLesson) || hasTimeClashExcludingTargetLesson(editedLesson, target))) {
             throw new DuplicateLessonException();
         }
 

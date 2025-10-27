@@ -124,8 +124,8 @@ public class LessonList {
         }
 
         // might need to change because it does not assess for time clash
-        if (!target.equals(editedLesson) &&
-                (hasLesson(editedLesson) || hasTimeClashExcludingTargetLesson(editedLesson, target))) {
+        if (!target.equals(editedLesson) && (
+                hasLesson(editedLesson) || hasTimeClashExcludingTargetLesson(editedLesson, target))) {
             throw new DuplicateLessonException();
         }
 
