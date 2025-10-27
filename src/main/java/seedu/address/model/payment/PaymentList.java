@@ -244,8 +244,8 @@ public class PaymentList {
     public void updateExistingPayment(YearMonth month, float totalAmount) throws PaymentException {
         try {
             Payment p = getPaymentByMonth(month);
-            p.setTotalAmount(totalAmount);
-            p.setPaid(false);
+
+            p.updatePayment(totalAmount);
 
             // reset status
             updateStatus();

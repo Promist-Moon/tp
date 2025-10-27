@@ -82,6 +82,23 @@ public class Payment {
     }
 
     /**
+     * Updates the payment upon {@link PaymentList} listening for changes in student's LessonList.
+     *
+     * @param newTotalAmount a float representing the new total amount calculated from lessonList.
+     */
+    public void updatePayment(float newTotalAmount) {
+        if (newTotalAmount < getTotalAmountFloat()) {
+            this.totalAmount = new TotalAmount(newTotalAmount);
+            if (newTotalAmount == 0) {
+                this.isPaid = true;
+            }
+        } else if (newTotalAmount > getTotalAmountFloat()) {
+            this.totalAmount = new TotalAmount(newTotalAmount);
+            this.isPaid = false;
+        }
+    }
+
+    /**
      * Marks current payment as paid
      * If the payment is already marked as paid, this method has no effect.
      */
