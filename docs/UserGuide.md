@@ -44,7 +44,11 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 
 --------------------------------------------------------------------------------------------------------------------
 ## User Interface (UI) Overview
-![Ui](images/Ui.png)
+![interface overview](images/interfaceOverview.png)
+**Command Bar**:
+**Message Box**:
+**Contact List Panel**:
+**Lesson List Panel/Today Schedule**:
 
 ## Features
 
@@ -135,6 +139,7 @@ Format: `list.unpaid`
 Lists all students that have **overdue** fees from previous months.
 
 Format: `list.overdue`
+![list command](images/listoverdue.png)
 
 ### Editing a person : `edit`
 
