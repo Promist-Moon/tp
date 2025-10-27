@@ -73,6 +73,7 @@ Action | Format, Examples
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
 **Delete Lesson** | `delete.lesson i/STUDENT_INDEX c/LESSON_INDEX…​`<br> e.g.,`delete.lesson i/2 c/1`
 **Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
+**View** | `view INDEX`<br> e.g., `view 1`
 **List** | `list`
 **List Paid** | `list.paid`
 **List Unpaid** | `list.unpaid`
@@ -185,9 +186,9 @@ Edits an existing student in the address book.
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
 *  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
 
-### Locating students by name: `find`
+### Searching for students by keyword: `find`
 
-Finds students whose names contain any of the given keywords.
+Finds students whose details contain any of the inputted keywords.
 
 **Format:** `find KEYWORD [MORE_KEYWORDS]`
 
@@ -202,6 +203,20 @@ Finds students whose names contain any of the given keywords.
 * `find John` returns `john` and `John Doe`
 * `find alex 91031282` returns `Alex Yeoh`, `David Li`<br>
   ![result for 'find alex david'](images/findAlexDavidResult.png)
+
+### List all lessons of a student: `view`
+
+Lists all the lessons taken by the specfied student.
+
+**Format:** `view INDEX`
+
+* List the lessons of the student at the specified `INDEX`.
+* The index refers to the index number shown in the displayed person list.
+* The index **must be a positive integer** 1, 2, 3, …​
+
+**Examples:**
+* `list` followed by `view 2` views the lessons of the 2nd student in the address book.
+* `find Betsy` followed by `view 1` views the 1st student in the results of the find command.
 
 ### Deleting a person : `delete`
 
