@@ -76,10 +76,10 @@ public class AddLessonCommand extends Command {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 
-        // check if model hasLesson (same timeslot)
         Person person = lastShownList.get(targetIndex.getZeroBased());
         if (person instanceof Student) {
             Student studentToAddLesson = (Student) person;
+
             model.addLesson(studentToAddLesson, toAdd);
         } else {
             // to edit and create a message for invalid student

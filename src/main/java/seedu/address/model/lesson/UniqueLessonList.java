@@ -39,12 +39,31 @@ public class UniqueLessonList implements Iterable<Lesson> {
     }
 
     /**
+     * Checks if the specified lesson has time clashes with any lessons in this unique lesson list.
+     *
+     * <p>Iterates through all lessons starting from index 1 up to the size of the list,
+     * and compares each lesson with the given lesson for time clashes.</p>
+     *
+     * @param lesson the Lesson to check for existence in this list
+     * @return true if the lesson is found in the list; false otherwise or if an exception occurs
+     */
+    public boolean hasTimeClash(Lesson lesson) {
+        for (Lesson lesson1 : internalList) {
+            if (lesson1.hasTimeClash(lesson)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
      * Adds a lesson to the list.
      * The lesson must not already exist in the list.
      */
     public void add(Lesson toAdd) {
         requireNonNull(toAdd);
-        if (contains(toAdd)) {
+        if (contains(toAdd) || hasTimeClash(toAdd)) {
+            // to throw separate exception??
             throw new DuplicateLessonException();
         }
         internalList.add(toAdd);
@@ -55,7 +74,7 @@ public class UniqueLessonList implements Iterable<Lesson> {
      * {@code target} must exist in the list.
      * The lesson identity of {@code editedLesson} must not be the same as another existing lesson in the list.
      */
-    public void setLesson(Lesson target, Lesson editedLesson) {
+    public void setLesson(Lesson target, Lesson editedLesson) throws DuplicateLessonException {
         requireAllNonNull(target, editedLesson);
 
         int index = internalList.indexOf(target);

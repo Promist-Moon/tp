@@ -204,6 +204,11 @@ public class AddCommandTest {
         public SortedList<Lesson> getSortedFilteredLessons() {
             throw new AssertionError("This method should not be called");
         }
+
+        @Override
+        public void setLesson(Student student, Lesson lesson, Lesson editedLesson) {
+            throw new AssertionError("This method should not be called");
+        }
     }
 
     /**

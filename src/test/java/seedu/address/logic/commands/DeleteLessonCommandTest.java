@@ -74,7 +74,7 @@ public class DeleteLessonCommandTest {
         Index outOfBoundLessonIndex = Index.fromOneBased(student.getLessonList().getSize() + 1);
         DeleteLessonCommand deleteLessonCommand = new DeleteLessonCommand(studentIndex, outOfBoundLessonIndex);
 
-        assertCommandFailure(deleteLessonCommand, model, Messages.MESSAGE_INVALID_DISPLAYED_LESSON);
+        assertCommandFailure(deleteLessonCommand, model, Messages.MESSAGE_INVALID_DISPLAYED_LESSON_INDEX);
     }
 
     @Test

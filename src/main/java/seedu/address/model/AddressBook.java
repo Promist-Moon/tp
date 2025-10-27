@@ -118,7 +118,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public boolean hasLesson(Lesson lesson) {
         requireNonNull(lesson);
-        return lessons.contains(lesson);
+        return lessons.contains(lesson) && lessons.hasTimeClash(lesson);
     }
 
     /**

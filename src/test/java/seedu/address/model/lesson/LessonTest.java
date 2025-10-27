@@ -7,9 +7,12 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.testutil.TypicalLessons.Y3_MATH;
+import static seedu.address.testutil.TypicalPersons.ALICE;
 
 import java.time.LocalTime;
 
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.model.person.student.Address;
@@ -95,7 +98,7 @@ public class LessonTest {
     }
 
     @Test
-    public void equals_sameDayAndOverlappingTimes_returnsTrue() {
+    public void hasTimeClash_sameDayAndOverlappingTimes_returnsTrue() {
         Lesson l1 = new LessonBuilder()
                 .withDay("1")
                 .withLessonTime("09:00", "10:30")
@@ -106,6 +109,59 @@ public class LessonTest {
                 .withLessonTime("09:30", "11:00")
                 .build();
 
+        assertTrue(l1.hasTimeClash(l2));
+    }
+
+    @Test
+    public void hasTimeClash_sameDayButBackToBack_returnsFalse() {
+        Lesson l1 = new LessonBuilder()
+                .withDay("1")
+                .withLessonTime("09:00", "10:30")
+                .build();
+
+        Lesson l2 = new LessonBuilder()
+                .withDay("1")
+                .withLessonTime("10:30", "12:00")
+                .build();
+
+        assertFalse(l1.hasTimeClash(l2));
+    }
+
+    @Test
+    public void hasTimeClash_differentDay_returnsFalse() {
+        Lesson l1 = new LessonBuilder()
+                .withDay("1")
+                .withLessonTime("09:00", "10:30")
+                .build();
+
+        Lesson l2 = new LessonBuilder()
+                .withDay("2")
+                .withLessonTime("09:00", "10:30")
+                .build();
+
+        assertFalse(l1.hasTimeClash(l2));
+    }
+
+    @Test
+    public void hasTimeClash_nullAndDifferentType_returnsFalse() {
+        Lesson l = new LessonBuilder().build();
+        assertFalse(l.hasTimeClash(null));
+    }
+
+    @Test
+    @DisplayName("equals method returns true for same instance")
+    public void equals_sameInstance_returnsTrue() {
+        Lesson l1 = Y3_MATH;
+        Lesson l2 = Y3_MATH;
+        assertTrue(l1.equals(l2));
+    }
+
+    @Test
+    @DisplayName("equals method returns true for different but equal instance")
+    public void equals_differentButEqualInstance_returnsTrue() {
+        Lesson l1 = Y3_MATH;
+        Lesson l2 = new LessonBuilder().withSubject("Math").withLevel("3").withDay("3")
+                .withLessonTime("09:00", "11:00").withStudent(ALICE).build();
         assertTrue(l1.equals(l2));
     }
 
