@@ -142,7 +142,7 @@ public class PaymentList {
         }
         sortByYearMonth();
         updateStatus();
-        setEarliestUnpaidYearmonth(findAndSetEarliestUnpaidYearMonth());
+        findAndSetEarliestUnpaidYearMonth();
     }
 
     /**
@@ -159,7 +159,7 @@ public class PaymentList {
         payments.add(payment);
         sortByYearMonth();
         updateStatus();
-        setEarliestUnpaidYearmonth(findAndSetEarliestUnpaidYearMonth());
+        findAndSetEarliestUnpaidYearMonth();
         return true;
     }
 
