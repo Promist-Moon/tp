@@ -85,7 +85,15 @@ Action | Format, Examples
 **Help** | `help`
 
 --------------------------------------------------------------------------------------------------------------------
+## User Interface (UI) Overview
+![interface overview](images/interfaceOverview.png)
 
+| UI Element                           | Description                                                                                                         |
+|--------------------------------------|---------------------------------------------------------------------------------------------------------------------|
+| **Command Bar**                      | Primary input field for entering commands like find, list and add.                                                  |
+| **Message Box**                      | Displays temporary feedback, including success confirmations and error messages, following a user action.           |
+| **Contact List Panel**               | View students' contact details here.                                                                                |
+| **Lesson List Panel/Today Schedule** | Displays the scheduled lessons of the day. This panel can be toggled to show all the lessons of a selected student. |
 ## Features
 
 <box type="info" seamless>
@@ -124,14 +132,21 @@ Shows a message explaining how to access the help page.
 
 ### Adding a student: `add`
 
-Adds a student to the address book.
+Adds a student to the address book with these fields:
+* Name
+* Phone
+* Email
+* Address
+* Tag(s)
 
 **Format:** `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
 
 <box type="tip" seamless>
 
-**Tip:** A student can have any number of tags (including 0)
+**Tip:** Tag is optional
 </box>
+
+![add command](images/add.png)
 
 **Examples:**
 * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
@@ -141,7 +156,14 @@ Adds a student to the address book.
 
 ### Adding a lesson: `add.lesson`
 
-Adds a lesson to the specific student.
+Adds a lesson to the specific student with these fields:
+* Student Index
+* Subject 
+* Level (1,2,3, or 4)
+* Day of Lesson
+* Start Time
+* End Time
+* Hourly Rate
 
 **Format:** `add.lesson i/STUDENT_INDEX s/SUBJECT l/LEVEL d/DAY s/START_TIME e/END_TIME r/HOURLY RATE`
 
@@ -166,29 +188,24 @@ Tracks that a student has made payment for that month.
 Shows a list of all persons in the address book.
 
 **Format:** `list`
-
-<br>
-
+![list command](images/list.png)
 ### Listing all payments: `list.paid`
 Lists all students that have **paid** their fees for the month.
 
 **Format:** `list.paid`
-
-<br>
+![list command](images/listpaid.png)
 
 ### Listing all unpaid fees: `list.unpaid`
 Lists all students that have **unpaid** fees for the month.
 
 **Format:** `list.unpaid`
-
-<br>
+![list command](images/listunpaid.png)
 
 ### Listing all overdue fees: `list.overdue`
 Lists all students that have **overdue** fees from previous months.
 
 **Format:** `list.overdue`
-
-<br>
+![list command](images/listoverdue.png)
 
 ### Editing a person : `edit`
 
@@ -211,9 +228,8 @@ Edits an existing student in the address book.
 
 ### Searching for students by keyword: `find`
 
-Finds students whose details contain any of the inputted keywords.
-
 **Format:** `find KEYWORD [MORE_KEYWORDS]`
+![find command](images/find.png)
 
 * The search is case-insensitive. e.g `hans` will match `Hans`
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
@@ -225,7 +241,6 @@ Finds students whose details contain any of the inputted keywords.
 **Examples:**
 * `find John` returns `john` and `John Doe`
 * `find alex 91031282` returns `Alex Yeoh`, `David Li`<br>
-  ![result for 'find alex david'](images/findAlexDavidResult.png)
 
 <br>
 
@@ -250,6 +265,10 @@ Lists all the lessons taken by the specfied student.
 Deletes the specified student from the address book.
 
 **Format:** `delete INDEX`
+Before delete:
+![before delete command](images/deleteBefore.png)
+After delete:
+![after delete command](images/deleteAfter.png)
 
 * Deletes the students at the specified `INDEX`.
 * The index refers to the index number shown in the displayed person list.
