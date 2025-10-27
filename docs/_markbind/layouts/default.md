@@ -3,7 +3,7 @@
 </head-bottom>
 
 <header sticky>
-  <navbar type="dark">
+  <navbar type="none" add-class="nav-blue">
     <a slot="brand" href="{{baseUrl}}/index.html" title="Home" class="navbar-brand" style="display: flex; align-items: center; gap: 8px">
         <img src="{{baseUrl}}/images/TuiniverseHeaderLogo.png" alt="Tuiniverse Logo" style="height: 25px;">
         <span>Tuiniverse</span>
