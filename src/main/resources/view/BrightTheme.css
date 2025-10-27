@@ -414,6 +414,24 @@
 
 }
 
+.label.cell_small_label_unpaid {
+    -fx-font-family: "Segoe UI";
+    -fx-font-size: 13px;
+    -fx-text-fill: #FF9800;
+}
+
+.label.cell_small_label_overdue {
+    -fx-font-family: "Segoe UI";
+    -fx-font-size: 13px;
+    -fx-text-fill: #F44336;
+}
+
+.label.cell_small_label_paid {
+    -fx-font-family: "Segoe UI";
+    -fx-font-size: 13px;
+    -fx-text-fill: #4CAF50;
+}
+
 #resultDisplay {
     -fx-wrap-text: true;
 }

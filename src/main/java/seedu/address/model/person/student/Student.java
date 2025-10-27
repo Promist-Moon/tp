@@ -124,6 +124,15 @@ public class Student extends Person {
     }
 
     /**
+     * Returns the total amount unpaid by the student.
+     *
+     * @return a TotalAmount object with amount equivalent to the total of unpaid payments.
+     */
+    public TotalAmount getAmountDue() {
+        return payments.calculateUnpaidAmount();
+    }
+
+    /**
      * Changes payment status to {@link PaymentStatus}
      *
      * Changes to paid when pay command is used.
