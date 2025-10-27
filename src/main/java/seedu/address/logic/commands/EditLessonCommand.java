@@ -15,6 +15,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_SUBJECT;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.function.Predicate;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.CollectionUtil;
@@ -107,11 +108,15 @@ public class EditLessonCommand extends Command {
 
         // Handling logic
         try {
-            Lesson lessonToEdit = studentLessonList.getLesson(lessonIndex.getZeroBased());
+            Lesson lessonToEdit = studentLessonList.getLesson(lessonIndex.getOneBased());
             Lesson editedLesson = createEditedLesson(lessonToEdit, editLessonDescriptor);
 
             model.setLesson(student, lessonToEdit, editedLesson);
-            return new CommandResult(String.format(MESSAGE_EDIT_LESSON_SUCCESS, Messages.formatLesson(editedLesson)));
+            Predicate<Lesson> belongsToStudent =
+                    lesson -> student.getLessonList().hasLesson(lesson);
+            model.updateFilteredLessonList(belongsToStudent);
+
+            return new CommandResult(String.format(MESSAGE_EDIT_LESSON_SUCCESS, Messages.format(student)));
 
         } catch (LessonException e) {
             throw new CommandException(MESSAGE_INVALID_DISPLAYED_LESSON_INDEX);

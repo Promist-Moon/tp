@@ -123,7 +123,9 @@ public class LessonList {
             throw new LessonNotFoundException();
         }
 
-        if (!target.equals(editedLesson) && hasLesson(editedLesson)) {
+        // might need to change because it does not assess for time clash
+        if (!target.equals(editedLesson) &&
+                (hasLesson(editedLesson) || hasTimeClashExcludingTargetLesson(editedLesson, target))) {
             throw new DuplicateLessonException();
         }
 
@@ -180,12 +182,31 @@ public class LessonList {
      * <p>Iterates through all lessons starting from index 1 up to the size of the list,
      * and compares each lesson with the given lesson for time clashes.</p>
      *
-     * @param lesson the Lesson to check for existence in this list
+     * @param lesson the Lesson to check for time clashes in this list
      * @return true if the lesson is found in the list; false otherwise or if an exception occurs
      */
     public boolean hasTimeClash(Lesson lesson) {
         for (Lesson lesson1 : lessons) {
             if (lesson1.hasTimeClash(lesson)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * Checks if the specified lesson has time clashes with any lessons in the lesson list, excluding the target lesson.
+     *
+     * <p>Iterates through all lessons starting from index 1 up to the size of the list,
+     * and compares each lesson with the given lesson for time clashes, excluding the target lesson.</p>
+     *
+     * @param lesson the Lesson to check for time clashes in this list
+     * @param target the Lesson to exclude for time clash check
+     * @return true if the lesson is found in the list; false otherwise or if an exception occurs
+     */
+    public boolean hasTimeClashExcludingTargetLesson(Lesson lesson, Lesson target) {
+        for (Lesson lesson1 : lessons) {
+            if (!lesson1.equals(target) && lesson1.hasTimeClash(lesson)) {
                 return true;
             }
         }

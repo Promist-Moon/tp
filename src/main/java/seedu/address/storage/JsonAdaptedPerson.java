@@ -98,11 +98,7 @@ class JsonAdaptedPerson {
         for (JsonAdaptedTag tag : tags) {
             personTags.add(tag.toModelType());
         }
-
-        final ArrayList<Lesson> personLessons = new ArrayList<>();
-        for (JsonAdaptedLesson lesson : lessons) {
-            personLessons.add(lesson.toModelType());
-        }
+        //
 
         final ArrayList<Payment> personPayments = new ArrayList<>();
         for (JsonAdaptedPayment payment : payments) {
@@ -146,9 +142,17 @@ class JsonAdaptedPerson {
             }
             final Address modelAddress = new Address(address);
             final Set<Tag> modelTags = new HashSet<>(personTags);
-            final LessonList ll = new LessonList(personLessons);
             final PaymentList pl = new PaymentList(personPayments);
-            return new Student(modelName, modelPhone, modelEmail, modelAddress, modelTags, ll, pl);
+            final LessonList ll = new LessonList();
+            final Student student = new Student(modelName, modelPhone, modelEmail, modelAddress, modelTags, ll, pl);
+
+            for (JsonAdaptedLesson lesson : lessons) {
+                Lesson l = lesson.toModelType();
+                l.addStudent(student);
+                student.getLessonList().addLesson(l);
+            }
+
+            return student;
         }
         case "parent": {
             // TODO: When Parent is implemented, validate Parent-specific fields here and return new Parent(...)
