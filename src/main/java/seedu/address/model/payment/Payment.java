@@ -14,6 +14,8 @@ public class Payment {
     private TotalAmount totalAmount;
     private boolean isPaid;
 
+    private TotalAmount unpaidAmount;
+
     /**
      * Constructs a new {@code Payment} object for a specified student.
      * This constructor initializes the payment details including
@@ -27,6 +29,8 @@ public class Payment {
         this.totalAmount = totalAmount;
         this.yearMonth = yearMonth;
         this.isPaid = false;
+
+        this.unpaidAmount = totalAmount;
     }
 
     /**
@@ -69,6 +73,14 @@ public class Payment {
         return this.totalAmount.getAsFloat();
     }
 
+    public TotalAmount getUnpaidAmount() {
+        return this.unpaidAmount;
+    }
+
+    public float getUnpaidAmountFloat() {
+        return this.unpaidAmount.getAsFloat();
+    }
+
     public void setTotalAmount(float f) {
         this.totalAmount = new TotalAmount(f);
     }
@@ -88,12 +100,20 @@ public class Payment {
      */
     public void updatePayment(float newTotalAmount) {
         if (newTotalAmount < getTotalAmountFloat()) {
+            // lesson is deleted -> total amount decreases
             this.totalAmount = new TotalAmount(newTotalAmount);
+            float newUnpaidAmount = Math.max(getUnpaidAmountFloat() + newTotalAmount - getTotalAmountFloat(), 0);
+            this.unpaidAmount = new TotalAmount(newUnpaidAmount);
             if (newTotalAmount == 0) {
                 this.isPaid = true;
             }
         } else if (newTotalAmount > getTotalAmountFloat()) {
+            // lesson is added -> total amount increases
             this.totalAmount = new TotalAmount(newTotalAmount);
+
+            // set new unpaid amount
+            float newUnpaidAmount = getUnpaidAmountFloat() + newTotalAmount - getTotalAmountFloat();
+            this.unpaidAmount = new TotalAmount(newUnpaidAmount);
             this.isPaid = false;
         }
     }
@@ -104,6 +124,7 @@ public class Payment {
      */
     public void markPaid() {
         isPaid = true;
+        this.unpaidAmount = new TotalAmount(0);
     }
 
     @Override
