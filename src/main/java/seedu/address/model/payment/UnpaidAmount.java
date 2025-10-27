@@ -1,5 +1,8 @@
 package seedu.address.model.payment;
 
+/**
+ * Represents the total amount in $ a student has not paid to a tutor per month.
+ */
 public class UnpaidAmount extends Amount {
 
     public UnpaidAmount(float amt) {

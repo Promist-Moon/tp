@@ -8,6 +8,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.payment.Payment;
 import seedu.address.model.payment.TotalAmount;
+import seedu.address.model.payment.UnpaidAmount;
 
 /**
  * Jackson-friendly version of {@link Payment}.
@@ -16,6 +17,7 @@ public class JsonAdaptedPayment {
     private final String yearMonth;
     private final String totalAmount;
     private final boolean isPaid;
+    private final String unpaidAmount;
 
     /**
      * Constructs a {@code JsonAdaptedPayment} with the given person details.
@@ -23,10 +25,12 @@ public class JsonAdaptedPayment {
     @JsonCreator
     public JsonAdaptedPayment(@JsonProperty("yearMonth") String yearMonth,
                               @JsonProperty("totalAmount") String totalAmount,
-                              @JsonProperty("isPaid") boolean isPaid) {
+                              @JsonProperty("isPaid") boolean isPaid,
+                              @JsonProperty("unpaidAmount") String unpaidAmount) {
         this.yearMonth = yearMonth;
         this.totalAmount = totalAmount;
         this.isPaid = isPaid;
+        this.unpaidAmount = unpaidAmount;
     }
 
     /**
@@ -36,6 +40,7 @@ public class JsonAdaptedPayment {
         yearMonth = source.getYearMonth().toString();
         totalAmount = source.getTotalAmount().toString();
         isPaid = source.isPaid();
+        unpaidAmount = source.getUnpaidAmount().toString();
     }
 
     /**
@@ -45,7 +50,8 @@ public class JsonAdaptedPayment {
     public Payment toModelType() throws IllegalValueException {
         Payment p = new Payment(
                 YearMonth.parse(yearMonth),
-                new TotalAmount(Float.parseFloat(totalAmount)));
+                new TotalAmount(Float.parseFloat(totalAmount)),
+                new UnpaidAmount(Float.parseFloat(unpaidAmount)));
         if (isPaid) {
             p.markPaid();
         }

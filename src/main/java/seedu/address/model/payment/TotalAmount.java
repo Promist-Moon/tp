@@ -1,9 +1,7 @@
 package seedu.address.model.payment;
 
-import static seedu.address.commons.util.AppUtil.checkArgument;
-
 /**
- * Represents the total amount in $ a student owes per month to a tutor.
+ * Represents the total amount in $ a student should pay to a tutor in a month.
  */
 public class TotalAmount extends Amount {
 

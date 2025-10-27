@@ -8,9 +8,9 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  * Guarantees: immutable; is valid as declared in {@link #isValidAmount(float)}
  */
 public abstract class Amount implements Comparable<Amount> {
-    protected final float amount;
-
     public static final String MESSAGE_CONSTRAINTS = "Total amount must be positive";
+
+    protected final float amount;
 
     /**
      * Constructs a {@code Amount}.
