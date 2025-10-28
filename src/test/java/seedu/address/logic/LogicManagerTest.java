@@ -1,6 +1,7 @@
 package seedu.address.logic;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertSame;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
 import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_AMY;
@@ -18,6 +19,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
+import javafx.beans.value.ObservableFloatValue;
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.ListCommand;
@@ -27,10 +29,14 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.payment.Payment;
+import seedu.address.model.payment.PaymentList;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.student.Student;
 import seedu.address.storage.JsonAddressBookStorage;
 import seedu.address.storage.JsonUserPrefsStorage;
 import seedu.address.storage.StorageManager;
+import seedu.address.testutil.PaymentBuilder;
 import seedu.address.testutil.StudentBuilder;
 
 public class LogicManagerTest {
@@ -85,6 +91,42 @@ public class LogicManagerTest {
     @Test
     public void getFilteredPersonList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, () -> logic.getFilteredPersonList().remove(0));
+    }
+
+    @Test
+    public void totalProperties_delegatesToModel() {
+        // Get references
+        ObservableFloatValue modelEarnings = model.totalEarningsProperty();
+        ObservableFloatValue logicEarnings = logic.totalEarningsProperty();
+
+        ObservableFloatValue modelUnpaid = model.totalUnpaidProperty();
+        ObservableFloatValue logicUnpaid = logic.totalUnpaidProperty();
+
+        assertSame(modelEarnings, logicEarnings);
+        assertSame(modelUnpaid, logicUnpaid);
+    }
+
+    @Test
+    public void totalProperties_reflectModelChanges() {
+        ObservableFloatValue earnings = logic.totalEarningsProperty();
+        ObservableFloatValue unpaid = logic.totalUnpaidProperty();
+
+        assertEquals(0.0f, earnings.get(), 1e-6);
+        assertEquals(0.0f, unpaid.get(), 1e-6);
+
+        Payment payment = new PaymentBuilder()
+                .withYearMonth("2025-10")
+                .withTotalAmount(100.0f)
+                .withUnpaidAmount(40.0f)
+                .build();
+        PaymentList pl = new PaymentList(payment);
+
+        Student student = new StudentBuilder().withName("Bob").withPaymentList(pl).build();
+
+        model.addPerson(student);
+
+        assertEquals(100.0f, earnings.get(), 1e-6);
+        assertEquals(40.0f, unpaid.get(), 1e-6);
     }
 
     /**
@@ -172,4 +214,5 @@ public class LogicManagerTest {
         expectedModel.addPerson(expectedPerson);
         assertCommandFailure(addCommand, CommandException.class, expectedMessage, expectedModel);
     }
+
 }
