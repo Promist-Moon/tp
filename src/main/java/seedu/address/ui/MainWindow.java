@@ -184,6 +184,13 @@ public class MainWindow extends UiPart<Stage> {
     private CommandResult executeCommand(String commandText) throws CommandException, ParseException {
         try {
             CommandResult commandResult = logic.execute(commandText);
+
+            if (commandResult.isShowingName()) {
+                lessonListPanel.updateLessonTitle(commandResult.getStudentName());
+            } else {
+                lessonListPanel.updateLessonTitle(DateTimeUtil.currentDay() + "'S SCHEDULE");
+            }
+
             logger.info("Result: " + commandResult.getFeedbackToUser());
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
 

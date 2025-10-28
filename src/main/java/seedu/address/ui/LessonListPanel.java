@@ -35,6 +35,14 @@ public class LessonListPanel extends UiPart<Region> {
     }
 
     /**
+     * update the lesson title to specified text.
+     * @param title
+     */
+    public void updateLessonTitle(String title) {
+        this.title.setText(title);
+    }
+
+    /**
      * Custom {@code ListCell} that displays the graphics of a {@code Lesson} using a {@code LessonCard}.
      */
     class LessonListViewCell extends ListCell<Lesson> {
