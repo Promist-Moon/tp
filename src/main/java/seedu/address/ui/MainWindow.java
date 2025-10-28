@@ -189,6 +189,7 @@ public class MainWindow extends UiPart<Stage> {
                 lessonListPanel.updateLessonTitle(commandResult.getStudentName());
             } else {
                 lessonListPanel.updateLessonTitle(DateTimeUtil.currentDay() + "'S SCHEDULE");
+                logic.getTodayLessonList();
             }
 
             logger.info("Result: " + commandResult.getFeedbackToUser());
