@@ -5,6 +5,8 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.testutil.TypicalPayments.jan25Paid;
+import static seedu.address.testutil.TypicalPayments.sep25Unpaid;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.BENSON;
 import static seedu.address.testutil.TypicalPersons.CARL;
@@ -12,18 +14,25 @@ import static seedu.address.testutil.TypicalPersons.DANIEL;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.lesson.Lesson;
+import seedu.address.model.payment.Payment;
+import seedu.address.model.payment.PaymentList;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.student.PaymentStatus;
 import seedu.address.model.person.student.Student;
 import seedu.address.model.person.student.StudentMatchesPaymentStatusPredicate;
 import seedu.address.testutil.AddressBookBuilder;
 import seedu.address.testutil.LessonBuilder;
+import seedu.address.testutil.PaymentBuilder;
 import seedu.address.testutil.StudentBuilder;
 
 
@@ -230,5 +239,110 @@ public class ModelManagerTest {
         modelManager.updateFilteredPersonListByPaymentStatus(
                 new StudentMatchesPaymentStatusPredicate(PaymentStatus.OVERDUE));
         assertFalse(modelManager.equals(new ModelManager(addressBook, userPrefs)));
+    }
+
+    @Test
+    public void totals_initiallyZero() {
+        assertEquals(0.0f, modelManager.totalEarningsProperty().get(), 1e-6);
+        assertEquals(0.0f, modelManager.totalUnpaidProperty().get(), 1e-6);
+    }
+
+    @Test
+    public void totals_addPersonWithPayments_calculatesNewTotal() {
+        ArrayList<Payment> al = new ArrayList<>(List.of(jan25Paid(), sep25Unpaid()));
+        PaymentList pl = new PaymentList(al);
+        Student student = new StudentBuilder()
+                .withName("Alice")
+                .withPaymentList(pl)
+                .build();
+
+        modelManager.addPerson(student);
+
+        assertEquals(1200.0f, modelManager.totalEarningsProperty().get(), 1e-6);
+        assertEquals(300.0f, modelManager.totalUnpaidProperty().get(), 1e-6);
+    }
+
+    @Test
+    public void totals_editPersonPayments_calculatesNewTotal() {
+        // Start with 1 student, 100 total / 40 unpaid
+        Payment origPayment = new PaymentBuilder()
+                .withYearMonth("2025-10")
+                .withTotalAmount(100.0f)
+                .withUnpaidAmount(40.0f)
+                .build();
+        PaymentList pl = new PaymentList(origPayment);
+
+        Student student = new StudentBuilder().withName("Bob").withPaymentList(pl).build();
+        modelManager.addPerson(student);
+
+        // Edit: replace payments with (200 total / 0 unpaid)
+        Payment newPayment = new PaymentBuilder()
+                .withYearMonth("2025-10")
+                .withTotalAmount(200.0f)
+                .withUnpaidAmount(0.0f)
+                .build();
+        PaymentList newPl = new PaymentList(newPayment);
+
+        Student editedStudent = new StudentBuilder(student).withPaymentList(newPl).build();
+        modelManager.setPerson(student, editedStudent);
+
+        assertEquals(200.0f, modelManager.totalEarningsProperty().get(), 1e-6);
+        assertEquals(0.0f, modelManager.totalUnpaidProperty().get(), 1e-6);
+    }
+
+    @Test
+    public void totals_deletePerson_calculatesNewTotal() {
+        Payment p = new PaymentBuilder()
+                .withYearMonth("2025-10")
+                .withTotalAmount(120.0f)
+                .withUnpaidAmount(10.0f)
+                .build();
+        PaymentList pl = new PaymentList(p);
+
+        Student s = new StudentBuilder().withName("Carol").withPaymentList(pl).build();
+        modelManager.addPerson(s);
+
+        assertEquals(120.0f, modelManager.totalEarningsProperty().get(), 1e-6);
+        assertEquals(10.0f, modelManager.totalUnpaidProperty().get(), 1e-6);
+
+        modelManager.deletePerson(s);
+
+        assertEquals(0.0f, modelManager.totalEarningsProperty().get(), 1e-6);
+        assertEquals(0.0f, modelManager.totalUnpaidProperty().get(), 1e-6);
+    }
+
+    @Test
+    public void totals_changePayments_firesChangeListeners() {
+        // Attach listeners to ensure the observable property emits changes
+        var earningsChanges = new float[]{-1f};
+        var unpaidChanges   = new float[]{-1f};
+
+        ChangeListener<Number> earnListener = (ObservableValue<? extends Number> obs, Number o, Number n) -> {
+            earningsChanges[0] = n.floatValue();
+        };
+        ChangeListener<Number> unpaidListener = (ObservableValue<? extends Number> obs, Number o, Number n) -> {
+            unpaidChanges[0] = n.floatValue();
+        };
+
+        modelManager.totalEarningsProperty().addListener(earnListener);
+        modelManager.totalUnpaidProperty().addListener(unpaidListener);
+
+        // Trigger change
+        Payment p = new PaymentBuilder()
+                .withYearMonth("2025-10")
+                .withTotalAmount(55.5f)
+                .withUnpaidAmount(12.3f)
+                .build();
+        PaymentList pl = new PaymentList(p);
+
+        Student s = new StudentBuilder().withName("Dan").withPaymentList(pl).build();
+        modelManager.addPerson(s);
+
+        assertEquals(55.5f, earningsChanges[0], 1e-6);
+        assertEquals(12.3f, unpaidChanges[0],   1e-6);
+
+        // Clean up
+        modelManager.totalEarningsProperty().removeListener(earnListener);
+        modelManager.totalUnpaidProperty().removeListener(unpaidListener);
     }
 }
