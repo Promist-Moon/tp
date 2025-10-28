@@ -6,7 +6,6 @@ import java.time.Duration;
 import java.time.LocalTime;
 import java.util.Objects;
 
-import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.person.student.Address;
 import seedu.address.model.person.student.Student;
 
