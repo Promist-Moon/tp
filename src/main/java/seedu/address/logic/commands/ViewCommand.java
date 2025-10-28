@@ -48,7 +48,6 @@ public class ViewCommand extends Command {
 
         Predicate<Lesson> belongsToStudent =
                 lesson -> studentToViewLessons.getLessonList().hasLesson(lesson);
-
         model.updateFilteredLessonList(belongsToStudent);
 
         return new CommandResult(String.format(MESSAGE_VIEW_SUCCESS, Messages.format(studentToViewLessons)),
