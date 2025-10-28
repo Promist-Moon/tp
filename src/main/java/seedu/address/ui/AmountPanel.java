@@ -2,14 +2,11 @@ package seedu.address.ui;
 
 import java.util.logging.Logger;
 
-import javafx.beans.binding.Bindings;
 import javafx.beans.value.ObservableFloatValue;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Region;
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.model.payment.TotalAmount;
-import seedu.address.model.payment.UnpaidAmount;
 
 /**
  * Horizontal panel showing total to be earned and total unpaid.
