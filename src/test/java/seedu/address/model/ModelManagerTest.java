@@ -21,7 +21,6 @@ import java.util.List;
 import org.junit.jupiter.api.Test;
 
 import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableFloatValue;
 import javafx.beans.value.ObservableValue;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.lesson.Lesson;
