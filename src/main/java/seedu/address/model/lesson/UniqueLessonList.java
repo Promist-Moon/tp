@@ -141,28 +141,6 @@ public class UniqueLessonList implements Iterable<Lesson> {
     }
 
     /**
-     * Returns the total amount earned per month for a list of lessons
-     *
-     * @return float representing the sum of all amounts earned per lesson.
-     */
-    public float getTotalAmountEarned() {
-        YearMonth current = DateTimeUtil.currentYearMonth();
-        float totalAmountEarned = 0;
-        for (Lesson l : internalList) {
-            Day day = l.getDay();
-
-            // count number of lessons in a month based on local month
-            int daysInMonth = DateTimeUtil.countDaysOfWeekInMonth(current, day);
-
-            float amountPerLesson = l.getAmountEarned();
-            float amountPerMonth = daysInMonth * amountPerLesson;
-
-            totalAmountEarned += amountPerMonth;
-        }
-        return totalAmountEarned;
-    }
-
-    /**
      * Returns the backing list as an unmodifiable {@code ObservableList}.
      */
     public ObservableList<Lesson> asUnmodifiableObservableList() {
