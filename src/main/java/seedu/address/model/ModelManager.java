@@ -277,9 +277,7 @@ public class ModelManager implements Model {
         float sum = 0f;
         for (Person p : addressBook.getPersonList()) {
             if (p instanceof Student student) {
-                sum += student.getPayments().getPayments().stream()
-                        .map(Payment::getTotalAmountFloat)
-                        .reduce(0f, Float::sum);
+                sum += student.getTotalAmountFloat();
             }
         }
         totalEarnings.set(sum);

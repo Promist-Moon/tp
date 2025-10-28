@@ -123,6 +123,10 @@ public class Student extends Person {
         return new TotalAmount(f);
     }
 
+    public float getTotalAmountFloat() {
+        return lessons.getTotalAmountEarned(DateTimeUtil.currentYearMonth());
+    }
+
     /**
      * Returns the total amount unpaid by the student.
      *

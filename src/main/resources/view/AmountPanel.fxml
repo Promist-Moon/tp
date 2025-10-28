@@ -14,7 +14,7 @@
 
     <!-- Total earned -->
     <VBox spacing="2" styleClass="amount-box">
-        <Label text="Total earned" styleClass="amount-title"/>
+        <Label text="Total earned for month" styleClass="amount-title"/>
         <Label fx:id="totalEarned" styleClass="amount-earned"/>
     </VBox>
 
