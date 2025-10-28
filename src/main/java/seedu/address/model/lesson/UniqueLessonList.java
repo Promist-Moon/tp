@@ -4,7 +4,6 @@ package seedu.address.model.lesson;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
-import java.time.YearMonth;
 import java.util.Iterator;
 import java.util.List;
 
@@ -13,7 +12,6 @@ import javafx.collections.ObservableList;
 import seedu.address.model.lesson.exceptions.DuplicateLessonException;
 import seedu.address.model.lesson.exceptions.LessonNotFoundException;
 import seedu.address.model.person.Person;
-import seedu.address.model.util.DateTimeUtil;
 
 /**
  * A list of lessons that enforces uniqueness between its elements and does not allow nulls.
