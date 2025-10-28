@@ -40,7 +40,7 @@ public class TodayLessonCard extends UiPart<Region> {
         this.lesson = lesson;
         id.setText(index + ". ");
         subject.setText(lesson.getSubject().toString());
-//        student.setText("Student: " + lesson.getStudent().getName().toString());
+        // student.setText("Student: " + lesson.getStudent().getName().toString());
         level.setText("Level: Secondary " + lesson.getLevel().toString());
         lessonTime.setText("Time (24H): " + lesson.getLessonTime().toString());
         rate.setText("Rate (per hr): $" + lesson.getRate().toString());
