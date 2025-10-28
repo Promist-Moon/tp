@@ -273,11 +273,6 @@ public class ModelManager implements Model {
         return totalEarnings.getReadOnlyProperty();
     }
 
-    @Override
-    public float getTotalEarnings() {
-        return totalEarnings.get();
-    }
-
     private void recomputeTotalEarnings() {
         float sum = 0f;
         for (Person p : addressBook.getPersonList()) {
@@ -293,11 +288,6 @@ public class ModelManager implements Model {
     @Override
     public ObservableFloatValue totalUnpaidProperty() {
         return totalUnpaid.getReadOnlyProperty();
-    }
-
-    @Override
-    public float getTotalUnpaid() {
-        return totalUnpaid.get();
     }
 
     private void recomputeTotalUnpaid() {
