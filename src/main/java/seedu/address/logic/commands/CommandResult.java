@@ -73,7 +73,7 @@ public class CommandResult {
         return feedbackToUser;
     }
 
-    public boolean isShowingName(){
+    public boolean isShowingName() {
         return showingName;
     }
 
