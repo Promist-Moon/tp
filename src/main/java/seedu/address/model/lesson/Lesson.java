@@ -157,14 +157,8 @@ public class Lesson {
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this)
-                .add("subject", subject)
-                .add("level", level)
-                .add("day", day)
-                .add("time", lessonTime)
-                .add("rate", rate)
-                .add("address", address)
-                .toString();
+        return String.format("Subject: %s, Level: %s, Day: %s, Time: %s, Rate: %.2f, Address: %s",
+                subject, level, day, lessonTime, rate.getRate(), address);
     }
 
 }
