@@ -2,6 +2,7 @@ package seedu.address.logic;
 
 import java.nio.file.Path;
 
+import javafx.beans.value.ObservableFloatValue;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.commands.CommandResult;
@@ -39,6 +40,18 @@ public interface Logic {
 
     /** Returns an unmodifiable view of the filtered list of today's lessons */
     ObservableList<Lesson> getTodayLessonList();
+
+    /**
+     * Returns a float value of the total earned from all students for the month.
+     * This should be the total of totalAmounts in all student's payment lists.
+     */
+    ObservableFloatValue totalEarningsProperty();
+
+    /**
+     * Returns a float value of the total unpaid from all students.
+     * This should be the total of unpaidAmounts in all student's payment lists.
+     */
+    ObservableFloatValue totalUnpaidProperty();
 
     /**
      * Returns the user prefs' address book file path.

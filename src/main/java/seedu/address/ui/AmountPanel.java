@@ -2,14 +2,12 @@ package seedu.address.ui;
 
 import java.util.logging.Logger;
 
-import javafx.collections.ObservableList;
+import javafx.beans.binding.Bindings;
+import javafx.beans.value.ObservableFloatValue;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
-import javafx.scene.control.ListCell;
-import javafx.scene.control.ListView;
 import javafx.scene.layout.Region;
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.model.lesson.Lesson;
 import seedu.address.model.payment.TotalAmount;
 import seedu.address.model.payment.UnpaidAmount;
 
@@ -28,33 +26,51 @@ public class AmountPanel extends UiPart<Region> {
     /**
      * Creates a {@code AmountPanel} with the given {@code TotalAmount} and {@code UnpaidAmount}.
      */
-    public AmountPanel(TotalAmount totalEarned, UnpaidAmount totalUnpaid) {
+    public AmountPanel(ObservableFloatValue totalEarningsObs, ObservableFloatValue totalUnpaidObs) {
         super(FXML);
-        setTotals(totalEarned, totalUnpaid);
+
+        setTotals(totalEarningsObs, totalUnpaidObs);
     }
 
     /**
      * Sets both totals at once.
      *
-     * @param totalEarned
-     * @param totalUnpaid
+     * @param totalEarningsObs
+     * @param totalUnpaidObs
      */
-    public void setTotals(TotalAmount totalEarned, UnpaidAmount totalUnpaid) {
-        setEarned(totalEarned);
-        setUnpaid(totalUnpaid);
+    public void setTotals(ObservableFloatValue totalEarningsObs, ObservableFloatValue totalUnpaidObs) {
+        setEarned(totalEarningsObs);
+        setUnpaid(totalUnpaidObs);
     }
 
-    public void setEarned(TotalAmount totalEarned) {
-        this.totalEarned.setText("$" + totalEarned);
+    public void setEarned(ObservableFloatValue totalEarningsObs) {
+        totalEarned.setText(String.format("$%.2f", totalEarningsObs.get()));
+        totalEarningsObs.addListener((obs, oldVal, newVal) -> {
+            totalEarned.setText(String.format("$%.2f", newVal.floatValue()));
+        });
     }
 
-    public void setUnpaid(UnpaidAmount totalUnpaid) {
-        this.totalUnpaid.setText("$" + totalUnpaid);
+    public void setUnpaid(ObservableFloatValue totalUnpaidObs) {
+        updateUnpaidLabel(totalUnpaidObs.get());
+        totalUnpaidObs.addListener((obs, oldVal, newVal) -> {
+            updateUnpaidLabel(newVal.floatValue());
+        });
+    }
 
-        if (totalUnpaid.isZero()) {
-            this.totalUnpaid.getStyleClass().add("amount-unpaid-zero");
+    /**
+     * Updates label text and style depending on amount.
+     *
+     * @param amount
+     */
+    private void updateUnpaidLabel(float amount) {
+        totalUnpaid.setText(String.format("$%.2f", amount));
+
+        totalUnpaid.getStyleClass().removeAll("unpaid", "paid"); // remove old state
+
+        if (Math.abs(amount) < 0.005) { // treat 0.00 as paid
+            totalUnpaid.getStyleClass().add("amount-unpaid-zero");
         } else {
-            this.totalUnpaid.getStyleClass().add("amount-unpaid-real");
+            totalUnpaid.getStyleClass().add("amount-unpaid-high");
         }
     }
 }

@@ -3,6 +3,7 @@ package seedu.address.model;
 import java.nio.file.Path;
 import java.util.function.Predicate;
 
+import javafx.beans.value.ObservableFloatValue;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.SortedList;
 import seedu.address.commons.core.GuiSettings;
@@ -129,4 +130,20 @@ public interface Model {
      * The lesson identity of {@code editedLesson} must not be the same as another existing lesson in the address book.
      */
     void setLesson(Student student, Lesson lesson, Lesson editedLesson);
+
+    /**
+     * Returns a float value of the total earned from all students for the month.
+     * This should be the total of totalAmounts in all student's payment lists.
+     */
+    ObservableFloatValue totalEarningsProperty();
+
+    float getTotalEarnings();
+
+    /**
+     * Returns a float value of the total yet to be paid from all students.
+     * This should be the total of unpaidAmounts in all student's payment lists.
+     */
+    ObservableFloatValue totalUnpaidProperty();
+
+    float getTotalUnpaid();
 }

@@ -7,6 +7,8 @@ import java.nio.file.Path;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
+import javafx.beans.property.ReadOnlyFloatWrapper;
+import javafx.beans.value.ObservableFloatValue;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
@@ -15,6 +17,7 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.lesson.Lesson;
 import seedu.address.model.lesson.LessonList;
 import seedu.address.model.lesson.LessonTimeComparator;
+import seedu.address.model.payment.Payment;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.student.Student;
 
@@ -29,6 +32,8 @@ public class ModelManager implements Model {
     private final FilteredList<Person> filteredPersons;
     private final FilteredList<Lesson> filteredLessons;
     private final SortedList<Lesson> sortedFilteredLessons;
+    private final ReadOnlyFloatWrapper totalEarnings = new ReadOnlyFloatWrapper(0.0f);
+    private final ReadOnlyFloatWrapper totalUnpaid = new ReadOnlyFloatWrapper(0.0f);
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -43,6 +48,8 @@ public class ModelManager implements Model {
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
         filteredLessons = new FilteredList<>(this.addressBook.getLessonList());
         sortedFilteredLessons = new SortedList<>(filteredLessons, new LessonTimeComparator());
+        recomputeTotalEarnings();
+        recomputeTotalUnpaid();
 
     }
 
@@ -106,12 +113,16 @@ public class ModelManager implements Model {
     @Override
     public void deletePerson(Person target) {
         addressBook.removePerson(target);
+        recomputeTotalEarnings();
+        recomputeTotalUnpaid();
     }
 
     @Override
     public void addPerson(Person person) {
         addressBook.addPerson(person);
         updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        recomputeTotalEarnings();
+        recomputeTotalUnpaid();
     }
 
     @Override
@@ -119,6 +130,8 @@ public class ModelManager implements Model {
         requireAllNonNull(target, editedPerson);
 
         addressBook.setPerson(target, editedPerson);
+        recomputeTotalEarnings();
+        recomputeTotalUnpaid();
     }
 
     //=========== Filtered Person List Accessors =============================================================
@@ -226,6 +239,8 @@ public class ModelManager implements Model {
 
         setPerson(student, editedStudent);
         updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        recomputeTotalEarnings();
+        recomputeTotalUnpaid();
     }
 
     @Override
@@ -237,6 +252,8 @@ public class ModelManager implements Model {
         LessonList ls = student.getLessonList();
         ls.deleteLesson(lesson);
         updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        recomputeTotalEarnings();
+        recomputeTotalUnpaid();
     }
 
     @Override
@@ -247,6 +264,52 @@ public class ModelManager implements Model {
         LessonList studentLessonList = student.getLessonList();
         studentLessonList.setLesson(target, editedLesson);
         updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        recomputeTotalEarnings();
+        recomputeTotalUnpaid();
+    }
+
+    @Override
+    public ObservableFloatValue totalEarningsProperty() {
+        return totalEarnings.getReadOnlyProperty();
+    }
+
+    @Override
+    public float getTotalEarnings() {
+        return totalEarnings.get();
+    }
+
+    private void recomputeTotalEarnings() {
+        float sum = 0f;
+        for (Person p : addressBook.getPersonList()) {
+            if (p instanceof Student student) {
+                sum += student.getPayments().getPayments().stream()
+                        .map(Payment::getTotalAmountFloat)
+                        .reduce(0f, Float::sum);
+            }
+        }
+        totalEarnings.set(sum);
+    }
+
+    @Override
+    public ObservableFloatValue totalUnpaidProperty() {
+        return totalUnpaid.getReadOnlyProperty();
+    }
+
+    @Override
+    public float getTotalUnpaid() {
+        return totalUnpaid.get();
+    }
+
+    private void recomputeTotalUnpaid() {
+        float sum = 0f;
+        for (Person p : addressBook.getPersonList()) {
+            if (p instanceof Student student) {
+                sum += student.getPayments().getPayments().stream()
+                        .map(Payment::getUnpaidAmountFloat)
+                        .reduce(0f, Float::sum);
+            }
+        }
+        totalUnpaid.set(sum);
     }
 
 }

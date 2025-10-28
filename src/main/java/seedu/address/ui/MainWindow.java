@@ -34,6 +34,7 @@ public class MainWindow extends UiPart<Stage> {
     // Independent Ui parts residing in this Ui container
     private PersonListPanel personListPanel;
     private LessonListPanel lessonListPanel;
+    private AmountPanel amountPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
 
@@ -48,6 +49,9 @@ public class MainWindow extends UiPart<Stage> {
 
     @FXML
     private StackPane lessonListPanelPlaceholder;
+
+    @FXML
+    private StackPane amountPanelPlaceholder;
 
     @FXML
     private StackPane resultDisplayPlaceholder;
@@ -121,6 +125,9 @@ public class MainWindow extends UiPart<Stage> {
         lessonListPanel = new LessonListPanel(
                 logic.getTodayLessonList(), DateTimeUtil.currentDay() + "'S SCHEDULE");
         lessonListPanelPlaceholder.getChildren().add(lessonListPanel.getRoot());
+
+        amountPanel = new AmountPanel(logic.totalEarningsProperty(), logic.totalUnpaidProperty());
+        amountPanelPlaceholder.getChildren().add(amountPanel.getRoot());
 
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());

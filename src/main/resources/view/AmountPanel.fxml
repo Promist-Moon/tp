@@ -7,7 +7,6 @@
 
 
 <HBox xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
-      fx:controller="seedu.address.ui.AmountPanel"
       spacing="16" styleClass="amount-panel" alignment="CENTER_LEFT">
     <padding>
         <Insets top="8" right="12" bottom="8" left="12"/>
