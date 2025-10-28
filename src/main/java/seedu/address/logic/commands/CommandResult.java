@@ -28,14 +28,14 @@ public class CommandResult {
     /**
      * Constructs a {@code CommandResult} with the specified fields.
      */
-//    public CommandResult(String feedbackToUser, boolean showHelp, boolean exit,
-//                         boolean showingName, String studentName) {
-//        this.feedbackToUser = requireNonNull(feedbackToUser);
-//        this.showHelp = showHelp;
-//        this.exit = exit;
-//        this.showingName = showingName;
-//        this.studentName = studentName;
-//    }
+    public CommandResult(String feedbackToUser, boolean showHelp, boolean exit,
+                         boolean showingName, String studentName) {
+        this.feedbackToUser = requireNonNull(feedbackToUser);
+        this.showHelp = showHelp;
+        this.exit = exit;
+        this.showingName = showingName;
+        this.studentName = studentName;
+    }
 
     /**
      * Constructs a {@code CommandResult} with specified feedbackToUser,
@@ -65,9 +65,9 @@ public class CommandResult {
      * Constructs a {@code CommandResult} with the specified fields
      * when there's a need to reset lesson list panel title.
      */
-//    public CommandResult(String feedbackToUser, boolean showingName, String name) {
-//        this(feedbackToUser, false, false, showingName, name);
-//    }
+    public CommandResult(String feedbackToUser, boolean showingName, String name) {
+        this(feedbackToUser, false, false, showingName, name);
+    }
 
     public String getFeedbackToUser() {
         return feedbackToUser;
