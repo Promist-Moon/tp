@@ -21,6 +21,7 @@ import java.util.List;
 import org.junit.jupiter.api.Test;
 
 import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableFloatValue;
 import javafx.beans.value.ObservableValue;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.lesson.Lesson;
@@ -314,8 +315,8 @@ public class ModelManagerTest {
     @Test
     public void totals_changePayments_firesChangeListeners() {
         // Attach listeners to ensure the observable property emits changes
-        var earningsChanges = new float[]{-1f};
-        var unpaidChanges   = new float[]{-1f};
+        float[] earningsChanges = new float[]{-1f};
+        float[] unpaidChanges = new float[]{-1f};
 
         ChangeListener<Number> earnListener = (ObservableValue<? extends Number> obs, Number o, Number n) -> {
             earningsChanges[0] = n.floatValue();
@@ -339,7 +340,7 @@ public class ModelManagerTest {
         modelManager.addPerson(s);
 
         assertEquals(55.5f, earningsChanges[0], 1e-6);
-        assertEquals(12.3f, unpaidChanges[0],   1e-6);
+        assertEquals(12.3f, unpaidChanges[0], 1e-6);
 
         // Clean up
         modelManager.totalEarningsProperty().removeListener(earnListener);
