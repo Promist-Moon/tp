@@ -3,6 +3,7 @@ package seedu.address.testutil.stubs;
 import java.nio.file.Path;
 import java.util.function.Predicate;
 
+import javafx.beans.value.ObservableFloatValue;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.SortedList;
 import seedu.address.commons.core.GuiSettings;
@@ -126,6 +127,16 @@ public class ModelStub implements Model {
 
     @Override
     public void setLesson(Student student, Lesson lesson, Lesson editedLesson) {
+        throw new AssertionError("This method should not be called");
+    }
+
+    @Override
+    public ObservableFloatValue totalEarningsProperty() {
+        throw new AssertionError("This method should not be called");
+    }
+
+    @Override
+    public ObservableFloatValue totalUnpaidProperty() {
         throw new AssertionError("This method should not be called");
     }
 }

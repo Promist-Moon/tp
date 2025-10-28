@@ -137,13 +137,9 @@ public interface Model {
      */
     ObservableFloatValue totalEarningsProperty();
 
-    float getTotalEarnings();
-
     /**
      * Returns a float value of the total yet to be paid from all students.
      * This should be the total of unpaidAmounts in all student's payment lists.
      */
     ObservableFloatValue totalUnpaidProperty();
-
-    float getTotalUnpaid();
 }
