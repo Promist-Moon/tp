@@ -203,15 +203,29 @@ public class PaymentList {
     /**
      * Calculates the amount of money in $ a student still owes a tutor.
      *
-     * @return a float representing the amount of money.
+     * @return an UnpaidAmount representing the amount of money.
      */
-    public TotalAmount calculateUnpaidAmount() {
+    public UnpaidAmount calculateUnpaidAmount() {
         float total = 0;
         ArrayList<Payment> unpaidList = findUnpaids();
         for (Payment p : unpaidList) {
             total += p.getUnpaidAmountFloat();
         }
-        return new TotalAmount(total);
+        return new UnpaidAmount(total);
+    }
+
+    /**
+     * Calculates the amount of money in $ a student still owes a tutor.
+     *
+     * @return a float representing the amount of money.
+     */
+    public float calculateUnpaidAmountFloat() {
+        float total = 0;
+        ArrayList<Payment> unpaidList = findUnpaids();
+        for (Payment p : unpaidList) {
+            total += p.getUnpaidAmountFloat();
+        }
+        return total;
     }
 
     /**

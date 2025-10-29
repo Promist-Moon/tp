@@ -15,6 +15,7 @@ import seedu.address.model.payment.Payment;
 import seedu.address.model.payment.PaymentList;
 import seedu.address.model.payment.Status;
 import seedu.address.model.payment.TotalAmount;
+import seedu.address.model.payment.UnpaidAmount;
 import seedu.address.model.payment.exceptions.PaymentException;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
@@ -130,9 +131,9 @@ public class Student extends Person {
     /**
      * Returns the total amount unpaid by the student.
      *
-     * @return a TotalAmount object with amount equivalent to the total of unpaid payments.
+     * @return a UnpaidAmount object with amount equivalent to the total of unpaid payments.
      */
-    public TotalAmount getAmountDue() {
+    public UnpaidAmount getAmountDue() {
         return payments.calculateUnpaidAmount();
     }
 
@@ -142,7 +143,7 @@ public class Student extends Person {
      * @return a float with amount equivalent to the total of unpaid payments.
      */
     public float getAmountDueFloat() {
-        return payments.calculateUnpaidAmount().getAsFloat();
+        return payments.calculateUnpaidAmountFloat();
     }
 
     /**
