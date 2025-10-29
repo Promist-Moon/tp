@@ -15,6 +15,7 @@ import seedu.address.model.payment.Payment;
 import seedu.address.model.payment.PaymentList;
 import seedu.address.model.payment.Status;
 import seedu.address.model.payment.TotalAmount;
+import seedu.address.model.payment.UnpaidAmount;
 import seedu.address.model.payment.exceptions.PaymentException;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
@@ -49,7 +50,7 @@ public class Student extends Person {
         this.tags.addAll(tags);
         this.lessons = new LessonList();
         this.payments = new PaymentList(new Payment(DateTimeUtil.currentYearMonth(), getTotalAmount()));
-        this.paymentStatus = PaymentStatus.UNPAID;
+        this.paymentStatus = PaymentStatus.PAID;
         wireLessonListeners();
     }
 
@@ -121,6 +122,28 @@ public class Student extends Person {
     public TotalAmount getTotalAmount() {
         float f = lessons.getTotalAmountEarned(DateTimeUtil.currentYearMonth());
         return new TotalAmount(f);
+    }
+
+    public float getTotalAmountFloat() {
+        return lessons.getTotalAmountEarned(DateTimeUtil.currentYearMonth());
+    }
+
+    /**
+     * Returns the total amount unpaid by the student.
+     *
+     * @return a UnpaidAmount object with amount equivalent to the total of unpaid payments.
+     */
+    public UnpaidAmount getAmountDue() {
+        return payments.calculateUnpaidAmount();
+    }
+
+    /**
+     * Returns the total amount unpaid by the student.
+     *
+     * @return a float with amount equivalent to the total of unpaid payments.
+     */
+    public float getAmountDueFloat() {
+        return payments.calculateUnpaidAmountFloat();
     }
 
     /**

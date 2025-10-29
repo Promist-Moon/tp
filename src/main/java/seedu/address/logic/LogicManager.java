@@ -5,6 +5,7 @@ import java.nio.file.AccessDeniedException;
 import java.nio.file.Path;
 import java.util.logging.Logger;
 
+import javafx.beans.value.ObservableFloatValue;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.SortedList;
 import seedu.address.commons.core.GuiSettings;
@@ -86,6 +87,16 @@ public class LogicManager implements Logic {
         //by default, we show the lesson for today only
         model.updateFilteredLessonList(new TodaysLessonPredicate(DateTimeUtil.currentDay()));
         return model.getSortedFilteredLessons();
+    }
+
+    @Override
+    public ObservableFloatValue totalEarningsProperty() {
+        return model.totalEarningsProperty();
+    }
+
+    @Override
+    public ObservableFloatValue totalUnpaidProperty() {
+        return model.totalUnpaidProperty();
     }
 
     @Override

@@ -45,6 +45,8 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label paymentStatus;
     @FXML
+    private Label unpaidAmount;
+    @FXML
     private VBox lessonList;
 
     /**
@@ -69,20 +71,25 @@ public class PersonCard extends UiPart<Region> {
                     .sorted(Comparator.comparing(tag -> tag.tagName))
                     .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
             paymentStatus.setText(((Student) person).getPaymentStatus().toString());
+            unpaidAmount.setText(String.format("$" + student.getAmountDue()));
+            unpaidAmount.setVisible(true);
+            unpaidAmount.setManaged(true);
             switch (student.getPaymentStatus()) {
             case PAID:
                 paymentStatus.getStyleClass().add("payment-status-paid");
+                unpaidAmount.getStyleClass().add("cell_small_label_paid");
                 break;
             case UNPAID:
                 paymentStatus.getStyleClass().add("payment-status-unpaid");
+                unpaidAmount.getStyleClass().add("cell_small_label_unpaid");
                 break;
             case OVERDUE:
                 paymentStatus.getStyleClass().add("payment-status-overdue");
+                unpaidAmount.getStyleClass().add("cell_small_label_overdue");
                 break;
             default:
                 break;
             }
-
         } else {
             // Fallback: hide address and tags if not a Student
             address.setVisible(false);

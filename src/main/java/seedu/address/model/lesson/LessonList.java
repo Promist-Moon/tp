@@ -137,27 +137,6 @@ public class LessonList {
         return this.getSize() == 0;
     }
 
-
-    /**
-     * Returns the total duration of {@code Lesson} hours in a month.
-     * @param month of the query.
-     * @return the total number of {@code Lesson} hours.
-     */
-    public long getTotalHours(YearMonth month) {
-        long totalHours = 0;
-        for (Lesson l : lessons) {
-            Day day = l.getDay();
-
-            // count number of lessons in a month based on local month
-            int daysInMonth = DateTimeUtil.countDaysOfWeekInMonth(month, day);
-            long hoursPerLesson = l.getDurationLong();
-            long hoursPerMonth = daysInMonth * hoursPerLesson;
-
-            totalHours += hoursPerMonth;
-        }
-        return totalHours;
-    }
-
     /**
      * Checks if the specified lesson exists in this lesson list.
      *
@@ -243,9 +222,12 @@ public class LessonList {
      */
     @Override
     public String toString() {
+        if (this.isEmpty()) {
+            return "[no lesson]";
+        }
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < lessons.size(); i++) {
-            sb.append(i + 1).append(". ").append(lessons.get(i)).append("\n");
+            sb.append("\n").append(i + 1).append(". ").append(lessons.get(i).toString());
         }
         return sb.toString();
     }

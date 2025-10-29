@@ -53,7 +53,7 @@ public class EditLessonCommand extends Command {
             + "[" + PREFIX_RATE + "RATE] "
             + "[" + PREFIX_START_TIME + "START TIME "
             + PREFIX_END_TIME + "END TIME]...\n"
-            + "Example: " + COMMAND_WORD + " " + PREFIX_STUDENT_INDEX + " 1 " + PREFIX_LESSON_INDEX + " 2 "
+            + "Example: " + COMMAND_WORD + " " + PREFIX_STUDENT_INDEX + "1 " + PREFIX_LESSON_INDEX + "2 "
             + PREFIX_DAY + "5 "
             + PREFIX_RATE + "44";
 
