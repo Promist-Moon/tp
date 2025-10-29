@@ -62,9 +62,4 @@ public class StudentStub extends Student {
     public float getTotalAmountFloat() {
         return stubTotal;
     }
-
-    @Override
-    public float getAmountDueFloat() {
-        return stubUnpaid;
-    }
 }
