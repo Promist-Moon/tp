@@ -67,9 +67,10 @@ public class StartupRolloverHandler {
         new MonthlyRollover(model).compute(lastOpened, now);
 
         // Save changes
-        saveAddressBook("after rollover");
         userPrefs.setLastOpened(now);
         saveUserPrefs(userPrefs, "after rollover");
+        model.setUserPrefs(userPrefs);
+        saveAddressBook("after rollover");
     }
 
     /**
