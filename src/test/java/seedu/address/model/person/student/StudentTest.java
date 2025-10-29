@@ -47,8 +47,8 @@ public class StudentTest {
     void constructor_minimalFields_initializesDefaultFields() {
         assertNotNull(BOB.getLessonList());
         assertNotNull(BOB.getPayments());
-        assertEquals(Status.UNPAID, BOB.getPaymentListStatus());
-        assertEquals(PaymentStatus.UNPAID, BOB.getPaymentStatus());
+        assertEquals(Status.PAID, BOB.getPaymentListStatus());
+        assertEquals(PaymentStatus.PAID, BOB.getPaymentStatus());
     }
 
     @Test

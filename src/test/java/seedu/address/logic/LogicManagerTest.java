@@ -38,6 +38,7 @@ import seedu.address.storage.JsonUserPrefsStorage;
 import seedu.address.storage.StorageManager;
 import seedu.address.testutil.PaymentBuilder;
 import seedu.address.testutil.StudentBuilder;
+import seedu.address.testutil.stubs.StudentStub;
 
 public class LogicManagerTest {
     private static final IOException DUMMY_IO_EXCEPTION = new IOException("dummy IO exception");
@@ -114,19 +115,11 @@ public class LogicManagerTest {
         assertEquals(0.0f, earnings.get(), 1e-6);
         assertEquals(0.0f, unpaid.get(), 1e-6);
 
-        Payment payment = new PaymentBuilder()
-                .withYearMonth("2025-10")
-                .withTotalAmount(100.0f)
-                .withUnpaidAmount(40.0f)
-                .build();
-        PaymentList pl = new PaymentList(payment);
+        Student s = new StudentStub("Carol", 120f, 10f);
+        model.addPerson(s);
 
-        Student student = new StudentBuilder().withName("Bob").withPaymentList(pl).build();
-
-        model.addPerson(student);
-
-        assertEquals(100.0f, earnings.get(), 1e-6);
-        assertEquals(40.0f, unpaid.get(), 1e-6);
+        assertEquals(120f, earnings.get(), 1e-6);
+        assertEquals(10f, unpaid.get(), 1e-6);
     }
 
     /**
