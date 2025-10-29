@@ -192,8 +192,7 @@ public class Student {
 
     /**
      * Checks if this person is equal to another object.
-     * Two persons are considered equal if they have the same name, phone, and email,
-     * and are of the same subclass type.
+     * Two persons are considered equal if they have the same name, phone, email, address, and tags.
      *
      * @param other the object to compare with.
      * @return true if both objects represent the same person with identical identity fields.

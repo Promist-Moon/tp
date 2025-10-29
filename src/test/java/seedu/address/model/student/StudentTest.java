@@ -160,14 +160,6 @@ public class StudentTest {
         // different type -> returns false
         assertFalse(ALICE.equals(5));
 
-        // different subclass (Person vs Student) -> returns false
-        Student dummyPerson = new StudentBuilder()
-                .withName(ALICE.getName().fullName)
-                .withPhone(ALICE.getPhone().value)
-                .withEmail(ALICE.getEmail().value)
-                .build();
-        assertFalse(ALICE.equals(dummyPerson));
-
         // different person -> returns false
         assertFalse(ALICE.equals(BOB));
 
