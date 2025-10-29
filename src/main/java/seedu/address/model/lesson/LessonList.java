@@ -243,9 +243,12 @@ public class LessonList {
      */
     @Override
     public String toString() {
+        if (this.isEmpty()) {
+            return "[no lesson]";
+        }
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < lessons.size(); i++) {
-            sb.append(i + 1).append(". ").append(lessons.get(i)).append("\n");
+            sb.append("\n").append(i + 1).append(". ").append(lessons.get(i).toString());
         }
         return sb.toString();
     }
