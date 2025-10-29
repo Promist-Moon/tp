@@ -7,6 +7,10 @@ import seedu.address.model.lesson.LessonTime;
 import seedu.address.model.lesson.Level;
 import seedu.address.model.lesson.Rate;
 import seedu.address.model.lesson.Subject;
+import seedu.address.model.payment.Payment;
+import seedu.address.model.payment.PaymentList;
+import seedu.address.model.payment.TotalAmount;
+import seedu.address.model.payment.UnpaidAmount;
 import seedu.address.model.student.Email;
 import seedu.address.model.student.Name;
 import seedu.address.model.student.Student;
@@ -15,6 +19,7 @@ import seedu.address.model.student.Address;
 import seedu.address.model.student.tag.Tag;
 import seedu.address.model.util.SampleDataUtil;
 
+import java.time.YearMonth;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -35,6 +40,11 @@ public class StudentBuilder {
             LessonTime.ofLessonTime("10:00", "12:00"),
             new Rate("40")
     );
+    public static final Payment DEFAULT_PAYMENT = new Payment(
+            YearMonth.parse("2025-10"),
+            new TotalAmount(400f),
+            new UnpaidAmount(0f)
+    );
 
     private Name name;
     private Phone phone;
@@ -42,6 +52,7 @@ public class StudentBuilder {
     private Address address;
     private Set<Tag> tags;
     private LessonList ll = new LessonList();
+    private PaymentList pl = new PaymentList();
 
     /**
      * Creates a {@code PersonBuilder} with default details.
@@ -53,6 +64,7 @@ public class StudentBuilder {
         address = new Address(DEFAULT_ADDRESS);
         tags = new HashSet<>();
         ll.addLesson(DEFAULT_LESSON);
+        pl.addPayment(DEFAULT_PAYMENT);
     }
 
     /**
@@ -65,6 +77,7 @@ public class StudentBuilder {
         address = personToCopy.getAddress();
         tags = new HashSet<>(personToCopy.getTags());
         ll = personToCopy.getLessonList();
+        pl = personToCopy.getPayments();
     }
 
     /**
@@ -120,7 +133,15 @@ public class StudentBuilder {
      * Sets the {@code Lessonlist} of the {@code Person} that we are building.
      */
     public StudentBuilder withLessonList(LessonList ll) {
-        this.ll = ll;
+        this.ll = new LessonList(ll.getLessons());
+        return this;
+    }
+
+    /**
+     * Sets the {@code Paymentlist} of the {@code Person} that we are building.
+     */
+    public StudentBuilder withPaymentList(PaymentList pl) {
+        this.pl = pl;
         return this;
     }
 
@@ -130,12 +151,13 @@ public class StudentBuilder {
      * @return A new {@code Person} instance.
      */
     public Student build() {
-        return new DummyPerson(name, phone, email, address, tags, ll);
+        return new DummyPerson(name, phone, email, address, tags, ll, pl);
     }
 
     private static class DummyPerson extends Student {
-        DummyPerson(Name name, Phone phone, Email email, Address address, Set<Tag> tags, LessonList lessonList) {
-            super(name, phone, email, address, tags, lessonList);
+        DummyPerson(Name name, Phone phone, Email email, Address address, Set<Tag> tags, LessonList lessonList,
+                    PaymentList paymentList) {
+            super(name, phone, email, address, tags, lessonList, paymentList);
         }
     }
 }
