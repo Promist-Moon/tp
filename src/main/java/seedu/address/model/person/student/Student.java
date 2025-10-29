@@ -50,7 +50,7 @@ public class Student extends Person {
         this.tags.addAll(tags);
         this.lessons = new LessonList();
         this.payments = new PaymentList(new Payment(DateTimeUtil.currentYearMonth(), getTotalAmount()));
-        this.paymentStatus = PaymentStatus.UNPAID;
+        this.paymentStatus = PaymentStatus.PAID;
         wireLessonListeners();
     }
 
