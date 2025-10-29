@@ -135,9 +135,9 @@ public class EditLessonCommand extends Command {
         Level updatedLevel = editLessonDescriptor.getLevel().orElse(lessonToEdit.getLevel());
         Rate updatedRate = editLessonDescriptor.getRate().orElse(lessonToEdit.getRate());
         Subject updatedSubject = editLessonDescriptor.getSubject().orElse(lessonToEdit.getSubject());
-        Student student = lessonToEdit.getStudent();
         Lesson updatedLesson = new Lesson(updatedSubject, updatedLevel, updatedDay, updatedLessonTime, updatedRate);
-        updatedLesson.addStudent(student);
+
+        //updatedLesson.addStudent(student);
         return updatedLesson;
     }
 

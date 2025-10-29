@@ -115,7 +115,7 @@ public class EditCommand extends Command {
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(studentToEdit.getEmail());
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(studentToEdit.getAddress());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(studentToEdit.getTags());
-        LessonList lessons = studentToEdit.getLessonList();
+        LessonList lessons = new LessonList();
         PaymentList payments = studentToEdit.getPayments();
         return new Student(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags, lessons, payments);
     }

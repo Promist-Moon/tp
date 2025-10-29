@@ -23,6 +23,7 @@ public class Lesson {
     private LessonTime lessonTime;
     private Rate rate;
     private Address address;
+    private String studentName;
 
     /**
      * Every field must be present and not null.
@@ -34,6 +35,19 @@ public class Lesson {
         this.day = day;
         this.lessonTime = lessonTime;
         this.rate = rate;
+    }
+
+    /**
+     * Every field must be present and not null.
+     */
+    public Lesson(Subject subject, Level level, Day day, LessonTime lessonTime, Rate rate, String studentName) {
+        requireAllNonNull(subject, level, day, lessonTime, rate);
+        this.subject = subject;
+        this.level = level;
+        this.day = day;
+        this.lessonTime = lessonTime;
+        this.rate = rate;
+        this.studentName = studentName;
     }
 
     public Subject getSubject() {
@@ -84,6 +98,10 @@ public class Lesson {
         return student;
     }
 
+    public String getStudentName() {
+        return studentName;
+    }
+
     /**
      * Returns the amount earned in $ from one lesson per week.
      * This is the product of the hourly rate and the duration of the class in hours.
@@ -102,6 +120,7 @@ public class Lesson {
         requireAllNonNull(student);
         this.student = student;
         this.address = student.getAddress();
+        this.studentName = student.getName().toString();
     }
 
     /**

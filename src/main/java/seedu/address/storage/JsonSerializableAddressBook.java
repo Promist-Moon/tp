@@ -13,6 +13,7 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.lesson.Lesson;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.student.Student;
 
 /**
  * An Immutable AddressBook that is serializable to JSON format.
@@ -63,14 +64,14 @@ class JsonSerializableAddressBook {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_PERSON);
             }
             addressBook.addPerson(person);
-        }
-
-        for (JsonAdaptedLesson jsonAdaptedLesson : lessons) {
-            Lesson lesson = jsonAdaptedLesson.toModelType();
-            if (addressBook.hasLesson(lesson)) {
-                throw new IllegalValueException(MESSAGE_DUPLICATE_LESSON);
+            Student currentStudent = (Student) person;
+            ArrayList<Lesson> lessonList = currentStudent.getLessonList().getLessons();
+            for (Lesson lesson: lessonList) {
+                if (addressBook.hasLesson(lesson)) {
+                    throw new IllegalValueException(MESSAGE_DUPLICATE_LESSON);
+                }
+                addressBook.addLesson(lesson);
             }
-            addressBook.addLesson(lesson);
         }
         return addressBook;
     }
