@@ -4,13 +4,8 @@ import java.time.YearMonth;
 import java.util.HashSet;
 import java.util.Set;
 
-import seedu.address.model.lesson.Day;
 import seedu.address.model.lesson.Lesson;
 import seedu.address.model.lesson.LessonList;
-import seedu.address.model.lesson.LessonTime;
-import seedu.address.model.lesson.Level;
-import seedu.address.model.lesson.Rate;
-import seedu.address.model.lesson.Subject;
 import seedu.address.model.payment.Payment;
 import seedu.address.model.payment.PaymentList;
 import seedu.address.model.payment.TotalAmount;
@@ -27,25 +22,6 @@ import seedu.address.model.util.SampleDataUtil;
  * A utility class to help with building Person objects for testing.
  */
 public class StudentBuilder {
-
-    /*
-    public static final String DEFAULT_NAME = "Alice Pauline";
-    public static final String DEFAULT_PHONE = "85355255";
-    public static final String DEFAULT_EMAIL = "alice@example.com";
-    public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
-    public static final Lesson DEFAULT_LESSON = new Lesson(
-            Subject.fromString("Math"),
-            Level.fromString("1"),
-            new Day("1"),
-            LessonTime.ofLessonTime("10:00", "12:00"),
-            new Rate("40")
-    );
-    public static final Payment DEFAULT_PAYMENT = new Payment(
-            YearMonth.parse("2025-10"),
-            new TotalAmount(400f),
-            new UnpaidAmount(0f)
-    );
-    */
 
     public static final String DEFAULT_NAME = "Aaron Tan";
     public static final String DEFAULT_PHONE = "99978799";
