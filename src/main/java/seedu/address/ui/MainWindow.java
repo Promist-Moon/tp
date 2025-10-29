@@ -193,7 +193,6 @@ public class MainWindow extends UiPart<Stage> {
             CommandResult commandResult = logic.execute(commandText);
 
             if (commandResult.isShowingName()) {
-                lessonListPanel.toggleShowingStudentLesson(true);
                 lessonListPanel.updateLessonTitle(commandResult.getStudentName());
                 logic.execute(commandText);
             } else {
