@@ -11,8 +11,7 @@ import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.payment.exceptions.PaymentException;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.Student;
+import seedu.address.model.student.Student;
 
 /**
  * Marks all payments associated with the specified person as paid.
@@ -40,15 +39,15 @@ public class PayCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        List<Person> lastShownList = model.getFilteredPersonList();
+        List<Student> lastShownList = model.getFilteredPersonList();
 
         if (targetIndex.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 
-        Person studentToPay = lastShownList.get(targetIndex.getZeroBased());
+        Student studentToPay = lastShownList.get(targetIndex.getZeroBased());
         try {
-            Person paidStudent = makePayment(studentToPay);
+            Student paidStudent = makePayment(studentToPay);
             model.setPerson(studentToPay, paidStudent);
             model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
             return new CommandResult(String.format(MESSAGE_PAYMENT_SUCCESS, Messages.format(paidStudent)));
@@ -59,7 +58,7 @@ public class PayCommand extends Command {
         }
     }
 
-    private static Person makePayment(Person studentToPay) throws PaymentException {
+    private static Student makePayment(Student studentToPay) throws PaymentException {
         assert studentToPay != null;
 
         // edit for future iterations to accept only student objects straightaway

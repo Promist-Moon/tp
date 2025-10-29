@@ -10,7 +10,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.model.lesson.exceptions.DuplicateLessonException;
 import seedu.address.model.lesson.exceptions.LessonNotFoundException;
-import seedu.address.model.person.Person;
+import seedu.address.model.student.Student;
 
 /**
  * A list of lessons that enforces uniqueness between its elements and does not allow nulls.
@@ -21,7 +21,7 @@ import seedu.address.model.person.Person;
  *
  * Supports a minimal set of list operations.
  *
- * @see Person#isSamePerson(Person)
+ * @see Student#isSamePerson(Student)
  */
 public class UniqueLessonList implements Iterable<Lesson> {
 

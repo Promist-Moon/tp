@@ -1,4 +1,4 @@
-package seedu.address.model.person;
+package seedu.address.model.student;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -13,31 +13,31 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.testutil.PersonBuilder;
+import seedu.address.testutil.StudentBuilder;
 
 
 public class PersonTest {
 
     @Test
     public void constructor_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new PersonBuilder().withName(null).build());
-        assertThrows(NullPointerException.class, () -> new PersonBuilder().withPhone(null).build());
-        assertThrows(NullPointerException.class, () -> new PersonBuilder().withEmail(null).build());
+        assertThrows(NullPointerException.class, () -> new StudentBuilder().withName(null).build());
+        assertThrows(NullPointerException.class, () -> new StudentBuilder().withPhone(null).build());
+        assertThrows(NullPointerException.class, () -> new StudentBuilder().withEmail(null).build());
     }
 
     @Test
     public void equals() {
-        Person amy = new PersonBuilder()
+        Student amy = new StudentBuilder()
                 .withName(VALID_NAME_AMY)
                 .withPhone(VALID_PHONE_AMY)
                 .withEmail(VALID_EMAIL_AMY)
                 .build();
-        Person amyCopy = new PersonBuilder()
+        Student amyCopy = new StudentBuilder()
                 .withName(VALID_NAME_AMY)
                 .withPhone(VALID_PHONE_AMY)
                 .withEmail(VALID_EMAIL_AMY)
                 .build();
-        Person bob = new PersonBuilder()
+        Student bob = new StudentBuilder()
                 .withName(VALID_NAME_BOB)
                 .withPhone(VALID_PHONE_BOB)
                 .withEmail(VALID_EMAIL_BOB)
@@ -51,11 +51,11 @@ public class PersonTest {
 
     @Test
     public void hashCode_sameValues_sameHash() {
-        Person amy = new PersonBuilder().withName(VALID_NAME_AMY)
+        Student amy = new StudentBuilder().withName(VALID_NAME_AMY)
                 .withPhone(VALID_PHONE_AMY)
                 .withEmail(VALID_EMAIL_AMY)
                 .build();
-        Person amyCopy = new PersonBuilder().withName(VALID_NAME_AMY)
+        Student amyCopy = new StudentBuilder().withName(VALID_NAME_AMY)
                 .withPhone(VALID_PHONE_AMY)
                 .withEmail(VALID_EMAIL_AMY)
                 .build();
@@ -64,16 +64,16 @@ public class PersonTest {
 
     @Test
     public void isSamePerson() {
-        Person amy = new PersonBuilder().withName(VALID_NAME_AMY)
+        Student amy = new StudentBuilder().withName(VALID_NAME_AMY)
                 .withPhone(VALID_PHONE_AMY)
                 .withEmail(VALID_EMAIL_AMY)
                 .build();
-        Person amyCopyDifferentEmail = new PersonBuilder()
+        Student amyCopyDifferentEmail = new StudentBuilder()
                 .withName(VALID_NAME_AMY)
                 .withPhone(VALID_PHONE_AMY)
                 .withEmail(VALID_EMAIL_BOB) // purposely different
                 .build();
-        Person bob = new PersonBuilder().withName(VALID_NAME_BOB)
+        Student bob = new StudentBuilder().withName(VALID_NAME_BOB)
                 .withPhone(VALID_PHONE_BOB)
                 .withEmail(VALID_EMAIL_BOB)
                 .build();
@@ -86,7 +86,7 @@ public class PersonTest {
 
     @Test
     public void toString_containsCanonicalNameAndFields() {
-        Person amy = new PersonBuilder().withName(VALID_NAME_AMY)
+        Student amy = new StudentBuilder().withName(VALID_NAME_AMY)
                 .withPhone(VALID_PHONE_AMY)
                 .withEmail(VALID_EMAIL_AMY)
                 .build();
@@ -98,7 +98,7 @@ public class PersonTest {
 
     @Test
     public void toDisplayString_containsLabelsAndFields() {
-        Person amy = new PersonBuilder().withName(VALID_NAME_AMY)
+        Student amy = new StudentBuilder().withName(VALID_NAME_AMY)
                 .withPhone(VALID_PHONE_AMY)
                 .withEmail(VALID_EMAIL_AMY)
                 .build();

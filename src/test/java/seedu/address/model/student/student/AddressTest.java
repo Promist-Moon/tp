@@ -1,11 +1,11 @@
-package seedu.address.model.person.student;
+package seedu.address.model.student.student;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
-import seedu.address.model.person.Address;
+import seedu.address.model.student.Address;
 
 public class AddressTest {
 

@@ -7,7 +7,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.model.payment.Status;
-import seedu.address.model.person.PaymentStatus;
+import seedu.address.model.student.PaymentStatus;
 
 class StatusMapperTest {
 

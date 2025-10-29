@@ -14,11 +14,11 @@ import seedu.address.model.lesson.LessonTime;
 import seedu.address.model.lesson.Level;
 import seedu.address.model.lesson.Rate;
 import seedu.address.model.lesson.Subject;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Phone;
-import seedu.address.model.person.Address;
-import seedu.address.model.person.tag.Tag;
+import seedu.address.model.student.Email;
+import seedu.address.model.student.Name;
+import seedu.address.model.student.Phone;
+import seedu.address.model.student.Address;
+import seedu.address.model.student.tag.Tag;
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes.

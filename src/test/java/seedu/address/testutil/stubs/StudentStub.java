@@ -6,12 +6,12 @@ import java.util.Collections;
 import seedu.address.model.lesson.LessonList;
 import seedu.address.model.payment.Payment;
 import seedu.address.model.payment.PaymentList;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Phone;
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Student;
-import seedu.address.model.person.tag.Tag;
+import seedu.address.model.student.Email;
+import seedu.address.model.student.Name;
+import seedu.address.model.student.Phone;
+import seedu.address.model.student.Address;
+import seedu.address.model.student.Student;
+import seedu.address.model.student.tag.Tag;
 
 /**
  * A base Student stub that creates a null lesson and payment list.

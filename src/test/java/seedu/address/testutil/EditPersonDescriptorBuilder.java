@@ -5,13 +5,12 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.Phone;
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Student;
-import seedu.address.model.person.tag.Tag;
+import seedu.address.model.student.Email;
+import seedu.address.model.student.Name;
+import seedu.address.model.student.Student;
+import seedu.address.model.student.Phone;
+import seedu.address.model.student.Address;
+import seedu.address.model.student.tag.Tag;
 
 /**
  * A utility class to help with building EditPersonDescriptor objects.
@@ -31,7 +30,7 @@ public class EditPersonDescriptorBuilder {
     /**
      * Returns an {@code EditPersonDescriptor} with fields containing {@code person}'s details
      */
-    public EditPersonDescriptorBuilder(Person person) {
+    public EditPersonDescriptorBuilder(Student person) {
         descriptor = new EditPersonDescriptor();
         // Common fields from abstract Person
         descriptor.setName(person.getName());

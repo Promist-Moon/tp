@@ -3,8 +3,8 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 
 import seedu.address.model.Model;
-import seedu.address.model.person.PaymentStatus;
-import seedu.address.model.person.StudentMatchesPaymentStatusPredicate;
+import seedu.address.model.student.PaymentStatus;
+import seedu.address.model.student.StudentMatchesPaymentStatusPredicate;
 
 
 

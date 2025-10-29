@@ -1,4 +1,4 @@
-package seedu.address.model.person;
+package seedu.address.model.student;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
@@ -11,9 +11,7 @@ import java.util.Set;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.lesson.LessonList;
 import seedu.address.model.payment.PaymentList;
-import seedu.address.model.person.Address;
-import seedu.address.model.person.PaymentStatus;
-import seedu.address.model.person.tag.Tag;
+import seedu.address.model.student.tag.Tag;
 
 
 /**
@@ -21,7 +19,7 @@ import seedu.address.model.person.tag.Tag;
  * A Person stores basic identity details such as name, phone number, and email address.
  * Subclasses (e.g., Student, Parent) may include additional fields specific to their roles.
  */
-public class Person {
+public class Student {
 
     // Identity fields
     private final Name name;
@@ -37,7 +35,7 @@ public class Person {
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
+    public Student(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
         requireAllNonNull(name, phone, email, address, tags);
         this.name = name;
         this.phone = phone;
@@ -52,7 +50,7 @@ public class Person {
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags, LessonList ll) {
+    public Student(Name name, Phone phone, Email email, Address address, Set<Tag> tags, LessonList ll) {
         requireAllNonNull(name, phone, email, address, tags);
         this.name = name;
         this.phone = phone;
@@ -137,11 +135,11 @@ public class Person {
         }
 
         // might need to change
-        if (other == null || !(other instanceof Person)) {
+        if (other == null || !(other instanceof Student)) {
             return false;
         }
 
-        Person that = (Person) other;
+        Student that = (Student) other;
         return name.equals(that.name)
                 && phone.equals(that.phone)
                 && email.equals(that.email)
@@ -153,7 +151,7 @@ public class Person {
      * Returns true if both person have the same name.
      * This defines a weaker notion of equality between two persons.
      */
-    public boolean isSamePerson(Person otherPerson) {
+    public boolean isSamePerson(Student otherPerson) {
         if (otherPerson == this) {
             return true;
         }

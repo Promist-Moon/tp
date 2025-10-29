@@ -11,9 +11,7 @@ import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.lesson.Lesson;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.Student;
-
+import seedu.address.model.student.Student;
 
 
 /**
@@ -51,7 +49,7 @@ public class ModelStub implements Model {
     }
 
     @Override
-    public void addPerson(Person person) {
+    public void addPerson(Student person) {
         throw new AssertionError("This method should not be called.");
     }
 
@@ -66,22 +64,22 @@ public class ModelStub implements Model {
     }
 
     @Override
-    public boolean hasPerson(Person person) {
+    public boolean hasPerson(Student person) {
         throw new AssertionError("This method should not be called.");
     }
 
     @Override
-    public void deletePerson(Person target) {
+    public void deletePerson(Student target) {
         throw new AssertionError("This method should not be called.");
     }
 
     @Override
-    public void setPerson(Person target, Person editedPerson) {
+    public void setPerson(Student target, Student editedPerson) {
         throw new AssertionError("This method should not be called.");
     }
 
     @Override
-    public ObservableList<Person> getFilteredPersonList() {
+    public ObservableList<Student> getFilteredPersonList() {
         throw new AssertionError("This method should not be called.");
     }
 
@@ -96,7 +94,7 @@ public class ModelStub implements Model {
     }
 
     @Override
-    public void updateFilteredPersonList(Predicate<Person> predicate) {
+    public void updateFilteredPersonList(Predicate<Student> predicate) {
         throw new AssertionError("This method should not be called.");
     }
 

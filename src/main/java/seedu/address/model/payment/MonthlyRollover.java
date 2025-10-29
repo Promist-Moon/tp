@@ -8,8 +8,7 @@ import java.util.logging.Logger;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.Model;
 import seedu.address.model.payment.exceptions.PaymentException;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.Student;
+import seedu.address.model.student.Student;
 import seedu.address.model.util.DateTimeUtil;
 
 /**
@@ -65,7 +64,7 @@ public class MonthlyRollover {
      */
     private void rolloverForMonth(YearMonth yearMonth) {
         // Iterate over the full backing list to avoid filters hiding persons
-        for (Person person : model.getAddressBook().getPersonList()) {
+        for (Student person : model.getAddressBook().getPersonList()) {
             if (!(person instanceof Student)) {
                 continue;
             }
