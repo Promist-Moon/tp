@@ -19,13 +19,38 @@ public class CommandResult {
     /** The application should exit. */
     private final boolean exit;
 
+    /** The title of lesson list panel should show student's name. */
+    private final boolean showingName;
+
+    /** The student's name to show, if needed */
+    private final String studentName;
+
     /**
      * Constructs a {@code CommandResult} with the specified fields.
+     */
+    public CommandResult(String feedbackToUser, boolean showHelp, boolean exit,
+                         boolean showingName, String studentName) {
+        this.feedbackToUser = requireNonNull(feedbackToUser);
+        this.showHelp = showHelp;
+        this.exit = exit;
+        this.showingName = showingName;
+        this.studentName = studentName;
+    }
+
+    /**
+     * Constructs a {@code CommandResult} with specified feedbackToUser,
+     * showHelp and exit, with showingName default to false and
+     * studentName set to null.
+     * @param feedbackToUser
+     * @param showHelp
+     * @param exit
      */
     public CommandResult(String feedbackToUser, boolean showHelp, boolean exit) {
         this.feedbackToUser = requireNonNull(feedbackToUser);
         this.showHelp = showHelp;
         this.exit = exit;
+        this.showingName = false;
+        this.studentName = null;
     }
 
     /**
@@ -36,8 +61,24 @@ public class CommandResult {
         this(feedbackToUser, false, false);
     }
 
+    /**
+     * Constructs a {@code CommandResult} with the specified fields
+     * when there's a need to reset lesson list panel title.
+     */
+    public CommandResult(String feedbackToUser, boolean showingName, String name) {
+        this(feedbackToUser, false, false, showingName, name);
+    }
+
     public String getFeedbackToUser() {
         return feedbackToUser;
+    }
+
+    public boolean isShowingName() {
+        return showingName;
+    }
+
+    public String getStudentName() {
+        return studentName;
     }
 
     public boolean isShowHelp() {
