@@ -25,6 +25,7 @@ import static seedu.address.testutil.TypicalPersons.CARL;
 import static seedu.address.testutil.TypicalPersons.DANIEL;
 import static seedu.address.testutil.TypicalPersons.ELLE;
 import static seedu.address.testutil.TypicalPersons.FIONA;
+import static seedu.address.testutil.TypicalPersons.GEORGE;
 import static seedu.address.testutil.TypicalPersons.HANNAH;
 
 import java.time.YearMonth;
@@ -45,11 +46,10 @@ public class StudentTest {
 
     @Test
     void constructor_minimalFields_initializesDefaultFields() {
-        System.out.println(BOB.getLessonList().toString());
-        assertNotNull(BOB.getLessonList());
-        assertNotNull(BOB.getPayments());
-        assertEquals(PaymentStatus.PAID, BOB.getPaymentStatus());
-        assertEquals(Status.PAID, BOB.getPaymentListStatus());
+        assertNotNull(GEORGE.getLessonList());
+        assertNotNull(GEORGE.getPayments());
+        assertEquals(Status.PAID, GEORGE.getPaymentListStatus());
+        assertEquals(PaymentStatus.PAID, GEORGE.getPaymentStatus());
     }
 
     @Test
