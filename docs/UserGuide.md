@@ -245,6 +245,7 @@ Edits an existing student in the address book.
 Lists all the lessons taken by the specfied student.
 
 **Format:** `view INDEX`
+![view command](images/viewCommand.png)
 
 * List the lessons of the student at the specified `INDEX`.
 * The index refers to the index number shown in the displayed person list.
@@ -285,7 +286,7 @@ Deletes an existing lesson from a specific student.
 <box type="warning" seamless>
 
 **Caution:**
-To ensure that you delete the exact lesson from a selected student, you must use <b>view</b> command to view the student first, and specify the lesson index shown in the lesson list panel.
+To ensure that you delete the exact lesson from a selected student, you must use `view` command to view the student <b>first</b>, and specify the lesson index shown in the lesson list panel.
 Trying to delete a lesson before viewing the student's lesson (through `view` command) may result in a wrong lesson being deleted.
 </box>
 
