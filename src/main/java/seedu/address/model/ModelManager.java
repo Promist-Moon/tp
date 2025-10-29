@@ -274,10 +274,8 @@ public class ModelManager implements Model {
 
     private void recomputeTotalEarnings() {
         float sum = 0f;
-        for (Student p : addressBook.getPersonList()) {
-            if (p instanceof Student student) {
-                sum += student.getTotalAmountFloat();
-            }
+        for (Student student : addressBook.getPersonList()) {
+            sum += student.getTotalAmountFloat();
         }
         totalEarnings.set(sum);
     }
@@ -289,12 +287,10 @@ public class ModelManager implements Model {
 
     private void recomputeTotalUnpaid() {
         float sum = 0f;
-        for (Student p : addressBook.getPersonList()) {
-            if (p instanceof Student student) {
-                sum += student.getPayments().getPayments().stream()
+        for (Student student : addressBook.getPersonList()) {
+            sum += student.getPayments().getPayments().stream()
                         .map(Payment::getUnpaidAmountFloat)
                         .reduce(0f, Float::sum);
-            }
         }
         totalUnpaid.set(sum);
     }

@@ -97,12 +97,7 @@ public class EditCommand extends Command {
     private static Student createEditedPerson(Student personToEdit, EditPersonDescriptor editPersonDescriptor) {
         assert personToEdit != null;
 
-        if (personToEdit instanceof Student s) {
-            return createEditedStudent(s, editPersonDescriptor);
-        }
-
-        // if not Student (or Parent in future additions)
-        throw new IllegalArgumentException("Unsupported person: " + personToEdit.getClass().getSimpleName());
+        return createEditedStudent(personToEdit, editPersonDescriptor);
     }
 
     /**

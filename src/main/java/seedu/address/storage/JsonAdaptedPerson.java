@@ -70,21 +70,16 @@ class JsonAdaptedPerson {
         phone = source.getPhone().value;
         email = source.getEmail().value;
         this.type = (source instanceof Student) ? "student" : "parent";
-        if (source instanceof Student student) {
-            address = student.getAddress().value;
-            tags.addAll(student.getTags().stream()
-                    .map(JsonAdaptedTag::new)
-                    .collect(Collectors.toList()));
-            lessons.addAll(student.getLessonList().getLessons().stream()
-                    .map(JsonAdaptedLesson::new)
-                    .collect(Collectors.toList()));
-            payments.addAll(student.getPayments().getPayments().stream()
-                    .map(JsonAdaptedPayment::new)
-                    .collect(Collectors.toList()));
-        } else {
-            // For now only Student is supported; non-student persons will fail during toModelType() validation
-            address = null;
-        }
+        address = source.getAddress().value;
+        tags.addAll(source.getTags().stream()
+                .map(JsonAdaptedTag::new)
+                .collect(Collectors.toList()));
+        lessons.addAll(source.getLessonList().getLessons().stream()
+                .map(JsonAdaptedLesson::new)
+                .collect(Collectors.toList()));
+        payments.addAll(source.getPayments().getPayments().stream()
+                .map(JsonAdaptedPayment::new)
+                .collect(Collectors.toList()));
     }
 
     /**

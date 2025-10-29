@@ -51,51 +51,41 @@ public class PersonCard extends UiPart<Region> {
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
      */
-    public PersonCard(Student person, int displayedIndex) {
+    public PersonCard(Student student, int displayedIndex) {
         super(FXML);
-        this.person = person;
+        this.person = student;
         id.setText(displayedIndex + ". ");
-        name.setText(person.getName().fullName);
-        phone.setText(person.getPhone().value);
-        email.setText(person.getEmail().value);
-        // Support Student subclass only (Parent not implemented yet)
-        if (person instanceof Student student) {
-            address.setText(student.getAddress().value);
-            address.setVisible(true);
-            address.setManaged(true);
-            tags.getChildren().clear();
-            tags.setVisible(true);
-            tags.setManaged(true);
-            student.getTags().stream()
-                    .sorted(Comparator.comparing(tag -> tag.tagName))
-                    .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
-            paymentStatus.setText(((Student) person).getPaymentStatus().toString());
-            unpaidAmount.setText(String.format("$" + student.getAmountDue()));
-            unpaidAmount.setVisible(true);
-            unpaidAmount.setManaged(true);
-            switch (student.getPaymentStatus()) {
-            case PAID:
-                paymentStatus.getStyleClass().add("payment-status-paid");
-                unpaidAmount.getStyleClass().add("cell_small_label_paid");
-                break;
-            case UNPAID:
-                paymentStatus.getStyleClass().add("payment-status-unpaid");
-                unpaidAmount.getStyleClass().add("cell_small_label_unpaid");
-                break;
-            case OVERDUE:
-                paymentStatus.getStyleClass().add("payment-status-overdue");
-                unpaidAmount.getStyleClass().add("cell_small_label_overdue");
-                break;
-            default:
-                break;
-            }
-        } else {
-            // Fallback: hide address and tags if not a Student
-            address.setVisible(false);
-            address.setManaged(false);
-            tags.getChildren().clear();
-            tags.setVisible(false);
-            tags.setManaged(false);
+        name.setText(student.getName().fullName);
+        phone.setText(student.getPhone().value);
+        email.setText(student.getEmail().value);
+        address.setText(student.getAddress().value);
+        address.setVisible(true);
+        address.setManaged(true);
+        tags.getChildren().clear();
+        tags.setVisible(true);
+        tags.setManaged(true);
+        student.getTags().stream()
+                .sorted(Comparator.comparing(tag -> tag.tagName))
+                .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+        paymentStatus.setText(((Student) student).getPaymentStatus().toString());
+        unpaidAmount.setText(String.format("$" + student.getAmountDue()));
+        unpaidAmount.setVisible(true);
+        unpaidAmount.setManaged(true);
+        switch (student.getPaymentStatus()) {
+        case PAID:
+            paymentStatus.getStyleClass().add("payment-status-paid");
+            unpaidAmount.getStyleClass().add("cell_small_label_paid");
+            break;
+        case UNPAID:
+            paymentStatus.getStyleClass().add("payment-status-unpaid");
+            unpaidAmount.getStyleClass().add("cell_small_label_unpaid");
+            break;
+        case OVERDUE:
+            paymentStatus.getStyleClass().add("payment-status-overdue");
+            unpaidAmount.getStyleClass().add("cell_small_label_overdue");
+            break;
+        default:
+            break;
         }
     }
 }
