@@ -38,7 +38,7 @@ public class PaymentList {
         this.payments.add(payment);
 
         updateStatus();
-        findAndSetEarliestUnpaidYearMonth();
+        setEarliestUnpaidYearMonth();
     }
 
     /**
@@ -50,7 +50,7 @@ public class PaymentList {
         sortByYearMonth();
 
         updateStatus();
-        findAndSetEarliestUnpaidYearMonth();
+        setEarliestUnpaidYearMonth();
     }
 
     public int size() {
@@ -142,7 +142,7 @@ public class PaymentList {
         }
         sortByYearMonth();
         updateStatus();
-        findAndSetEarliestUnpaidYearMonth();
+        setEarliestUnpaidYearMonth();
     }
 
     /**
@@ -159,7 +159,7 @@ public class PaymentList {
         payments.add(payment);
         sortByYearMonth();
         updateStatus();
-        findAndSetEarliestUnpaidYearMonth();
+        setEarliestUnpaidYearMonth();
         return true;
     }
 
@@ -181,7 +181,7 @@ public class PaymentList {
         }
         sortByYearMonth();
         updateStatus();
-        setEarliestUnpaidYearmonth(findAndSetEarliestUnpaidYearMonth());
+        setEarliestUnpaidYearMonth();
         return replaced;
     }
 
@@ -246,7 +246,7 @@ public class PaymentList {
      * Returns the earlier (max YearMonth) unpaid payment's month, or null if none.
      * Manual method.
      */
-    public YearMonth findAndSetEarliestUnpaidYearMonth() {
+    public YearMonth findEarliestUnpaidYearMonth() {
         YearMonth earliest = null;
         for (Payment p : payments) {
             if (!p.isPaid()) {
@@ -256,10 +256,14 @@ public class PaymentList {
                 }
             }
         }
-        if (earliest != earliestUnpaidYearmonth) {
-            setEarliestUnpaidYearmonth(earliest);
-        }
         return earliest;
+    }
+
+    /**
+     * Set earliest unpaid year month.
+     */
+    public void setEarliestUnpaidYearMonth() {
+        this.earliestUnpaidYearmonth = findEarliestUnpaidYearMonth();
     }
 
     /**
@@ -277,7 +281,7 @@ public class PaymentList {
 
             // reset status
             updateStatus();
-            findAndSetEarliestUnpaidYearMonth();
+            setEarliestUnpaidYearMonth();
         } catch (PaymentException e) {
             throw e;
         }
