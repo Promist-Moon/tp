@@ -14,16 +14,15 @@ import seedu.address.model.lesson.Lesson;
 import seedu.address.model.lesson.LessonList;
 import seedu.address.model.payment.Payment;
 import seedu.address.model.payment.PaymentList;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.Phone;
-import seedu.address.model.person.student.Address;
-import seedu.address.model.person.student.Student;
-import seedu.address.model.person.student.tag.Tag;
+import seedu.address.model.student.Address;
+import seedu.address.model.student.Email;
+import seedu.address.model.student.Name;
+import seedu.address.model.student.Phone;
+import seedu.address.model.student.Student;
+import seedu.address.model.student.tag.Tag;
 
 /**
- * Jackson-friendly version of {@link Person}.
+ * Jackson-friendly version of {@link Student}.
  */
 class JsonAdaptedPerson {
 
@@ -66,26 +65,21 @@ class JsonAdaptedPerson {
     /**
      * Converts a given {@code Person} into this class for Jackson use.
      */
-    public JsonAdaptedPerson(Person source) {
+    public JsonAdaptedPerson(Student source) {
         name = source.getName().fullName;
         phone = source.getPhone().value;
         email = source.getEmail().value;
         this.type = (source instanceof Student) ? "student" : "parent";
-        if (source instanceof Student student) {
-            address = student.getAddress().value;
-            tags.addAll(student.getTags().stream()
-                    .map(JsonAdaptedTag::new)
-                    .collect(Collectors.toList()));
-            lessons.addAll(student.getLessonList().getLessons().stream()
-                    .map(JsonAdaptedLesson::new)
-                    .collect(Collectors.toList()));
-            payments.addAll(student.getPayments().getPayments().stream()
-                    .map(JsonAdaptedPayment::new)
-                    .collect(Collectors.toList()));
-        } else {
-            // For now only Student is supported; non-student persons will fail during toModelType() validation
-            address = null;
-        }
+        address = source.getAddress().value;
+        tags.addAll(source.getTags().stream()
+                .map(JsonAdaptedTag::new)
+                .collect(Collectors.toList()));
+        lessons.addAll(source.getLessonList().getLessons().stream()
+                .map(JsonAdaptedLesson::new)
+                .collect(Collectors.toList()));
+        payments.addAll(source.getPayments().getPayments().stream()
+                .map(JsonAdaptedPayment::new)
+                .collect(Collectors.toList()));
     }
 
     /**
@@ -93,7 +87,7 @@ class JsonAdaptedPerson {
      *
      * @throws IllegalValueException if there were any data constraints violated in the adapted person.
      */
-    public Person toModelType() throws IllegalValueException {
+    public Student toModelType() throws IllegalValueException {
         final List<Tag> personTags = new ArrayList<>();
         for (JsonAdaptedTag tag : tags) {
             personTags.add(tag.toModelType());

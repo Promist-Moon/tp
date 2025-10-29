@@ -17,8 +17,7 @@ import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.lesson.Lesson;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.student.Student;
+import seedu.address.model.student.Student;
 
 /**
  * Adds a lesson to the address book.
@@ -69,14 +68,14 @@ public class AddLessonCommand extends Command {
         if (model.hasLesson(toAdd)) {
             throw new CommandException(MESSAGE_DUPLICATE_LESSON);
         }
-        List<Person> lastShownList = model.getFilteredPersonList();
+        List<Student> lastShownList = model.getFilteredPersonList();
 
         // need to check if index is a student
         if (targetIndex.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 
-        Person person = lastShownList.get(targetIndex.getZeroBased());
+        Student person = lastShownList.get(targetIndex.getZeroBased());
         if (person instanceof Student) {
             Student studentToAddLesson = (Student) person;
 

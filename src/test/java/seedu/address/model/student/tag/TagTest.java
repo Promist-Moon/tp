@@ -1,4 +1,4 @@
-package seedu.address.model.person.student.tag;
+package seedu.address.model.student.tag;
 
 import static seedu.address.testutil.Assert.assertThrows;
 

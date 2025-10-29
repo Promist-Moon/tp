@@ -18,8 +18,7 @@ import seedu.address.model.lesson.Lesson;
 import seedu.address.model.lesson.LessonList;
 import seedu.address.model.lesson.LessonTimeComparator;
 import seedu.address.model.payment.Payment;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.student.Student;
+import seedu.address.model.student.Student;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -29,7 +28,7 @@ public class ModelManager implements Model {
 
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
-    private final FilteredList<Person> filteredPersons;
+    private final FilteredList<Student> filteredPersons;
     private final FilteredList<Lesson> filteredLessons;
     private final SortedList<Lesson> sortedFilteredLessons;
     private final ReadOnlyFloatWrapper totalEarnings = new ReadOnlyFloatWrapper(0.0f);
@@ -105,20 +104,20 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public boolean hasPerson(Person person) {
+    public boolean hasPerson(Student person) {
         requireNonNull(person);
         return addressBook.hasPerson(person);
     }
 
     @Override
-    public void deletePerson(Person target) {
+    public void deletePerson(Student target) {
         addressBook.removePerson(target);
         recomputeTotalEarnings();
         recomputeTotalUnpaid();
     }
 
     @Override
-    public void addPerson(Person person) {
+    public void addPerson(Student person) {
         addressBook.addPerson(person);
         updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         recomputeTotalEarnings();
@@ -126,7 +125,7 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void setPerson(Person target, Person editedPerson) {
+    public void setPerson(Student target, Student editedPerson) {
         requireAllNonNull(target, editedPerson);
 
         addressBook.setPerson(target, editedPerson);
@@ -141,12 +140,12 @@ public class ModelManager implements Model {
      * {@code versionedAddressBook}
      */
     @Override
-    public ObservableList<Person> getFilteredPersonList() {
+    public ObservableList<Student> getFilteredPersonList() {
         return filteredPersons;
     }
 
     @Override
-    public void updateFilteredPersonList(Predicate<Person> predicate) {
+    public void updateFilteredPersonList(Predicate<Student> predicate) {
         requireNonNull(predicate);
         filteredPersons.setPredicate(predicate);
     }
@@ -275,10 +274,8 @@ public class ModelManager implements Model {
 
     private void recomputeTotalEarnings() {
         float sum = 0f;
-        for (Person p : addressBook.getPersonList()) {
-            if (p instanceof Student student) {
-                sum += student.getTotalAmountFloat();
-            }
+        for (Student student : addressBook.getPersonList()) {
+            sum += student.getTotalAmountFloat();
         }
         totalEarnings.set(sum);
     }
@@ -290,12 +287,10 @@ public class ModelManager implements Model {
 
     private void recomputeTotalUnpaid() {
         float sum = 0f;
-        for (Person p : addressBook.getPersonList()) {
-            if (p instanceof Student student) {
-                sum += student.getPayments().getPayments().stream()
+        for (Student student : addressBook.getPersonList()) {
+            sum += student.getPayments().getPayments().stream()
                         .map(Payment::getUnpaidAmountFloat)
                         .reduce(0f, Float::sum);
-            }
         }
         totalUnpaid.set(sum);
     }

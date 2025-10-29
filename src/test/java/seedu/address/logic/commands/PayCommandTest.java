@@ -17,7 +17,7 @@ import seedu.address.logic.Messages;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.person.Person;
+import seedu.address.model.student.Student;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for
@@ -29,7 +29,7 @@ public class PayCommandTest {
 
     @Test
     public void execute_alreadyPaid_throwsCommandException() {
-        Person target = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        Student target = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
 
         PayCommand payCommand = new PayCommand(INDEX_FIRST_PERSON);
 
@@ -40,7 +40,7 @@ public class PayCommandTest {
     // Commented out as current person is marked as PAID
     @Test
     public void execute_validIndexUnfilteredList_success() {
-        Person personToPay = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        Student personToPay = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         PayCommand payCommand = new PayCommand(INDEX_FIRST_PERSON);
 
         String expectedMessage = String.format(PayCommand.MESSAGE_PAYMENT_SUCCESS,

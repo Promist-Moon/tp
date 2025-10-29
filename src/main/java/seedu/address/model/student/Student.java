@@ -1,4 +1,4 @@
-package seedu.address.model.person.student;
+package seedu.address.model.student;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
@@ -11,28 +11,27 @@ import java.util.Set;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.lesson.LessonList;
-import seedu.address.model.payment.Payment;
 import seedu.address.model.payment.PaymentList;
 import seedu.address.model.payment.Status;
 import seedu.address.model.payment.TotalAmount;
 import seedu.address.model.payment.UnpaidAmount;
 import seedu.address.model.payment.exceptions.PaymentException;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.Phone;
-import seedu.address.model.person.exceptions.PaymentStatusUpdateException;
-import seedu.address.model.person.student.tag.Tag;
+import seedu.address.model.student.exceptions.PaymentStatusUpdateException;
+import seedu.address.model.student.tag.Tag;
 import seedu.address.model.util.DateTimeUtil;
 import seedu.address.model.util.mapping.StatusMapper;
 
 /**
- * Represents a Student in the address book.
- * Guarantees: details are present and not null, field values are validated, immutable.
+ * Represents a Person in the address book.
+ * A Person stores basic identity details such as name, phone number, and email address.
+ * Subclasses (e.g., Student, Parent) may include additional fields specific to their roles.
  */
-public class Student extends Person {
+public class Student {
 
-    // Data fields
+    // Identity fields
+    private final Name name;
+    private final Phone phone;
+    private final Email email;
     private final Address address;
     private final Set<Tag> tags = new HashSet<>();
     private final LessonList lessons;
@@ -44,12 +43,14 @@ public class Student extends Person {
      * Every field must be present and not null.
      */
     public Student(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
-        super(name, phone, email);
-        requireAllNonNull(address, tags);
+        requireAllNonNull(name, phone, email, address, tags);
+        this.name = name;
+        this.phone = phone;
+        this.email = email;
         this.address = address;
         this.tags.addAll(tags);
         this.lessons = new LessonList();
-        this.payments = new PaymentList(new Payment(DateTimeUtil.currentYearMonth(), getTotalAmount()));
+        this.payments = new PaymentList();
         this.paymentStatus = PaymentStatus.PAID;
         wireLessonListeners();
     }
@@ -58,14 +59,28 @@ public class Student extends Person {
      * Every field must be present and not null.
      */
     public Student(Name name, Phone phone, Email email, Address address, Set<Tag> tags, LessonList ll, PaymentList pl) {
-        super(name, phone, email);
-        requireAllNonNull(address, tags);
+        requireAllNonNull(name, phone, email, address, tags);
+        this.name = name;
+        this.phone = phone;
+        this.email = email;
         this.address = address;
         this.tags.addAll(tags);
         this.lessons = new LessonList(ll.getLessons());
         this.payments = pl;
         this.paymentStatus = mapStatus(getPaymentListStatus());
         wireLessonListeners();
+    }
+
+    public Name getName() {
+        return name;
+    }
+
+    public Phone getPhone() {
+        return phone;
+    }
+
+    public Email getEmail() {
+        return email;
     }
 
     public Address getAddress() {
@@ -88,7 +103,7 @@ public class Student extends Person {
     }
 
     /**
-     * Returns a mutable ArrayList of Payments.
+     * Returns a mutable TreeMap of Payments.
      */
     public PaymentList getPayments() {
         return this.payments;
@@ -175,10 +190,35 @@ public class Student extends Person {
     }
 
     /**
-     * Returns true if both students have the same name.
+     * Checks if this person is equal to another object.
+     * Two persons are considered equal if they have the same name, phone, email, address, and tags.
+     *
+     * @param other the object to compare with.
+     * @return true if both objects represent the same person with identical identity fields.
+     */
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        // might need to change
+        if (other == null || !(other instanceof Student)) {
+            return false;
+        }
+
+        Student that = (Student) other;
+        return name.equals(that.name)
+                && phone.equals(that.phone)
+                && email.equals(that.email)
+                && address.equals(that.address)
+                && tags.equals(that.tags);
+    }
+
+    /**
+     * Returns true if both person have the same name.
      * This defines a weaker notion of equality between two persons.
      */
-    public boolean isSamePerson(Person otherPerson) {
+    public boolean isSamePerson(Student otherPerson) {
         if (otherPerson == this) {
             return true;
         }
@@ -187,58 +227,44 @@ public class Student extends Person {
                 && otherPerson.getName().equals(getName());
     }
 
-    /**
-     * Returns true if both persons have the same identity and data fields.
-     * This defines a stronger notion of equality between two persons.
-     */
-    @Override
-    public boolean equals(Object other) {
-        if (other == this) {
-            return true;
-        }
-
-        // compare Person identity
-        if (!super.equals(other)) {
-            return false;
-        }
-
-        // instanceof handles nulls
-        if (!(other instanceof Student)) {
-            return false;
-        }
-
-        Student otherStudent = (Student) other;
-        return address.equals(otherStudent.address)
-                && tags.equals(otherStudent.tags);
-    }
-
-
-    @Override
     public int hashCode() {
-        // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(super.hashCode(), address, tags);
+        return Objects.hash(name, phone, email, address, tags);
     }
 
-    @Override
+
+    /**
+     * Returns a user-facing string for display.
+     * Subclasses may override this method to append their own fields.
+     */
     public String toDisplayString() {
-        final StringBuilder builder = new StringBuilder(super.toDisplayString());
-        builder.append("; Address: ").append(address)
+        final StringBuilder builder = new StringBuilder();
+        builder.append("Name: ").append(name)
+                .append("; Phone: ").append(phone)
+                .append("; Email: ").append(email)
+                .append("; Address: ").append(address)
                 .append("; Lessons: ").append(this.getLessonList().toString())
                 .append("; Tags: ");
         this.getTags().forEach(builder::append);
         return builder.toString();
     }
 
-    @Override
+    /**
+     * Returns a string representation of this {@code Person} for debugging purposes.
+     * The string includes the person's {@code Name}, {@code Phone}, and {@code Email}, and is mainly intended
+     * for logging or internal inspection rather than user display.
+     *
+     * @return a string representation of this person with their core identity fields.
+     */
     public String toString() {
         return new ToStringBuilder(this)
-                .add("name", getName())
-                .add("phone", getPhone())
-                .add("email", getEmail())
+                .add("name", name)
+                .add("phone", phone)
+                .add("email", email)
                 .add("address", address)
                 .add("lessons", lessons)
                 .add("tags", tags)
                 .toString();
+
     }
 
     /*
@@ -273,5 +299,5 @@ public class Student extends Person {
             throw new PaymentStatusUpdateException();
         }
     }
-
 }
+

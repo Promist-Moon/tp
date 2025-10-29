@@ -28,11 +28,10 @@ import java.util.List;
 import seedu.address.model.AddressBook;
 import seedu.address.model.lesson.LessonList;
 import seedu.address.model.payment.PaymentList;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.student.Student;
+import seedu.address.model.student.Student;
 
 /**
- * A utility class containing a list of {@link Person} objects to be used in tests.
+ * A utility class containing a list of {@link Student} objects to be used in tests.
  */
 public class TypicalPersons {
 
@@ -93,14 +92,14 @@ public class TypicalPersons {
      */
     public static AddressBook getTypicalAddressBook() {
         AddressBook ab = new AddressBook();
-        for (Person person : getTypicalPersons()) {
+        for (Student person : getTypicalPersons()) {
             ab.addPerson(person);
         }
         ab.setLessons(getTypicalLessons());
         return ab;
     }
 
-    public static List<? extends Person> getTypicalPersons() {
+    public static List<? extends Student> getTypicalPersons() {
         return new ArrayList<>(Arrays.asList(ALICE, BENSON, CARL, DANIEL, ELLE, FIONA, GEORGE));
     }
 }

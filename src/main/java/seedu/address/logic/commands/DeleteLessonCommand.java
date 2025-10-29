@@ -14,8 +14,7 @@ import seedu.address.model.Model;
 import seedu.address.model.lesson.Lesson;
 import seedu.address.model.lesson.LessonList;
 import seedu.address.model.lesson.exceptions.LessonException;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.student.Student;
+import seedu.address.model.student.Student;
 
 /**
  * Represents a command to delete a lesson from a student's lesson list.
@@ -65,14 +64,14 @@ public class DeleteLessonCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        List<Person> studentList = model.getFilteredPersonList();
+        List<Student> studentList = model.getFilteredPersonList();
         Student currStudent;
 
         if (studentIndex.getZeroBased() >= studentList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 
-        Person student = studentList.get(studentIndex.getZeroBased());
+        Student student = studentList.get(studentIndex.getZeroBased());
 
         if (student instanceof Student) {
             currStudent = (Student) student;

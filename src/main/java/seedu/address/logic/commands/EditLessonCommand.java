@@ -32,8 +32,7 @@ import seedu.address.model.lesson.Rate;
 import seedu.address.model.lesson.Subject;
 import seedu.address.model.lesson.exceptions.DuplicateLessonException;
 import seedu.address.model.lesson.exceptions.LessonException;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.student.Student;
+import seedu.address.model.student.Student;
 
 /**
  * Edits the details of an existing lesson in the address book.
@@ -82,7 +81,7 @@ public class EditLessonCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        List<Person> lastShownList = model.getFilteredPersonList();
+        List<Student> lastShownList = model.getFilteredPersonList();
         // Initialising student
         Student student;
 
@@ -90,7 +89,7 @@ public class EditLessonCommand extends Command {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 
-        Person person = lastShownList.get(studentIndex.getZeroBased());
+        Student person = lastShownList.get(studentIndex.getZeroBased());
 
         if (person instanceof Student) {
             student = (Student) person;

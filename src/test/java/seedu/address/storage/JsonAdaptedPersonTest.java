@@ -12,13 +12,11 @@ import java.util.stream.Collectors;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.Phone;
-import seedu.address.model.person.student.Address;
-import seedu.address.model.person.student.Student;
-import seedu.address.testutil.PersonBuilder;
+import seedu.address.model.student.Address;
+import seedu.address.model.student.Email;
+import seedu.address.model.student.Name;
+import seedu.address.model.student.Phone;
+import seedu.address.model.student.Student;
 
 public class JsonAdaptedPersonTest {
     private static final String INVALID_NAME = "R@chel";
@@ -39,20 +37,6 @@ public class JsonAdaptedPersonTest {
     public void toModelType_validPersonDetails_returnsPerson() throws Exception {
         JsonAdaptedPerson person = new JsonAdaptedPerson(BENSON);
         assertEquals(BENSON, person.toModelType());
-    }
-
-
-    @Test
-    public void constructor_nonStudent_setsAddressNull() {
-        // Create a simple non-Student Person using PersonBuilder (DummyPerson)
-        Person dummyPerson = new PersonBuilder().build();
-
-        // Build a JsonAdaptedPerson from this dummy
-        JsonAdaptedPerson jsonPerson = new JsonAdaptedPerson(dummyPerson);
-
-        // Since non-Student persons have no address, the address field should be null
-        // When we call toModelType(), it should throw because address == null for student subtype
-        assertThrows(IllegalValueException.class, jsonPerson::toModelType);
     }
 
     @Test
@@ -156,7 +140,7 @@ public class JsonAdaptedPersonTest {
         JsonAdaptedPerson person =
                 new JsonAdaptedPerson(null, VALID_NAME, VALID_PHONE,
                         VALID_EMAIL, VALID_ADDRESS, VALID_TAGS, null, null);
-        Person result = person.toModelType();
+        Student result = person.toModelType();
         assertEquals(Student.class, result.getClass());
     }
 

@@ -1,4 +1,4 @@
-package seedu.address.model.person.student;
+package seedu.address.model.student;
 
 /**
  * Represents the payment status of a student for a specific month.

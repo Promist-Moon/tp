@@ -1,33 +1,39 @@
 package seedu.address.testutil;
 
-import static seedu.address.testutil.TypicalLessons.Y3_MATH;
-
 import java.time.YearMonth;
 import java.util.HashSet;
 import java.util.Set;
 
+import seedu.address.model.lesson.Lesson;
 import seedu.address.model.lesson.LessonList;
 import seedu.address.model.payment.Payment;
 import seedu.address.model.payment.PaymentList;
 import seedu.address.model.payment.TotalAmount;
 import seedu.address.model.payment.UnpaidAmount;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Phone;
-import seedu.address.model.person.student.Address;
-import seedu.address.model.person.student.Student;
-import seedu.address.model.person.student.tag.Tag;
+import seedu.address.model.student.Address;
+import seedu.address.model.student.Email;
+import seedu.address.model.student.Name;
+import seedu.address.model.student.Phone;
+import seedu.address.model.student.Student;
+import seedu.address.model.student.tag.Tag;
 import seedu.address.model.util.SampleDataUtil;
 
 /**
- * A utility class to help with building Student objects.
+ * A utility class to help with building Person objects for testing.
  */
 public class StudentBuilder {
 
-    public static final String DEFAULT_NAME = "Amy Bee";
-    public static final String DEFAULT_PHONE = "85355255";
-    public static final String DEFAULT_EMAIL = "amy@gmail.com";
-    public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
+    public static final String DEFAULT_NAME = "Aaron Tan";
+    public static final String DEFAULT_PHONE = "99978799";
+    public static final String DEFAULT_EMAIL = "aarontan@example.com";
+    public static final String DEFAULT_ADDRESS = "666, NUS School of Computing, #08-111";
+    public static final Lesson DEFAULT_LESSON = new LessonBuilder()
+            .withSubject("Math")
+            .withLevel("5")
+            .withDay("7")
+            .withRate("100")
+            .withLessonTime("21:30", "23:59")
+            .build();
     public static final Payment DEFAULT_PAYMENT = new Payment(
             YearMonth.parse("2025-10"),
             new TotalAmount(400f),
@@ -41,8 +47,9 @@ public class StudentBuilder {
     private Set<Tag> tags;
     private LessonList ll = new LessonList();
     private PaymentList pl = new PaymentList();
+
     /**
-     * Creates a {@code StudentBuilder} with the default details.
+     * Creates a {@code StudentBuilder} with default details. This student is not in the typical addressbook.
      */
     public StudentBuilder() {
         name = new Name(DEFAULT_NAME);
@@ -50,25 +57,28 @@ public class StudentBuilder {
         email = new Email(DEFAULT_EMAIL);
         address = new Address(DEFAULT_ADDRESS);
         tags = new HashSet<>();
-        ll.addLesson(Y3_MATH);
+        ll.addLesson(DEFAULT_LESSON);
         pl.addPayment(DEFAULT_PAYMENT);
     }
 
     /**
-     * Initializes the StudentBuilder with the data of {@code personToCopy}.
+     * Initializes the StudentBuilder with the data of {@code studentToCopy}.
      */
-    public StudentBuilder(Student personToCopy) {
-        name = personToCopy.getName();
-        phone = personToCopy.getPhone();
-        email = personToCopy.getEmail();
-        address = personToCopy.getAddress();
-        tags = new HashSet<>(personToCopy.getTags());
-        ll = personToCopy.getLessonList();
-        pl = personToCopy.getPayments();
+    public StudentBuilder(Student studentToCopy) {
+        name = studentToCopy.getName();
+        phone = studentToCopy.getPhone();
+        email = studentToCopy.getEmail();
+        address = studentToCopy.getAddress();
+        tags = new HashSet<>(studentToCopy.getTags());
+        ll = studentToCopy.getLessonList();
+        pl = studentToCopy.getPayments();
     }
 
     /**
      * Sets the {@code Name} of the {@code Student} that we are building.
+     *
+     * @param name The name to set.
+     * @return This {@code StudentBuilder} instance for chaining.
      */
     public StudentBuilder withName(String name) {
         this.name = new Name(name);
@@ -76,7 +86,7 @@ public class StudentBuilder {
     }
 
     /**
-     * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code Person} that we are building.
+     * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code Student} that we are building.
      */
     public StudentBuilder withTags(String ... tags) {
         this.tags = SampleDataUtil.getTagSet(tags);
@@ -93,6 +103,9 @@ public class StudentBuilder {
 
     /**
      * Sets the {@code Phone} of the {@code Student} that we are building.
+     *
+     * @param phone The phone to set.
+     * @return This {@code StudentBuilder} instance for chaining.
      */
     public StudentBuilder withPhone(String phone) {
         this.phone = new Phone(phone);
@@ -100,7 +113,10 @@ public class StudentBuilder {
     }
 
     /**
-     * Sets the {@code Email} of the {@code Person} that we are building.
+     * Sets the {@code Email} of the {@code Student} that we are building.
+     *
+     * @param email The email to set.
+     * @return This {@code StudentBuilder} instance for chaining.
      */
     public StudentBuilder withEmail(String email) {
         this.email = new Email(email);
@@ -108,7 +124,7 @@ public class StudentBuilder {
     }
 
     /**
-     * Sets the {@code Lessonlist} of the {@code Person} that we are building.
+     * Sets the {@code Lessonlist} of the {@code Student} that we are building.
      */
     public StudentBuilder withLessonList(LessonList ll) {
         this.ll = new LessonList(ll.getLessons());
@@ -116,15 +132,26 @@ public class StudentBuilder {
     }
 
     /**
-     * Sets the {@code Paymentlist} of the {@code Person} that we are building.
+     * Sets the {@code PaymentList} of the {@code Student} that we are building.
      */
     public StudentBuilder withPaymentList(PaymentList pl) {
         this.pl = pl;
         return this;
     }
 
+    /**
+     * Returns a new {@code Student} with the specified attributes.
+     *
+     * @return A new {@code Student} instance.
+     */
     public Student build() {
-        return new Student(name, phone, email, address, tags, ll, pl);
+        return new DummyPerson(name, phone, email, address, tags, ll, pl);
     }
 
+    private static class DummyPerson extends Student {
+        DummyPerson(Name name, Phone phone, Email email, Address address, Set<Tag> tags, LessonList lessonList,
+                    PaymentList paymentList) {
+            super(name, phone, email, address, tags, lessonList, paymentList);
+        }
+    }
 }

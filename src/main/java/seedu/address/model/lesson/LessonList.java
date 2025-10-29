@@ -1,5 +1,6 @@
 package seedu.address.model.lesson;
 
+import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.time.YearMonth;
@@ -147,12 +148,8 @@ public class LessonList {
      * @return true if the lesson is found in the list; false otherwise or if an exception occurs
      */
     public boolean hasLesson(Lesson lesson) {
-        for (Lesson lesson1 : lessons) {
-            if (lesson1.equals(lesson)) {
-                return true;
-            }
-        }
-        return false;
+        requireNonNull(lesson);
+        return lessons.stream().anyMatch(lesson::equals);
     }
 
     /**

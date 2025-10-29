@@ -1,7 +1,7 @@
 package seedu.address.model.util.mapping;
 
 import seedu.address.model.payment.Status;
-import seedu.address.model.person.student.PaymentStatus;
+import seedu.address.model.student.PaymentStatus;
 
 /**
  * A mapper that converts a {@link Status} enum value into a {@link PaymentStatus} enum valye

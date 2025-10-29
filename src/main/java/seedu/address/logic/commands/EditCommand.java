@@ -23,13 +23,12 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.lesson.LessonList;
 import seedu.address.model.payment.PaymentList;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.Phone;
-import seedu.address.model.person.student.Address;
-import seedu.address.model.person.student.Student;
-import seedu.address.model.person.student.tag.Tag;
+import seedu.address.model.student.Address;
+import seedu.address.model.student.Email;
+import seedu.address.model.student.Name;
+import seedu.address.model.student.Phone;
+import seedu.address.model.student.Student;
+import seedu.address.model.student.tag.Tag;
 
 /**
  * Edits the details of an existing person in the address book.
@@ -73,14 +72,14 @@ public class EditCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        List<Person> lastShownList = model.getFilteredPersonList();
+        List<Student> lastShownList = model.getFilteredPersonList();
 
         if (index.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 
-        Person personToEdit = lastShownList.get(index.getZeroBased());
-        Person editedPerson = createEditedPerson(personToEdit, editPersonDescriptor);
+        Student personToEdit = lastShownList.get(index.getZeroBased());
+        Student editedPerson = createEditedPerson(personToEdit, editPersonDescriptor);
 
         if (!personToEdit.isSamePerson(editedPerson) && model.hasPerson(editedPerson)) {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
@@ -95,15 +94,10 @@ public class EditCommand extends Command {
      * Creates and returns a {@code Person} edited with {@code editPersonDescriptor}.
      * Dispatches to subtype-specific logic based on the runtime type.
      */
-    private static Person createEditedPerson(Person personToEdit, EditPersonDescriptor editPersonDescriptor) {
+    private static Student createEditedPerson(Student personToEdit, EditPersonDescriptor editPersonDescriptor) {
         assert personToEdit != null;
 
-        if (personToEdit instanceof Student s) {
-            return createEditedStudent(s, editPersonDescriptor);
-        }
-
-        // if not Student (or Parent in future additions)
-        throw new IllegalArgumentException("Unsupported person: " + personToEdit.getClass().getSimpleName());
+        return createEditedStudent(personToEdit, editPersonDescriptor);
     }
 
     /**

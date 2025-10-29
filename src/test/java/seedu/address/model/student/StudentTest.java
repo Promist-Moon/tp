@@ -1,4 +1,4 @@
-package seedu.address.model.person.student;
+package seedu.address.model.student;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -36,9 +36,7 @@ import seedu.address.model.payment.Payment;
 import seedu.address.model.payment.PaymentList;
 import seedu.address.model.payment.Status;
 import seedu.address.model.payment.exceptions.PaymentException;
-import seedu.address.model.person.Person;
 import seedu.address.model.util.DateTimeUtil;
-import seedu.address.testutil.PersonBuilder;
 import seedu.address.testutil.StudentBuilder;
 
 public class StudentTest {
@@ -129,7 +127,7 @@ public class StudentTest {
         assertFalse(ALICE.isSamePerson(null));
 
         // same name, all other attributes different -> returns true
-        Person editedAlice = new StudentBuilder(ALICE).withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB)
+        Student editedAlice = new StudentBuilder(ALICE).withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB)
                 .withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND).build();
         assertTrue(ALICE.isSamePerson(editedAlice));
 
@@ -138,7 +136,7 @@ public class StudentTest {
         assertFalse(ALICE.isSamePerson(editedAlice));
 
         // name differs in case, all other attributes same -> returns false
-        Person editedBob = new StudentBuilder(BOB).withName(VALID_NAME_BOB.toLowerCase()).build();
+        Student editedBob = new StudentBuilder(BOB).withName(VALID_NAME_BOB.toLowerCase()).build();
         assertFalse(BOB.isSamePerson(editedBob));
 
         // name has trailing spaces, all other attributes same -> returns false
@@ -150,7 +148,7 @@ public class StudentTest {
     @Test
     public void equals() {
         // same values -> returns true
-        Person aliceCopy = new StudentBuilder(ALICE).build();
+        Student aliceCopy = new StudentBuilder(ALICE).build();
         assertTrue(ALICE.equals(aliceCopy));
 
         // same object -> returns true
@@ -162,19 +160,11 @@ public class StudentTest {
         // different type -> returns false
         assertFalse(ALICE.equals(5));
 
-        // different subclass (Person vs Student) -> returns false
-        Person dummyPerson = new PersonBuilder()
-                .withName(ALICE.getName().fullName)
-                .withPhone(ALICE.getPhone().value)
-                .withEmail(ALICE.getEmail().value)
-                .build();
-        assertFalse(ALICE.equals(dummyPerson));
-
         // different person -> returns false
         assertFalse(ALICE.equals(BOB));
 
         // different name -> returns false
-        Person editedAlice = new StudentBuilder(ALICE).withName(VALID_NAME_BOB).build();
+        Student editedAlice = new StudentBuilder(ALICE).withName(VALID_NAME_BOB).build();
         assertFalse(ALICE.equals(editedAlice));
 
         // different phone -> returns false

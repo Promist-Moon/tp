@@ -1,4 +1,4 @@
-package seedu.address.model.person.exceptions;
+package seedu.address.model.student.exceptions;
 
 /**
  * Signals that the operation failed to update the student's payment status

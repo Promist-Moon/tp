@@ -18,8 +18,7 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.lesson.Lesson;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.student.Student;
+import seedu.address.model.student.Student;
 import seedu.address.testutil.LessonBuilder;
 import seedu.address.testutil.StudentBuilder;
 import seedu.address.testutil.stubs.ModelStub;
@@ -100,7 +99,7 @@ public class AddLessonCommandTest {
         }
 
         @Override
-        public ObservableList<Person> getFilteredPersonList() {
+        public ObservableList<Student> getFilteredPersonList() {
             return javafx.collections.FXCollections.observableArrayList(students);
         }
 

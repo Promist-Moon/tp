@@ -21,10 +21,10 @@ import org.junit.jupiter.api.Test;
 import javafx.beans.value.ChangeListener;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.lesson.Lesson;
-import seedu.address.model.person.NameContainsKeywordsPredicate;
-import seedu.address.model.person.student.PaymentStatus;
-import seedu.address.model.person.student.Student;
-import seedu.address.model.person.student.StudentMatchesPaymentStatusPredicate;
+import seedu.address.model.student.NameContainsKeywordsPredicate;
+import seedu.address.model.student.PaymentStatus;
+import seedu.address.model.student.Student;
+import seedu.address.model.student.StudentMatchesPaymentStatusPredicate;
 import seedu.address.testutil.AddressBookBuilder;
 import seedu.address.testutil.LessonBuilder;
 import seedu.address.testutil.StudentBuilder;
@@ -166,6 +166,7 @@ public class ModelManagerTest {
                 .findFirst()
                 .orElseThrow();
 
+        System.out.println(updatedStudent);
         assertTrue(updatedStudent.getLessonList().hasLesson(lesson));
 
         // Check if student is added to lesson's student list

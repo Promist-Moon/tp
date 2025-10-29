@@ -15,8 +15,8 @@ import java.time.LocalTime;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import seedu.address.model.person.student.Address;
-import seedu.address.model.person.student.Student;
+import seedu.address.model.student.Address;
+import seedu.address.model.student.Student;
 import seedu.address.testutil.LessonBuilder;
 import seedu.address.testutil.StudentBuilder;
 
