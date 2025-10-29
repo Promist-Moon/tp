@@ -18,10 +18,6 @@ Tuiniverse is a **desktop app** which expedites:
 All of this is displayed done with optimized typing (via a Command Line Interface) layered within graphical 
 display of all the information you need. 
 
-Our **guarantee** is that we can get your contact management tasks done **faster** than all the alternatives.
-
-AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized for use via a  Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AB3 can get your contact management tasks done faster than traditional GUI apps.
-
 <!-- * Table of Contents -->
 <page-nav-print />
 
@@ -70,10 +66,10 @@ Refer to the [Features](#features) below for more details of each command.
 
 Action | Format, Examples
 --------|------------------
-**Add** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
-**Add Lesson** | `add.lesson i/STUDENT_INDEX s/SUBJECT l/LEVEL d/DAY s/START_TIME e/END_TIME r/HOURLY RATE` <br> e.g., `add.lesson i/4 s/Math l/3 d/Tuesday s/13:00 e/15:00 r/40`
+**Add Student** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 t/friends t/owesMoney`
+**Add Lesson** | `add.lesson i/STUDENT_INDEX s/SUBJECT l/LEVEL d/DAY st/START_TIME et/END_TIME r/HOURLY RATE` <br> e.g., `add.lesson i/1 s/English l/2 d/Monday st/10:00 et/12:00 r/80 `
 **Clear** | `clear`
-**Delete** | `delete INDEX`<br> e.g., `delete 3`
+**Delete Student** | `delete INDEX`<br> e.g., `delete 3`
 **Delete Lesson** | `delete.lesson i/STUDENT_INDEX c/LESSON_INDEX…​`<br> e.g.,`delete.lesson i/2 c/1`
 **Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **View** | `view INDEX`<br> e.g., `view 1`
@@ -165,10 +161,10 @@ Adds a lesson to the specific student with these fields:
 * End Time
 * Hourly Rate
 
-**Format:** `add.lesson i/STUDENT_INDEX s/SUBJECT l/LEVEL d/DAY s/START_TIME e/END_TIME r/HOURLY RATE`
+**Format:** `add.lesson i/STUDENT_INDEX s/SUBJECT l/LEVEL d/DAY st/START_TIME et/END_TIME r/HOURLY RATE`
 
 **Examples:**
-* `add.lesson i/4 s/Math l/3 d/Tuesday s/13:00 e/15:00 r/40`
+* `add.lesson i/1 s/English l/2 d/Monday st/10:00 et/12:00 r/80`
 
 <br>
 
@@ -285,6 +281,13 @@ After delete:
 Deletes an existing lesson from a specific student.
 
 **Format:**`delete.lesson i/STUDENT_INDEX c/LESSON_INDEX…​`
+
+<box type="warning" seamless>
+
+**Caution:**
+To ensure that you delete the exact lesson from a selected student, you must use <b>view</b> command to view the student first, and specify the lesson index shown in the lesson list panel.
+Trying to delete a lesson before viewing the student's lesson (through `view` command) may result in a wrong lesson being deleted.
+</box>
 
 **Examples:**
 * `delete.lesson i/2 c/1`
