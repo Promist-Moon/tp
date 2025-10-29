@@ -9,6 +9,7 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
+import javafx.collections.ListChangeListener;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.lesson.LessonList;
 import seedu.address.model.payment.PaymentList;
@@ -153,15 +154,6 @@ public class Student {
     }
 
     /**
-     * Returns the total amount unpaid by the student.
-     *
-     * @return a float with amount equivalent to the total of unpaid payments.
-     */
-    public float getAmountDueFloat() {
-        return payments.calculateUnpaidAmountFloat();
-    }
-
-    /**
      * Changes payment status to {@link PaymentStatus}
      *
      * Changes to paid when pay command is used.
@@ -275,12 +267,16 @@ public class Student {
         // Recompute whenever lessons change (add/remove/edit).
         this.lessons.addListener(change -> {
             while (change.next()) {
-                if (change.wasAdded() || change.wasRemoved() || change.wasUpdated() || change.wasReplaced()) {
+                if (hasStructuralChange(change)) {
                     refreshCurrentMonthPayment();
                     break;
                 }
             }
         });
+    }
+
+    private boolean hasStructuralChange(ListChangeListener.Change<?> change) {
+        return change.wasAdded() || change.wasRemoved() || change.wasUpdated() || change.wasReplaced();
     }
 
     /**
