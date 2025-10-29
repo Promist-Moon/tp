@@ -256,14 +256,14 @@ public class ModelManagerTest {
     @Test
     public void totals_addPersonWithPayments_calculatesNewTotal() {
         assertEquals(0f, modelManager.totalEarningsProperty().get(), 1e-6);
-        assertEquals(0f, modelManager.totalUnpaidProperty().get(),    1e-6);
+        assertEquals(0f, modelManager.totalUnpaidProperty().get(), 1e-6);
 
         // one student contributes total=300, unpaid=600
         Student s = new StudentStub("Alice", 300f, 600f);
         modelManager.addPerson(s);
 
         assertEquals(300f, modelManager.totalEarningsProperty().get(), 1e-6);
-        assertEquals(600f, modelManager.totalUnpaidProperty().get(),   1e-6);
+        assertEquals(600f, modelManager.totalUnpaidProperty().get(), 1e-6);
     }
 
     @Test
@@ -286,7 +286,7 @@ public class ModelManagerTest {
         Student s = new StudentStub("Carol", 120f, 10f);
         modelManager.addPerson(s);
         assertEquals(120f, modelManager.totalEarningsProperty().get(), 1e-6);
-        assertEquals(10f,  modelManager.totalUnpaidProperty().get(), 1e-6);
+        assertEquals(10f, modelManager.totalUnpaidProperty().get(), 1e-6);
 
         modelManager.deletePerson(s);
         assertEquals(0f, modelManager.totalEarningsProperty().get(), 1e-6);
@@ -297,8 +297,8 @@ public class ModelManagerTest {
     public void totals_changePayments_firesListeners() {
         float[] earned = new float[]{Float.NaN};
         float[] unpaid = new float[]{Float.NaN};
-        ChangeListener<Number> earnListener = (ChangeListener<Number>)(obs,o,n)-> earned[0]=n.floatValue();
-        ChangeListener<Number> unpaidListener = (ChangeListener<Number>)(obs,o,n)-> unpaid[0]=n.floatValue();
+        ChangeListener<Number> earnListener = (obs, o, n) -> earned[0] = n.floatValue();
+        ChangeListener<Number> unpaidListener = (obs, o, n) -> unpaid[0] = n.floatValue();
 
         modelManager.totalEarningsProperty().addListener(earnListener);
         modelManager.totalUnpaidProperty().addListener(unpaidListener);
@@ -306,7 +306,7 @@ public class ModelManagerTest {
         modelManager.addPerson(new StudentStub("Dan", 55.5f, 12.3f));
 
         assertEquals(55.5f, modelManager.totalEarningsProperty().get(), 1e-6);
-        assertEquals(12.3f, modelManager.totalUnpaidProperty().get(),   1e-6);
+        assertEquals(12.3f, modelManager.totalUnpaidProperty().get(), 1e-6);
         assertEquals(55.5f, earned[0], 1e-6);
         assertEquals(12.3f, unpaid[0], 1e-6);
 
