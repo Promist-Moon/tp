@@ -11,6 +11,7 @@ import java.util.Set;
 
 import javafx.collections.ListChangeListener;
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.model.lesson.Lesson;
 import seedu.address.model.lesson.LessonList;
 import seedu.address.model.payment.PaymentList;
 import seedu.address.model.payment.Status;
@@ -101,6 +102,10 @@ public class Student {
      */
     public LessonList getLessonList() {
         return this.lessons;
+    }
+
+    public boolean hasLesson(Lesson lesson) {
+        return this.getLessonList().hasLesson(lesson);
     }
 
     /**
