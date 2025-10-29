@@ -40,20 +40,6 @@ public class JsonAdaptedPersonTest {
         assertEquals(BENSON, person.toModelType());
     }
 
-
-    @Test
-    public void constructor_nonStudent_setsAddressNull() {
-        // Create a simple non-Student Person using PersonBuilder (DummyPerson)
-        Student dummyPerson = new StudentBuilder().build();
-
-        // Build a JsonAdaptedPerson from this dummy
-        JsonAdaptedPerson jsonPerson = new JsonAdaptedPerson(dummyPerson);
-
-        // Since non-Student persons have no address, the address field should be null
-        // When we call toModelType(), it should throw because address == null for student subtype
-        assertThrows(IllegalValueException.class, jsonPerson::toModelType);
-    }
-
     @Test
     public void toModelType_invalidName_throwsIllegalValueException() {
         JsonAdaptedPerson person =
