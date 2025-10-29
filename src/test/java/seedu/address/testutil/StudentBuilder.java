@@ -28,6 +28,7 @@ import seedu.address.model.util.SampleDataUtil;
  */
 public class StudentBuilder {
 
+    /*
     public static final String DEFAULT_NAME = "Alice Pauline";
     public static final String DEFAULT_PHONE = "85355255";
     public static final String DEFAULT_EMAIL = "alice@example.com";
@@ -44,6 +45,24 @@ public class StudentBuilder {
             new TotalAmount(400f),
             new UnpaidAmount(0f)
     );
+    */
+
+    public static final String DEFAULT_NAME = "Aaron Tan";
+    public static final String DEFAULT_PHONE = "99978799";
+    public static final String DEFAULT_EMAIL = "aarontan@example.com";
+    public static final String DEFAULT_ADDRESS = "666, NUS School of Computing, #08-111";
+    public static final Lesson DEFAULT_LESSON = new LessonBuilder()
+            .withSubject("Math")
+            .withLevel("5")
+            .withDay("7")
+            .withRate("100")
+            .withLessonTime("21:30", "23:59")
+            .build();
+    public static final Payment DEFAULT_PAYMENT = new Payment(
+            YearMonth.parse("2025-10"),
+            new TotalAmount(400f),
+            new UnpaidAmount(0f)
+    );
 
     private Name name;
     private Phone phone;
@@ -54,7 +73,7 @@ public class StudentBuilder {
     private PaymentList pl = new PaymentList();
 
     /**
-     * Creates a {@code PersonBuilder} with default details.
+     * Creates a {@code StudentBuilder} with default details. This student is not in the typical addressbook.
      */
     public StudentBuilder() {
         name = new Name(DEFAULT_NAME);
@@ -67,23 +86,23 @@ public class StudentBuilder {
     }
 
     /**
-     * Initializes the StudentBuilder with the data of {@code personToCopy}.
+     * Initializes the StudentBuilder with the data of {@code studentToCopy}.
      */
-    public StudentBuilder(Student personToCopy) {
-        name = personToCopy.getName();
-        phone = personToCopy.getPhone();
-        email = personToCopy.getEmail();
-        address = personToCopy.getAddress();
-        tags = new HashSet<>(personToCopy.getTags());
-        ll = personToCopy.getLessonList();
-        pl = personToCopy.getPayments();
+    public StudentBuilder(Student studentToCopy) {
+        name = studentToCopy.getName();
+        phone = studentToCopy.getPhone();
+        email = studentToCopy.getEmail();
+        address = studentToCopy.getAddress();
+        tags = new HashSet<>(studentToCopy.getTags());
+        ll = studentToCopy.getLessonList();
+        pl = studentToCopy.getPayments();
     }
 
     /**
-     * Sets the {@code Name} of the {@code Person} that we are building.
+     * Sets the {@code Name} of the {@code Student} that we are building.
      *
      * @param name The name to set.
-     * @return This {@code PersonBuilder} instance for chaining.
+     * @return This {@code StudentBuilder} instance for chaining.
      */
     public StudentBuilder withName(String name) {
         this.name = new Name(name);
@@ -91,7 +110,7 @@ public class StudentBuilder {
     }
 
     /**
-     * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code Person} that we are building.
+     * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code Student} that we are building.
      */
     public StudentBuilder withTags(String ... tags) {
         this.tags = SampleDataUtil.getTagSet(tags);
@@ -107,10 +126,10 @@ public class StudentBuilder {
     }
 
     /**
-     * Sets the {@code Phone} of the {@code Person} that we are building.
+     * Sets the {@code Phone} of the {@code Student} that we are building.
      *
      * @param phone The phone to set.
-     * @return This {@code PersonBuilder} instance for chaining.
+     * @return This {@code StudentBuilder} instance for chaining.
      */
     public StudentBuilder withPhone(String phone) {
         this.phone = new Phone(phone);
@@ -118,10 +137,10 @@ public class StudentBuilder {
     }
 
     /**
-     * Sets the {@code Email} of the {@code Person} that we are building.
+     * Sets the {@code Email} of the {@code Student} that we are building.
      *
      * @param email The email to set.
-     * @return This {@code PersonBuilder} instance for chaining.
+     * @return This {@code StudentBuilder} instance for chaining.
      */
     public StudentBuilder withEmail(String email) {
         this.email = new Email(email);
@@ -129,7 +148,7 @@ public class StudentBuilder {
     }
 
     /**
-     * Sets the {@code Lessonlist} of the {@code Person} that we are building.
+     * Sets the {@code Lessonlist} of the {@code Student} that we are building.
      */
     public StudentBuilder withLessonList(LessonList ll) {
         this.ll = new LessonList(ll.getLessons());
@@ -137,7 +156,7 @@ public class StudentBuilder {
     }
 
     /**
-     * Sets the {@code Paymentlist} of the {@code Person} that we are building.
+     * Sets the {@code PaymentList} of the {@code Student} that we are building.
      */
     public StudentBuilder withPaymentList(PaymentList pl) {
         this.pl = pl;
@@ -145,9 +164,9 @@ public class StudentBuilder {
     }
 
     /**
-     * Returns a new {@code Person} with the specified attributes.
+     * Returns a new {@code Student} with the specified attributes.
      *
-     * @return A new {@code Person} instance.
+     * @return A new {@code Student} instance.
      */
     public Student build() {
         return new DummyPerson(name, phone, email, address, tags, ll, pl);

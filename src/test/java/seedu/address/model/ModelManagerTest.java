@@ -166,6 +166,7 @@ public class ModelManagerTest {
                 .findFirst()
                 .orElseThrow();
 
+        System.out.println(updatedStudent);
         assertTrue(updatedStudent.getLessonList().hasLesson(lesson));
 
         // Check if student is added to lesson's student list
