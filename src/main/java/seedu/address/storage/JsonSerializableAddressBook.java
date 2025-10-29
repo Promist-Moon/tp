@@ -67,10 +67,9 @@ class JsonSerializableAddressBook {
             Student currentStudent = (Student) person;
             ArrayList<Lesson> lessonList = currentStudent.getLessonList().getLessons();
             for (Lesson lesson: lessonList) {
-                if (addressBook.hasLesson(lesson)) {
-                    throw new IllegalValueException(MESSAGE_DUPLICATE_LESSON);
+                if (!(addressBook.hasLesson(lesson))) {
+                    addressBook.addLesson(lesson);
                 }
-                addressBook.addLesson(lesson);
             }
         }
         return addressBook;
