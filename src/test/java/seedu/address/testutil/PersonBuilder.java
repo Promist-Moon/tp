@@ -1,9 +1,22 @@
 package seedu.address.testutil;
 
+import seedu.address.model.lesson.Day;
+import seedu.address.model.lesson.Lesson;
+import seedu.address.model.lesson.LessonList;
+import seedu.address.model.lesson.LessonTime;
+import seedu.address.model.lesson.Level;
+import seedu.address.model.lesson.Rate;
+import seedu.address.model.lesson.Subject;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Address;
+import seedu.address.model.person.tag.Tag;
+import seedu.address.model.util.SampleDataUtil;
+
+import java.util.HashSet;
+import java.util.Set;
 
 
 /**
@@ -14,10 +27,21 @@ public class PersonBuilder {
     private static final String DEFAULT_NAME = "Alice Pauline";
     private static final String DEFAULT_PHONE = "85355255";
     private static final String DEFAULT_EMAIL = "alice@example.com";
+    public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
+    public static final Lesson DEFAULT_LESSON = new Lesson(
+            Subject.fromString("Math"),
+            Level.fromString("1"),
+            new Day("1"),
+            LessonTime.ofLessonTime("10:00", "12:00"),
+            new Rate("40")
+    );
 
     private Name name;
     private Phone phone;
     private Email email;
+    private Address address;
+    private Set<Tag> tags;
+    private LessonList ll = new LessonList();
 
     /**
      * Creates a {@code PersonBuilder} with default details.
@@ -26,6 +50,21 @@ public class PersonBuilder {
         name = new Name(DEFAULT_NAME);
         phone = new Phone(DEFAULT_PHONE);
         email = new Email(DEFAULT_EMAIL);
+        address = new Address(DEFAULT_ADDRESS);
+        tags = new HashSet<>();
+        ll.addLesson(DEFAULT_LESSON);
+    }
+
+    /**
+     * Initializes the StudentBuilder with the data of {@code personToCopy}.
+     */
+    public PersonBuilder(Person personToCopy) {
+        name = personToCopy.getName();
+        phone = personToCopy.getPhone();
+        email = personToCopy.getEmail();
+        address = personToCopy.getAddress();
+        tags = new HashSet<>(personToCopy.getTags());
+        ll = personToCopy.getLessonList();
     }
 
     /**
@@ -36,6 +75,22 @@ public class PersonBuilder {
      */
     public PersonBuilder withName(String name) {
         this.name = new Name(name);
+        return this;
+    }
+
+    /**
+     * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code Person} that we are building.
+     */
+    public PersonBuilder withTags(String ... tags) {
+        this.tags = SampleDataUtil.getTagSet(tags);
+        return this;
+    }
+
+    /**
+     * Sets the {@code Address} of the {@code Student} that we are building.
+     */
+    public PersonBuilder withAddress(String address) {
+        this.address = new Address(address);
         return this;
     }
 
@@ -62,17 +117,25 @@ public class PersonBuilder {
     }
 
     /**
+     * Sets the {@code Lessonlist} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withLessonList(LessonList ll) {
+        this.ll = ll;
+        return this;
+    }
+
+    /**
      * Returns a new {@code Person} with the specified attributes.
      *
      * @return A new {@code Person} instance.
      */
     public Person build() {
-        return new DummyPerson(name, phone, email);
+        return new DummyPerson(name, phone, email, address, tags, ll);
     }
 
     private static class DummyPerson extends Person {
-        DummyPerson(Name name, Phone phone, Email email) {
-            super(name, phone, email);
+        DummyPerson(Name name, Phone phone, Email email, Address address, Set<Tag> tags, LessonList lessonList) {
+            super(name, phone, email, address, tags, lessonList);
         }
     }
 }
