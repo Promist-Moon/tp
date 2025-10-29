@@ -60,17 +60,6 @@ public class PayCommand extends Command {
 
     private static Student makePayment(Student studentToPay) throws PaymentException {
         assert studentToPay != null;
-
-        // edit for future iterations to accept only student objects straightaway
-        if (studentToPay instanceof Student s) {
-            return makePayment(s);
-        }
-
-        // if not Student (or Parent in future additions)
-        throw new IllegalArgumentException(studentToPay.getClass().getSimpleName());
-    }
-
-    private static Student makePayment(Student studentToPay) throws PaymentException {
         studentToPay.pay();
         return studentToPay;
     }

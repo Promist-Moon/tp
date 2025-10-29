@@ -3,6 +3,7 @@ package seedu.address.model.student;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.time.YearMonth;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Objects;
@@ -10,9 +11,16 @@ import java.util.Set;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.lesson.LessonList;
+import seedu.address.model.payment.Payment;
 import seedu.address.model.payment.PaymentList;
+import seedu.address.model.payment.Status;
+import seedu.address.model.payment.TotalAmount;
+import seedu.address.model.payment.UnpaidAmount;
+import seedu.address.model.payment.exceptions.PaymentException;
+import seedu.address.model.student.exceptions.PaymentStatusUpdateException;
 import seedu.address.model.student.tag.Tag;
-
+import seedu.address.model.util.DateTimeUtil;
+import seedu.address.model.util.mapping.StatusMapper;
 
 /**
  * Represents a Person in the address book.
@@ -44,22 +52,24 @@ public class Student {
         this.tags.addAll(tags);
         this.lessons = new LessonList();
         this.payments = new PaymentList();
-        this.paymentStatus = PaymentStatus.UNPAID;
+        this.paymentStatus = PaymentStatus.PAID;
+        wireLessonListeners();
     }
 
     /**
      * Every field must be present and not null.
      */
-    public Student(Name name, Phone phone, Email email, Address address, Set<Tag> tags, LessonList ll) {
+    public Student(Name name, Phone phone, Email email, Address address, Set<Tag> tags, LessonList ll, PaymentList pl) {
         requireAllNonNull(name, phone, email, address, tags);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
         this.tags.addAll(tags);
-        this.lessons = ll;
-        this.payments = new PaymentList();
-        this.paymentStatus = PaymentStatus.UNPAID;
+        this.lessons = new LessonList(ll.getLessons());
+        this.payments = pl;
+        this.paymentStatus = mapStatus(getPaymentListStatus());
+        wireLessonListeners();
     }
 
     public Name getName() {
@@ -96,7 +106,7 @@ public class Student {
     /**
      * Returns a mutable TreeMap of Payments.
      */
-    public PaymentList getPaymentList() {
+    public PaymentList getPayments() {
         return this.payments;
     }
 
@@ -105,6 +115,51 @@ public class Student {
      */
     public PaymentStatus getPaymentStatus() {
         return this.paymentStatus;
+    }
+
+    /**
+     * Returns the status of the student from the payment list the month
+     */
+    public Status getPaymentListStatus() {
+        return getPayments().getStatus();
+    }
+
+    /**
+     * Checks whether payment list status corresponds to student status
+     * A defensive check to ensure no difference in status.
+     */
+    public void checkIsStatusSame() {
+        PaymentStatus plStatus = mapStatus(getPaymentListStatus());
+        if (getPaymentStatus() != plStatus) {
+            setPaymentStatus(plStatus);
+        }
+    }
+
+    public TotalAmount getTotalAmount() {
+        float f = lessons.getTotalAmountEarned(DateTimeUtil.currentYearMonth());
+        return new TotalAmount(f);
+    }
+
+    public float getTotalAmountFloat() {
+        return lessons.getTotalAmountEarned(DateTimeUtil.currentYearMonth());
+    }
+
+    /**
+     * Returns the total amount unpaid by the student.
+     *
+     * @return a UnpaidAmount object with amount equivalent to the total of unpaid payments.
+     */
+    public UnpaidAmount getAmountDue() {
+        return payments.calculateUnpaidAmount();
+    }
+
+    /**
+     * Returns the total amount unpaid by the student.
+     *
+     * @return a float with amount equivalent to the total of unpaid payments.
+     */
+    public float getAmountDueFloat() {
+        return payments.calculateUnpaidAmountFloat();
     }
 
     /**
@@ -122,6 +177,20 @@ public class Student {
     }
 
     /**
+     * Marks all the payments in the student's PaymentList as paid.
+     *
+     * @throws PaymentException
+     */
+    public void pay() throws PaymentException {
+        payments.markAllPaid();
+        setPaymentStatus(PaymentStatus.PAID);
+    }
+
+    public PaymentStatus mapStatus(Status status) {
+        return StatusMapper.toPaymentStatus(status);
+    }
+
+    /**
      * Checks if this person is equal to another object.
      * Two persons are considered equal if they have the same name, phone, and email,
      * and are of the same subclass type.
@@ -130,7 +199,7 @@ public class Student {
      * @return true if both objects represent the same person with identical identity fields.
      */
     public boolean equals(Object other) {
-        if (this == other) {
+        if (other == this) {
             return true;
         }
 
@@ -198,6 +267,39 @@ public class Student {
                 .add("tags", tags)
                 .toString();
 
+    }
+
+    /*
+    Private methods
+     */
+
+    private void wireLessonListeners() {
+        // Recompute whenever lessons change (add/remove/edit).
+        this.lessons.addListener(change -> {
+            while (change.next()) {
+                if (change.wasAdded() || change.wasRemoved() || change.wasUpdated() || change.wasReplaced()) {
+                    refreshCurrentMonthPayment();
+                    break;
+                }
+            }
+        });
+    }
+
+    /**
+     * Recomputes the current month’s total from lessons and syncs PaymentList + Student status.
+     **/
+    private void refreshCurrentMonthPayment() throws PaymentStatusUpdateException {
+        try {
+            YearMonth ym = DateTimeUtil.currentYearMonth();
+            float newTotal = lessons.getTotalAmountEarned(ym);
+            payments.updateExistingPayment(ym, newTotal);
+
+            System.out.println("New payment updated: new total: " + newTotal);
+
+            setPaymentStatus(mapStatus(getPaymentListStatus()));
+        } catch (PaymentException e) {
+            throw new PaymentStatusUpdateException();
+        }
     }
 }
 
