@@ -1,5 +1,9 @@
 package seedu.address.testutil;
 
+import java.time.YearMonth;
+import java.util.HashSet;
+import java.util.Set;
+
 import seedu.address.model.lesson.Day;
 import seedu.address.model.lesson.Lesson;
 import seedu.address.model.lesson.LessonList;
@@ -11,27 +15,22 @@ import seedu.address.model.payment.Payment;
 import seedu.address.model.payment.PaymentList;
 import seedu.address.model.payment.TotalAmount;
 import seedu.address.model.payment.UnpaidAmount;
+import seedu.address.model.student.Address;
 import seedu.address.model.student.Email;
 import seedu.address.model.student.Name;
-import seedu.address.model.student.Student;
 import seedu.address.model.student.Phone;
-import seedu.address.model.student.Address;
+import seedu.address.model.student.Student;
 import seedu.address.model.student.tag.Tag;
 import seedu.address.model.util.SampleDataUtil;
-
-import java.time.YearMonth;
-import java.util.HashSet;
-import java.util.Set;
-
 
 /**
  * A utility class to help with building Person objects for testing.
  */
 public class StudentBuilder {
 
-    private static final String DEFAULT_NAME = "Alice Pauline";
-    private static final String DEFAULT_PHONE = "85355255";
-    private static final String DEFAULT_EMAIL = "alice@example.com";
+    public static final String DEFAULT_NAME = "Alice Pauline";
+    public static final String DEFAULT_PHONE = "85355255";
+    public static final String DEFAULT_EMAIL = "alice@example.com";
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
     public static final Lesson DEFAULT_LESSON = new Lesson(
             Subject.fromString("Math"),

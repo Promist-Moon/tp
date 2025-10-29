@@ -1,4 +1,4 @@
-package seedu.address.model.student.student;
+package seedu.address.model.student;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -36,8 +36,6 @@ import seedu.address.model.payment.Payment;
 import seedu.address.model.payment.PaymentList;
 import seedu.address.model.payment.Status;
 import seedu.address.model.payment.exceptions.PaymentException;
-import seedu.address.model.student.PaymentStatus;
-import seedu.address.model.student.Student;
 import seedu.address.model.util.DateTimeUtil;
 import seedu.address.testutil.StudentBuilder;
 
