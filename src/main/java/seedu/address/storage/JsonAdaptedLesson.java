@@ -62,7 +62,7 @@ public class JsonAdaptedLesson {
         Lesson res = new Lesson(
                 Subject.fromString(subject),
                 Level.fromString(level),
-                new Day(day),
+                new Day(Integer.valueOf(day)),
                 LessonTime.ofLessonTime(startTime, endTime),
                 new Rate(rate),
                 studentName);
