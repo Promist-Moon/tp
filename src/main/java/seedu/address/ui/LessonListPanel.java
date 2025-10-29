@@ -24,14 +24,33 @@ public class LessonListPanel extends UiPart<Region> {
     @FXML
     private Label title;
 
+    private boolean showingStudentLesson;
+
     /**
      * Creates a {@code LessonListPanel} with the given {@code ObservableList}.
      */
     public LessonListPanel(ObservableList<Lesson> lessonList, String titleText) {
         super(FXML);
+        showingStudentLesson = false;
         title.setText(titleText);
         lessonListView.setItems(lessonList);
         lessonListView.setCellFactory(listView -> new LessonListViewCell());
+    }
+
+    /**
+     * update the lesson title to specified text.
+     * @param title
+     */
+    public void updateLessonTitle(String title) {
+        this.title.setText(title);
+    }
+
+    /**
+     * update the status of the current viewing mode.
+     * @param showingStudentLesson
+     */
+    public void toggleShowingStudentLesson(boolean showingStudentLesson) {
+        this.showingStudentLesson = showingStudentLesson;
     }
 
     /**
@@ -46,7 +65,12 @@ public class LessonListPanel extends UiPart<Region> {
                 setGraphic(null);
                 setText(null);
             } else {
-                setGraphic(new TodayLessonCard(lesson, getIndex() + 1).getRoot());
+                if (!showingStudentLesson) {
+                    setGraphic(new TodayLessonCard(lesson, getIndex() + 1).getRoot());
+                } else {
+                    setGraphic(new StudentLessonCard(lesson, getIndex() + 1).getRoot());
+                }
+
             }
         }
     }

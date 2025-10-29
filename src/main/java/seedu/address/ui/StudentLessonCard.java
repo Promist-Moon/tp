@@ -11,7 +11,7 @@ import seedu.address.model.lesson.Lesson;
  */
 public class StudentLessonCard extends UiPart<Region> {
 
-    private static final String FXML = "LessonListCard.fxml";
+    private static final String FXML = "StudentLessonListCard.fxml";
 
     public final Lesson lesson;
 
@@ -40,8 +40,8 @@ public class StudentLessonCard extends UiPart<Region> {
         this.lesson = lesson;
         id.setText(index + ". ");
         subject.setText(lesson.getSubject().toString());
-        level.setText("Level: Secondary" + lesson.getLevel().toString());
-        day.setText("Scheduled every: " + lesson.getLevel().toString());
+        level.setText("Level: Secondary " + lesson.getLevel().toString());
+        day.setText("Scheduled every: " + lesson.getDay().toString());
         lessonTime.setText("Time (24H): " + lesson.getLessonTime().toString());
         rate.setText("Rate (per hr): $" + lesson.getRate().toString());
 
