@@ -1,4 +1,4 @@
-package seedu.address.model.person.student;
+package seedu.address.model.person;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
@@ -17,12 +17,8 @@ import seedu.address.model.payment.Status;
 import seedu.address.model.payment.TotalAmount;
 import seedu.address.model.payment.UnpaidAmount;
 import seedu.address.model.payment.exceptions.PaymentException;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.Phone;
 import seedu.address.model.person.exceptions.PaymentStatusUpdateException;
-import seedu.address.model.person.student.tag.Tag;
+import seedu.address.model.person.tag.Tag;
 import seedu.address.model.util.DateTimeUtil;
 import seedu.address.model.util.mapping.StatusMapper;
 

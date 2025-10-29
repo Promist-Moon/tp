@@ -9,7 +9,7 @@ import javafx.collections.transformation.SortedList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.lesson.Lesson;
 import seedu.address.model.person.Person;
-import seedu.address.model.person.student.Student;
+import seedu.address.model.person.Student;
 
 /**
  * The API of the Model component.

@@ -9,9 +9,9 @@ import seedu.address.model.payment.PaymentList;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
-import seedu.address.model.person.student.Address;
-import seedu.address.model.person.student.Student;
-import seedu.address.model.person.student.tag.Tag;
+import seedu.address.model.person.Address;
+import seedu.address.model.person.Student;
+import seedu.address.model.person.tag.Tag;
 
 /**
  * A base Student stub that creates a null lesson and payment list.

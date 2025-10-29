@@ -19,7 +19,7 @@ import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.lesson.Lesson;
 import seedu.address.model.person.Person;
-import seedu.address.model.person.student.Student;
+import seedu.address.model.person.Student;
 import seedu.address.testutil.LessonBuilder;
 import seedu.address.testutil.StudentBuilder;
 import seedu.address.testutil.stubs.ModelStub;

@@ -33,7 +33,7 @@ import seedu.address.model.lesson.Subject;
 import seedu.address.model.lesson.exceptions.DuplicateLessonException;
 import seedu.address.model.lesson.exceptions.LessonException;
 import seedu.address.model.person.Person;
-import seedu.address.model.person.student.Student;
+import seedu.address.model.person.Student;
 
 /**
  * Edits the details of an existing lesson in the address book.

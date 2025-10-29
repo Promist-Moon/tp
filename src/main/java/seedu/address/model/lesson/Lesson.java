@@ -6,8 +6,8 @@ import java.time.Duration;
 import java.time.LocalTime;
 import java.util.Objects;
 
-import seedu.address.model.person.student.Address;
-import seedu.address.model.person.student.Student;
+import seedu.address.model.person.Address;
+import seedu.address.model.person.Student;
 
 /**
  * Represents a Lesson.

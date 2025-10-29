@@ -29,7 +29,7 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.lesson.LessonList;
 import seedu.address.model.payment.PaymentList;
 import seedu.address.model.person.Person;
-import seedu.address.model.person.student.Student;
+import seedu.address.model.person.Student;
 
 /**
  * A utility class containing a list of {@link Person} objects to be used in tests.

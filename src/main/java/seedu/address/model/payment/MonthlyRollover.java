@@ -9,7 +9,7 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.Model;
 import seedu.address.model.payment.exceptions.PaymentException;
 import seedu.address.model.person.Person;
-import seedu.address.model.person.student.Student;
+import seedu.address.model.person.Student;
 import seedu.address.model.util.DateTimeUtil;
 
 /**

@@ -19,7 +19,7 @@ import seedu.address.model.lesson.LessonList;
 import seedu.address.model.lesson.LessonTimeComparator;
 import seedu.address.model.payment.Payment;
 import seedu.address.model.person.Person;
-import seedu.address.model.person.student.Student;
+import seedu.address.model.person.Student;
 
 /**
  * Represents the in-memory model of the address book data.

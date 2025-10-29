@@ -9,9 +9,9 @@ import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
-import seedu.address.model.person.student.Address;
-import seedu.address.model.person.student.Student;
-import seedu.address.model.person.student.tag.Tag;
+import seedu.address.model.person.Address;
+import seedu.address.model.person.Student;
+import seedu.address.model.person.tag.Tag;
 
 /**
  * A utility class to help with building EditPersonDescriptor objects.

@@ -17,8 +17,8 @@ import seedu.address.model.lesson.Subject;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
-import seedu.address.model.person.student.Address;
-import seedu.address.model.person.student.tag.Tag;
+import seedu.address.model.person.Address;
+import seedu.address.model.person.tag.Tag;
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes.
