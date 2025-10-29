@@ -114,10 +114,10 @@ public class LessonTime implements Comparable<LessonTime> {
 
     /**
      * Converts the Duration of the class to hours
-     * @return a long representing number of hours
+     * @return a double representing number of hours
      */
-    public long getDurationLong() {
-        return this.getDuration().toHours();
+    public double getDurationDouble() {
+        return this.getDuration().toMinutes() / 60.0;
     }
 
     /**

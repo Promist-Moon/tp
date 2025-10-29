@@ -73,10 +73,10 @@ public class Lesson {
 
     /**
      * Returns the Duration of the class in hours
-     * @return a long representing number of hours
+     * @return a double representing number of hours
      */
-    public long getDurationLong() {
-        return lessonTime.getDurationLong();
+    public double getDurationDouble() {
+        return lessonTime.getDurationDouble();
     }
 
     public Student getStudent() {
@@ -90,7 +90,7 @@ public class Lesson {
      * @return product of the hourly rate and the duration of the class in hours as a float
      */
     public float getAmountEarned() {
-        return getDurationLong() * rate.getRate();
+        return (float) getDurationDouble() * rate.getRate();
     }
 
     /**
