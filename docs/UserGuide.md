@@ -283,12 +283,6 @@ Deletes an existing lesson from a specific student.
 
 **Format:**`delete.lesson i/STUDENT_INDEX c/LESSON_INDEX…​`
 
-<box type="warning" seamless>
-
-**Caution:**
-To ensure that you delete the exact lesson from a selected student, you must use `view` command to view the student <b>first</b>, and specify the lesson index shown in the lesson list panel.
-Trying to delete a lesson before viewing the student's lesson (through `view` command) may result in a wrong lesson being deleted.
-</box>
 
 **Examples:**
 * `delete.lesson i/2 c/1`
