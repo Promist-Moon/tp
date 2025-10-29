@@ -11,7 +11,6 @@ import java.util.Set;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.lesson.LessonList;
-import seedu.address.model.payment.Payment;
 import seedu.address.model.payment.PaymentList;
 import seedu.address.model.payment.Status;
 import seedu.address.model.payment.TotalAmount;
