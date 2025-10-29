@@ -46,7 +46,8 @@ public class DateTimeUtil {
 
         int count = 0;
         for (LocalDate date = firstDay; !date.isAfter(lastDay); date = date.plusDays(1)) {
-            if (date.getDayOfWeek() == day.getDayOfWeek()) {
+            boolean isSameDayOfWeek = date.getDayOfWeek() == day.getDayOfWeek();
+            if (isSameDayOfWeek) {
                 count++;
             }
         }

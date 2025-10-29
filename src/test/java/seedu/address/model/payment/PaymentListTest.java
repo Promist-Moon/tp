@@ -32,7 +32,7 @@ public class PaymentListTest {
         PaymentList pl = new PaymentList();
         assertEquals(0, pl.size());
         assertTrue(pl.isEmpty());
-        assertNull(pl.findAndSetEarliestUnpaidYearMonth());
+        assertNull(pl.getEarliestUnpaidYearmonth());
     }
 
     @Test
@@ -41,7 +41,7 @@ public class PaymentListTest {
                 .withYearMonth("2025-03").withTotalAmount(600f)
                 .withUnpaidAmount(600f).build());
         assertEquals(1, pl.size());
-        assertNotNull(pl.findAndSetEarliestUnpaidYearMonth());
+        assertNotNull(pl.getEarliestUnpaidYearmonth());
         assertEquals(Status.UNPAID, pl.getStatus());
     }
 

@@ -34,7 +34,7 @@ public class DeleteLessonCommand extends Command {
             + "Parameters: STUDENT_INDEX (must be a positive integer)"
             + "LESSON_INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " "
-            + PREFIX_STUDENT_INDEX + " 1 "
+            + PREFIX_STUDENT_INDEX + "1 "
             + PREFIX_LESSON_INDEX + "2";
 
     public static final String MESSAGE_DELETE_LESSON_SUCCESS = "Deleted Lesson: %1$s";

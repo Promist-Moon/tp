@@ -43,10 +43,9 @@ public class ViewCommand extends Command {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 
-        Student studentToViewLessons = (Student) lastShownList.get(targetIndex.getZeroBased());
+        Student studentToViewLessons = lastShownList.get(targetIndex.getZeroBased());
 
-        Predicate<Lesson> belongsToStudent =
-                lesson -> studentToViewLessons.getLessonList().hasLesson(lesson);
+        Predicate<Lesson> belongsToStudent = studentToViewLessons::hasLesson;
         model.updateFilteredLessonList(belongsToStudent);
 
         return new CommandResult(String.format(MESSAGE_VIEW_SUCCESS, Messages.format(studentToViewLessons)),

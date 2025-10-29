@@ -9,7 +9,9 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
+import javafx.collections.ListChangeListener;
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.model.lesson.Lesson;
 import seedu.address.model.lesson.LessonList;
 import seedu.address.model.payment.PaymentList;
 import seedu.address.model.payment.Status;
@@ -102,6 +104,10 @@ public class Student {
         return this.lessons;
     }
 
+    public boolean hasLesson(Lesson lesson) {
+        return this.getLessonList().hasLesson(lesson);
+    }
+
     /**
      * Returns a mutable TreeMap of Payments.
      */
@@ -150,15 +156,6 @@ public class Student {
      */
     public UnpaidAmount getAmountDue() {
         return payments.calculateUnpaidAmount();
-    }
-
-    /**
-     * Returns the total amount unpaid by the student.
-     *
-     * @return a float with amount equivalent to the total of unpaid payments.
-     */
-    public float getAmountDueFloat() {
-        return payments.calculateUnpaidAmountFloat();
     }
 
     /**
@@ -275,12 +272,16 @@ public class Student {
         // Recompute whenever lessons change (add/remove/edit).
         this.lessons.addListener(change -> {
             while (change.next()) {
-                if (change.wasAdded() || change.wasRemoved() || change.wasUpdated() || change.wasReplaced()) {
+                if (hasStructuralChange(change)) {
                     refreshCurrentMonthPayment();
                     break;
                 }
             }
         });
+    }
+
+    private boolean hasStructuralChange(ListChangeListener.Change<?> change) {
+        return change.wasAdded() || change.wasRemoved() || change.wasUpdated() || change.wasReplaced();
     }
 
     /**
