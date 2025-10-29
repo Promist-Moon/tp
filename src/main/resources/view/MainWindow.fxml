@@ -61,6 +61,7 @@
             <StackPane fx:id="lessonListPanelPlaceholder" VBox.vgrow="ALWAYS" style="-fx-background-color: #f4f9fd;"/>
           </VBox>
         </AnchorPane>
+        <StackPane fx:id="amountPanelPlaceholder" VBox.vgrow="NEVER"/>
         <StackPane fx:id="statusbarPlaceholder" VBox.vgrow="NEVER"/>
       </VBox>
     </Scene>

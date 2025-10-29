@@ -14,8 +14,11 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Arrays;
 
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import javafx.beans.value.ChangeListener;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.lesson.Lesson;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
@@ -25,11 +28,23 @@ import seedu.address.model.person.student.StudentMatchesPaymentStatusPredicate;
 import seedu.address.testutil.AddressBookBuilder;
 import seedu.address.testutil.LessonBuilder;
 import seedu.address.testutil.StudentBuilder;
+import seedu.address.testutil.stubs.StudentStub;
 
 
 public class ModelManagerTest {
 
-    private ModelManager modelManager = new ModelManager();
+    private ModelManager modelManager;
+
+    @BeforeEach
+    void setUp() {
+        // Always start clean
+        modelManager = new ModelManager();
+    }
+
+    @AfterEach
+    void tearDown() {
+        modelManager = null;
+    }
 
     @Test
     public void constructor() {
@@ -230,5 +245,72 @@ public class ModelManagerTest {
         modelManager.updateFilteredPersonListByPaymentStatus(
                 new StudentMatchesPaymentStatusPredicate(PaymentStatus.OVERDUE));
         assertFalse(modelManager.equals(new ModelManager(addressBook, userPrefs)));
+    }
+
+    @Test
+    public void totals_initiallyZero() {
+        assertEquals(0.0f, modelManager.totalEarningsProperty().get(), 1e-6);
+        assertEquals(0.0f, modelManager.totalUnpaidProperty().get(), 1e-6);
+    }
+
+    @Test
+    public void totals_addPersonWithPayments_calculatesNewTotal() {
+        assertEquals(0f, modelManager.totalEarningsProperty().get(), 1e-6);
+        assertEquals(0f, modelManager.totalUnpaidProperty().get(), 1e-6);
+
+        // one student contributes total=300, unpaid=600
+        Student s = new StudentStub("Alice", 300f, 600f);
+        modelManager.addPerson(s);
+
+        assertEquals(300f, modelManager.totalEarningsProperty().get(), 1e-6);
+        assertEquals(600f, modelManager.totalUnpaidProperty().get(), 1e-6);
+    }
+
+    @Test
+    public void totals_editPersonPayment_calculatesNewTotal() {
+        Student before = new StudentStub("Bob", 100f, 40f);
+        modelManager.addPerson(before);
+        assertEquals(100f, modelManager.totalEarningsProperty().get(), 1e-6);
+        assertEquals(40f, modelManager.totalUnpaidProperty().get(), 1e-6);
+
+        Student after = new StudentStub("Bob", 200f, 0f);
+        modelManager.setPerson(before, after);
+
+        assertEquals(1, modelManager.getAddressBook().getPersonList().size());
+        assertEquals(200f, modelManager.totalEarningsProperty().get(), 1e-6);
+        assertEquals(0f, modelManager.totalUnpaidProperty().get(), 1e-6);
+    }
+
+    @Test
+    public void totals_deletePerson_goesToZero() {
+        Student s = new StudentStub("Carol", 120f, 10f);
+        modelManager.addPerson(s);
+        assertEquals(120f, modelManager.totalEarningsProperty().get(), 1e-6);
+        assertEquals(10f, modelManager.totalUnpaidProperty().get(), 1e-6);
+
+        modelManager.deletePerson(s);
+        assertEquals(0f, modelManager.totalEarningsProperty().get(), 1e-6);
+        assertEquals(0f, modelManager.totalUnpaidProperty().get(), 1e-6);
+    }
+
+    @Test
+    public void totals_changePayments_firesListeners() {
+        float[] earned = new float[]{Float.NaN};
+        float[] unpaid = new float[]{Float.NaN};
+        ChangeListener<Number> earnListener = (obs, o, n) -> earned[0] = n.floatValue();
+        ChangeListener<Number> unpaidListener = (obs, o, n) -> unpaid[0] = n.floatValue();
+
+        modelManager.totalEarningsProperty().addListener(earnListener);
+        modelManager.totalUnpaidProperty().addListener(unpaidListener);
+
+        modelManager.addPerson(new StudentStub("Dan", 55.5f, 12.3f));
+
+        assertEquals(55.5f, modelManager.totalEarningsProperty().get(), 1e-6);
+        assertEquals(12.3f, modelManager.totalUnpaidProperty().get(), 1e-6);
+        assertEquals(55.5f, earned[0], 1e-6);
+        assertEquals(12.3f, unpaid[0], 1e-6);
+
+        modelManager.totalEarningsProperty().removeListener(earnListener);
+        modelManager.totalUnpaidProperty().removeListener(unpaidListener);
     }
 }

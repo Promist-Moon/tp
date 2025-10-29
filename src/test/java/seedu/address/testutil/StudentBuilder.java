@@ -10,6 +10,7 @@ import seedu.address.model.lesson.LessonList;
 import seedu.address.model.payment.Payment;
 import seedu.address.model.payment.PaymentList;
 import seedu.address.model.payment.TotalAmount;
+import seedu.address.model.payment.UnpaidAmount;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
@@ -29,7 +30,8 @@ public class StudentBuilder {
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
     public static final Payment DEFAULT_PAYMENT = new Payment(
             YearMonth.parse("2025-10"),
-            new TotalAmount(400f)
+            new TotalAmount(400f),
+            new UnpaidAmount(0f)
     );
 
     private Name name;
