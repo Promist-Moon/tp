@@ -36,7 +36,7 @@ public class Day {
      *
      * @param day A valid integer corresponding to a day.
      */
-    public Day (int day) {
+    public Day(int day) {
         String str = Integer.toString(day);
         if (str.matches("\\d")) {
             checkArgument(isValidDay(str), MESSAGE_CONSTRAINTS);
