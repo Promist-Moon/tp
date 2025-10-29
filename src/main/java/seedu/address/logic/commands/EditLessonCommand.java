@@ -182,6 +182,16 @@ public class EditLessonCommand extends Command {
         public EditLessonDescriptor() {
         }
 
+        /** Creates a descriptor from String inputs. */
+        public EditLessonDescriptor(String day, String startTime, String endTime, String level,
+                                           String rate, String subject) {
+            this.day = new Day(day);
+            this.lessonTime = LessonTime.ofLessonTime(startTime, endTime);
+            this.level = Level.fromString(level);
+            this.rate = new Rate(rate);
+            this.subject = Subject.fromString(subject);
+        }
+
         /**
          * Returns true if at least one field is edited.
          */

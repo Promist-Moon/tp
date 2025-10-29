@@ -16,7 +16,9 @@ import java.util.List;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
+import seedu.address.model.lesson.Lesson;
 import seedu.address.model.Model;
+import seedu.address.model.lesson.LessonSubjectContainsKeywordsPredicate;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
@@ -79,7 +81,7 @@ public class CommandTestUtil {
     public static final String VALID_START_TIME_LESSON2 = "16:45";
     public static final String VALID_END_TIME_LESSON1 = "11:30";
     public static final String VALID_END_TIME_LESSON2 = "19:45";
-
+    public static final String VALID_RATE_2 = "70.00";
     /**
      * Executes the given {@code command}, confirms that <br>
      * - the returned {@link CommandResult} matches {@code expectedCommandResult} <br>
@@ -134,6 +136,20 @@ public class CommandTestUtil {
         model.updateFilteredPersonList(new NameContainsKeywordsPredicate(Arrays.asList(splitName[0])));
 
         assertEquals(1, model.getFilteredPersonList().size());
+    }
+
+    /**
+     * Updates {@code model}'s filtered list to show only the Lesson at the given {@code targetIndex} in the
+     * {@code lesson}'s address book.
+     */
+    public static void showLessonAtIndex(Model model, Index targetIndex) {
+        assertTrue(targetIndex.getZeroBased() < model.getFilteredLessonList().size());
+
+        Lesson lesson = model.getFilteredLessonList().get(targetIndex.getZeroBased());
+        final String[] splitSubject = lesson.getSubject().toString().split("\\s+");
+        model.updateFilteredLessonList(new LessonSubjectContainsKeywordsPredicate(Arrays.asList(splitSubject[0])));
+
+        assertEquals(1, model.getFilteredLessonList().size());
     }
 
 }
