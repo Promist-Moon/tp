@@ -41,7 +41,7 @@ public class EditLessonCommand extends Command {
 
     public static final String COMMAND_WORD = "edit.lesson";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the lesson of the student "
-            + "identified by the index number used in the displayed person list."
+            + "identified by the index number used in the displayed student list."
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: " + PREFIX_STUDENT_INDEX + "STUDENT INDEX "
             + PREFIX_LESSON_INDEX + "LESSON INDEX (must be a positive integers)"
@@ -52,14 +52,13 @@ public class EditLessonCommand extends Command {
             + "[" + PREFIX_START_TIME + "START TIME "
             + PREFIX_END_TIME + "END TIME]...\n"
             + "Example: " + COMMAND_WORD + " " + PREFIX_STUDENT_INDEX + "1 " + PREFIX_LESSON_INDEX + "2 "
-            + PREFIX_DAY + "5 "
+            + PREFIX_DAY + "Monday "
             + PREFIX_RATE + "44";
 
     public static final String MESSAGE_EDIT_LESSON_SUCCESS = "Edited Lesson: %1$s";
     public static final String MESSAGE_DUPLICATE_LESSON = "This lesson clashes with an existing "
             + "lesson in the address book.";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
-
     private final Index studentIndex;
     private final Index lessonIndex;
     private final EditLessonDescriptor editLessonDescriptor;
