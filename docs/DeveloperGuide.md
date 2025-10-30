@@ -796,3 +796,8 @@ by counting for the number of clicks.
 When editing a student to add tags, they currently need to retype every single tag to preserve the tags that were set previously, as a new
 tag list will be created. Hence, in the future, we can create an add.tag function that adds a tag to a person in case they have additional
 information they want to store.
+
+### 4. Viewing lessons in order
+When viewing a student's lesson via the view command, the lessons are sorted by time. This is not optimal, as we can see Thursday 6am lessons
+ranked before Monday 8am lesson even if it is Monday. Hence, we can sort the student's lesson list first by day, then by time, instead of
+by time only.
