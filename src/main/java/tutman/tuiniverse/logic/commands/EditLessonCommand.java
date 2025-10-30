@@ -13,7 +13,6 @@ import static tutman.tuiniverse.logic.parser.CliSyntax.PREFIX_STUDENT_INDEX;
 import static tutman.tuiniverse.logic.parser.CliSyntax.PREFIX_SUBJECT;
 
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
 import java.util.function.Predicate;
 
