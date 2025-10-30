@@ -25,8 +25,9 @@ public class EditLessonDescriptorTest {
     @Test
     public void equals() {
         // same values -> returns true
-        EditLessonDescriptor descriptorWithSameValues = new EditLessonDescriptor(VALID_DAY_LESSON1, VALID_START_TIME_LESSON1,
-                VALID_END_TIME_LESSON1, VALID_LEVEL_LESSON1, VALID_RATE_2, VALID_SUBJECT_LESSON1);
+        EditLessonDescriptor descriptorWithSameValues = new EditLessonDescriptor(VALID_DAY_LESSON1,
+                VALID_START_TIME_LESSON1, VALID_END_TIME_LESSON1,
+                VALID_LEVEL_LESSON1, VALID_RATE_2, VALID_SUBJECT_LESSON1);
         assertTrue(descriptorWithSameValues.equals(new EditLessonDescriptor(VALID_DAY_LESSON1, VALID_START_TIME_LESSON1,
                 VALID_END_TIME_LESSON1, VALID_LEVEL_LESSON1, VALID_RATE_2, VALID_SUBJECT_LESSON1)));
 
@@ -46,7 +47,7 @@ public class EditLessonDescriptorTest {
 
         // different start time -> returns false
         editedLesson = new EditLessonDescriptorBuilder()
-                .withLessonTime(LessonTime.ofLessonTime(VALID_START_TIME_LESSON2, VALID_END_TIME_LESSON1))
+                .withLessonTime(LessonTime.ofLessonTime(VALID_START_TIME_LESSON1, VALID_END_TIME_LESSON2))
                 .build();
         assertFalse(descriptorWithSameValues.equals(editedLesson));
 

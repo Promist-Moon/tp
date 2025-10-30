@@ -32,6 +32,7 @@ import tutman.tuiniverse.model.lesson.Rate;
 import tutman.tuiniverse.model.lesson.Subject;
 import tutman.tuiniverse.model.lesson.exceptions.DuplicateLessonException;
 import tutman.tuiniverse.model.lesson.exceptions.LessonException;
+import tutman.tuiniverse.model.lesson.exceptions.LessonNotFoundException;
 import tutman.tuiniverse.model.student.Student;
 
 /**
@@ -82,8 +83,6 @@ public class EditLessonCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         List<Student> lastShownList = model.getFilteredPersonList();
-        // Initialising student
-        Student student;
 
         if (studentIndex.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
@@ -91,50 +90,45 @@ public class EditLessonCommand extends Command {
 
         Student person = lastShownList.get(studentIndex.getZeroBased());
 
-        if (person instanceof Student) {
-            student = (Student) person;
-        } else {
-            // might have to change to person is not a student
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
-        }
-
         // Initialising student's lesson list
-        LessonList studentLessonList = student.getLessonList();
+        LessonList studentLessonList = person.getLessonList();
 
-        if (lessonIndex.getOneBased() > studentLessonList.getSize()) {
+        if (lessonIndex.getZeroBased() > studentLessonList.getSize()) {
             throw new CommandException(MESSAGE_INVALID_DISPLAYED_LESSON_INDEX);
         }
 
         // Handling logic
         try {
             Lesson lessonToEdit = studentLessonList.getLesson(lessonIndex.getOneBased());
-            Lesson editedLesson = createEditedLesson(lessonToEdit, editLessonDescriptor);
+            Lesson editedLesson = createEditedLesson(person, lessonToEdit, editLessonDescriptor);
 
-            model.setLesson(student, lessonToEdit, editedLesson);
+            model.setLesson(person, lessonToEdit, editedLesson);
             Predicate<Lesson> belongsToStudent =
-                    lesson -> student.getLessonList().hasLesson(lesson);
+                    lesson -> person.getLessonList().hasLesson(lesson);
             model.updateFilteredLessonList(belongsToStudent);
 
-            return new CommandResult(String.format(MESSAGE_EDIT_LESSON_SUCCESS, Messages.format(student)));
+            return new CommandResult(String.format(MESSAGE_EDIT_LESSON_SUCCESS, Messages.formatLesson(editedLesson)));
 
         } catch (LessonException e) {
             throw new CommandException(MESSAGE_INVALID_DISPLAYED_LESSON_INDEX);
         } catch (DuplicateLessonException e) {
             throw new CommandException(MESSAGE_DUPLICATE_LESSON);
+        } catch (LessonNotFoundException e) {
+            throw new CommandException(MESSAGE_INVALID_DISPLAYED_LESSON_INDEX);
         }
     }
 
     /**
      * Handles editing a {@code Lesson} edited with {@code editLessonDescriptor}.
      */
-    private static Lesson createEditedLesson(Lesson lessonToEdit, EditLessonDescriptor editLessonDescriptor) {
+    private static Lesson createEditedLesson(Student student, Lesson lessonToEdit,
+                                             EditLessonDescriptor editLessonDescriptor) {
         assert lessonToEdit != null;
         Day updatedDay = editLessonDescriptor.getDay().orElse(lessonToEdit.getDay());
         LessonTime updatedLessonTime = editLessonDescriptor.getLessonTime().orElse(lessonToEdit.getLessonTime());
         Level updatedLevel = editLessonDescriptor.getLevel().orElse(lessonToEdit.getLevel());
         Rate updatedRate = editLessonDescriptor.getRate().orElse(lessonToEdit.getRate());
         Subject updatedSubject = editLessonDescriptor.getSubject().orElse(lessonToEdit.getSubject());
-        Student student = lessonToEdit.getStudent();
         Lesson updatedLesson = new Lesson(updatedSubject, updatedLevel, updatedDay, updatedLessonTime, updatedRate);
         updatedLesson.addStudent(student);
         return updatedLesson;
@@ -250,11 +244,11 @@ public class EditLessonCommand extends Command {
             }
 
             EditLessonDescriptor otherEditLessonDescriptor = (EditLessonDescriptor) other;
-            return Objects.equals(day, otherEditLessonDescriptor.day)
-                    && Objects.equals(lessonTime, otherEditLessonDescriptor.lessonTime)
-                    && Objects.equals(level, otherEditLessonDescriptor.level)
-                    && Objects.equals(rate, otherEditLessonDescriptor.rate)
-                    && Objects.equals(subject, otherEditLessonDescriptor.subject);
+            return this.day.equals(otherEditLessonDescriptor.day)
+                    && this.lessonTime.equals(otherEditLessonDescriptor.lessonTime)
+                    && (this.level.getLevel() == otherEditLessonDescriptor.level.getLevel())
+                    && (this.rate.getRate() == otherEditLessonDescriptor.rate.getRate())
+                    && this.subject.getSubject().equals(otherEditLessonDescriptor.subject.getSubject());
         }
 
         @Override

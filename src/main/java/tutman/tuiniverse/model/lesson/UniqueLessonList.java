@@ -81,7 +81,6 @@ public class UniqueLessonList implements Iterable<Lesson> {
     public void add(Lesson toAdd) {
         requireNonNull(toAdd);
         if (contains(toAdd) || hasTimeClash(toAdd)) {
-            // to throw separate exception??
             throw new DuplicateLessonException();
         }
         internalList.add(toAdd);

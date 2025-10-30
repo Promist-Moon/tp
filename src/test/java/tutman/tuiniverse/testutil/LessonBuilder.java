@@ -59,7 +59,6 @@ public class LessonBuilder {
         day = new Day(DEFAULT_DAY);
         lt = ofLessonTime(DEFAULT_START_TIME, DEFAULT_END_TIME);
         rate = new Rate(DEFAULT_RATE);
-        student = null;
         address = null;
     }
 
@@ -74,7 +73,6 @@ public class LessonBuilder {
         day = lessonToCopy.getDay();
         lt = lessonToCopy.getLessonTime();
         rate = lessonToCopy.getRate();
-        student = lessonToCopy.getStudent();
         address = lessonToCopy.getAddress();
     }
 
@@ -142,8 +140,6 @@ public class LessonBuilder {
      * @return this builder for chaining.
      */
     public LessonBuilder withStudent(Student student) {
-        this.student = student;
-
         if (student != null) {
             this.address = student.getAddress();
         }

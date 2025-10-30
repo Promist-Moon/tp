@@ -52,6 +52,7 @@ public class EditLessonDescriptorBuilder {
         toCopy.getLevel().ifPresent(descriptor::setLevel);
         toCopy.getRate().ifPresent(descriptor::setRate);
         toCopy.getSubject().ifPresent(descriptor::setSubject);
+
     }
 
     /** Seeds values from an existing lesson (handy for “edit one field” tests). */

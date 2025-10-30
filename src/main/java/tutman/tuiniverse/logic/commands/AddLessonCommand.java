@@ -17,6 +17,7 @@ import tutman.tuiniverse.logic.Messages;
 import tutman.tuiniverse.logic.commands.exceptions.CommandException;
 import tutman.tuiniverse.model.Model;
 import tutman.tuiniverse.model.lesson.Lesson;
+import tutman.tuiniverse.model.lesson.exceptions.DuplicateLessonException;
 import tutman.tuiniverse.model.student.Student;
 
 /**
@@ -74,17 +75,12 @@ public class AddLessonCommand extends Command {
         if (targetIndex.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
-
-        Student person = lastShownList.get(targetIndex.getZeroBased());
-        if (person instanceof Student) {
-            Student studentToAddLesson = (Student) person;
-
-            model.addLesson(studentToAddLesson, toAdd);
-        } else {
-            // to edit and create a message for invalid student
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        try {
+            Student person = lastShownList.get(targetIndex.getZeroBased());
+            model.addLesson(person, toAdd);
+        } catch (DuplicateLessonException e) {
+            throw new CommandException(MESSAGE_DUPLICATE_LESSON);
         }
-
         return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.formatLesson(toAdd)));
 
     }
