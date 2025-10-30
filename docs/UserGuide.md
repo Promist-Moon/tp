@@ -10,17 +10,13 @@ As a **private secondary school tutor** in Singapore, it can be hard to **manage
 for larger tuition centre businesses, it means a lot of **unnecessary hassle** and much **room for error**.  
 
 Tuiniverse is the solution for all things tuition!
-Tuiniverse is a **desktop app** which expedites:
+Tuiniverse is a **desktop app** which <u>expedites</u>:
 * Contact storing and upkeep
 * Payment tracking
 * Lesson scheduling 
 
 All of this is displayed done with optimized typing (via a Command Line Interface) layered within graphical 
 display of all the information you need. 
-
-Our **guarantee** is that we can get your contact management tasks done **faster** than all the alternatives.
-
-AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized for use via a  Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AB3 can get your contact management tasks done faster than traditional GUI apps.
 
 <!-- * Table of Contents -->
 <page-nav-print />
@@ -54,7 +50,7 @@ Type some commands into the command box and press Enter to execute it. e.g. typi
 Some example commands you can try:
    * `list` : Lists all contacts.
 
-   * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the Address Book.
+   * `add n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 t/friends t/owesMoney` : Adds a contact named `John Doe` to the contact list.
 
    * `delete 3` : Deletes the 3rd contact shown in the current list.
 
@@ -70,19 +66,22 @@ Refer to the [Features](#features) below for more details of each command.
 
 Action | Format, Examples
 --------|------------------
-**Add** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
-**Add Lesson** | `add.lesson i/STUDENT_INDEX s/SUBJECT l/LEVEL d/DAY s/START_TIME e/END_TIME r/HOURLY RATE` <br> e.g., `add.lesson i/4 s/Math l/3 d/Tuesday s/13:00 e/15:00 r/40`
-**Clear** | `clear`
-**Delete** | `delete INDEX`<br> e.g., `delete 3`
-**Delete Lesson** | `delete.lesson i/STUDENT_INDEX c/LESSON_INDEX…​`<br> e.g.,`delete.lesson i/2 c/1`
-**Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
+**Add Student** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 t/friends t/owesMoney`
+**Add Lesson** | `add.lesson i/STUDENT_INDEX s/SUBJECT l/LEVEL d/DAY st/START_TIME et/END_TIME r/HOURLY RATE` <br> e.g., `add.lesson i/1 s/English l/2 d/Monday st/10:00 et/12:00 r/80 `
 **View** | `view INDEX`<br> e.g., `view 1`
 **List** | `list`
 **List Paid** | `list.paid`
 **List Unpaid** | `list.unpaid`
 **List Overdue** | `list.overdue`
+**Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
+**Edit Student** | `edit` <br> e.g., `edit 1 p/91234567 e/johndoe@example.com`
+**Edit Lesson** | `edit.lesson` <br> e.g., `edit.lesson i/1 c/2 d/Monday r/44`
 **Pay** | `pay INDEX`<br> e.g., `pay 3`
+**Delete Student** | `delete INDEX`<br> e.g., `delete 3`
+**Delete Lesson** | `delete.lesson i/STUDENT_INDEX c/LESSON_INDEX…​`<br> e.g.,`delete.lesson i/2 c/1`
+**Clear** | `clear`
 **Help** | `help`
+**Exit** | `exit`
 
 --------------------------------------------------------------------------------------------------------------------
 ## User Interface (UI) Overview
@@ -158,34 +157,48 @@ Adds a student to the address book with these fields:
 
 Adds a lesson to the specific student with these fields:
 * Student Index
-* Subject 
+* Subject (Refer to [Glossary](#Glossary) for the list of subject)
 * Level (1,2,3, or 4)
-* Day of Lesson
+* Day of Lesson (Monday, Tuesday...)
 * Start Time
 * End Time
 * Hourly Rate
 
-**Format:** `add.lesson i/STUDENT_INDEX s/SUBJECT l/LEVEL d/DAY s/START_TIME e/END_TIME r/HOURLY RATE`
+<box type="tip" seamless>
+
+**Notes**:
+When you add a lesson in Tuiniverse, it’s assumed to run every week from the first to the last week of the month.
+
+For example, if October 2025 has five Thursdays and you schedule a Thursday lesson, it will be set for all five Thursdays. The total payment will be calculated based on this.
+</box>
+
+**Format:** `add.lesson i/STUDENT_INDEX s/SUBJECT l/LEVEL d/DAY st/START_TIME et/END_TIME r/HOURLY RATE`
 
 **Examples:**
-* `add.lesson i/4 s/Math l/3 d/Tuesday s/13:00 e/15:00 r/40`
+* `add.lesson i/1 s/English l/2 d/Monday st/10:00 et/12:00 r/80`
 
 <br>
 
-### Making payment: `pay`
-Tracks that a student has made payment for that month.
+### List all lessons of a student: `view`
 
-**Format:** `pay INDEX`
+Lists all the lessons taken by the specfied student.
 
-* Marks payment for the student at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
-* When you mark an **unpaid** or **overdue** student as paid, their status becomes **paid**.
-* A **paid** student cannot make payment until the next month.
+**Format:** `view INDEX`
+![view command](images/viewCommand.png)
+
+* List the lessons of the student at the specified `INDEX`.
+* The index refers to the index number shown in the displayed student list.
+* The index **must be a positive integer** 1, 2, 3, …​
+
+**Examples:**
+* `list` followed by `view 2` views the lessons of the 2nd student in the address book.
+* `find Betsy` followed by `view 1` views the 1st student in the results of the find command.
 
 <br>
 
-### Listing all persons : `list`
+### Listing all students : `list`
 
-Shows a list of all persons in the address book.
+Shows a list of all students in the contact book.
 
 **Format:** `list`
 ![list command](images/list.png)
@@ -207,26 +220,9 @@ Lists all students that have **overdue** fees from previous months.
 **Format:** `list.overdue`
 ![list command](images/listoverdue.png)
 
-### Editing a person : `edit`
-
-Edits an existing student in the address book.
-
-**Format:** `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
-
-* Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
-* At least one of the optional fields must be provided.
-* Existing values will be updated to the input values.
-* When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
-* You can remove all the person’s tags by typing `t/` without
-    specifying any tags after it.
-
-**Examples:**
-*  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
-*  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
+### Searching for students by keyword: `find`
 
 <br>
-
-### Searching for students by keyword: `find`
 
 **Format:** `find KEYWORD [MORE_KEYWORDS]`
 ![find command](images/find.png)
@@ -244,23 +240,61 @@ Edits an existing student in the address book.
 
 <br>
 
-### List all lessons of a student: `view`
+### Editing a student : `edit`
 
-Lists all the lessons taken by the specfied student.
+Edits an existing student in the contact book.
 
-**Format:** `view INDEX`
+**Format:** `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
 
-* List the lessons of the student at the specified `INDEX`.
-* The index refers to the index number shown in the displayed person list.
-* The index **must be a positive integer** 1, 2, 3, …​
+* Edits the student at the specified `INDEX`. The index refers to the index number shown in the displayed student list. The index **must be a positive integer** 1, 2, 3, …​
+* At least one of the optional fields must be provided.
+* Existing values will be updated to the input values.
+* When editing tags, the existing tags of the student will be removed i.e adding of tags is not cumulative.
+* You can remove all the student’s tags by typing `t/` without
+  specifying any tags after it.
 
 **Examples:**
-* `list` followed by `view 2` views the lessons of the 2nd student in the address book.
-* `find Betsy` followed by `view 1` views the 1st student in the results of the find command.
+*  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st student to be `91234567` and `johndoe@example.com` respectively.
+*  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd student to be `Betsy Crower` and clears all existing tags.
 
 <br>
 
-### Deleting a person : `delete`
+### Editing a lesson : `edit.lesson`
+
+Edits the details of the lesson of the student identified by the index number used in the displayed person list.
+Existing values will be overwritten by the input values.
+
+**Format:** `edit.lesson i/STUDENT_INDEX c/LESSON_INDEX [s/SUBJECT] [d/DAY] [l/LEVEL] [r/RATE] [st/START TIME et/END TIME]…​`
+
+<box type="warning" seamless>
+
+**Caution:**
+To ensure that you edit the correct lesson from a selected student, use the `view` command <b>first</b> to display the student's details, then specify the lesson index shown in the lesson list panel.
+Trying to edit a lesson before viewing the student's lesson (via `view` command) may result in a wrong lesson being edited.
+</box>
+
+* Edits the lesson at the specified `LESSON_INDEX` of the student at`STUDENT_INDEX`. 
+* The index refers to the index number shown in the displayed student list & lesson list respectively. The index **must be a positive integer** 1, 2, 3, …​
+* At least one of the optional fields must be provided.
+* Existing values will be updated to the input values.
+
+**Examples:**
+*  `edit.lesson i/1 c/2 d/Monday r/44` Edits the 2nd lesson of the 1st student to be scheduled on every `Monday` at a rate of `$44/hr`.
+
+<br>
+
+### Making payment: `pay`
+Tracks that a student has made payment for that month.
+
+**Format:** `pay INDEX`
+
+* Marks payment for the student at the specified `INDEX`. The index refers to the index number shown in the displayed student list. The index **must be a positive integer** 1, 2, 3, …​
+* When you mark an **unpaid** or **overdue** student as paid, their status becomes **paid**.
+* A **paid** student cannot make payment until the next month.
+
+<br>
+
+### Deleting a student : `delete`
 
 Deletes the specified student from the address book.
 
@@ -270,9 +304,10 @@ Before delete:
 After delete:
 ![after delete command](images/deleteAfter.png)
 
-* Deletes the students at the specified `INDEX`.
-* The index refers to the index number shown in the displayed person list.
+* Deletes the student at the specified `INDEX`.
+* The index refers to the index number shown in the displayed student list.
 * The index **must be a positive integer** 1, 2, 3, …​
+* Deleting a student also delete away their related class and payment record for the month.
 
 **Examples:**
 * `list` followed by `delete 2` deletes the 2nd student in the address book.
@@ -285,6 +320,13 @@ After delete:
 Deletes an existing lesson from a specific student.
 
 **Format:**`delete.lesson i/STUDENT_INDEX c/LESSON_INDEX…​`
+
+<box type="warning" seamless>
+
+**Caution:**
+To ensure that you delete the correct lesson from a selected student, use the `view` command <b>first</b> to display the student's details, then specify the lesson index shown in the lesson list panel.
+Trying to delete a lesson before viewing the student's lesson (via `view` command) may result in a wrong lesson being deleted.
+</box>
 
 **Examples:**
 * `delete.lesson i/2 c/1`
@@ -315,12 +357,12 @@ Tuiniverse data are saved in the hard disk automatically after any command that 
 
 ### Editing the data file
 
-Tuiniverse data are saved automatically as a JSON file `[JAR file location]/data/Tuiniverse.json`. Advanced users are welcome to update data directly by editing that data file.
+Tuiniverse data are saved automatically as a JSON file `[JAR file location]/data/tuiniverse.json`. Advanced users are welcome to update data directly by editing that data file.
 
 <box type="warning" seamless>
 
 **Caution:**
-If your changes to the data file makes its format invalid, Tuiniverse will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.<br>
+If your changes to the data file makes its format invalid, Tuiniverse will discard all data and start with an empty data file at the next run when you attempt to perform any command.  Hence, it is recommended to take a backup of the file before editing it.<br>
 Furthermore, certain edits can cause the Tuiniverse to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </box>
 
@@ -337,13 +379,17 @@ _Details coming soon ..._
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous Tuiniverse home folder.
 
+**Q**: How do I edit only one tag for a specific student without affecting the others?<br>
+**A**: You’ll need to specify both the edited tag and the tags you want to keep in order to see the changes.
+For example, if a student currently has the tags `earlyLesson` and `moreExplanation`, and you 
+want to change `earlyLesson` to `lateLesson`, use the edit command as follows:
+`edit [INDEX] t/lateLesson t/moreExplanation`
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## Glossary
 
-* **Person**: A person can either be a student or a parent
-    * Student - A student studies a subject under a tutor for an hourly rate.
-    * Parent - The parent of the student.
+* Student: A person who's being taught by the tutor (you).
 * **Payment Status**: Each student has a payment status which updates every month.
     * Paid - The student has paid within the month
     * Unpaid - The student has not paid within the month
