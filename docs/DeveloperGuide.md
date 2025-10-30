@@ -676,20 +676,28 @@ testers are expected to do more *exploratory* testing.
 
 1. Initial launch
 
-   1. Download the jar file and copy into an empty folder
+    * Download the jar file and copy into an empty folder
 
-   1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+    * Double-click the jar file 
 
-1. Saving window preferences
+    Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
 
-   1. Resize the window to an optimum size. Move the window to a different location. Close the window.
+<br>
 
-   1. Re-launch the app by double-clicking the jar file.<br>
-       Expected: The most recent window size and location is retained.
+2. Saving window preferences
 
-1. _{ more test cases …​ }_
+   * Resize the window to an optimum size. Move the window to a different location. Close the window.
 
-### Deleting a person
+   * Re-launch the app by double-clicking the jar file.
+
+   Expected: The most recent window size and location is retained.
+
+### Adding a student
+
+**Error message indicating invalid command format** : Unknown Command
+
+
+### Deleting a student
 
 1. Deleting a person while all persons are being shown
 
