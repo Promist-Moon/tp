@@ -1,7 +1,7 @@
 ---
   layout: default.md
-  title: "User Guide"
-  pageNav: 3
+    title: "User Guide"
+    pageNav: 3
 ---
 
 ## Introduction
@@ -22,6 +22,7 @@ display of all the information you need.
 <page-nav-print />
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## Quick start
 
@@ -48,15 +49,15 @@ To get adjusted to using Tuiniverse, we have created a short practice to keep us
 Type some commands into the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
 
 Some example commands you can try:
-   * `list` : Lists all contacts.
+* `list` : Lists all contacts.
 
-   * `add n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 t/friends t/owesMoney` : Adds a contact named `John Doe` to the contact list.
+* `add n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 t/friends t/owesMoney` : Adds a contact named `John Doe` to the contact list.
 
-   * `delete 3` : Deletes the 3rd contact shown in the current list.
+* `delete 3` : Deletes the 3rd contact shown in the current list.
 
-   * `clear` : Deletes all contacts.
+* `clear` : Deletes all contacts.
 
-   * `exit` : Exits the app.
+* `exit` : Exits the app.
 
 Refer to the [Features](#features) below for more details of each command.
 
@@ -84,16 +85,19 @@ Action | Format, Examples
 **Exit** | `exit`
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
+
 ## User Interface (UI) Overview
 ![interface overview](images/interfaceOverview.png)
 
-| UI Element                          | Description                                                                                                         |
-|-------------------------------------|---------------------------------------------------------------------------------------------------------------------|
-| **Command Bar**                     | Primary input field for entering commands like find, list and add.                                                  |
-| **Message Box**                     | Displays temporary feedback, including success confirmations and error messages, following a user action.           |
-| **Contact List Panel**              | View students' contact details here.                                                                                |
+| UI Element                           | Description                                                                                                         |
+|--------------------------------------|---------------------------------------------------------------------------------------------------------------------|
+| **Command Bar**                      | Primary input field for entering commands like find, list and add.                                                  |
+| **Message Box**                      | Displays temporary feedback, including success confirmations and error messages, following a user action.           |
+| **Contact List Panel**               | View students' contact details here.                                                                                |
 | **Lesson List Panel/Today Schedule** | Displays the scheduled lessons of the day. This panel can be toggled to show all the lessons of a selected student. |
-| **Amount Panel**                | View summary of earnings and payment here.                                                                          |
+
+<div style="page-break-after: always;"></div>
 
 ## Features
 
@@ -117,7 +121,7 @@ Action | Format, Examples
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
-</box>
+  </box>
 
 <br>
 
@@ -175,8 +179,6 @@ For example, if October 2025 has five Thursdays and you schedule a Thursday less
 </box>
 
 **Format:** `add.lesson i/STUDENT_INDEX s/SUBJECT l/LEVEL d/DAY st/START_TIME et/END_TIME r/HOURLY RATE`
-
-![add lesson command](images/addLesson.png)
 
 **Examples:**
 * `add.lesson i/1 s/English l/2 d/Monday st/10:00 et/12:00 r/80`
@@ -277,7 +279,7 @@ To ensure that you edit the correct lesson from a selected student, use the `vie
 Trying to edit a lesson before viewing the student's lesson (via `view` command) may result in a wrong lesson being edited.
 </box>
 
-* Edits the lesson at the specified `LESSON_INDEX` of the student at`STUDENT_INDEX`. 
+* Edits the lesson at the specified `LESSON_INDEX` of the student at`STUDENT_INDEX`.
 * The index refers to the index number shown in the displayed student list & lesson list respectively. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
@@ -376,7 +378,10 @@ Furthermore, certain edits can cause the Tuiniverse to behave in unexpected ways
 
 _Details coming soon ..._
 
+
+
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## FAQ
 
@@ -385,7 +390,7 @@ _Details coming soon ..._
 
 **Q**: How do I edit only one tag for a specific student without affecting the others?<br>
 **A**: You’ll need to specify both the edited tag and the tags you want to keep in order to see the changes.
-For example, if a student currently has the tags `earlyLesson` and `moreExplanation`, and you 
+For example, if a student currently has the tags `earlyLesson` and `moreExplanation`, and you
 want to change `earlyLesson` to `lateLesson`, use the edit command as follows:
 `edit [INDEX] t/lateLesson t/moreExplanation`
 
@@ -393,11 +398,11 @@ want to change `earlyLesson` to `lateLesson`, use the edit command as follows:
 
 ## Glossary
 
-* **Student**: A person who's being taught by the tutor (you).
+* Student: A person who's being taught by the tutor (you).
 * **Payment Status**: Each student has a payment status which updates every month.
-    * Paid - The student has paid within the month
-    * Unpaid - The student has not paid within the month
-    * Overdue - The student has outstanding bills from previous months
+  * Paid - The student has paid within the month
+  * Unpaid - The student has not paid within the month
+  * Overdue - The student has outstanding bills from previous months
 * **Bill**: The payment amount owed by a student
 * **Subjects**: Math, English, Physics, Chemistry, Biology, Geography, History, Mother tongue, Social Studies, Literature
 * **Note**: A comment located in a student's information
