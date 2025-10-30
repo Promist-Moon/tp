@@ -10,7 +10,6 @@ import java.util.List;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import tutman.tuiniverse.model.lesson.Lesson;
-import tutman.tuiniverse.model.student.Student;
 import tutman.tuiniverse.model.student.exceptions.DuplicatePersonException;
 import tutman.tuiniverse.model.student.exceptions.PersonNotFoundException;
 
