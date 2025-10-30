@@ -1,4 +1,4 @@
-package tutman.tuiniverse.model.payment;
+package tutman.tuiniverse.model.util;
 
 import static java.util.Objects.requireNonNull;
 
@@ -7,9 +7,11 @@ import java.util.logging.Logger;
 
 import tutman.tuiniverse.commons.core.LogsCenter;
 import tutman.tuiniverse.model.Model;
+import tutman.tuiniverse.model.payment.Payment;
+import tutman.tuiniverse.model.payment.PaymentList;
+import tutman.tuiniverse.model.payment.TotalAmount;
 import tutman.tuiniverse.model.payment.exceptions.PaymentException;
 import tutman.tuiniverse.model.student.Student;
-import tutman.tuiniverse.model.util.DateTimeUtil;
 
 /**
  * Handles the monthly payment rollover logic when the app is opened
@@ -71,52 +73,23 @@ public class MonthlyRollover {
 
             Student student = (Student) person;
 
-            // Compute amount earned for this YearMonth; skip zero-value months
-            float value = student.getLessonList().getTotalAmountEarned(yearMonth);
-            if (value <= 0f) {
+            // Compute amount earned for this YearMonth
+            TotalAmount amount = student.getTotalAmountByMonth(yearMonth);
+
+            // Skip zero values
+            if (amount.getAsFloat() <= 0f) {
                 continue;
             }
-            TotalAmount totalAmount = new TotalAmount(value);
 
             PaymentList oldPayments = student.getPayments();
 
-            // === Duplicate handling (idempotent by YearMonth) ===
-            if (oldPayments.containsMonth(yearMonth)) {
-                // Upsert policy: if the existing payment is UNPAID and the amount has changed,
-                // replace it to keep data consistent with lesson history.
-                try {
-                    Payment existing = oldPayments.getPaymentByMonth(yearMonth);
-                    float existingAmt = existing.getTotalAmount().getAsFloat();
-                    float newAmt = totalAmount.getAsFloat();
-                    boolean amountDiffers = Float.compare(existingAmt, newAmt) != 0;
-
-                    if (amountDiffers && !existing.isPaid()) {
-                        // upsert: overwrite the month with recomputed amount (only if not yet paid)
-                        PaymentList copied = oldPayments.copy();
-                        copied.putPaymentForMonth(new Payment(yearMonth, totalAmount));
-
-                        Student editedStudent = new Student(
-                                student.getName(),
-                                student.getPhone(),
-                                student.getEmail(),
-                                student.getAddress(),
-                                student.getTags(),
-                                student.getLessonList(),
-                                copied
-                        );
-                        model.setPerson(student, editedStudent);
-                    }
-                } catch (PaymentException e) {
-                    // Lookup failed despite containsMonth(): log and skip this student-month
-                    logger.warning("Rollover lookup failed for " + student.getName() + " " + yearMonth
-                            + ": " + e.getMessage());
-                    continue;
-                }
-                continue; // Either handled via upsert or intentionally skipped
+            // Duplicate Handling; returns true if month is present (handled or skipped)
+            if (upsert(student, yearMonth, amount)) {
+                continue;
             }
 
-            // === Normal path: add if absent (idempotent add) ===
-            Payment newPayment = new Payment(yearMonth, totalAmount);
+            // Happy path: add if absent (idempotent add)
+            Payment newPayment = new Payment(yearMonth, amount);
             PaymentList copiedPayments = oldPayments.copy();
             boolean added = copiedPayments.addPaymentIfAbsent(newPayment);
             if (!added) {
@@ -135,5 +108,51 @@ public class MonthlyRollover {
 
             model.setPerson(student, editedStudent);
         }
+    }
+
+    /**
+     * Handles the "upsert" policy for an existing month:
+     * - If a payment exists for {@code yearMonth} and it is UNPAID and the recomputed amount differs,
+     *   overwrite that month's payment with the new computed {@code amount}.
+     * - If it exists but is PAID or the amount is unchanged, do nothing.
+     * Returns {@code true} if the month existed (handled or skipped), {@code false} if absent.
+     */
+    private boolean upsert(Student student, YearMonth yearMonth, TotalAmount amount) {
+        PaymentList oldPayments = student.getPayments();
+
+        // If month not present, signal caller to proceed with "add if absent"
+        if (!oldPayments.containsMonth(yearMonth)) {
+            return false;
+        }
+
+        try {
+            Payment existing = oldPayments.getPaymentByMonth(yearMonth);
+            TotalAmount existingAmt = existing.getTotalAmount();
+            float newAmt = amount.getAsFloat();
+            boolean amountDiffers = Float.compare(existingAmt.getAsFloat(), newAmt) != 0;
+
+            if (amountDiffers && !existing.isPaid()) {
+                // Overwrite (idempotent upsert for unpaid months whose computed amount changed)
+                PaymentList copied = oldPayments.copy();
+                copied.putPaymentForMonth(new Payment(yearMonth, amount));
+
+                Student editedStudent = new Student(
+                        student.getName(),
+                        student.getPhone(),
+                        student.getEmail(),
+                        student.getAddress(),
+                        student.getTags(),
+                        student.getLessonList(),
+                        copied
+                );
+                model.setPerson(student, editedStudent);
+            }
+        } catch (PaymentException e) {
+            // Lookup failed despite containsMonth(): log and treat as handled for this student-month
+            logger.warning("Rollover lookup failed for " + student.getName() + " " + yearMonth
+                    + ": " + e.getMessage());
+        }
+
+        return true;
     }
 }

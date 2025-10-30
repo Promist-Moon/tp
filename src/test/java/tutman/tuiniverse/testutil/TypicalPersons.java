@@ -64,7 +64,7 @@ public class TypicalPersons {
     public static final Student GEORGE = new StudentBuilder().withName("George Best").withPhone("9482442")
             .withEmail("anna@example.com").withAddress("4th street")
             .withLessonList(new LessonList().addLesson(Y3_GEOGRAPHY))
-            .withPaymentList(new PaymentList()).build();
+            .withPaymentList(new PaymentList(currentYmUnpaid0())).build();
     public static final Student HANNAH = new StudentBuilder().withName("HANNAH MONTANA").withPhone("94823224")
             .withEmail("mileycyrus@example.com").withAddress("usa ave")
             .withLessonList(new LessonList().addLesson(Y1_ENGLISH))

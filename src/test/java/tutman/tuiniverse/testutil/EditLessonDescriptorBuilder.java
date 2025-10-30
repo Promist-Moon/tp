@@ -66,26 +66,41 @@ public class EditLessonDescriptorBuilder {
         descriptor.setSubject(lesson.getSubject());
     }
 
+    /**
+     * Sets the {@code Day} of the {@code EditLessonDescriptor} that we are building.
+     */
     public EditLessonDescriptorBuilder withDay(Day day) {
         descriptor.setDay(day);
         return this;
     }
 
+    /**
+     * Sets the {@code LessonTime} of the {@code EditLessonDescriptor} that we are building.
+     */
     public EditLessonDescriptorBuilder withLessonTime(LessonTime lessonTime) {
         descriptor.setLessonTime(lessonTime);
         return this;
     }
 
+    /**
+     * Sets the {@code Level} of the {@code EditLessonDescriptor} that we are building.
+     */
     public EditLessonDescriptorBuilder withLevel(Level level) {
         descriptor.setLevel(level);
         return this;
     }
 
+    /**
+     * Sets the {@code Rate} of the {@code EditLessonDescriptor} that we are building.
+     */
     public EditLessonDescriptorBuilder withRate(Rate rate) {
         descriptor.setRate(rate);
         return this;
     }
 
+    /**
+     * Sets the {@code Subject} of the {@code EditLessonDescriptor} that we are building.
+     */
     public EditLessonDescriptorBuilder withSubject(Subject subject) {
         descriptor.setSubject(subject);
         return this;

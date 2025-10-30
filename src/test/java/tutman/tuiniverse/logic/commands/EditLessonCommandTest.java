@@ -4,20 +4,20 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static tutman.tuiniverse.logic.commands.CommandTestUtil.VALID_DAY_LESSON1;
-import static tutman.tuiniverse.logic.commands.CommandTestUtil.VALID_START_TIME_LESSON1;
 import static tutman.tuiniverse.logic.commands.CommandTestUtil.VALID_END_TIME_LESSON1;
 import static tutman.tuiniverse.logic.commands.CommandTestUtil.VALID_END_TIME_LESSON2;
 import static tutman.tuiniverse.logic.commands.CommandTestUtil.VALID_LEVEL_LESSON1;
-import static tutman.tuiniverse.logic.commands.CommandTestUtil.VALID_SUBJECT_LESSON1;
 import static tutman.tuiniverse.logic.commands.CommandTestUtil.VALID_RATE_2;
+import static tutman.tuiniverse.logic.commands.CommandTestUtil.VALID_START_TIME_LESSON1;
+import static tutman.tuiniverse.logic.commands.CommandTestUtil.VALID_SUBJECT_LESSON1;
 import static tutman.tuiniverse.logic.commands.CommandTestUtil.assertCommandFailure;
 import static tutman.tuiniverse.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static tutman.tuiniverse.logic.commands.CommandTestUtil.showLessonAtIndex;
 import static tutman.tuiniverse.testutil.Assert.assertThrows;
 import static tutman.tuiniverse.testutil.TypicalIndexes.INDEX_FIRST_LESSON;
 import static tutman.tuiniverse.testutil.TypicalIndexes.INDEX_SECOND_LESSON;
-import static tutman.tuiniverse.testutil.TypicalPersons.getTypicalAddressBook;
 import static tutman.tuiniverse.testutil.TypicalPersons.ALICE;
+import static tutman.tuiniverse.testutil.TypicalPersons.getTypicalAddressBook;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -30,11 +30,8 @@ import tutman.tuiniverse.model.Model;
 import tutman.tuiniverse.model.ModelManager;
 import tutman.tuiniverse.model.UserPrefs;
 import tutman.tuiniverse.model.lesson.Lesson;
-import tutman.tuiniverse.model.lesson.Rate;
 import tutman.tuiniverse.model.lesson.Subject;
 import tutman.tuiniverse.testutil.EditLessonDescriptorBuilder;
-import tutman.tuiniverse.testutil.LessonBuilder;
-
 /**
  * Contains integration tests (interaction with the Model) and unit tests for EditLessonCommand.
  */
@@ -128,7 +125,8 @@ public class EditLessonCommandTest {
         assertFalse(standardCommand.equals(new ClearCommand()));
 
         // different lesson index -> returns false
-        assertFalse(standardCommand.equals(new EditLessonCommand(INDEX_SECOND_LESSON, INDEX_FIRST_LESSON, copyDescriptor)));
+        assertFalse(standardCommand.equals(new EditLessonCommand(INDEX_SECOND_LESSON, INDEX_FIRST_LESSON,
+                copyDescriptor)));
 
         // different descriptor -> returns false
         assertFalse(standardCommand.equals(new EditLessonCommand(INDEX_FIRST_LESSON, INDEX_FIRST_LESSON,

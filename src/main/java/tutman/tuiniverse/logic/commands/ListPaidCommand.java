@@ -9,7 +9,7 @@ import tutman.tuiniverse.model.student.StudentMatchesPaymentStatusPredicate;
 
 
 /**
- * Lists all persons in the address book to the user.
+ * Lists all students in the address book to the user.
  */
 public class ListPaidCommand extends Command {
 

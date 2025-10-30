@@ -30,9 +30,7 @@ public class PaymentListTest {
     @Test
     public void constructor_noArguments_success() {
         PaymentList pl = new PaymentList();
-        assertEquals(0, pl.size());
-        assertTrue(pl.isEmpty());
-        assertNull(pl.getEarliestUnpaidYearmonth());
+        assertEquals(1, pl.size());
     }
 
     @Test

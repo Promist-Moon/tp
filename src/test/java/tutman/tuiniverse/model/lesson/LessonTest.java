@@ -45,7 +45,7 @@ public class LessonTest {
 
     @Test
     public void constructor_nullFields_throwsNullPointer() {
-        Day day = new Day("1");
+        Day day = new Day(1);
         LessonTime time = LessonTime.ofLessonTime("10:00", "11:30");
         Rate rate = new Rate("30");
 

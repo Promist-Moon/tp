@@ -5,20 +5,22 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static tutman.tuiniverse.logic.commands.CommandTestUtil.VALID_DAY_LESSON1;
 import static tutman.tuiniverse.logic.commands.CommandTestUtil.VALID_DAY_LESSON2;
-import static tutman.tuiniverse.logic.commands.CommandTestUtil.VALID_START_TIME_LESSON1;
 import static tutman.tuiniverse.logic.commands.CommandTestUtil.VALID_END_TIME_LESSON1;
-import static tutman.tuiniverse.logic.commands.CommandTestUtil.VALID_START_TIME_LESSON2;
 import static tutman.tuiniverse.logic.commands.CommandTestUtil.VALID_END_TIME_LESSON2;
 import static tutman.tuiniverse.logic.commands.CommandTestUtil.VALID_LEVEL_LESSON1;
 import static tutman.tuiniverse.logic.commands.CommandTestUtil.VALID_LEVEL_LESSON2;
-import static tutman.tuiniverse.logic.commands.CommandTestUtil.VALID_SUBJECT_LESSON1;
 import static tutman.tuiniverse.logic.commands.CommandTestUtil.VALID_RATE_2;
+import static tutman.tuiniverse.logic.commands.CommandTestUtil.VALID_START_TIME_LESSON1;
+import static tutman.tuiniverse.logic.commands.CommandTestUtil.VALID_SUBJECT_LESSON1;
 import static tutman.tuiniverse.logic.commands.CommandTestUtil.VALID_SUBJECT_LESSON2;
 
 import org.junit.jupiter.api.Test;
 
 import tutman.tuiniverse.logic.commands.EditLessonCommand.EditLessonDescriptor;
-import tutman.tuiniverse.model.lesson.*;
+import tutman.tuiniverse.model.lesson.Day;
+import tutman.tuiniverse.model.lesson.LessonTime;
+import tutman.tuiniverse.model.lesson.Level;
+import tutman.tuiniverse.model.lesson.Subject;
 import tutman.tuiniverse.testutil.EditLessonDescriptorBuilder;
 
 public class EditLessonDescriptorTest {

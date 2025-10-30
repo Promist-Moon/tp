@@ -75,14 +75,11 @@ public class AddLessonCommand extends Command {
         if (targetIndex.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
-        try {
-            Student person = lastShownList.get(targetIndex.getZeroBased());
-            model.addLesson(person, toAdd);
-        } catch (DuplicateLessonException e) {
-            throw new CommandException(MESSAGE_DUPLICATE_LESSON);
-        }
-        return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.formatLesson(toAdd)));
 
+        Student person = lastShownList.get(targetIndex.getZeroBased());
+        model.addLesson(person, toAdd);
+
+        return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.formatLesson(toAdd)));
     }
 
     @Override

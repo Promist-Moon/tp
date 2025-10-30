@@ -1,4 +1,4 @@
-package tutman.tuiniverse.model.payment;
+package tutman.tuiniverse.model.util;
 
 import java.io.IOException;
 import java.time.YearMonth;
@@ -8,7 +8,6 @@ import tutman.tuiniverse.commons.util.StringUtil;
 import tutman.tuiniverse.model.AddressBook;
 import tutman.tuiniverse.model.Model;
 import tutman.tuiniverse.model.UserPrefs;
-import tutman.tuiniverse.model.util.DateTimeUtil;
 import tutman.tuiniverse.storage.Storage;
 
 /**
@@ -68,9 +67,10 @@ public class StartupRolloverHandler {
         new MonthlyRollover(model).compute(lastOpened, now);
 
         // Save changes
-        saveAddressBook("after rollover");
         userPrefs.setLastOpened(now);
         saveUserPrefs(userPrefs, "after rollover");
+        model.setUserPrefs(userPrefs);
+        saveAddressBook("after rollover");
     }
 
     /**

@@ -56,7 +56,7 @@ public class LessonBuilder {
     public LessonBuilder() {
         subject = Subject.fromString(DEFAULT_SUBJECT);
         level = Level.fromString(DEFAULT_LEVEL);
-        day = new Day(DEFAULT_DAY);
+        day = new Day(Integer.valueOf(DEFAULT_DAY));
         lt = ofLessonTime(DEFAULT_START_TIME, DEFAULT_END_TIME);
         rate = new Rate(DEFAULT_RATE);
         address = null;
@@ -105,7 +105,7 @@ public class LessonBuilder {
      * @return this builder for chaining.
      */
     public LessonBuilder withDay(String day) {
-        this.day = new Day(day);
+        this.day = new Day(Integer.valueOf(day));
         return this;
     }
 
