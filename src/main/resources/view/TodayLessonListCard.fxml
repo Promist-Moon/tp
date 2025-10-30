@@ -9,7 +9,6 @@
 <?import javafx.scene.layout.VBox?>
 
 <HBox id="cardPane" fx:id="cardPane" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
-  <!-- Improve in future to become table view -->
   <GridPane HBox.hgrow="ALWAYS">
     <columnConstraints>
       <ColumnConstraints hgrow="SOMETIMES" minWidth="10" prefWidth="150" />
@@ -27,6 +26,7 @@
         </Label>
         <Label fx:id="subject" text="\$subject" styleClass="cell_big_label" />
       </HBox>
+      <!--<Label fx:id="student" styleClass="cell_small_label" HBox.hgrow="ALWAYS" text="\student" alignment="CENTER_LEFT"/>-->
       <Label fx:id="level" styleClass="cell_small_label" HBox.hgrow="ALWAYS" text="\$level" alignment="CENTER_LEFT"/>
       <Label fx:id="lessonTime" styleClass="cell_small_label" text="\$lessonTime" />
       <Label fx:id="rate" styleClass="cell_small_label" text="\$rate" />

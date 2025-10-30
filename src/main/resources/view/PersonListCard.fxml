@@ -33,8 +33,16 @@
         <Region HBox.hgrow="ALWAYS" />
         <Label fx:id="paymentStatus" styleClass="cell_small_label" HBox.hgrow="ALWAYS" alignment="CENTER_RIGHT" />
       </HBox>
-      <Label fx:id="address" styleClass="cell_small_label" text="\$address" />
-      <Label fx:id="email" styleClass="cell_small_label" text="\$email" />
+      <HBox spacing="50">
+        <Label fx:id="address" styleClass="cell_small_label" text="\$address" alignment="CENTER_LEFT"/>
+        <Region HBox.hgrow="ALWAYS" />
+        <Label text="Amount unpaid:" styleClass="cell_small_label" HBox.hgrow="ALWAYS" alignment="CENTER_RIGHT"/>
+      </HBox>
+      <HBox spacing="50">
+        <Label fx:id="email" styleClass="cell_small_label" text="\$email" alignment="CENTER_LEFT"/>
+        <Region HBox.hgrow="ALWAYS" />
+        <Label fx:id="unpaidAmount" HBox.hgrow="ALWAYS" alignment="CENTER_RIGHT"/>
+      </HBox>
       <!-- Lesson List -->
       <VBox fx:id="lessonList" spacing="5" alignment="CENTER_LEFT" />
     </VBox>
