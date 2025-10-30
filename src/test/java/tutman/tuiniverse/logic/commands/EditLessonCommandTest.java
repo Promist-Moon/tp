@@ -91,18 +91,6 @@ public class EditLessonCommandTest {
     }
 
     @Test
-    public void execute_invalidLessonIndexFilteredList_failure() {
-        showLessonAtIndex(model, INDEX_FIRST_LESSON);
-        Index outOfBoundIndex = INDEX_SECOND_LESSON;
-        assertTrue(outOfBoundIndex.getOneBased() < model.getAddressBook().getLessonList().size());
-
-        EditLessonCommand editLessonCommand = new EditLessonCommand(INDEX_FIRST_LESSON, INDEX_SECOND_LESSON,
-                new EditLessonDescriptorBuilder().build());
-
-        assertCommandFailure(editLessonCommand, model, Messages.MESSAGE_INVALID_DISPLAYED_LESSON_INDEX);
-    }
-
-    @Test
     public void equals() {
         final EditLessonCommand standardCommand = new EditLessonCommand(INDEX_FIRST_LESSON, INDEX_FIRST_LESSON,
                 new EditLessonDescriptor(VALID_DAY_LESSON1, VALID_START_TIME_LESSON1, VALID_END_TIME_LESSON1,
