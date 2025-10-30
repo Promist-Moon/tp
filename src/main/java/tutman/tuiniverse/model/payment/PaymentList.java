@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.Comparator;
 
 import tutman.tuiniverse.model.payment.exceptions.PaymentException;
+import tutman.tuiniverse.model.util.DateTimeUtil;
 
 /**
  * Represents a list of payments.
@@ -24,7 +25,7 @@ public class PaymentList {
      */
     public PaymentList() {
         this.payments = new ArrayList<>();
-
+        payments.add(new Payment(DateTimeUtil.currentYearMonth(), new TotalAmount(0f)));
         earliestUnpaidYearmonth = null;
         setPaymentStatus(Status.PAID);
     }
