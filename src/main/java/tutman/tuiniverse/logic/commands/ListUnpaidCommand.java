@@ -7,13 +7,13 @@ import tutman.tuiniverse.model.student.PaymentStatus;
 import tutman.tuiniverse.model.student.StudentMatchesPaymentStatusPredicate;
 
 /**
- * Lists all persons in the address book to the user.
+ * Lists all students in the address book to the user.
  */
 public class ListUnpaidCommand extends Command {
 
     public static final String COMMAND_WORD = "list.unpaid";
 
-    public static final String MESSAGE_SUCCESS = "Listed all unpaid persons";
+    public static final String MESSAGE_SUCCESS = "Listed all unpaid students";
 
     private StudentMatchesPaymentStatusPredicate predicate;
 
