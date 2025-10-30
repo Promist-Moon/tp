@@ -801,3 +801,7 @@ information they want to store.
 When viewing a student's lesson via the view command, the lessons are sorted by time. This is not optimal, as we can see Thursday 6am lessons
 ranked before Monday 8am lesson even if it is Monday. Hence, we can sort the student's lesson list first by day, then by time, instead of
 by time only.
+
+### 5. Duplicate tags
+Adding/editing tags will only register one tag for the same tag instance (ie `edit 1 t/tag t/tag` only creates one tag `tag`). However, no error or
+message in usage indicates that duplicates are not allowed. Hence, the message usage can be amended.
