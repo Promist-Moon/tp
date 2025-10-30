@@ -68,18 +68,18 @@ Action | Format, Examples
 --------|------------------
 **Add Student** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 t/friends t/owesMoney`
 **Add Lesson** | `add.lesson i/STUDENT_INDEX s/SUBJECT l/LEVEL d/DAY st/START_TIME et/END_TIME r/HOURLY RATE` <br> e.g., `add.lesson i/1 s/English l/2 d/Monday st/10:00 et/12:00 r/80 `
-**Clear** | `clear`
-**Delete Student** | `delete INDEX`<br> e.g., `delete 3`
-**Delete Lesson** | `delete.lesson i/STUDENT_INDEX c/LESSON_INDEX…​`<br> e.g.,`delete.lesson i/2 c/1`
-**Edit Student** | `edit` <br> e.g., `edit 1 p/91234567 e/johndoe@example.com`
-**Edit Lesson** | `edit.lesson` <br> e.g., `edit.lesson i/1 c/2 d/Monday r/44`
-**Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **View** | `view INDEX`<br> e.g., `view 1`
 **List** | `list`
 **List Paid** | `list.paid`
 **List Unpaid** | `list.unpaid`
 **List Overdue** | `list.overdue`
+**Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
+**Edit Student** | `edit` <br> e.g., `edit 1 p/91234567 e/johndoe@example.com`
+**Edit Lesson** | `edit.lesson` <br> e.g., `edit.lesson i/1 c/2 d/Monday r/44`
 **Pay** | `pay INDEX`<br> e.g., `pay 3`
+**Delete Student** | `delete INDEX`<br> e.g., `delete 3`
+**Delete Lesson** | `delete.lesson i/STUDENT_INDEX c/LESSON_INDEX…​`<br> e.g.,`delete.lesson i/2 c/1`
+**Clear** | `clear`
 **Help** | `help`
 **Exit** | `exit`
 
@@ -171,14 +171,20 @@ Adds a lesson to the specific student with these fields:
 
 <br>
 
-### Making payment: `pay`
-Tracks that a student has made payment for that month.
+### List all lessons of a student: `view`
 
-**Format:** `pay INDEX`
+Lists all the lessons taken by the specfied student.
 
-* Marks payment for the student at the specified `INDEX`. The index refers to the index number shown in the displayed student list. The index **must be a positive integer** 1, 2, 3, …​
-* When you mark an **unpaid** or **overdue** student as paid, their status becomes **paid**.
-* A **paid** student cannot make payment until the next month.
+**Format:** `view INDEX`
+![view command](images/viewCommand.png)
+
+* List the lessons of the student at the specified `INDEX`.
+* The index refers to the index number shown in the displayed student list.
+* The index **must be a positive integer** 1, 2, 3, …​
+
+**Examples:**
+* `list` followed by `view 2` views the lessons of the 2nd student in the address book.
+* `find Betsy` followed by `view 1` views the 1st student in the results of the find command.
 
 <br>
 
@@ -206,6 +212,26 @@ Lists all students that have **overdue** fees from previous months.
 **Format:** `list.overdue`
 ![list command](images/listoverdue.png)
 
+### Searching for students by keyword: `find`
+
+<br>
+
+**Format:** `find KEYWORD [MORE_KEYWORDS]`
+![find command](images/find.png)
+
+* The search is case-insensitive. e.g `hans` will match `Hans`
+* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
+* The name, address, email and phone number can be searched.
+* Any substring of a word will be matched e.g. `Han` will match `Hans`
+* Students matching at least one keyword will be returned (i.e. `OR` search).
+  e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+
+**Examples:**
+* `find John` returns `john` and `John Doe`
+* `find alex 91031282` returns `Alex Yeoh`, `David Li`<br>
+
+<br>
+
 ### Editing a student : `edit`
 
 Edits an existing student in the contact book.
@@ -232,6 +258,13 @@ Existing values will be overwritten by the input values.
 
 **Format:** `edit.lesson i/STUDENT_INDEX c/LESSON_INDEX [s/SUBJECT] [d/DAY] [l/LEVEL] [r/RATE] [st/START TIME et/END TIME]…​`
 
+<box type="warning" seamless>
+
+**Caution:**
+To ensure that you edit the correct lesson from a selected student, use the `view` command <b>first</b> to display the student's details, then specify the lesson index shown in the lesson list panel.
+Trying to edit a lesson before viewing the student's lesson (via `view` command) may result in a wrong lesson being edited.
+</box>
+
 * Edits the lesson at the specified `LESSON_INDEX` of the student at`STUDENT_INDEX`. 
 * The index refers to the index number shown in the displayed student list & lesson list respectively. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
@@ -239,40 +272,17 @@ Existing values will be overwritten by the input values.
 
 **Examples:**
 *  `edit.lesson i/1 c/2 d/Monday r/44` Edits the 2nd lesson of the 1st student to be scheduled on every `Monday` at a rate of `$44/hr`.
-<br>
-
-### Searching for students by keyword: `find`
-
-**Format:** `find KEYWORD [MORE_KEYWORDS]`
-![find command](images/find.png)
-
-* The search is case-insensitive. e.g `hans` will match `Hans`
-* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-* The name, address, email and phone number can be searched.
-* Any substring of a word will be matched e.g. `Han` will match `Hans`
-* Students matching at least one keyword will be returned (i.e. `OR` search).
-  e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
-
-**Examples:**
-* `find John` returns `john` and `John Doe`
-* `find alex 91031282` returns `Alex Yeoh`, `David Li`<br>
 
 <br>
 
-### List all lessons of a student: `view`
+### Making payment: `pay`
+Tracks that a student has made payment for that month.
 
-Lists all the lessons taken by the specfied student.
+**Format:** `pay INDEX`
 
-**Format:** `view INDEX`
-![view command](images/viewCommand.png)
-
-* List the lessons of the student at the specified `INDEX`.
-* The index refers to the index number shown in the displayed student list.
-* The index **must be a positive integer** 1, 2, 3, …​
-
-**Examples:**
-* `list` followed by `view 2` views the lessons of the 2nd student in the address book.
-* `find Betsy` followed by `view 1` views the 1st student in the results of the find command.
+* Marks payment for the student at the specified `INDEX`. The index refers to the index number shown in the displayed student list. The index **must be a positive integer** 1, 2, 3, …​
+* When you mark an **unpaid** or **overdue** student as paid, their status becomes **paid**.
+* A **paid** student cannot make payment until the next month.
 
 <br>
 
@@ -286,9 +296,10 @@ Before delete:
 After delete:
 ![after delete command](images/deleteAfter.png)
 
-* Deletes the students at the specified `INDEX`.
+* Deletes the student at the specified `INDEX`.
 * The index refers to the index number shown in the displayed student list.
 * The index **must be a positive integer** 1, 2, 3, …​
+* Deleting a student also delete away their related class and payment details.
 
 **Examples:**
 * `list` followed by `delete 2` deletes the 2nd student in the address book.
@@ -302,6 +313,12 @@ Deletes an existing lesson from a specific student.
 
 **Format:**`delete.lesson i/STUDENT_INDEX c/LESSON_INDEX…​`
 
+<box type="warning" seamless>
+
+**Caution:**
+To ensure that you delete the correct lesson from a selected student, use the `view` command <b>first</b> to display the student's details, then specify the lesson index shown in the lesson list panel.
+Trying to delete a lesson before viewing the student's lesson (via `view` command) may result in a wrong lesson being deleted.
+</box>
 
 **Examples:**
 * `delete.lesson i/2 c/1`
@@ -353,6 +370,12 @@ _Details coming soon ..._
 
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous Tuiniverse home folder.
+
+**Q**: How do I edit only one tag for a specific student without affecting the others?<br>
+**A**: You’ll need to specify both the edited tag and the tags you want to keep in order to see the changes.
+For example, if a student currently has the tags `earlyLesson` and `moreExplanation`, and you 
+want to change `earlyLesson` to `lateLesson`, use the edit command as follows:
+`edit [INDEX] t/lateLesson t/moreExplanation`
 
 --------------------------------------------------------------------------------------------------------------------
 
