@@ -791,3 +791,8 @@ which counts the number of a certain day (eg Thursday) until the end of the mont
 Currently, when a student is pressed, the person card will turn from light blue to bright blue. However, one is unable to unselect
 this person card, and only press another person card to turn the card back to light blue. Hence in the future, we can implement an unselect
 by counting for the number of clicks.
+
+### 3. Adding tags
+When editing a student to add tags, they currently need to retype every single tag to preserve the tags that were set previously, as a new
+tag list will be created. Hence, in the future, we can create an add.tag function that adds a tag to a person in case they have additional
+information they want to store.
