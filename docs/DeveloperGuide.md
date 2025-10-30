@@ -674,7 +674,7 @@ testers are expected to do more *exploratory* testing.
 
 ### Launch and shutdown
 
-1. Initial launch
+1. **Initial launch**
 
     * Download the jar file and copy into an empty folder
 
@@ -682,9 +682,8 @@ testers are expected to do more *exploratory* testing.
 
     Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
 
-<br>
 
-2. Saving window preferences
+2. **Saving window preferences**
 
    * Resize the window to an optimum size. Move the window to a different location. Close the window.
 
@@ -693,32 +692,63 @@ testers are expected to do more *exploratory* testing.
    Expected: The most recent window size and location is retained.
 
 ### Adding a student
+**Sample error message indicating invalid command format:** Invalid command format!
 
 1. Adding a student with all the required details
-   1. Test case: `add n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25`
-   Expected: New student added: Name: John Doe; Phone: 98765432; Email: johnd@example.com; Address: 311, Clementi Ave 2, #02-25; Lessons: [no lesson]; Tags:
+   * Test case: `add n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25`
+     Expected: New student added: Name: John Doe; Phone: 98765432; Email: johnd@example.com; Address: 311, Clementi Ave 2, #02-25; Lessons: [no lesson]; Tags:. Confirmation message is displayed with the student's details.
 
+1. Adding a student with missing compulsory fields
+   * Test case: `add n/John Doe p/98765432 e/johnd@example.com`
+     Expected:  Error message indicating that invalid command format will output.
+
+1. Adding a student with invalid phone number
+   * Test case: `add n/John Doe p/INVALID_NUMBER e/johnd@example.com a/311, Clementi Ave 2, #02-25`
+     Expected: Phone numbers should only contain numbers, and it should be between 3 and 8 digits long. Error message is displayed
+   
 
 ### Deleting a student
 
 1. Deleting a student while all persons are being shown
 
-   1. Prerequisites: List all student using the `list` command. Multiple students in the list.
+   * Prerequisites: List all student using the `list` command. Multiple students in the list.
 
-   1. Test case: `delete 1`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+   * Test case: `delete 1`<br>
+     Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. 
 
-   1. Test case: `delete 0`<br>
-      Expected: No Student is deleted. Error details shown in the status message. Status bar remains the same.
+   * Test case: `delete 0`<br>
+     Expected: No Student is deleted. Error message indicating that invalid command format will output.
 
-   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
-      Expected: Similar to previous.
+   * Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
+     Expected: Similar to previous.
 
 ### Adding a lesson to student
 
 1. Adding a lesson to a student
-   1. Test case: `add.lesson i/1 s/English l/2 d/Monday st/10:00 et/12:00 r/80 `
-   Expected: New lesson added:  Subject: English; Secondary: 2; Day: MONDAY; Start: 10:00; End: 12:00; Address: 311, Clementi Ave 2, #02-25; Rate: $80.00 
+   * Test case: `add.lesson i/1 s/English l/2 d/Monday st/10:00 et/12:00 r/80`
+   Expected: New lesson added:  Subject: English; Secondary: 2; Day: MONDAY; Start: 10:00; End: 12:00; Address: 311, Clementi Ave 2, #02-25; Rate: $80.00
+   <br>Confirmation message is displayed with the lesson details.
+
+2. Adding a lesson to a student with missing compulsory fields
+   * Test case: `add.lesson i/1 s/English l/2 d/Monday st/10:00`
+   Expected: No lesson is added. Error message indicating that invalid command format will output.
+
+3. Adding a lesson to a student with incorrect Subject field
+   * Test case: `add.lesson i/1 s/Dragon l/2 d/Monday st/10:00 et/12:00 r/80`
+   Expected: Subjects are not case-sensitive, and can only take these values: Math, English, Physics, Chemistry, Biology, Geography, History, Literature, Social Studies, Mother Tongue. No lesson is added, error message displayed. 
+
+4. Adding a lesson to a student with incorrect Level field
+   * Test case: `add.lesson i/1 s/English l/6 d/Monday st/10:00 et/12:00 r/80 `
+   Expected: Levels can only take these integer values: 1, 2, 3, 4, 5. No lesson is added, error message displayed.
+
+5. Adding a lesson to a student with incorrect Day field
+    * Test case: `add.lesson i/1 s/English l/2 d/Today st/10:00 et/12:00 r/80 `
+      Expected: Day is an integer which corresponds to: [1: Monday], [2: Tuesday], [3: Wednesday], [4: Thursday], [5: Friday], [6: Saturday], [7: Sunday]. No lesson is added, error message displayed.
+
+6. Adding a lesson to a student with incorrect start and end time
+   * Test case: `add.lesson i/1 s/English l/2 d/Monday st/WRONG_TIME et/12:00 r/80 `
+   Expected: Time must be given in the format HH:MM, and the start time should be before the end time. No lesson is added, error message displayed.
+
 
 ### Editing a lesson 
 

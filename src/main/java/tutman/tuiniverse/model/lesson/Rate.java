@@ -1,5 +1,7 @@
 package tutman.tuiniverse.model.lesson;
 
+import tutman.tuiniverse.logic.commands.exceptions.CommandException;
+
 import static tutman.tuiniverse.commons.util.AppUtil.checkArgument;
 
 /**
@@ -8,8 +10,7 @@ import static tutman.tuiniverse.commons.util.AppUtil.checkArgument;
  */
 public class Rate {
 
-    public static final String MESSAGE_CONSTRAINTS = "Rates must be positive";
-
+    public static final String MESSAGE_CONSTRAINTS = "Rates must be a positive number!";
     private final float rate;
 
     /**
@@ -34,7 +35,8 @@ public class Rate {
      */
     public static boolean isValidRate(String str) {
         float rate = Float.parseFloat(str);
-        return rate >= 0;
+        return (rate >= 0);
+
     }
 
     @Override
