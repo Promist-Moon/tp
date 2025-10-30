@@ -32,7 +32,6 @@ import tutman.tuiniverse.model.lesson.Rate;
 import tutman.tuiniverse.model.lesson.Subject;
 import tutman.tuiniverse.model.lesson.exceptions.DuplicateLessonException;
 import tutman.tuiniverse.model.lesson.exceptions.LessonException;
-import tutman.tuiniverse.model.lesson.exceptions.LessonNotFoundException;
 import tutman.tuiniverse.model.student.Student;
 
 /**
