@@ -25,6 +25,7 @@ import static tutman.tuiniverse.testutil.TypicalPersons.CARL;
 import static tutman.tuiniverse.testutil.TypicalPersons.DANIEL;
 import static tutman.tuiniverse.testutil.TypicalPersons.ELLE;
 import static tutman.tuiniverse.testutil.TypicalPersons.FIONA;
+import static tutman.tuiniverse.testutil.TypicalPersons.GEORGE;
 import static tutman.tuiniverse.testutil.TypicalPersons.HANNAH;
 
 import java.time.YearMonth;
@@ -43,10 +44,10 @@ public class StudentTest {
 
     @Test
     void constructor_minimalFields_initializesDefaultFields() {
-        assertNotNull(BOB.getLessonList());
-        assertNotNull(BOB.getPayments());
-        assertEquals(Status.PAID, BOB.getPaymentListStatus());
-        assertEquals(PaymentStatus.PAID, BOB.getPaymentStatus());
+        assertNotNull(GEORGE.getLessonList());
+        assertNotNull(GEORGE.getPayments());
+        assertEquals(Status.PAID, GEORGE.getPaymentListStatus());
+        assertEquals(PaymentStatus.PAID, GEORGE.getPaymentStatus());
     }
 
     @Test

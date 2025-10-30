@@ -3,11 +3,13 @@ package tutman.tuiniverse.model.student;
 import static java.util.Objects.requireNonNull;
 import static tutman.tuiniverse.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import tutman.tuiniverse.model.lesson.Lesson;
 import tutman.tuiniverse.model.student.exceptions.DuplicatePersonException;
 import tutman.tuiniverse.model.student.exceptions.PersonNotFoundException;
 
@@ -63,6 +65,12 @@ public class UniquePersonList implements Iterable<Student> {
 
         if (!target.isSamePerson(editedPerson) && contains(editedPerson)) {
             throw new DuplicatePersonException();
+        }
+
+        ArrayList<Lesson> lessons = target.getLessonList().getLessons();
+        for (Lesson lesson : lessons) {
+            lesson.addStudent(editedPerson);
+            editedPerson.getLessonList().addLesson(lesson);
         }
 
         internalList.set(index, editedPerson);
@@ -140,9 +148,7 @@ public class UniquePersonList implements Iterable<Student> {
     private boolean personsAreUnique(List<Student> persons) {
         for (int i = 0; i < persons.size() - 1; i++) {
             for (int j = i + 1; j < persons.size(); j++) {
-                if (persons.get(i).isSamePerson(persons.get(j))) {
-                    return false;
-                }
+                return !(persons.get(i).isSamePerson(persons.get(j)));
             }
         }
         return true;

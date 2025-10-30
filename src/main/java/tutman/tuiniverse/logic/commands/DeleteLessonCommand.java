@@ -65,21 +65,13 @@ public class DeleteLessonCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         List<Student> studentList = model.getFilteredPersonList();
-        Student currStudent;
 
         if (studentIndex.getZeroBased() >= studentList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 
         Student student = studentList.get(studentIndex.getZeroBased());
-
-        if (student instanceof Student) {
-            currStudent = (Student) student;
-        } else {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
-        }
-
-        LessonList lls = currStudent.getLessonList();
+        LessonList lls = student.getLessonList();
 
         if (lessonIndex.getOneBased() > lls.getSize()) {
             throw new CommandException(MESSAGE_INVALID_DISPLAYED_LESSON_INDEX);
@@ -87,7 +79,7 @@ public class DeleteLessonCommand extends Command {
 
         try {
             Lesson deleteLesson = lls.getLesson(lessonIndex.getOneBased());
-            model.deleteLesson(currStudent, deleteLesson);
+            model.deleteLesson(student, deleteLesson);
             return new CommandResult(String.format(MESSAGE_DELETE_LESSON_SUCCESS, Messages.formatLesson(deleteLesson)));
         } catch (LessonException e) {
             throw new CommandException(MESSAGE_INVALID_DISPLAYED_LESSON_INDEX);

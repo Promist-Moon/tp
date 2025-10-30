@@ -15,7 +15,7 @@ public class DayTest {
     @Test
     public void constructor_validDayString_success() {
         for (int i = 1; i <= 7; i++) {
-            Day day = new Day(String.valueOf(i));
+            Day day = new Day(i);
             assertEquals(DayOfWeek.of(i), day.getDayOfWeek());
         }
     }
@@ -50,15 +50,15 @@ public class DayTest {
 
     @Test
     public void toString_returnsCorrectDayString() {
-        Day day = new Day("3");
+        Day day = new Day(3);
         assertEquals("WEDNESDAY", day.toString());
     }
 
     @Test
     public void validEquals_and_validHashcode() {
-        Day day1 = new Day("4");
-        Day day2 = new Day("4");
-        Day day3 = new Day("3");
+        Day day1 = new Day(4);
+        Day day2 = new Day(4);
+        Day day3 = new Day(3);
 
         assertEquals(day1, day1);
         assertEquals(day1, day2);

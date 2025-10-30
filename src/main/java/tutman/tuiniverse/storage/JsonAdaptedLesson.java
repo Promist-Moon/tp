@@ -22,6 +22,7 @@ public class JsonAdaptedLesson {
     private final String startTime;
     private final String endTime;
     private final String rate;
+    private final String studentName;
 
     /**
      * Constructs a {@code JsonAdaptedLesson} with the given lesson details.
@@ -30,13 +31,14 @@ public class JsonAdaptedLesson {
     public JsonAdaptedLesson(@JsonProperty("subject") String subject,
                              @JsonProperty("level") String level, @JsonProperty("day") String day,
                              @JsonProperty("startTime") String startTime, @JsonProperty("endTime") String endTime,
-                             @JsonProperty("rate") String rate) {
+                             @JsonProperty("rate") String rate, @JsonProperty("studentName") String studentName) {
         this.subject = subject;
         this.level = level;
         this.day = day;
         this.startTime = startTime;
         this.endTime = endTime;
         this.rate = rate;
+        this.studentName = studentName;
     }
 
     /**
@@ -49,6 +51,7 @@ public class JsonAdaptedLesson {
         startTime = source.getLessonTime().getStart().toString();
         endTime = source.getLessonTime().getEnd().toString();
         rate = source.getRate().toString();
+        studentName = source.getStudentName();
     }
 
     /**
@@ -59,9 +62,10 @@ public class JsonAdaptedLesson {
         Lesson res = new Lesson(
                 Subject.fromString(subject),
                 Level.fromString(level),
-                new Day(day),
+                new Day(Integer.valueOf(day)),
                 LessonTime.ofLessonTime(startTime, endTime),
-                new Rate(rate));
+                new Rate(rate),
+                studentName);
         return res;
     }
 }

@@ -82,24 +82,13 @@ public class EditLessonCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         List<Student> lastShownList = model.getFilteredPersonList();
-        // Initialising student
-        Student student;
 
         if (studentIndex.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 
         Student person = lastShownList.get(studentIndex.getZeroBased());
-
-        if (person instanceof Student) {
-            student = (Student) person;
-        } else {
-            // might have to change to person is not a student
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
-        }
-
-        // Initialising student's lesson list
-        LessonList studentLessonList = student.getLessonList();
+        LessonList studentLessonList = person.getLessonList();
 
         if (lessonIndex.getOneBased() > studentLessonList.getSize()) {
             throw new CommandException(MESSAGE_INVALID_DISPLAYED_LESSON_INDEX);
@@ -109,13 +98,13 @@ public class EditLessonCommand extends Command {
         try {
             Lesson lessonToEdit = studentLessonList.getLesson(lessonIndex.getOneBased());
             Lesson editedLesson = createEditedLesson(lessonToEdit, editLessonDescriptor);
-
-            model.setLesson(student, lessonToEdit, editedLesson);
+            editedLesson.addStudent(person);
+            model.setLesson(person, lessonToEdit, editedLesson);
             Predicate<Lesson> belongsToStudent =
-                    lesson -> student.getLessonList().hasLesson(lesson);
+                    lesson -> person.getLessonList().hasLesson(lesson);
             model.updateFilteredLessonList(belongsToStudent);
 
-            return new CommandResult(String.format(MESSAGE_EDIT_LESSON_SUCCESS, Messages.format(student)));
+            return new CommandResult(String.format(MESSAGE_EDIT_LESSON_SUCCESS, Messages.format(person)));
 
         } catch (LessonException e) {
             throw new CommandException(MESSAGE_INVALID_DISPLAYED_LESSON_INDEX);
@@ -134,9 +123,9 @@ public class EditLessonCommand extends Command {
         Level updatedLevel = editLessonDescriptor.getLevel().orElse(lessonToEdit.getLevel());
         Rate updatedRate = editLessonDescriptor.getRate().orElse(lessonToEdit.getRate());
         Subject updatedSubject = editLessonDescriptor.getSubject().orElse(lessonToEdit.getSubject());
-        Student student = lessonToEdit.getStudent();
-        Lesson updatedLesson = new Lesson(updatedSubject, updatedLevel, updatedDay, updatedLessonTime, updatedRate);
-        updatedLesson.addStudent(student);
+        String studentName = editLessonDescriptor.getStudentName().orElse(lessonToEdit.getStudentName());
+        Lesson updatedLesson = new Lesson(updatedSubject, updatedLevel, updatedDay,
+                updatedLessonTime, updatedRate, studentName);
         return updatedLesson;
     }
 
@@ -177,6 +166,7 @@ public class EditLessonCommand extends Command {
         private Level level;
         private Rate rate;
         private Subject subject;
+        private String studentName;
 
         public EditLessonDescriptor() {
         }
@@ -226,6 +216,14 @@ public class EditLessonCommand extends Command {
 
         public Optional<Subject> getSubject() {
             return Optional.ofNullable(subject);
+        }
+
+        public void setStudentName(String studentName) {
+            this.studentName = studentName;
+        }
+
+        public Optional<String> getStudentName() {
+            return Optional.ofNullable(studentName);
         }
 
         @Override

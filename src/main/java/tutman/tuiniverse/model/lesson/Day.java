@@ -23,21 +23,30 @@ public class Day {
      * @param str A valid string representing an integer day.
      */
     public Day(String str) {
-        str = str.trim().toUpperCase();
-
-        if (str.matches("\\d")) {
-            checkArgument(isValidDay(str), MESSAGE_CONSTRAINTS);
-            int integerDay = Integer.parseInt(str);
-            this.day = DayOfWeek.of(integerDay);
-        } else {
-            //for interpreting of Day from json (TUESDAY->2)
-            try {
-                this.day = DayOfWeek.valueOf(str);
-            } catch (IllegalArgumentException e) {
-                throw new IllegalArgumentException("Invalid day format. Use integer 1–7 or day name like MONDAY.");
-            }
+        try {
+            str = str.trim().toUpperCase();
+            this.day = DayOfWeek.valueOf(str);
+        } catch (IllegalArgumentException e) {
+            throw new IllegalArgumentException("Invalid day format. Use day name like MONDAY.");
         }
     }
+
+    /**
+     * Creates a {@code Day} from an integer.
+     *
+     * @param day A valid integer corresponding to a day.
+     */
+    public Day(int day) {
+        String str = Integer.toString(day);
+        if (str.matches("\\d")) {
+            checkArgument(isValidDay(str), MESSAGE_CONSTRAINTS);
+            this.day = DayOfWeek.of(day);
+        } else {
+            throw new IllegalArgumentException("Invalid day format. Use integer 1–7.");
+        }
+    }
+
+
 
     /**
      * Checks if the given string is a valid day.
@@ -67,7 +76,7 @@ public class Day {
     public static Day[] values() {
         Day[] days = new Day[7];
         for (int i = 1; i <= 7; i++) {
-            days[i - 1] = new Day(String.valueOf(i));
+            days[i - 1] = new Day(i);
         }
         return days;
     }
