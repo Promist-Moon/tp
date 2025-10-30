@@ -299,7 +299,7 @@ After delete:
 * Deletes the student at the specified `INDEX`.
 * The index refers to the index number shown in the displayed student list.
 * The index **must be a positive integer** 1, 2, 3, …​
-* Deleting a student also delete away their related class and payment details.
+* Deleting a student also delete away their related class and payment record for the month.
 
 **Examples:**
 * `list` followed by `delete 2` deletes the 2nd student in the address book.
