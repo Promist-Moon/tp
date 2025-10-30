@@ -22,14 +22,14 @@ public class PayCommand extends Command {
     public static final String COMMAND_WORD = "pay";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Marks all payments associated with the specified person as paid,"
-            + " using the index number shown in the displayed person list.\n"
+            + ": Marks all payments associated with the specified student as paid,"
+            + " using the index number shown in the displayed student list.\n"
             + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + "1";
 
     public static final String MESSAGE_PAYMENT_SUCCESS = "Paid: %1$s";
     public static final String MESSAGE_NOT_PAID = "Student has paid already: %1$s";
-    public static final String MESSAGE_NOT_STUDENT = "Unsupported person: %1$s";
+    public static final String MESSAGE_NOT_STUDENT = "Unsupported student: %1$s";
 
     private final Index targetIndex;
 

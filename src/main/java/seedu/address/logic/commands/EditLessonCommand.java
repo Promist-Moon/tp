@@ -43,7 +43,7 @@ public class EditLessonCommand extends Command {
 
     public static final String COMMAND_WORD = "edit.lesson";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the lesson of the student "
-            + "identified by the index number used in the displayed person list."
+            + "identified by the index number used in the displayed student list."
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: " + PREFIX_STUDENT_INDEX + "STUDENT INDEX "
             + PREFIX_LESSON_INDEX + "LESSON INDEX (must be a positive integers)"
