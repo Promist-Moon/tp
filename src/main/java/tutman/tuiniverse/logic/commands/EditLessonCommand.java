@@ -13,7 +13,6 @@ import static tutman.tuiniverse.logic.parser.CliSyntax.PREFIX_STUDENT_INDEX;
 import static tutman.tuiniverse.logic.parser.CliSyntax.PREFIX_SUBJECT;
 
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
 import java.util.function.Predicate;
 
@@ -32,7 +31,6 @@ import tutman.tuiniverse.model.lesson.Rate;
 import tutman.tuiniverse.model.lesson.Subject;
 import tutman.tuiniverse.model.lesson.exceptions.DuplicateLessonException;
 import tutman.tuiniverse.model.lesson.exceptions.LessonException;
-import tutman.tuiniverse.model.lesson.exceptions.LessonNotFoundException;
 import tutman.tuiniverse.model.student.Student;
 
 /**
@@ -98,14 +96,14 @@ public class EditLessonCommand extends Command {
         // Handling logic
         try {
             Lesson lessonToEdit = studentLessonList.getLesson(lessonIndex.getOneBased());
-            Lesson editedLesson = createEditedLesson(lessonToEdit, editLessonDescriptor);
+            Lesson editedLesson = createEditedLesson(person, lessonToEdit, editLessonDescriptor);
             editedLesson.addStudent(person);
             model.setLesson(person, lessonToEdit, editedLesson);
             Predicate<Lesson> belongsToStudent =
                     lesson -> person.getLessonList().hasLesson(lesson);
             model.updateFilteredLessonList(belongsToStudent);
 
-            return new CommandResult(String.format(MESSAGE_EDIT_LESSON_SUCCESS, Messages.format(person)));
+            return new CommandResult(String.format(MESSAGE_EDIT_LESSON_SUCCESS, Messages.formatLesson(editedLesson)));
 
         } catch (LessonException e) {
             throw new CommandException(MESSAGE_INVALID_DISPLAYED_LESSON_INDEX);
@@ -117,16 +115,17 @@ public class EditLessonCommand extends Command {
     /**
      * Handles editing a {@code Lesson} edited with {@code editLessonDescriptor}.
      */
-    private static Lesson createEditedLesson(Lesson lessonToEdit, EditLessonDescriptor editLessonDescriptor) {
+    private static Lesson createEditedLesson(Student student, Lesson lessonToEdit,
+                                             EditLessonDescriptor editLessonDescriptor) {
         assert lessonToEdit != null;
         Day updatedDay = editLessonDescriptor.getDay().orElse(lessonToEdit.getDay());
         LessonTime updatedLessonTime = editLessonDescriptor.getLessonTime().orElse(lessonToEdit.getLessonTime());
         Level updatedLevel = editLessonDescriptor.getLevel().orElse(lessonToEdit.getLevel());
         Rate updatedRate = editLessonDescriptor.getRate().orElse(lessonToEdit.getRate());
         Subject updatedSubject = editLessonDescriptor.getSubject().orElse(lessonToEdit.getSubject());
-        String studentName = editLessonDescriptor.getStudentName().orElse(lessonToEdit.getStudentName());
         Lesson updatedLesson = new Lesson(updatedSubject, updatedLevel, updatedDay,
-                updatedLessonTime, updatedRate, studentName);
+                updatedLessonTime, updatedRate);
+        updatedLesson.addStudent(student);
         return updatedLesson;
     }
 
@@ -169,6 +168,16 @@ public class EditLessonCommand extends Command {
         private Subject subject;
 
         public EditLessonDescriptor() {
+        }
+
+        /** Creates a descriptor from String inputs. */
+        public EditLessonDescriptor(String day, String startTime, String endTime, String level,
+                                    String rate, String subject) {
+            this.day = new Day(Integer.valueOf(day));
+            this.lessonTime = LessonTime.ofLessonTime(startTime, endTime);
+            this.level = Level.fromString(level);
+            this.rate = new Rate(rate);
+            this.subject = Subject.fromString(subject);
         }
 
         /**
@@ -230,11 +239,11 @@ public class EditLessonCommand extends Command {
             }
 
             EditLessonDescriptor otherEditLessonDescriptor = (EditLessonDescriptor) other;
-            return Objects.equals(day, otherEditLessonDescriptor.day)
-                    && Objects.equals(lessonTime, otherEditLessonDescriptor.lessonTime)
-                    && Objects.equals(level, otherEditLessonDescriptor.level)
-                    && Objects.equals(rate, otherEditLessonDescriptor.rate)
-                    && Objects.equals(subject, otherEditLessonDescriptor.subject);
+            return this.day.equals(otherEditLessonDescriptor.day)
+                    && this.lessonTime.equals(otherEditLessonDescriptor.lessonTime)
+                    && (this.level.getLevel() == otherEditLessonDescriptor.level.getLevel())
+                    && (this.rate.getRate() == otherEditLessonDescriptor.rate.getRate())
+                    && this.subject.getSubject().equals(otherEditLessonDescriptor.subject.getSubject());
         }
 
         @Override

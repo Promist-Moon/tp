@@ -721,3 +721,91 @@ testers are expected to do more *exploratory* testing.
    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
 
 1. _{ more test cases …​ }_
+
+--------------------------------------------------------------------------------------------------------------------
+
+## **Appendix: Effort**
+### Difficulty level
+Tuiniverse goes beyond AB3 in scope and architectural complexity. While AB3 manages a single entity type (Person),
+Tuiniverse extends this to three distinct domain models — Student, Lesson, and Payment - that are all connected to
+each other. Each entity has its own data structure (LessonList, PaymentList) and lifecycle logic
+(e.g., monthly payment rollovers, lesson scheduling, payment tracking). This resulted in higher coupling and the need for
+careful abstraction.
+
+### Challenges faced
+1. **Synchronising data across Student, Lesson, and Payment.**<br>
+The value, or the TotalAmount, of each payment is dependent on the student's lessons. In turn, the payment status of
+a student is dependent on the status of the payment list, which is dependent on the number of unpaid payments in the payment
+list. Hence, a lot of abstraction was required to make sure information was passed accurately while still enforcing SLAP.
+Furthermore, listeners were needed to make sure changes in Lesson were detected in Payment and Student. This made use of the observer
+pattern to make sure other objects were aware of any mutation in state.
+
+2. **Time-based architecture**<br>
+A lot of Tuiniverse's logic is tightly coupled with time. For instance, the MonthlyRollover logic was needed to make sure a new
+Payment object was instantiated with each month. This required careful time-based checking (via YearMonth) and persistence management to prevent
+duplicate rollovers while maintaining data integrity.
+
+3. **Dynamic payment status updates**<br>
+Students may decide to add lessons in the middle of the month, which initially made it difficult to change payment status after paid. Hence,
+refactoring payment to include unpaid amounts made it easier for tutors to check the amount unpaid for these new students.
+
+4. **Effective scheduling**<br>
+We wanted to make sure scheduling reflected in real life time management, where deconflicts are necessary and one cannot participate in
+two events simultaneously. Hence, we added a method to assess for clashes. Furthermore, a lesson list panel was added to view a tutor's schedule for
+the day, which can help them to plan accordingly.
+
+### Effort required
+A lot of our code was written from scratch, especially the MonthlyRollover and TimeClash logic. That said, some effort was saved through reuse of code,
+namely in the adding, deleting, and editing lessons which mirrored the design of the AB3 add/delete/edit feature. We can confidently say
+only about 10% of code was borrowed.
+
+We split the responsibilities between our members by teams. Rachel and Ray handled the Lesson implementations, while Emilia and Bing Hang
+worked on Payment. Dickson, aside from UI, took the lead in bridging the two teams, and took the initiative to ensure the deliverables were done correctly and on time.
+
+The effort required from all 5 of us was high. Aside from the features we wanted to implement, there were several other responsibilities
+we made sure to be attentive of, namely:
+* Testing
+* Code Quality
+* Documentation
+* UI design
+* Project/GitHub management
+
+We made sure to segment this effectively among the 5 of us, with each of us heading a different aspect. This allowed one person to take
+responsibility for ensuring the quality of our code across the codebase, while adhering to software engineering practices.
+
+### Achievement of the project
+Tuiniverse successfully evolved AB3 into a feature-complete tuition management application handling different aspects of tutor-pupil management.
+It enables private tutors to manage lessons, payments, and students in one place - with real-time financial tracking and automated rollovers.
+Beyond technical achievement, the project demonstrates our team’s mastery of:
+* Software design principles (abstraction, low coupling, high cohesion).
+* Event-driven programming via JavaFX bindings.
+* Test-driven development across multiple entity types.
+* Collaborative Git workflows (feature branches, PR reviews, CI testing).
+
+--------------------------------------------------------------------------------------------------------------------
+
+## **Appendix: Planned Enhancements**
+Team Size: 5
+
+### 1. Partial Payments
+At present, Tuiniverse assumes that once a student begins lessons in a given month, they attend for the entire month.
+Consequently, the system calculates the total and unpaid fees based on a full month’s worth of lessons, even if the student
+joined midway through the month.
+In future iterations, we plan to enhance this by supporting partial payment calculations, allowing tutors to accurately account for students who begin
+or pause lessons mid-month. This will be done by taking in the current date, and implementing a new CountDaysFromNowUntilMonthEnd method
+which counts the number of a certain day (eg Thursday) until the end of the month.
+
+### 2. Unselect a selected student
+Currently, when a student is pressed, the person card will turn from light blue to bright blue. However, one is unable to unselect
+this person card, and only press another person card to turn the card back to light blue. Hence in the future, we can implement an unselect
+by counting for the number of clicks.
+
+### 3. Adding tags
+When editing a student to add tags, they currently need to retype every single tag to preserve the tags that were set previously, as a new
+tag list will be created. Hence, in the future, we can create an add.tag function that adds a tag to a person in case they have additional
+information they want to store.
+
+### 4. Viewing lessons in order
+When viewing a student's lesson via the view command, the lessons are sorted by time. This is not optimal, as we can see Thursday 6am lessons
+ranked before Monday 8am lesson even if it is Monday. Hence, we can sort the student's lesson list first by day, then by time, instead of
+by time only.

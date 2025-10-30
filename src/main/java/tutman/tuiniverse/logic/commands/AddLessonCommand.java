@@ -17,7 +17,6 @@ import tutman.tuiniverse.logic.Messages;
 import tutman.tuiniverse.logic.commands.exceptions.CommandException;
 import tutman.tuiniverse.model.Model;
 import tutman.tuiniverse.model.lesson.Lesson;
-import tutman.tuiniverse.model.lesson.exceptions.DuplicateLessonException;
 import tutman.tuiniverse.model.student.Student;
 
 /**

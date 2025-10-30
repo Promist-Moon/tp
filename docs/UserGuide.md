@@ -5,18 +5,18 @@
 ---
 
 ## Introduction
-As a **private secondary school tutor** in Singapore, it can be hard to **manage student contacts**, 
-**track payments** and **schedule lessons** with such a big group of people. Unless you are willing to fork out high prices for premium services meant 
-for larger tuition centre businesses, it means a lot of **unnecessary hassle** and much **room for error**.  
+As a **private secondary school tutor** in Singapore, it can be hard to **manage student contacts**,
+**track payments** and **schedule lessons** with such a big group of people. Unless you are willing to fork out high prices for premium services meant
+for larger tuition centre businesses, it means a lot of **unnecessary hassle** and much **room for error**. 
 
 Tuiniverse is the solution for all things tuition!
 Tuiniverse is a **desktop app** which <u>expedites</u>:
 * Contact storing and upkeep
 * Payment tracking
-* Lesson scheduling 
+* Lesson scheduling
 
-All of this is displayed done with optimized typing (via a Command Line Interface) layered within graphical 
-display of all the information you need. 
+All of this is displayed done with optimized typing (via a Command Line Interface) layered within graphical
+display of all the information you need.
 
 <!-- * Table of Contents -->
 <page-nav-print />
@@ -393,7 +393,7 @@ want to change `earlyLesson` to `lateLesson`, use the edit command as follows:
 
 ## Glossary
 
-* Student: A person who's being taught by the tutor (you).
+* **Student**: A person who's being taught by the tutor (you).
 * **Payment Status**: Each student has a payment status which updates every month.
     * Paid - The student has paid within the month
     * Unpaid - The student has not paid within the month

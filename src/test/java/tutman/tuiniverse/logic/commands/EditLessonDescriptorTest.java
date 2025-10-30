@@ -44,7 +44,7 @@ public class EditLessonDescriptorTest {
 
         // different day -> returns false
         EditLessonDescriptor editedLesson = new EditLessonDescriptorBuilder()
-                .withDay(new Day(VALID_DAY_LESSON2)).build();
+                .withDay(new Day(Integer.valueOf(VALID_DAY_LESSON2))).build();
         assertFalse(descriptorWithSameValues.equals(editedLesson));
 
         // different start time -> returns false

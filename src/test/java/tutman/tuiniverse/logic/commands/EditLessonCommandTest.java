@@ -12,7 +12,6 @@ import static tutman.tuiniverse.logic.commands.CommandTestUtil.VALID_START_TIME_
 import static tutman.tuiniverse.logic.commands.CommandTestUtil.VALID_SUBJECT_LESSON1;
 import static tutman.tuiniverse.logic.commands.CommandTestUtil.assertCommandFailure;
 import static tutman.tuiniverse.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static tutman.tuiniverse.logic.commands.CommandTestUtil.showLessonAtIndex;
 import static tutman.tuiniverse.testutil.Assert.assertThrows;
 import static tutman.tuiniverse.testutil.TypicalIndexes.INDEX_FIRST_LESSON;
 import static tutman.tuiniverse.testutil.TypicalIndexes.INDEX_SECOND_LESSON;
@@ -86,18 +85,6 @@ public class EditLessonCommandTest {
                 .withSubject(Subject.fromString(VALID_SUBJECT_LESSON1))
                 .build();
         EditLessonCommand editLessonCommand = new EditLessonCommand(INDEX_FIRST_LESSON, outOfBoundIndex, descriptor);
-
-        assertCommandFailure(editLessonCommand, model, Messages.MESSAGE_INVALID_DISPLAYED_LESSON_INDEX);
-    }
-
-    @Test
-    public void execute_invalidLessonIndexFilteredList_failure() {
-        showLessonAtIndex(model, INDEX_FIRST_LESSON);
-        Index outOfBoundIndex = INDEX_SECOND_LESSON;
-        assertTrue(outOfBoundIndex.getOneBased() < model.getAddressBook().getLessonList().size());
-
-        EditLessonCommand editLessonCommand = new EditLessonCommand(INDEX_FIRST_LESSON, INDEX_SECOND_LESSON,
-                new EditLessonDescriptorBuilder().build());
 
         assertCommandFailure(editLessonCommand, model, Messages.MESSAGE_INVALID_DISPLAYED_LESSON_INDEX);
     }
