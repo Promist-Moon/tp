@@ -1,4 +1,4 @@
-package seedu.address.model.payment;
+package seedu.address.model.util;
 
 import static java.util.Objects.requireNonNull;
 
@@ -7,9 +7,11 @@ import java.util.logging.Logger;
 
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.Model;
+import seedu.address.model.payment.Payment;
+import seedu.address.model.payment.PaymentList;
+import seedu.address.model.payment.TotalAmount;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.student.Student;
-import seedu.address.model.util.DateTimeUtil;
 
 /**
  * Handles the monthly payment rollover logic when the app is opened

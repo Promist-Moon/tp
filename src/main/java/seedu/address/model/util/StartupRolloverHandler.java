@@ -1,4 +1,4 @@
-package seedu.address.model.payment;
+package seedu.address.model.util;
 
 import java.io.IOException;
 import java.time.YearMonth;
@@ -7,7 +7,6 @@ import java.util.logging.Logger;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.model.Model;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.util.DateTimeUtil;
 import seedu.address.storage.Storage;
 
 /**
