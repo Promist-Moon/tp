@@ -123,6 +123,11 @@ public class Student extends Person {
         return new TotalAmount(f);
     }
 
+    public TotalAmount getTotalAmountByMonth(YearMonth month) {
+        float f = lessons.getTotalAmountEarned(month);
+        return new TotalAmount(f);
+    }
+
     /**
      * Changes payment status to {@link PaymentStatus}
      *

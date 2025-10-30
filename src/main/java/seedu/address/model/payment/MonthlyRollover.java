@@ -7,7 +7,6 @@ import java.util.logging.Logger;
 
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.Model;
-import seedu.address.model.payment.exceptions.PaymentException;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.student.Student;
 import seedu.address.model.util.DateTimeUtil;
@@ -64,7 +63,6 @@ public class MonthlyRollover {
      * @param yearMonth the {@code YearMonth} to perform rollover for
      */
     private void rolloverForMonth(YearMonth yearMonth) {
-        // Iterate over the full backing list to avoid filters hiding persons
         for (Person person : model.getAddressBook().getPersonList()) {
             if (!(person instanceof Student)) {
                 continue;
@@ -72,52 +70,23 @@ public class MonthlyRollover {
 
             Student student = (Student) person;
 
-            // Compute amount earned for this YearMonth; skip zero-value months
-            float value = student.getLessonList().getTotalAmountEarned(yearMonth);
-            if (value <= 0f) {
+            // Compute amount earned for this YearMonth
+            TotalAmount amount = student.getTotalAmountByMonth(yearMonth);
+
+            // Skip zero values
+            if (amount.getAsFloat() <= 0f) {
                 continue;
             }
-            TotalAmount totalAmount = new TotalAmount(value);
 
             PaymentList oldPayments = student.getPayments();
 
-            // === Duplicate handling (idempotent by YearMonth) ===
+            // Duplicate Handling
             if (oldPayments.containsMonth(yearMonth)) {
-                // Upsert policy: if the existing payment is UNPAID and the amount has changed,
-                // replace it to keep data consistent with lesson history.
-                try {
-                    Payment existing = oldPayments.getPaymentByMonth(yearMonth);
-                    float existingAmt = existing.getTotalAmount().getAsFloat();
-                    float newAmt = totalAmount.getAsFloat();
-                    boolean amountDiffers = Float.compare(existingAmt, newAmt) != 0;
-
-                    if (amountDiffers && !existing.isPaid()) {
-                        // upsert: overwrite the month with recomputed amount (only if not yet paid)
-                        PaymentList copied = oldPayments.copy();
-                        copied.putPaymentForMonth(new Payment(yearMonth, totalAmount));
-
-                        Student editedStudent = new Student(
-                                student.getName(),
-                                student.getPhone(),
-                                student.getEmail(),
-                                student.getAddress(),
-                                student.getTags(),
-                                student.getLessonList(),
-                                copied
-                        );
-                        model.setPerson(student, editedStudent);
-                    }
-                } catch (PaymentException e) {
-                    // Lookup failed despite containsMonth(): log and skip this student-month
-                    logger.warning("Rollover lookup failed for " + student.getName() + " " + yearMonth
-                            + ": " + e.getMessage());
-                    continue;
-                }
-                continue; // Either handled via upsert or intentionally skipped
+                continue;
             }
 
-            // === Normal path: add if absent (idempotent add) ===
-            Payment newPayment = new Payment(yearMonth, totalAmount);
+            // Happy path: add if absent (idempotent add)
+            Payment newPayment = new Payment(yearMonth, amount);
             PaymentList copiedPayments = oldPayments.copy();
             boolean added = copiedPayments.addPaymentIfAbsent(newPayment);
             if (!added) {
