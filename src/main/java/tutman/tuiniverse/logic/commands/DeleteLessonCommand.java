@@ -29,7 +29,8 @@ public class DeleteLessonCommand extends Command {
     public static final String COMMAND_WORD = "delete.lesson";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Deletes the lesson identified by the index number used in the displayed lesson list"
+            + ": Deletes the lesson identified by the index number shown in the"
+            + " displayed lesson list when in view mode,"
             + " for the student identified by the index number used in the displayed student list.\n"
             + "Parameters: " + PREFIX_STUDENT_INDEX + "STUDENT_INDEX "
             + PREFIX_LESSON_INDEX + "LESSON_INDEX \n"

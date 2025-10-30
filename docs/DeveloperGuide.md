@@ -128,16 +128,22 @@ How the parsing works:
 
 The `Model` component,
 
-* stores the address book data i.e., all `Person` objects (which are contained in a `UniquePersonList` object).
-* stores the currently 'selected' `Person` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
+* stores the address book data i.e., all `Student` objects (which are contained in a `UniquePersonList` object).
+* stores the currently 'selected' `Student` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Student>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
 <box type="info" seamless>
 
-**Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
+**Note:** Alternative (arguably, a more OOP) models are given below. The diagram below has a `Tag` list in the `AddressBook`, which `Student` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Student` needing their own `Tag` objects.<br>
 
 <puml src="diagrams/BetterModelClassDiagram.puml" width="450" />
+
+To fully visualise `PaymentList`, the `Student` holds a `PaymentList`. The `PaymentList` is associated with a `PaymentStatus` enum. This allows quick for quick `PaymentStatus` checks for a `Student` object.
+<puml src="diagrams/PaymentClassDiagram.puml" width="250" />
+
+In the same vein `Student` holds a `LessonList`, which contains any amount of `Lesson` as shown in the diagram below
+<puml src="diagrams/LessonClassDiagram.puml" width="400" />
 
 </box>
 
@@ -676,35 +682,64 @@ testers are expected to do more *exploratory* testing.
 
 1. Initial launch
 
-   1. Download the jar file and copy into an empty folder
+    * Download the jar file and copy into an empty folder
 
-   1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+    * Double-click the jar file 
 
-1. Saving window preferences
+    Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
 
-   1. Resize the window to an optimum size. Move the window to a different location. Close the window.
+<br>
 
-   1. Re-launch the app by double-clicking the jar file.<br>
-       Expected: The most recent window size and location is retained.
+2. Saving window preferences
 
-1. _{ more test cases …​ }_
+   * Resize the window to an optimum size. Move the window to a different location. Close the window.
 
-### Deleting a person
+   * Re-launch the app by double-clicking the jar file.
 
-1. Deleting a person while all persons are being shown
+   Expected: The most recent window size and location is retained.
 
-   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+### Adding a student
+
+1. Adding a student with all the required details
+   1. Test case: `add n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25`
+   Expected: New student added: Name: John Doe; Phone: 98765432; Email: johnd@example.com; Address: 311, Clementi Ave 2, #02-25; Lessons: [no lesson]; Tags:
+
+
+### Deleting a student
+
+1. Deleting a student while all persons are being shown
+
+   1. Prerequisites: List all student using the `list` command. Multiple students in the list.
 
    1. Test case: `delete 1`<br>
       Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
 
    1. Test case: `delete 0`<br>
-      Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
+      Expected: No Student is deleted. Error details shown in the status message. Status bar remains the same.
 
    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
 
-1. _{ more test cases …​ }_
+### Adding a lesson to student
+
+1. Adding a lesson to a student
+   1. Test case: `add.lesson i/1 s/English l/2 d/Monday st/10:00 et/12:00 r/80 `
+   Expected: New lesson added:  Subject: English; Secondary: 2; Day: MONDAY; Start: 10:00; End: 12:00; Address: 311, Clementi Ave 2, #02-25; Rate: $80.00 
+
+### Editing a lesson 
+
+1. Edit a lesson's details with some fields missing   
+   1. Test case: `edit.lesson i/1 c/1 s/Math`
+   Expected: Edited Lesson:  Subject: Math; Secondary: 2; Day: MONDAY; Start: 10:00; End: 12:00; Address: 311, Clementi Ave 2, #02-25; Rate: $80.00
+
+
+### Deleting a lesson from student
+
+1. Deleting a lesson from student
+   1. Test case: `delete.lesson i/1 c/1`
+   Expected: Deleted Lesson:  Subject: English; Secondary: 2; Day: MONDAY; Start: 10:00; End: 12:00; Address: 311, Clementi Ave 2, #02-25; Rate: $80.00
+
+
 
 ### Saving data
 
@@ -713,3 +748,103 @@ testers are expected to do more *exploratory* testing.
    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
 
 1. _{ more test cases …​ }_
+
+--------------------------------------------------------------------------------------------------------------------
+
+## **Appendix: Effort**
+### Difficulty level
+Tuiniverse goes beyond AB3 in scope and architectural complexity. While AB3 manages a single entity type (Person),
+Tuiniverse extends this to three distinct domain models — Student, Lesson, and Payment - that are all connected to
+each other. Each entity has its own data structure (LessonList, PaymentList) and lifecycle logic
+(e.g., monthly payment rollovers, lesson scheduling, payment tracking). This resulted in higher coupling and the need for
+careful abstraction.
+
+### Challenges faced
+1. **Synchronising data across Student, Lesson, and Payment.**<br>
+The value, or the TotalAmount, of each payment is dependent on the student's lessons. In turn, the payment status of
+a student is dependent on the status of the payment list, which is dependent on the number of unpaid payments in the payment
+list. Hence, a lot of abstraction was required to make sure information was passed accurately while still enforcing SLAP.
+Furthermore, listeners were needed to make sure changes in Lesson were detected in Payment and Student. This made use of the observer
+pattern to make sure other objects were aware of any mutation in state.
+
+2. **Time-based architecture**<br>
+A lot of Tuiniverse's logic is tightly coupled with time. For instance, the MonthlyRollover logic was needed to make sure a new
+Payment object was instantiated with each month. This required careful time-based checking (via YearMonth) and persistence management to prevent
+duplicate rollovers while maintaining data integrity.
+
+3. **Dynamic payment status updates**<br>
+Students may decide to add lessons in the middle of the month, which initially made it difficult to change payment status after paid. Hence,
+refactoring payment to include unpaid amounts made it easier for tutors to check the amount unpaid for these new students.
+
+4. **Effective scheduling**<br>
+We wanted to make sure scheduling reflected in real life time management, where deconflicts are necessary and one cannot participate in
+two events simultaneously. Hence, we added a method to assess for clashes. Furthermore, a lesson list panel was added to view a tutor's schedule for
+the day, which can help them to plan accordingly.
+
+### Effort required
+A lot of our code was written from scratch, especially the MonthlyRollover and TimeClash logic. That said, some effort was saved through reuse of code,
+namely in the adding, deleting, and editing lessons which mirrored the design of the AB3 add/delete/edit feature. We can confidently say
+only about 10% of code was borrowed.
+
+We split the responsibilities between our members by teams. Rachel and Ray handled the Lesson implementations, while Emilia and Bing Hang
+worked on Payment. Dickson, aside from UI, took the lead in bridging the two teams, and took the initiative to ensure the deliverables were done correctly and on time.
+
+The effort required from all 5 of us was high. Aside from the features we wanted to implement, there were several other responsibilities
+we made sure to be attentive of, namely:
+* Testing
+* Code Quality
+* Documentation
+* UI design
+* Project/GitHub management
+
+We made sure to segment this effectively among the 5 of us, with each of us heading a different aspect. This allowed one person to take
+responsibility for ensuring the quality of our code across the codebase, while adhering to software engineering practices.
+
+### Achievement of the project
+Tuiniverse successfully evolved AB3 into a feature-complete tuition management application handling different aspects of tutor-pupil management.
+It enables private tutors to manage lessons, payments, and students in one place - with real-time financial tracking and automated rollovers.
+Beyond technical achievement, the project demonstrates our team’s mastery of:
+* Software design principles (abstraction, low coupling, high cohesion).
+* Event-driven programming via JavaFX bindings.
+* Test-driven development across multiple entity types.
+* Collaborative Git workflows (feature branches, PR reviews, CI testing).
+
+--------------------------------------------------------------------------------------------------------------------
+
+## **Appendix: Planned Enhancements**
+Team Size: 5
+
+### 1. Granular payment handling
+At present, Tuiniverse assumes that once a student begins lessons in a given month, they attend for the entire month.
+Consequently, the system calculates the total and unpaid fees based on a full month’s worth of lessons, even if the student
+joined midway through the month.
+In future iterations, we plan to enhance this by supporting partial payment calculations, allowing tutors to accurately account for students who begin
+or pause lessons mid-month. This will be done by taking in the current date, and implementing a new CountDaysFromNowUntilMonthEnd method
+which counts the number of a certain day (eg Thursday) until the end of the month.
+
+### 2. Unselect a selected student
+Currently, when a student is pressed, the person card will turn from light blue to bright blue. However, one is unable to unselect
+this person card, and only press another person card to turn the card back to light blue. Hence in the future, we can implement an unselect
+by counting for the number of clicks.
+
+### 3. Adding tags
+When editing a student to add tags, they currently need to retype every single tag to preserve the tags that were set previously, as a new
+tag list will be created. Hence, in the future, we can create an add.tag function that adds a tag to a person in case they have additional
+information they want to store.
+
+### 4. Viewing lessons in order
+When viewing a student's lesson via the view command, the lessons are sorted by time. This is not optimal, as we can see Thursday 6am lessons
+ranked before Monday 8am lesson even if it is Monday. Hence, we can sort the student's lesson list first by day, then by time, instead of
+by time only.
+
+### 5. Duplicate tags
+Adding/editing tags will only register one tag for the same tag instance (ie edit 1 t/tag t/tag only creates one tag tag). However, no error or
+message in usage indicates that duplicates are not allowed. Hence, the message usage can be amended.
+
+### 6. Custom Payment amount
+Currently payCommand assumes student has paid his due fees all at once. In a future enhancement, tutor would be able to decrement unpaidAmount with a custom amount. 
+
+### 7. Attendance list
+Current implementation assumes that student attends all the lessons in the month, not accounting for public holidays and instances where student is absent. An attendance list where tutor can mark student's attendance will help solve the problem
+
+

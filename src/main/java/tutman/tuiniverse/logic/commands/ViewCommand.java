@@ -22,7 +22,7 @@ public class ViewCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Lists all the lessons taken by the specfied student,"
-            + " using their  index number shown in the displayed person list.\n"
+            + " using their index number shown in the displayed student list.\n"
             + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1";
 

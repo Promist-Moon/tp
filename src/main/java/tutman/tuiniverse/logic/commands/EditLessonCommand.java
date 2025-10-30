@@ -42,7 +42,7 @@ public class EditLessonCommand extends Command {
 
     public static final String COMMAND_WORD = "edit.lesson";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the lesson of the student "
-            + "identified by the index number used in the displayed person list. "
+            + "identified by the index number used in the displayed student list. "
             + "Existing values will be overwritten by the input values.\n \n"
             + "Parameters: " + PREFIX_STUDENT_INDEX + "STUDENT_INDEX "
             + PREFIX_LESSON_INDEX + "LESSON_INDEX "
@@ -52,17 +52,16 @@ public class EditLessonCommand extends Command {
             + "[" + PREFIX_RATE + "RATE] "
             + "[" + PREFIX_START_TIME + "START TIME "
             + PREFIX_END_TIME + "END TIME]...\n"
-            + "(STUDENT_INDEX and LESSON_INDEX must be a positive integers.)\n"
+            + "(STUDENT_INDEX and LESSON_INDEX must be positive integers.)\n"
             + "(To change the lesson time, both START TIME and END TIME are needed.)\n \n"
             + "Example: " + COMMAND_WORD + " " + PREFIX_STUDENT_INDEX + "1 " + PREFIX_LESSON_INDEX + "2 "
-            + PREFIX_DAY + "5 "
+            + PREFIX_DAY + "Monday "
             + PREFIX_RATE + "44";
 
     public static final String MESSAGE_EDIT_LESSON_SUCCESS = "Edited Lesson: %1$s";
     public static final String MESSAGE_DUPLICATE_LESSON = "This lesson clashes with an existing "
             + "lesson in the address book.";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
-
     private final Index studentIndex;
     private final Index lessonIndex;
     private final EditLessonDescriptor editLessonDescriptor;
@@ -99,14 +98,14 @@ public class EditLessonCommand extends Command {
         // Handling logic
         try {
             Lesson lessonToEdit = studentLessonList.getLesson(lessonIndex.getOneBased());
-            Lesson editedLesson = createEditedLesson(lessonToEdit, editLessonDescriptor);
+            Lesson editedLesson = createEditedLesson(person, lessonToEdit, editLessonDescriptor);
             editedLesson.addStudent(person);
             model.setLesson(person, lessonToEdit, editedLesson);
             Predicate<Lesson> belongsToStudent =
                     lesson -> person.getLessonList().hasLesson(lesson);
             model.updateFilteredLessonList(belongsToStudent);
 
-            return new CommandResult(String.format(MESSAGE_EDIT_LESSON_SUCCESS, Messages.format(person)));
+            return new CommandResult(String.format(MESSAGE_EDIT_LESSON_SUCCESS, Messages.formatLesson(editedLesson)));
 
         } catch (LessonException e) {
             throw new CommandException(MESSAGE_INVALID_DISPLAYED_LESSON_INDEX);
@@ -118,16 +117,17 @@ public class EditLessonCommand extends Command {
     /**
      * Handles editing a {@code Lesson} edited with {@code editLessonDescriptor}.
      */
-    private static Lesson createEditedLesson(Lesson lessonToEdit, EditLessonDescriptor editLessonDescriptor) {
+    private static Lesson createEditedLesson(Student student, Lesson lessonToEdit,
+                                             EditLessonDescriptor editLessonDescriptor) {
         assert lessonToEdit != null;
         Day updatedDay = editLessonDescriptor.getDay().orElse(lessonToEdit.getDay());
         LessonTime updatedLessonTime = editLessonDescriptor.getLessonTime().orElse(lessonToEdit.getLessonTime());
         Level updatedLevel = editLessonDescriptor.getLevel().orElse(lessonToEdit.getLevel());
         Rate updatedRate = editLessonDescriptor.getRate().orElse(lessonToEdit.getRate());
         Subject updatedSubject = editLessonDescriptor.getSubject().orElse(lessonToEdit.getSubject());
-        String studentName = editLessonDescriptor.getStudentName().orElse(lessonToEdit.getStudentName());
         Lesson updatedLesson = new Lesson(updatedSubject, updatedLevel, updatedDay,
-                updatedLessonTime, updatedRate, studentName);
+                updatedLessonTime, updatedRate);
+        updatedLesson.addStudent(student);
         return updatedLesson;
     }
 
@@ -171,6 +171,16 @@ public class EditLessonCommand extends Command {
         private String studentName;
 
         public EditLessonDescriptor() {
+        }
+
+        /** Creates a descriptor from String inputs. */
+        public EditLessonDescriptor(String day, String startTime, String endTime, String level,
+                                    String rate, String subject) {
+            this.day = new Day(Integer.valueOf(day));
+            this.lessonTime = LessonTime.ofLessonTime(startTime, endTime);
+            this.level = Level.fromString(level);
+            this.rate = new Rate(rate);
+            this.subject = Subject.fromString(subject);
         }
 
         /**
@@ -220,14 +230,6 @@ public class EditLessonCommand extends Command {
             return Optional.ofNullable(subject);
         }
 
-        public void setStudentName(String studentName) {
-            this.studentName = studentName;
-        }
-
-        public Optional<String> getStudentName() {
-            return Optional.ofNullable(studentName);
-        }
-
         @Override
         public boolean equals(Object other) {
             if (other == this) {
@@ -240,11 +242,11 @@ public class EditLessonCommand extends Command {
             }
 
             EditLessonDescriptor otherEditLessonDescriptor = (EditLessonDescriptor) other;
-            return Objects.equals(day, otherEditLessonDescriptor.day)
-                    && Objects.equals(lessonTime, otherEditLessonDescriptor.lessonTime)
-                    && Objects.equals(level, otherEditLessonDescriptor.level)
-                    && Objects.equals(rate, otherEditLessonDescriptor.rate)
-                    && Objects.equals(subject, otherEditLessonDescriptor.subject);
+            return this.day.equals(otherEditLessonDescriptor.day)
+                    && this.lessonTime.equals(otherEditLessonDescriptor.lessonTime)
+                    && (this.level.getLevel() == otherEditLessonDescriptor.level.getLevel())
+                    && (this.rate.getRate() == otherEditLessonDescriptor.rate.getRate())
+                    && this.subject.getSubject().equals(otherEditLessonDescriptor.subject.getSubject());
         }
 
         @Override
@@ -260,3 +262,4 @@ public class EditLessonCommand extends Command {
         }
     }
 }
+
