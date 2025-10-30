@@ -10,7 +10,7 @@ As a **private secondary school tutor** in Singapore, it can be hard to **manage
 for larger tuition centre businesses, it means a lot of **unnecessary hassle** and much **room for error**.  
 
 Tuiniverse is the solution for all things tuition!
-Tuiniverse is a **desktop app** which expedites:
+Tuiniverse is a **desktop app** which <u>expedites</u>:
 * Contact storing and upkeep
 * Payment tracking
 * Lesson scheduling 
@@ -50,7 +50,7 @@ Type some commands into the command box and press Enter to execute it. e.g. typi
 Some example commands you can try:
    * `list` : Lists all contacts.
 
-   * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the Address Book.
+   * `add n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 t/friends t/owesMoney` : Adds a contact named `John Doe` to the contact list.
 
    * `delete 3` : Deletes the 3rd contact shown in the current list.
 
@@ -71,6 +71,8 @@ Action | Format, Examples
 **Clear** | `clear`
 **Delete Student** | `delete INDEX`<br> e.g., `delete 3`
 **Delete Lesson** | `delete.lesson i/STUDENT_INDEX c/LESSON_INDEX…​`<br> e.g.,`delete.lesson i/2 c/1`
+**Edit Student** | `edit` <br> e.g., `edit 1 p/91234567 e/johndoe@example.com`
+**Edit Lesson** | `edit.lesson` <br> e.g., `edit.lesson i/1 c/2 d/Monday r/44`
 **Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **View** | `view INDEX`<br> e.g., `view 1`
 **List** | `list`
@@ -79,6 +81,7 @@ Action | Format, Examples
 **List Overdue** | `list.overdue`
 **Pay** | `pay INDEX`<br> e.g., `pay 3`
 **Help** | `help`
+**Exit** | `exit`
 
 --------------------------------------------------------------------------------------------------------------------
 ## User Interface (UI) Overview
