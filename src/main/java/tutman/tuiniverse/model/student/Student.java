@@ -158,6 +158,11 @@ public class Student {
         return payments.calculateUnpaidAmount();
     }
 
+    public TotalAmount getTotalAmountByMonth(YearMonth yearMonth) {
+        float f = lessons.getTotalAmountEarned(yearMonth);
+        return new TotalAmount(f);
+    }
+
     /**
      * Changes payment status to {@link PaymentStatus}
      *
