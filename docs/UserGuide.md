@@ -22,6 +22,7 @@ display of all the information you need.
 <page-nav-print />
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## Quick start
 
@@ -84,6 +85,8 @@ Action | Format, Examples
 **Exit** | `exit`
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
+
 ## User Interface (UI) Overview
 ![interface overview](images/interfaceOverview.png)
 
@@ -93,6 +96,9 @@ Action | Format, Examples
 | **Message Box**                      | Displays temporary feedback, including success confirmations and error messages, following a user action.           |
 | **Contact List Panel**               | View students' contact details here.                                                                                |
 | **Lesson List Panel/Today Schedule** | Displays the scheduled lessons of the day. This panel can be toggled to show all the lessons of a selected student. |
+
+<div style="page-break-after: always;"></div>
+
 ## Features
 
 <box type="info" seamless>
@@ -372,7 +378,10 @@ Furthermore, certain edits can cause the Tuiniverse to behave in unexpected ways
 
 _Details coming soon ..._
 
+
+
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## FAQ
 
