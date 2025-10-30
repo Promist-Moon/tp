@@ -87,12 +87,14 @@ Action | Format, Examples
 ## User Interface (UI) Overview
 ![interface overview](images/interfaceOverview.png)
 
-| UI Element                           | Description                                                                                                         |
-|--------------------------------------|---------------------------------------------------------------------------------------------------------------------|
-| **Command Bar**                      | Primary input field for entering commands like find, list and add.                                                  |
-| **Message Box**                      | Displays temporary feedback, including success confirmations and error messages, following a user action.           |
-| **Contact List Panel**               | View students' contact details here.                                                                                |
+| UI Element                          | Description                                                                                                         |
+|-------------------------------------|---------------------------------------------------------------------------------------------------------------------|
+| **Command Bar**                     | Primary input field for entering commands like find, list and add.                                                  |
+| **Message Box**                     | Displays temporary feedback, including success confirmations and error messages, following a user action.           |
+| **Contact List Panel**              | View students' contact details here.                                                                                |
 | **Lesson List Panel/Today Schedule** | Displays the scheduled lessons of the day. This panel can be toggled to show all the lessons of a selected student. |
+| **Amount Panel**                | View summary of earnings and payment here.                                                                          |
+
 ## Features
 
 <box type="info" seamless>
@@ -173,6 +175,8 @@ For example, if October 2025 has five Thursdays and you schedule a Thursday less
 </box>
 
 **Format:** `add.lesson i/STUDENT_INDEX s/SUBJECT l/LEVEL d/DAY st/START_TIME et/END_TIME r/HOURLY RATE`
+
+![add lesson command](images/addLesson.png)
 
 **Examples:**
 * `add.lesson i/1 s/English l/2 d/Monday st/10:00 et/12:00 r/80`
