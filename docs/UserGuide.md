@@ -22,6 +22,7 @@ display of all the information you need.
 <page-nav-print />
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## Quick start
 
@@ -84,6 +85,8 @@ Action | Format, Examples
 **Exit** | `exit`
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
+
 ## User Interface (UI) Overview
 ![interface overview](images/interfaceOverview.png)
 
@@ -377,6 +380,7 @@ Furthermore, certain edits can cause the Tuiniverse to behave in unexpected ways
 _Details coming soon ..._
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## FAQ
 
