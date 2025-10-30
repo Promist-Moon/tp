@@ -773,3 +773,21 @@ Beyond technical achievement, the project demonstrates our team’s mastery of:
 * Event-driven programming via JavaFX bindings.
 * Test-driven development across multiple entity types.
 * Collaborative Git workflows (feature branches, PR reviews, CI testing).
+
+--------------------------------------------------------------------------------------------------------------------
+
+## **Appendix: Planned Enhancements**
+Team Size: 5
+
+### 1. Partial Payments
+At present, Tuiniverse assumes that once a student begins lessons in a given month, they attend for the entire month.
+Consequently, the system calculates the total and unpaid fees based on a full month’s worth of lessons, even if the student
+joined midway through the month.
+In future iterations, we plan to enhance this by supporting partial payment calculations, allowing tutors to accurately account for students who begin
+or pause lessons mid-month. This will be done by taking in the current date, and implementing a new CountDaysFromNowUntilMonthEnd method
+which counts the number of a certain day (eg Thursday) until the end of the month.
+
+### 2. Unselect a selected student
+Currently, when a student is pressed, the person card will turn from light blue to bright blue. However, one is unable to unselect
+this person card, and only press another person card to turn the card back to light blue. Hence in the future, we can implement an unselect
+by counting for the number of clicks.
