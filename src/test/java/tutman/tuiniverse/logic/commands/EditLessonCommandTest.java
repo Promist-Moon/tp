@@ -12,7 +12,6 @@ import static tutman.tuiniverse.logic.commands.CommandTestUtil.VALID_START_TIME_
 import static tutman.tuiniverse.logic.commands.CommandTestUtil.VALID_SUBJECT_LESSON1;
 import static tutman.tuiniverse.logic.commands.CommandTestUtil.assertCommandFailure;
 import static tutman.tuiniverse.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static tutman.tuiniverse.logic.commands.CommandTestUtil.showLessonAtIndex;
 import static tutman.tuiniverse.testutil.Assert.assertThrows;
 import static tutman.tuiniverse.testutil.TypicalIndexes.INDEX_FIRST_LESSON;
 import static tutman.tuiniverse.testutil.TypicalIndexes.INDEX_SECOND_LESSON;
