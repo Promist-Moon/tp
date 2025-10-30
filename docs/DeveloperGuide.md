@@ -718,9 +718,9 @@ testers are expected to do more *exploratory* testing.
 
 ## **Appendix: Effort**
 ### Difficulty level
-Tuiniverse goes beyond AB3 in scope and architectural complexity. While AB3 manages a single entity type (Person), 
+Tuiniverse goes beyond AB3 in scope and architectural complexity. While AB3 manages a single entity type (Person),
 Tuiniverse extends this to three distinct domain models — Student, Lesson, and Payment - that are all connected to
-each other. Each entity has its own data structure (LessonList, PaymentList) and lifecycle logic 
+each other. Each entity has its own data structure (LessonList, PaymentList) and lifecycle logic
 (e.g., monthly payment rollovers, lesson scheduling, payment tracking). This resulted in higher coupling and the need for
 careful abstraction.
 
@@ -735,7 +735,7 @@ pattern to make sure other objects were aware of any mutation in state.
 2. **Time-based architecture**<br>
 A lot of Tuiniverse's logic is tightly coupled with time. For instance, the MonthlyRollover logic was needed to make sure a new
 Payment object was instantiated with each month. This required careful time-based checking (via YearMonth) and persistence management to prevent
-duplicate rollovers while maintaining data integrity. 
+duplicate rollovers while maintaining data integrity.
 
 3. **Dynamic payment status updates**<br>
 Students may decide to add lessons in the middle of the month, which initially made it difficult to change payment status after paid. Hence,
