@@ -25,7 +25,6 @@ public class PaymentList {
      */
     public PaymentList() {
         this.payments = new ArrayList<>();
-        payments.add(new Payment(DateTimeUtil.currentYearMonth(), new TotalAmount(0f)));
         earliestUnpaidYearmonth = null;
         setPaymentStatus(Status.PAID);
     }
