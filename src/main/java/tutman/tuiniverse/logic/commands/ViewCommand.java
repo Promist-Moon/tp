@@ -24,7 +24,7 @@ public class ViewCommand extends Command {
             + ": Lists all the lessons taken by the specfied student,"
             + " using their  index number shown in the displayed person list.\n"
             + "Parameters: INDEX (must be a positive integer)\n"
-            + "Example: " + COMMAND_WORD + "1";
+            + "Example: " + COMMAND_WORD + " 1";
 
     public static final String MESSAGE_VIEW_SUCCESS = "Lessons for student: %1$s";
 

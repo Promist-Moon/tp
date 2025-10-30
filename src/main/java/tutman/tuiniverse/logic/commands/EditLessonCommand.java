@@ -42,16 +42,18 @@ public class EditLessonCommand extends Command {
 
     public static final String COMMAND_WORD = "edit.lesson";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the lesson of the student "
-            + "identified by the index number used in the displayed person list."
-            + "Existing values will be overwritten by the input values.\n"
-            + "Parameters: " + PREFIX_STUDENT_INDEX + "STUDENT INDEX "
-            + PREFIX_LESSON_INDEX + "LESSON INDEX (must be a positive integers)"
+            + "identified by the index number used in the displayed person list. "
+            + "Existing values will be overwritten by the input values.\n \n"
+            + "Parameters: " + PREFIX_STUDENT_INDEX + "STUDENT_INDEX "
+            + PREFIX_LESSON_INDEX + "LESSON_INDEX "
             + "[" + PREFIX_SUBJECT + "SUBJECT] "
             + "[" + PREFIX_DAY + "DAY] "
             + "[" + PREFIX_LEVEL + "LEVEL] "
             + "[" + PREFIX_RATE + "RATE] "
             + "[" + PREFIX_START_TIME + "START TIME "
             + PREFIX_END_TIME + "END TIME]...\n"
+            + "(STUDENT_INDEX and LESSON_INDEX must be a positive integers.)\n"
+            + "(To change the lesson time, both START TIME and END TIME are needed.)\n \n"
             + "Example: " + COMMAND_WORD + " " + PREFIX_STUDENT_INDEX + "1 " + PREFIX_LESSON_INDEX + "2 "
             + PREFIX_DAY + "5 "
             + PREFIX_RATE + "44";

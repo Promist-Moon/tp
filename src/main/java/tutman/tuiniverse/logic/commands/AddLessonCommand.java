@@ -25,7 +25,7 @@ import tutman.tuiniverse.model.student.Student;
 public class AddLessonCommand extends Command {
     public static final String COMMAND_WORD = "add.lesson";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a lesson to the student. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a lesson to the student. \n"
             + "Parameters: "
             + PREFIX_STUDENT_INDEX + "STUDENT INDEX "
             + PREFIX_SUBJECT + "SUBJECT "
