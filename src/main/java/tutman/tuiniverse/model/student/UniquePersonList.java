@@ -148,9 +148,7 @@ public class UniquePersonList implements Iterable<Student> {
     private boolean personsAreUnique(List<Student> persons) {
         for (int i = 0; i < persons.size() - 1; i++) {
             for (int j = i + 1; j < persons.size(); j++) {
-                if (persons.get(i).isSamePerson(persons.get(j))) {
-                    return false;
-                }
+                return !(persons.get(i).isSamePerson(persons.get(j)));
             }
         }
         return true;
