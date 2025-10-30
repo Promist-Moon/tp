@@ -393,7 +393,7 @@ want to change `earlyLesson` to `lateLesson`, use the edit command as follows:
 
 ## Glossary
 
-* Student: A person who's being taught by the tutor (you).
+* **Student**: A person who's being taught by the tutor (you).
 * **Payment Status**: Each student has a payment status which updates every month.
     * Paid - The student has paid within the month
     * Unpaid - The student has not paid within the month
