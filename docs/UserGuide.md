@@ -157,12 +157,20 @@ Adds a student to the address book with these fields:
 
 Adds a lesson to the specific student with these fields:
 * Student Index
-* Subject 
+* Subject (Refer to [Glossary](#Glossary) for the list of subject)
 * Level (1,2,3, or 4)
-* Day of Lesson
+* Day of Lesson (Monday, Tuesday...)
 * Start Time
 * End Time
 * Hourly Rate
+
+<box type="tip" seamless>
+
+**Notes**:
+When you add a lesson in Tuiniverse, it’s assumed to run every week from the first to the last week of the month.
+
+For example, if October 2025 has five Thursdays and you schedule a Thursday lesson, it will be set for all five Thursdays. The total payment will be calculated based on this.
+</box>
 
 **Format:** `add.lesson i/STUDENT_INDEX s/SUBJECT l/LEVEL d/DAY st/START_TIME et/END_TIME r/HOURLY RATE`
 
@@ -349,12 +357,12 @@ Tuiniverse data are saved in the hard disk automatically after any command that 
 
 ### Editing the data file
 
-Tuiniverse data are saved automatically as a JSON file `[JAR file location]/data/Tuiniverse.json`. Advanced users are welcome to update data directly by editing that data file.
+Tuiniverse data are saved automatically as a JSON file `[JAR file location]/data/tuiniverse.json`. Advanced users are welcome to update data directly by editing that data file.
 
 <box type="warning" seamless>
 
 **Caution:**
-If your changes to the data file makes its format invalid, Tuiniverse will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.<br>
+If your changes to the data file makes its format invalid, Tuiniverse will discard all data and start with an empty data file at the next run when you attempt to perform any command.  Hence, it is recommended to take a backup of the file before editing it.<br>
 Furthermore, certain edits can cause the Tuiniverse to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </box>
 
