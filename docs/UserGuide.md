@@ -176,15 +176,15 @@ Tracks that a student has made payment for that month.
 
 **Format:** `pay INDEX`
 
-* Marks payment for the student at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
+* Marks payment for the student at the specified `INDEX`. The index refers to the index number shown in the displayed student list. The index **must be a positive integer** 1, 2, 3, …​
 * When you mark an **unpaid** or **overdue** student as paid, their status becomes **paid**.
 * A **paid** student cannot make payment until the next month.
 
 <br>
 
-### Listing all persons : `list`
+### Listing all students : `list`
 
-Shows a list of all persons in the address book.
+Shows a list of all students in the contact book.
 
 **Format:** `list`
 ![list command](images/list.png)
@@ -206,23 +206,39 @@ Lists all students that have **overdue** fees from previous months.
 **Format:** `list.overdue`
 ![list command](images/listoverdue.png)
 
-### Editing a person : `edit`
+### Editing a student : `edit`
 
-Edits an existing student in the address book.
+Edits an existing student in the contact book.
 
 **Format:** `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
 
-* Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
+* Edits the student at the specified `INDEX`. The index refers to the index number shown in the displayed student list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
-* When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
-* You can remove all the person’s tags by typing `t/` without
-    specifying any tags after it.
+* When editing tags, the existing tags of the student will be removed i.e adding of tags is not cumulative.
+* You can remove all the student’s tags by typing `t/` without
+  specifying any tags after it.
 
 **Examples:**
-*  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
-*  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
+*  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st student to be `91234567` and `johndoe@example.com` respectively.
+*  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd student to be `Betsy Crower` and clears all existing tags.
 
+<br>
+
+### Editing a lesson : `edit.lesson`
+
+Edits the details of the lesson of the student identified by the index number used in the displayed person list.
+Existing values will be overwritten by the input values.
+
+**Format:** `edit.lesson i/STUDENT_INDEX c/LESSON_INDEX [s/SUBJECT] [d/DAY] [l/LEVEL] [r/RATE] [st/START TIME et/END TIME]…​`
+
+* Edits the lesson at the specified `LESSON_INDEX` of the student at`STUDENT_INDEX`. 
+* The index refers to the index number shown in the displayed student list & lesson list respectively. The index **must be a positive integer** 1, 2, 3, …​
+* At least one of the optional fields must be provided.
+* Existing values will be updated to the input values.
+
+**Examples:**
+*  `edit.lesson i/1 c/2 d/Monday r/44` Edits the 2nd lesson of the 1st student to be scheduled on every `Monday` at a rate of `$44/hr`.
 <br>
 
 ### Searching for students by keyword: `find`
@@ -251,7 +267,7 @@ Lists all the lessons taken by the specfied student.
 ![view command](images/viewCommand.png)
 
 * List the lessons of the student at the specified `INDEX`.
-* The index refers to the index number shown in the displayed person list.
+* The index refers to the index number shown in the displayed student list.
 * The index **must be a positive integer** 1, 2, 3, …​
 
 **Examples:**
@@ -260,7 +276,7 @@ Lists all the lessons taken by the specfied student.
 
 <br>
 
-### Deleting a person : `delete`
+### Deleting a student : `delete`
 
 Deletes the specified student from the address book.
 
@@ -271,7 +287,7 @@ After delete:
 ![after delete command](images/deleteAfter.png)
 
 * Deletes the students at the specified `INDEX`.
-* The index refers to the index number shown in the displayed person list.
+* The index refers to the index number shown in the displayed student list.
 * The index **must be a positive integer** 1, 2, 3, …​
 
 **Examples:**
@@ -342,9 +358,7 @@ _Details coming soon ..._
 
 ## Glossary
 
-* **Person**: A person can either be a student or a parent
-    * Student - A student studies a subject under a tutor for an hourly rate.
-    * Parent - The parent of the student.
+* Student: A person who's being taught by the tutor (you).
 * **Payment Status**: Each student has a payment status which updates every month.
     * Paid - The student has paid within the month
     * Unpaid - The student has not paid within the month
