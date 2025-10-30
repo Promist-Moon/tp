@@ -1,7 +1,5 @@
 package tutman.tuiniverse.model.lesson;
 
-import tutman.tuiniverse.logic.commands.exceptions.CommandException;
-
 import static tutman.tuiniverse.commons.util.AppUtil.checkArgument;
 
 /**
