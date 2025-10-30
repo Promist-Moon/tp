@@ -682,35 +682,64 @@ testers are expected to do more *exploratory* testing.
 
 1. Initial launch
 
-   1. Download the jar file and copy into an empty folder
+    * Download the jar file and copy into an empty folder
 
-   1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+    * Double-click the jar file 
 
-1. Saving window preferences
+    Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
 
-   1. Resize the window to an optimum size. Move the window to a different location. Close the window.
+<br>
 
-   1. Re-launch the app by double-clicking the jar file.<br>
-       Expected: The most recent window size and location is retained.
+2. Saving window preferences
 
-1. _{ more test cases …​ }_
+   * Resize the window to an optimum size. Move the window to a different location. Close the window.
 
-### Deleting a person
+   * Re-launch the app by double-clicking the jar file.
 
-1. Deleting a person while all persons are being shown
+   Expected: The most recent window size and location is retained.
 
-   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+### Adding a student
+
+1. Adding a student with all the required details
+   1. Test case: `add n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25`
+   Expected: New student added: Name: John Doe; Phone: 98765432; Email: johnd@example.com; Address: 311, Clementi Ave 2, #02-25; Lessons: [no lesson]; Tags:
+
+
+### Deleting a student
+
+1. Deleting a student while all persons are being shown
+
+   1. Prerequisites: List all student using the `list` command. Multiple students in the list.
 
    1. Test case: `delete 1`<br>
       Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
 
    1. Test case: `delete 0`<br>
-      Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
+      Expected: No Student is deleted. Error details shown in the status message. Status bar remains the same.
 
    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
 
-1. _{ more test cases …​ }_
+### Adding a lesson to student
+
+1. Adding a lesson to a student
+   1. Test case: `add.lesson i/1 s/English l/2 d/Monday st/10:00 et/12:00 r/80 `
+   Expected: New lesson added:  Subject: English; Secondary: 2; Day: MONDAY; Start: 10:00; End: 12:00; Address: 311, Clementi Ave 2, #02-25; Rate: $80.00 
+
+### Editing a lesson 
+
+1. Edit a lesson's details with some fields missing   
+   1. Test case: `edit.lesson i/1 c/1 s/Math`
+   Expected: Edited Lesson:  Subject: Math; Secondary: 2; Day: MONDAY; Start: 10:00; End: 12:00; Address: 311, Clementi Ave 2, #02-25; Rate: $80.00
+
+
+### Deleting a lesson from student
+
+1. Deleting a lesson from student
+   1. Test case: `delete.lesson i/1 c/1`
+   Expected: Deleted Lesson:  Subject: English; Secondary: 2; Day: MONDAY; Start: 10:00; End: 12:00; Address: 311, Clementi Ave 2, #02-25; Rate: $80.00
+
+
 
 ### Saving data
 
