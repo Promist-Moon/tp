@@ -1,8 +1,9 @@
 ---
   layout: default.md
-    title: "User Guide"
-    pageNav: 3
+  title: "User Guide"
+  pageNav: 3
 ---
+
 
 ## Introduction
 As a **private secondary school tutor** in Singapore, it can be hard to **manage student contacts**,
@@ -94,8 +95,9 @@ Action | Format, Examples
 | **Message Box**                      | Displays temporary feedback, including success confirmations and error messages, following a user action.           |
 | **Contact List Panel**               | View students' contact details here.                                                                                |
 | **Lesson List Panel/Today Schedule** | Displays the scheduled lessons of the day. This panel can be toggled to show all the lessons of a selected student. |
+| **Amount Panel**                | View summary of earnings and payment here.   
 
-<div style="page-break-after: always;"></div>
+
 
 ## Features
 
