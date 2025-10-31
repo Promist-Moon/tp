@@ -951,15 +951,15 @@ To view the exact changes in lesson, use `view 1` to see the student's lessons i
     1. Simulate a missing data file:
        * Close the application.
        * Navigate to the **data** directory where the application stores its data files.
-       * Delete the data file **addressbook.json**
+       * Delete the data file **tuiniverse.json**
     2. Re-launch the application
     * Expected: The application starts with a default data set.
 
 2. Dealing with corrupted data files
-   1. Simulate a corrupted addressbook.json data file:
+   1. Simulate a corrupted tuiniverse.json data file:
       * Close the application.
       * Navigate to the **data** directory where the application stores its data files.
-      * Open the data file **addressbook.json** with a text editor.
+      * Open the data file **tuiniverse.json** with a text editor.
       * Introduce an invalid JSON syntax (delete a closing brace, or add random text).
       * save the file.
    2. Re-launch the application.
