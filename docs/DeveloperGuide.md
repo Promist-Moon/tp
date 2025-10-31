@@ -13,7 +13,9 @@
 
 ## **Acknowledgements**
 
-_{ list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well }_
+Our project is built based on the foundation design and documentation structure of AddressBook-Level3 (AB3) by the SE-EDU team, as provided in the CS2103T module at the National University of Singapore (NUS).
+
+We also referenced SE-EDU’s AB3 Developer Guide and Sample MarkBind sites for documentation and diagram formatting conventions.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -216,6 +218,8 @@ It checks for conflicts between lessons based on day and time intervals, ensurin
 * The method returns true if two lessons occur on the same Day and their LessonTime intervals overlap.
 * Used during AddLessonCommand to validate new lessons before insertion.
 * Also leveraged by the lesson calendar to flag and highlight clashes visually in the UI.
+
+{ to be updated with graph }
 
 #### Design considerations:
 
