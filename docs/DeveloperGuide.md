@@ -680,37 +680,96 @@ testers are expected to do more *exploratory* testing.
 
 ### Launch and shutdown
 
-1. Initial launch
+1. **Initial launch**
 
-   1. Download the jar file and copy into an empty folder
+    * Download the jar file and copy into an empty folder
 
-   1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+    * Double-click the jar file 
 
-1. Saving window preferences
+    Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
 
-   1. Resize the window to an optimum size. Move the window to a different location. Close the window.
 
-   1. Re-launch the app by double-clicking the jar file.<br>
-       Expected: The most recent window size and location is retained.
+2. **Saving window preferences**
 
-1. _{ more test cases …​ }_
+   * Resize the window to an optimum size. Move the window to a different location. Close the window.
 
-### Deleting a person
+   * Re-launch the app by double-clicking the jar file.
 
-1. Deleting a person while all persons are being shown
+   Expected: The most recent window size and location is retained.
 
-   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+### Adding a student
+**Sample error message indicating invalid command format:** Invalid command format!
 
-   1. Test case: `delete 1`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+1. Adding a student with all the required details
+   * Test case: `add n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25`
+     Expected: New student added: Name: John Doe; Phone: 98765432; Email: johnd@example.com; Address: 311, Clementi Ave 2, #02-25; Lessons: [no lesson]; Tags:. Confirmation message is displayed with the student's details.
 
-   1. Test case: `delete 0`<br>
-      Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
+1. Adding a student with missing compulsory fields
+   * Test case: `add n/John Doe p/98765432 e/johnd@example.com`
+     Expected:  Error message indicating that invalid command format will output.
 
-   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
-      Expected: Similar to previous.
+1. Adding a student with invalid phone number
+   * Test case: `add n/John Doe p/INVALID_NUMBER e/johnd@example.com a/311, Clementi Ave 2, #02-25`
+     Expected: Phone numbers should only contain numbers, and it should be between 3 and 8 digits long. Error message is displayed
+   
 
-1. _{ more test cases …​ }_
+### Deleting a student
+
+1. Deleting a student while all persons are being shown
+
+   * Prerequisites: List all student using the `list` command. Multiple students in the list.
+
+   * Test case: `delete 1`<br>
+     Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. 
+
+   * Test case: `delete 0`<br>
+     Expected: No Student is deleted. Error message indicating that invalid command format will output.
+
+   * Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
+     Expected: Similar to previous.
+
+### Adding a lesson to student
+
+1. Adding a lesson to a student
+   * Test case: `add.lesson i/1 s/English l/2 d/Monday st/10:00 et/12:00 r/80`
+   Expected: New lesson added:  Subject: English; Secondary: 2; Day: MONDAY; Start: 10:00; End: 12:00; Address: 311, Clementi Ave 2, #02-25; Rate: $80.00
+   <br>Confirmation message is displayed with the lesson details.
+
+2. Adding a lesson to a student with missing compulsory fields
+   * Test case: `add.lesson i/1 s/English l/2 d/Monday st/10:00`
+   Expected: No lesson is added. Error message indicating that invalid command format will output.
+
+3. Adding a lesson to a student with incorrect Subject field
+   * Test case: `add.lesson i/1 s/Dragon l/2 d/Monday st/10:00 et/12:00 r/80`
+   Expected: Subjects are not case-sensitive, and can only take these values: Math, English, Physics, Chemistry, Biology, Geography, History, Literature, Social Studies, Mother Tongue. No lesson is added, error message displayed. 
+
+4. Adding a lesson to a student with incorrect Level field
+   * Test case: `add.lesson i/1 s/English l/6 d/Monday st/10:00 et/12:00 r/80 `
+   Expected: Levels can only take these integer values: 1, 2, 3, 4, 5. No lesson is added, error message displayed.
+
+5. Adding a lesson to a student with incorrect Day field
+    * Test case: `add.lesson i/1 s/English l/2 d/Today st/10:00 et/12:00 r/80 `
+      Expected: Day is an integer which corresponds to: [1: Monday], [2: Tuesday], [3: Wednesday], [4: Thursday], [5: Friday], [6: Saturday], [7: Sunday]. No lesson is added, error message displayed.
+
+6. Adding a lesson to a student with incorrect start and end time
+   * Test case: `add.lesson i/1 s/English l/2 d/Monday st/WRONG_TIME et/12:00 r/80 `
+   Expected: Time must be given in the format HH:MM, and the start time should be before the end time. No lesson is added, error message displayed.
+
+
+### Editing a lesson 
+
+1. Edit a lesson's details with some fields missing   
+   1. Test case: `edit.lesson i/1 c/1 s/Math`
+   Expected: Edited Lesson:  Subject: Math; Secondary: 2; Day: MONDAY; Start: 10:00; End: 12:00; Address: 311, Clementi Ave 2, #02-25; Rate: $80.00
+
+
+### Deleting a lesson from student
+
+1. Deleting a lesson from student
+   1. Test case: `delete.lesson i/1 c/1`
+   Expected: Deleted Lesson:  Subject: English; Secondary: 2; Day: MONDAY; Start: 10:00; End: 12:00; Address: 311, Clementi Ave 2, #02-25; Rate: $80.00
+
+
 
 ### Saving data
 
@@ -785,7 +844,7 @@ Beyond technical achievement, the project demonstrates our team’s mastery of:
 ## **Appendix: Planned Enhancements**
 Team Size: 5
 
-### 1. Partial Payments
+### 1. Granular payment handling
 At present, Tuiniverse assumes that once a student begins lessons in a given month, they attend for the entire month.
 Consequently, the system calculates the total and unpaid fees based on a full month’s worth of lessons, even if the student
 joined midway through the month.
@@ -807,3 +866,15 @@ information they want to store.
 When viewing a student's lesson via the view command, the lessons are sorted by time. This is not optimal, as we can see Thursday 6am lessons
 ranked before Monday 8am lesson even if it is Monday. Hence, we can sort the student's lesson list first by day, then by time, instead of
 by time only.
+
+### 5. Duplicate tags
+Adding/editing tags will only register one tag for the same tag instance (ie edit 1 t/tag t/tag only creates one tag tag). However, no error or
+message in usage indicates that duplicates are not allowed. Hence, the message usage can be amended.
+
+### 6. Custom Payment amount
+Currently payCommand assumes student has paid his due fees all at once. In a future enhancement, tutor would be able to decrement unpaidAmount with a custom amount. 
+
+### 7. Attendance list
+Current implementation assumes that student attends all the lessons in the month, not accounting for public holidays and instances where student is absent. An attendance list where tutor can mark student's attendance will help solve the problem
+
+

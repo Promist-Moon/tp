@@ -24,7 +24,7 @@ public class PayCommand extends Command {
             + ": Marks all payments associated with the specified student as paid,"
             + " using the index number shown in the displayed student list.\n"
             + "Parameters: INDEX (must be a positive integer)\n"
-            + "Example: " + COMMAND_WORD + "1";
+            + "Example: " + COMMAND_WORD + " 1";
 
     public static final String MESSAGE_PAYMENT_SUCCESS = "Paid: %1$s";
     public static final String MESSAGE_NOT_PAID = "Student has paid already: %1$s";
