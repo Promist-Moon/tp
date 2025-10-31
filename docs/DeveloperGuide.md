@@ -697,6 +697,7 @@ testers are expected to do more *exploratory* testing.
 
    Expected: The most recent window size and location is retained.
 
+
 ### Adding a student
 **Sample error message indicating invalid command format:** Invalid command format!
 
@@ -728,6 +729,32 @@ testers are expected to do more *exploratory* testing.
    * Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
      Expected: Similar to previous.
 
+
+### Editing a student
+<box seamless>
+
+**Tip:** Confirmation message will also display the lessons associated to the edited student. LESSONS refer to the lessons that was previously added.  
+
+</box>
+<box seamless>
+
+**Prerequisite 1:** At least one student exists in the list (A student at index 1).
+
+</box>
+
+1. Editing a student's details
+   * Test case: `edit 1 n/Dohn Joe p/23456789 e/dohnj@example.com a/313,Somerset`
+     Expected: Edited Student: Name: Dohn Joe; Phone: 23456789; Email: dohnj@example.com; Address: 313,Somerset; Lessons: [LESSONS] Confirmation message is displayed with the updated details.
+
+2. Editing a student with some fields missing
+   * Test case: `edit 1 p/67676767 a/Yishun, yishun`
+     Expected: Edited Student: Name: Dohn Joe; Phone: 67676767; Email: dohnj@example.com; Address: Yishun, yishun; Lessons: [LESSONS] Confirmation message is displayed with the updated details, other details remain unchanged
+
+3. Editing a student with invalid index
+   * Test case: `edit 0 n/Dohn Joe p/23456789 e/dohnj@example.com a/313,Somerset`
+     Expected: No student is edited. Error message indicating that invalid command format will output.
+
+
 ### Adding a lesson to student
 
 1. Adding a lesson to a student
@@ -756,28 +783,76 @@ testers are expected to do more *exploratory* testing.
    Expected: Time must be given in the format HH:MM, and the start time should be before the end time. No lesson is added, error message displayed.
 
 
-### Editing a lesson 
-
-1. Edit a lesson's details with some fields missing   
-   1. Test case: `edit.lesson i/1 c/1 s/Math`
-   Expected: Edited Lesson:  Subject: Math; Secondary: 2; Day: MONDAY; Start: 10:00; End: 12:00; Address: 311, Clementi Ave 2, #02-25; Rate: $80.00
-
-
 ### Deleting a lesson from student
+<box type="info" seamless>
+
+**Prerequisite:** At least one student exists in the list (A student at index 1) and at least one lesson exists for that student (A lesson at index 1).
+
+**Tip:** Add a student to test delete capabilities using `add n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25`,
+and add a lesson to the student with `add.lesson i/1 s/English l/2 d/Monday st/10:00 et/12:00 r/80`.
+</box>
 
 1. Deleting a lesson from student
-   1. Test case: `delete.lesson i/1 c/1`
-   Expected: Deleted Lesson:  Subject: English; Secondary: 2; Day: MONDAY; Start: 10:00; End: 12:00; Address: 311, Clementi Ave 2, #02-25; Rate: $80.00
+   * Test case: `delete.lesson i/1 c/1`
+   Expected: Deleted Lesson:  Subject: English; Secondary: 2; Day: MONDAY; Start: 10:00; End: 12:00; Address: 311, Clementi Ave 2, #02-25; Rate: $80.00. Confirmation message is displayed with the updated details.
 
+2. Deleting a lesson from student with invalid student index
+   * Test case: `delete.lesson i/0 c/1`
+     Expected: No lesson is deleted. Error message indicating that invalid command format will output.
+
+3. Deleting a lesson from student with invalid lesson index
+   * Test case: `delete.lesson i/1 c/0`
+     Expected: No lesson is deleted. Error message indicating that invalid command format will output.
+
+
+### Editing a lesson
+<box type="info" seamless>
+
+**Prerequisite:** At least one student exists in the list (A student at index 1) and at least one lesson exists for that student (A lesson at index 1).
+
+**Tip:** Add a student to test delete capabilities using `add n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25`,
+and add a lesson to the student with `add.lesson i/1 s/English l/2 d/Monday st/10:00 et/12:00 r/80`.
+
+To view the exact changes in lesson, use `view 1` to see the student's lessons in the Lesson list panel on the right. 
+<br>After successfully editing a lesson, use `view 1` and check that the edited lesson details has been changed.
+</box>
+
+1. Edit a lesson's details 
+   * Test case: `edit.lesson i/1 c/1 s/Math l/3 d/Friday st/11:00 et/13:00 r/90`
+     Expected: Edited Lesson:  Subject: Math; Secondary: 3; Day: FRIDAY; Start: 11:00; End: 13:00; Address: 311, Clementi Ave 2, #02-25; Rate: $90.00. Confirmation message is displayed with the updated details.
+
+2. Edit a lesson's details with some field's missing
+   * Test case: `edit.lesson i/1 c/1 s/Geography`
+     Expected: Edited Lesson:  Subject: Geography; Secondary: 3; Day: FRIDAY; Start: 11:00; End: 13:00; Address: 311, Clementi Ave 2, #02-25; Rate: $90.00. Confirmation message is displayed with the updated details, other details remain unchanged.
+
+3. Edit a lesson's details with invalid student index
+   * Test case: `edit.lesson i/0 c/1 s/Geography`
+     Expected: No lesson is edited. Error message indicating that invalid command format will output.
+
+4. Edit a lesson's details with invalid lesson index
+   * Test case: `edit.lesson i/1 c/0 s/Geography`
+     Expected: No lesson is edited. Error message indicating that invalid command format will output.
 
 
 ### Saving data
 
-1. Dealing with missing/corrupted data files
+1. Dealing with missing data files
+    1. Simulate a missing data file:
+       * Close the application.
+       * Navigate to the **data** directory where the application stores its data files.
+       * Delete the data file **addressbook.json**
+    2. Re-launch the application
+    * Expected: The application starts with a default data set.
 
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
-
-1. _{ more test cases …​ }_
+2. Dealing with corrupted data files
+   1. Simulate a corrupted data file:
+      * Close the application.
+      * Navigate to the **data** directory where the application stores its data files.
+      * Open the data file **addressbook.json** with a text editor.
+      * Introduce an invalid JSON syntax (delete a closing brace, or add random text).
+      * save the file.
+   2. Re-launch the application.
+   * Expected: The application detects the corrupted data file and displays an error message in the terminal. It will then start with an empty data set. 
 
 --------------------------------------------------------------------------------------------------------------------
 
