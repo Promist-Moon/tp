@@ -845,7 +845,7 @@ To view the exact changes in lesson, use `view 1` to see the student's lessons i
     * Expected: The application starts with a default data set.
 
 2. Dealing with corrupted data files
-   1. Simulate a corrupted addressbook.json data file:
+   1. Simulate a corrupted tuiniverse.json data file:
       * Close the application.
       * Navigate to the **data** directory where the application stores its data files.
       * Open the data file **addressbook.json** with a text editor.
