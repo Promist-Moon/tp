@@ -298,32 +298,25 @@ _{Explain here how the data archiving feature will be implemented}_
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                     | I want to …​                                            | So that I can…​                                                          |
-|----------|---------------------------------------------|---------------------------------------------------------|--------------------------------------------------------------------------|
-| `* * *`  | new user                                    | see usage instructions                                  | refer to instructions when I forget how to use the App                   |
-| `* * *`  | tutor                                       | add a new student                                       |                                                                          |
-| `* *`    | tutor                                       | add a new parent                                        | view parent's details                                                    |
-| `* *`    | tutor                                       | link a student with their parent's contact              | bill the parent and contact them regarding their child’s academic matter |
-| `* * *`  | tutor                                       | delete a person                                         | remove entries that I no longer need                                     |
-| `* * *`  | tutor                                       | edit a person's information                             | update their information                                                 |
-| `* * *`  | tutor                                       | find a person by name                                   | locate details of persons without having to go through the entire list   |
-| `* *`    | tutor with many persons in the address book | sort persons by name                                    | locate a person easily                                                   |
-| `* *`    | tutor                                       | see students' payment status                            | track who has and has not paid                                           |
-| `* *`    | tutor                                       | list students who have not made payment                 | track students who have not paid                                         |
-| `* *`    | tutor                                       | view my schedule for today                              | know which locations I will be travelling to today                       |
-| `*`      | busy tutor                                  | view upcoming classes for the week                      | plan, prepare and organise lesson materials in advance                   |
-| `*`      | tutor who hates commuting long distances    | know the most efficient time slot to add in a student   | minimize commute time                                                    |
-| `*`      | tutor who frequently uses the app           | edit a class for a certain week only                    | reschedule a class and without it affecting my regular schedule          |
-| `* * *`  | tutor                                       | add a new class                                         | view class details                                                       |
-| `* *`    | forgetful tutor                             | be prevented from adding classes of conflicting timings | avoid accidentally holding two classes at the same time                  |
-| `* *`    | tutor                                       | see students' bill for the month                        | track each student's bill                                                |
-| `* *`    | tutor                                       | mark students' attendance after every class             | track class hours and calculate the student's bill                       |
-| `*`      | tutor motivated to see students improve     | add a note for a student before their class             | track class content for the student                                      |
-| `*`      | tutor motivated to see students improve     | edit a student's note after a class                     | check student's progress                                                 |
-| `*`      | tutor who teaches multiple subjects         | filter students by subject                              | prepare resources and reuse lesson materials for similar classes         |
-| `*`      | tutor who teaches multiple subjects         | organise students by subject                            | better plan lesson materials and lesson outlines                         |
-
-*{More to be added}*
+| Priority | As a …​                                      | I want to …​                                            | So that I can…​                                                        |
+|----------|----------------------------------------------|---------------------------------------------------------|------------------------------------------------------------------------|
+| `* * *`  | new user                                     | see usage instructions                                  | refer to instructions when I forget how to use the App                 |
+| `* * *`  | tutor                                        | add a new student                                       |                                                                        |
+| `* * *`  | tutor                                        | delete a student                                        | remove entries that I no longer need                                   |
+| `* * *`  | tutor                                        | edit a person's information                             | update their information                                               |
+| `* * *`  | tutor                                        | find a person by name                                   | locate details of persons without having to go through the entire list |
+| `* *`    | tutor with many students in the address book | sort students by name                                   | locate a student easily                                                |
+| `* *`    | tutor                                        | see students' payment status                            | track who has and has not paid                                         |
+| `* *`    | tutor                                        | list students who have not made payment                 | track students who have not paid                                       |
+| `* *`    | tutor                                        | view my schedule for today                              | know which locations I will be travelling to today                     |
+| `*`      | busy tutor                                   | view upcoming lessons for a certain day                 | plan, prepare and organise lesson materials in advance                 |
+| `* * *`  | tutor                                        | add a new lesson                                        | view lesson details                                                    |
+| `* *`    | forgetful tutor                              | be prevented from adding lessons of conflicting timings | avoid accidentally holding two lessons at the same time                |
+| `* *`    | tutor                                        | see students' bill for the month                        | track each student's bill                                              |
+| `*`      | tutor motivated to see students improve      | add a tag for a student before their lesson             | track lesson content for the student                                   |
+| `*`      | tutor motivated to see students improve      | edit a student's tag after a lesson                     | check student's progress                                               |
+| `*`      | tutor who teaches multiple subjects          | filter students by subject                              | prepare resources and reuse lesson materials for similar lessons       |
+| `*`      | tutor who teaches multiple subjects          | organise students by subject                            | better plan lesson materials and lesson outlines                       |
 
 ### Use cases
 
@@ -332,18 +325,21 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 ## **Use Case List**
 
 1. [UC-AddStudent](#uc-addstudent)
-2. **Edit a Student** (placeholder for future UC)
-3. [UC-AddClass](#uc-addclass)
+2. [UC-EditStudent](#uc-editstudent)
+3. [UC-AddLesson](#uc-addlesson)
 4. [UC-Pay](#uc-pay)
-5. **Find a Student** (placeholder for future UC)
+5. [UC-FindStudent](#uc-findstudent)
 6. [UC-DeleteStudent](#uc-deletestudent)
-7. [UC-DeleteClass](#uc-deleteclass)
-8. [UC-ListPaid](#uc-listpaid)
-9. [UC-ListUnpaid](#uc-listunpaid)
-10. [UC-ListOverdue](#uc-listoverdue)
-11. [UC-AddAndBillStudent](#uc-addandbillstudent)
-12. [UC-QuitStudent](#uc-quitstudent)
-13. [UC-SeeSummaryForMonth](#uc-seesummaryformonth)
+7. [UC-DeleteLesson](#uc-deletelesson)
+8. [UC-EditLesson](#uc-editlesson)
+9. [UC-ListPaid](#uc-listpaid)
+10. [UC-ListUnpaid](#uc-listunpaid)
+11. [UC-ListOverdue](#uc-listoverdue)
+12. [UC-ViewLessons](#uc-viewlessons)
+13. [UC-AddAndBillStudent](#uc-addandbillstudent)
+14. [UC-QuitStudent](#uc-quitstudent)
+15. [UC-SeeSummaryForMonth](#uc-seesummaryformonth)
+16. [UC-SeeNewMonthPayments](#uc-seenewmonthpayments)
 
 ---
 
@@ -357,7 +353,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 1. Tutor chooses to add a student.
 2. Tutor enters all details in order.
 3. TSMS validates the details:
-    - Name, address, contact number, and parent fields are non-blank.
+    - Name, address, contact number, and email fields are non-blank.
     - Contact number must contain only numerical digits.
 4. TSMS creates the student and displays a message confirming successful creation.
    **Use case ends.**
@@ -375,23 +371,60 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ---
 
-## **UC-AddClass**
+## **UC-EditStudent**
 
 **System:** Tuiniverse Student Management System (TSMS)
-**Use case:** UC-AddClass
+**Use case:** UC-EditStudent
+**Actor:** Tutor
+
+### **Preconditions**
+- There is an existing student with the same details.
+
+### **MSS**
+1. Tutor chooses to edit a student detail (eg address, phone number, tag).
+2. Tutor enters the student index followed by the amended detail.
+3. TSMS validates the details:
+    - Student current exists.
+    - Contact number must contain only numerical digits.
+4. TSMS edits the student detail and displays a message confirming successful edition.
+   **Use case ends.**
+
+### **Extensions**
+- **3a.** TSMS detects an error in a field.
+    - **3a1.** TSMS returns an error message.
+    - **3a2.** TSMS clears user input.
+      **Use case ends.**
+
+- **3b.** TSMS detects unknown command markers.
+    - **3b1.** TSMS returns an error message.
+    - **3b2.** TSMS clears user input.
+      **Use case ends.**
+
+- **3c.** TSMS cannot find a student with that index.
+    - **2a1.** TSMS returns an error message.
+    - **2a2.** TSMS clears user input.
+      Steps **2a1–2a2** repeat until valid input is entered.
+      **Use case ends.**
+
+---
+
+## **UC-AddLesson**
+
+**System:** Tuiniverse Student Management System (TSMS)
+**Use case:** UC-AddLesson
 **Actor:** Tutor
 
 ### **MSS**
-1. User adds a class using the command.
+1. User adds a lesson using the command.
 2. TSMS checks that the student index exists.
-3. TSMS validates the class details:
+3. TSMS validates the lesson details:
     - Subject matches existing subjects.
     - Level matches existing levels.
     - Day is a valid day.
     - Time is valid.
     - Hourly rate is a number.
 4. TSMS checks for clashes in the timetable.
-5. TSMS creates and saves the class, linking it to the student.
+5. TSMS creates and saves the lesson, linking it to the student.
    **Use case ends.**
 
 ### **Extensions**
@@ -425,10 +458,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 - Student shows up in list of paid students.
 
 ### **MSS**
-1. Tutor chooses a student who has paid.
+1. Tutor chooses a student to mark as paid.
 2. TSMS validates the student index.
 3. TSMS verifies that the student has outstanding payment.
 4. TSMS updates the student’s payment status to *Paid*.
+5. TSMS updates the amount unpaid under student to `$0.00`.
+6. TSMS decreases the amount unpaid in the amount panel.
    **Use case ends.**
 
 ### **Extensions**
@@ -445,7 +480,28 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
       **Use case ends.**
 
 - **3a.** Student has no outstanding payment.
-    - **3a1.** TSMS returns an error message.
+    - **3a1.** TSMS returns an error message stating the student has paid.
+      **Use case ends.**
+
+---
+
+## **UC-FindStudent**
+
+**System:** Tuiniverse Student Management System (TSMS)
+**Use case:** UC-FindStudent
+**Actor:** Tutor
+
+### **MSS**
+1. Tutor chooses to find a student.
+2. TSMS checks that the student with the given keyword exists.
+3. TSMS lists the students with names matching the keywords.
+   **Use case ends.**
+
+### **Extensions**
+- **1a.** Tutor does not enter a keyword.
+    - **1a1.** TSMS returns an error message.
+    - **1a2.** TSMS clears user input.
+      Steps **1a1–1a2** repeat until valid input is entered.
       **Use case ends.**
 
 ---
@@ -461,7 +517,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 2. TSMS validates whether the student exists.
 3. TSMS displays a confirmation prompt.
 4. Tutor confirms the deletion.
-5. TSMS deletes the student and all associated data (e.g., classes).
+5. TSMS deletes the student and all associated data (e.g., lessons).
    **Use case ends.**
 
 ### **Extensions**
@@ -484,16 +540,16 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ---
 
-## **UC-DeleteClass**
+## **UC-DeleteLesson**
 
 **System:** Tuiniverse Student Management System (TSMS)
-**Use case:** UC-DeleteClass
+**Use case:** UC-DeleteLesson
 **Actor:** Tutor
 
 ### **MSS**
-1. User deletes a class with the command.
+1. Tutor deletes a lesson with the command.
 2. TSMS checks that the student index exists.
-3. TSMS removes the class from the timetable and unlinks it from the student.
+3. TSMS removes the lesson from the timetable and unlinks it from the student.
    **Use case ends.**
 
 ### **Extensions**
@@ -507,6 +563,43 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     - **2a1.** TSMS returns an error message.
     - **2a2.** TSMS clears user input.
       Steps **2a1–2a2** repeat until valid input is entered.
+      **Use case ends.**
+
+---
+
+## **UC-EditLesson**
+
+**System:** Tuiniverse Student Management System (TSMS)
+**Use case:** UC-EditLesson
+**Actor:** Tutor
+
+### **MSS**
+1. Tutor edits a lesson with the command.
+2. TSMS checks that the student index exists.
+3. TSMS edits the lesson from the timetable.
+   **Use case ends.**
+
+### **Extensions**
+- **1a.** Tutor omits a field.
+    - **1a1.** TSMS returns an error message.
+    - **1a2.** TSMS clears user input.
+      Steps **1a1–1a2** repeat until valid input is entered.
+      **Use case ends.**
+
+- **1b.** Tutor edits lesson time with a clash.
+    - **1b1.** TSMS returns an error message.
+      Steps **1b1–1b2** repeat until valid input is entered.
+      **Use case ends.**
+
+- **2a.** TSMS cannot find a student with that index.
+    - **2a1.** TSMS returns an error message.
+    - **2a2.** TSMS clears user input.
+      Steps **2a1–2a2** repeat until valid input is entered.
+      **Use case ends.**
+
+- **3a.** Tutor edits rate of lesson.
+    - **3a1.** TSMS recalculates amount unpaid for student.
+    - **3a2.** TSMS recalculates amount unpaid for all students.
       **Use case ends.**
 
 ---
@@ -580,23 +673,51 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ---
 
+## **UC-ViewLessons**
+
+**System:** Tuiniverse Student Management System (TSMS)
+**Use case:** UC-ViewLessons
+**Actor:** Tutor
+
+**Guarantees:**
+- Lists lessons belonging to a certain student.
+
+### **MSS**
+1. Tutor chooses to list lessons belonging to a student.
+2. TSMS validates the student index.
+3. TSMS retrieves all lessons that belong to the student.
+   **Use case ends.**
+
+### **Extensions**
+- **2a.** TSMS cannot find a student with that index.
+    - **2a1.** TSMS returns an error message.
+    - **2a2.** TSMS clears user input.
+      Steps **2a1–2a2** repeat until valid input is entered.
+      **Use case ends.**
+  
+- **3a.** The student has no lessons.
+    - **3a1.** TSMS displays a message in the console.
+      **Use case ends.**
+
+---
+
 ## **UC-AddAndBillStudent**
 
 **System:** Tuiniverse Student Management System (TSMS)
 **Use case:** UC-AddAndBillStudent
-**Actor:** Tutor, Student, Parent
+**Actor:** Tutor, Student
 
 ### **Preconditions**
 - No existing student with the same details.
-- No class schedule clashes.
+- No lesson schedule clashes.
 
 ### **MSS**
 1. Tutor takes in a new student.
-2. Student confirms class details with the tutor.
-3. Parent pays the student’s fees for the month.
+2. Student confirms lesson details with the tutor.
+3. Student pays their fees for the month.
 4. Tutor <ins>adds a student (UC-AddStudent)</ins>.
 5. Tutor <ins>adds a parent (UC-AddParent)</ins>.
-6. Tutor <ins>adds a class for the student (UC-AddClass)</ins>.
+6. Tutor <ins>adds a lesson for the student (UC-AddLesson)</ins>.
 7. Tutor <ins>marks payment received (UC-Pay)</ins>.
    **Use case ends.**
 
@@ -609,10 +730,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Actor:** Tutor, Student
 
 ### **Precondition**
-- Student currently has classes with the tutor.
+- Student currently has lessons with the tutor.
+
+**Guarantees:**
+- Lists lessons belonging to a certain student.
 
 ### **MSS**
-1. Student terminates classes with the tutor.
+1. Student terminates lessons with the tutor.
 2. Tutor <ins>deletes the student (UC-DeleteStudent)</ins>.
    **Use case ends.**
 
@@ -631,6 +755,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Use case:** UC-SeeSummaryForMonth
 **Actor:** Tutor
 
+### **Precondition**
+- Student currently has lessons with the tutor.
+
 ### **MSS**
 1. Tutor <ins>views list of paid students (UC-ListPaid)</ins>.
 2. Tutor <ins>views list of unpaid students (UC-ListUnpaid)</ins>.
@@ -639,9 +766,34 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ---
 
+## **UC-SeeNewMonthPayments**
+
+**System:** Tuiniverse Student Management System (TSMS)
+**Use case:** UC-SeeNewMonthPayments
+**Actor:** Tutor, Student
+
+### **Precondition**
+- TSMS enter a new month.
+
+**Guarantees:**
+- All students with lessons becomes **Unpaid**.
+- Total earnings and total unpaid are recalculated
+
+### **MSS**
+1. TSMS enters a new month
+2. TSMS adds a new payment corresponding to the year and month.
+3. TSMS displays the new amount unpaid and updates to unpaid/overdue status.
+4. TSMS recalculates and displays the new total earned for month and total unpaid.
+5. Tutor <ins>views list of unpaid students (UC-ListUnpaid)</ins>.
+6. Tutor <ins>views list of overdue students (UC-ListOverdue)</ins>.
+7. Tutor <ins>updates students who have paid for the current month (UC-Pay)</ins>.
+   **Use case ends.**
+
+---
+
 ### Non-Functional Requirements
 
-1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
+1. Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
 2. The app should be able to accomodate up to 1000 tuition teachers concurrently without any performance compromises
 3. A tutor with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
 4. User actions should take less than 2 seconds
@@ -655,15 +807,15 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
 * **GUI**: Graphical User Interface
 * **CLI**: Command Line Interface
-* **Person**: Student or parent
+* **Student**: A person studying in secondary school taking private one-on-one lessons with a tutor
 * **Payment Status**:
   * Paid - The student has paid within the month
-  * Unpaid - Payment has been requested less than 2 weeks ago but has not been paid
-  * Overdue - Payment has been requested more than 2 weeks ago but has not been paid
-* **Bill**: The payment amount owed by a student
+  * Unpaid - Payment of fees for lessons of the current month has not been paid
+  * Overdue - Payment of fees for lessons of previous months has not been paid
+* **Amount unpaid**: The payment amount owed by a student
 * **Subjects**: Math, English, Physics, Chemistry, Biology, Geography, History, Mother tongue, Social Studies, Literature
-* **Note**: A comment located in a student's information
-* **Schedule**: A timetable for classes containing the time, location, subject of the class and the student taking the class
+* **Tag**: A comment located in a student's information
+* **Schedule**: A timetable for lessons containing the time, location, subject of the lesson and the student taking the lesson
 
 --------------------------------------------------------------------------------------------------------------------
 
