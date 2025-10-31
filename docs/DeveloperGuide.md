@@ -845,14 +845,24 @@ To view the exact changes in lesson, use `view 1` to see the student's lessons i
     * Expected: The application starts with a default data set.
 
 2. Dealing with corrupted data files
-   1. Simulate a corrupted data file:
+   1. Simulate a corrupted addressbook.json data file:
       * Close the application.
       * Navigate to the **data** directory where the application stores its data files.
       * Open the data file **addressbook.json** with a text editor.
       * Introduce an invalid JSON syntax (delete a closing brace, or add random text).
       * save the file.
    2. Re-launch the application.
-   * Expected: The application detects the corrupted data file and displays an error message in the terminal. It will then start with an empty data set. 
+   * Expected: The application detects the corrupted data file and displays an error message in the terminal. It will then start with an empty data set.
+
+3. Editing preferences.json (changing `lastOpened`)
+   1. Simulate a month elapsing:
+      * Close the application.
+      * Navigate the root directory where the application store the `preferences.json`
+      * Find the `lastOpened` field and set it to a valid `YearMonth`
+          * Example: `"lastOpened": "2025-9"`
+   2. Save the file and relaunch the application.
+   * Expected: The application reads the updated `lastOpened` value on startup and updates it to current `YearMonth`, simultaneously starting the time-based features such as the monthly rollover logic for payments.
+
 
 --------------------------------------------------------------------------------------------------------------------
 
