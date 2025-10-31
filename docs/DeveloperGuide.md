@@ -952,4 +952,15 @@ Currently payCommand assumes student has paid his due fees all at once. In a fut
 ### 7. Attendance list
 Current implementation assumes that student attends all the lessons in the month, not accounting for public holidays and instances where student is absent. An attendance list where tutor can mark student's attendance will help solve the problem
 
+### 8. Today's Schedule Not Showing Student Name
+Currently, the lesson list panel displays the day’s lesson schedule but does not 
+indicate which student each lesson is associated with. We plan to enhance this feature 
+in the future by including the student’s name alongside each lesson, allowing users to 
+easily identify which students they will be teaching for the day.
 
+### 9. Add, Edit, and Delete Lesson UI
+At present, when users add, edit, or delete a lesson, only a confirmation message 
+appears in the message box to indicate that the command has been successfully executed.
+In the future, we plan to improve the user experience by automatically switching the 
+lesson panel to display the specific student’s lesson list, enabling users to immediately 
+view the updates they have made.
