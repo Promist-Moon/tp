@@ -113,9 +113,10 @@ public class Payment {
 
     @Override
     public String toString() {
-        return String.format("Payment[Month=%s, Amount=%.2f, Paid=%s]",
+        return String.format("Payment[Month=%s, Amount=%.2f, UnpaidAmount=%.2f, Paid=%s]",
                 yearMonth,
                 totalAmount.getAsFloat(),
+                unpaidAmount.getAsFloat(),
                 isPaid() ? "Paid" : "Unpaid");
     }
 
