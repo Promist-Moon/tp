@@ -51,12 +51,12 @@ public class StringUtilTest {
     public void isOutOfBoundsInteger() {
 
         // EP: within boundaries
-        assertTrue(StringUtil.isOutOfBoundsInteger("1"));
-        assertTrue(StringUtil.isOutOfBoundsInteger("999999999"));
+        assertFalse(StringUtil.isOutOfBoundsInteger("1"));
+        assertFalse(StringUtil.isOutOfBoundsInteger("999999999"));
 
-        // EP: numbers with white space
-        assertFalse(StringUtil.isOutOfBoundsInteger("1000000000"));
-        assertFalse(StringUtil.isOutOfBoundsInteger("1000000001"));
+        // EP: numbers out of bounds
+        assertTrue(StringUtil.isOutOfBoundsInteger("1000000000"));
+        assertTrue(StringUtil.isOutOfBoundsInteger("1000000001"));
     }
 
     //---------------- Tests for containsWordIgnoreCase --------------------------------------
