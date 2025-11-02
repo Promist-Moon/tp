@@ -37,9 +37,11 @@ Linux | Follow the Java installation instructions [here](https://se-education.or
 
 2. Download the latest `.jar` file from [here](https://github.com/AY2526S1-CS2103T-W08-2/tp/releases/tag/v1.5.1).
 
-3. Copy the file to the folder you want to use as the _home folder_ for your Tuiniverse app.
+3. Copy the file to the folder you want to use as the _home folder_ for your Tuiniverse app (e.g. `Desktop/Tuiniverse`).
 
-4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar tuiniverse.jar` command to run the application.<br>
+4. Open a command terminal, and type `cd [folder/path]` into the home folder of your jar, eg `cd Desktop/Tuiniverse`.
+
+5. Use the `java -jar tuiniverse.jar` command to run the application.<br>
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
 
