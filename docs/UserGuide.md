@@ -217,7 +217,8 @@ Lists all students that have **paid** their fees for the month.
 ![list command](images/listpaid.png)
 
 ### Listing all unpaid fees: `list.unpaid`
-Lists all students that have **unpaid** fees for the month.
+Lists all students that have **unpaid** fees for the month.<br>
+This means they have at least one lesson
 
 **Format:** `list.unpaid`
 ![list command](images/listunpaid.png)
@@ -410,6 +411,27 @@ want to change `earlyLesson` to `lateLesson`, use the edit command as follows:
 * **Subjects**: Math, English, Physics, Chemistry, Biology, Geography, History, Mother tongue, Social Studies, Literature
 * **Note**: A comment located in a student's information
 * **Schedule**: A timetable for classes containing the time, location, subject of the class and the student taking the class
+
+## Glossary
+
+| **Category**  | **Term**                           | **Definition**                                                                                                                                    |
+|---------------|------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Technical** | **Command Line Interface (CLI)**   | A comment located in a student's information.                                                                                                     |
+|               | **Graphical User Interface (GUI)** | A timetable for classes containing the time, location, subject of the class, and the student taking the class.                                    |
+|               | **Terminal**                       | A timetable for classes containing the time, location, subject of the class, and the student taking the class.                                    |
+| **Actors**    | **Tutor**                          | The user - you, the person managing and teaching students.                                                                                        |
+|               | **Student**                        | A person currently enrolled in secondary school who is being taught one-on-one tuition services by the tutor.                                     |
+| **Payments**  | **Payment Status**                 | Indicates whether a student has paid for their lessons within the month. Each student has a payment status which updates every month.             |
+|               | **Paid**                           | The student has paid for all lessons within the current month.                                                                                    |
+|               | **Unpaid**                         | The student has not paid the full amount for some lessons within the current month.                                                               |
+|               | **Overdue**                        | The student has outstanding unpaid lessons from previous months.                                                                                  |
+|               | **Amount unpaid**                  | The amount the student has yet to pay the tutor for both current and previous months.                                                             |
+|               | **Total earned for month**         | The total amount to be earned for all lessons from all students in one month, when all students have paid their fees.                             |
+|               | **Total unpaid**                   | The total unpaid amounts between all students that the tutor has yet to receive.                                                                  |
+| **Lessons**   | **Lesson**                         | A session between a student and a tutor where the tutor teaches a student a subject.                                                              |
+|               | **Subjects**                       | The topics taught by the tutor (e.g., Math, English, Physics, Chemistry, Biology, Geography, History, Mother Tongue, Social Studies, Literature). |
+|               | **Level**                          | The level of the student in secondary school, depending on age and academic stream (1, 2, 3, 4, 5).                                               |
+|               | **Rate**                           | The hourly rate a student pays the tutor for a lesson.                                                                                            |
 
 --------------------------------------------------------------------------------------------------------------------
 
