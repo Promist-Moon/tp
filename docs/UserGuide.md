@@ -416,9 +416,9 @@ want to change `earlyLesson` to `lateLesson`, use the edit command as follows:
 
 | **Category**  | **Term**                           | **Definition**                                                                                                                                    |
 |---------------|------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Technical** | **Command Line Interface (CLI)**   | A comment located in a student's information.                                                                                                     |
-|               | **Graphical User Interface (GUI)** | A timetable for classes containing the time, location, subject of the class, and the student taking the class.                                    |
-|               | **Terminal**                       | A timetable for classes containing the time, location, subject of the class, and the student taking the class.                                    |
+| **Technical** | **Command Line Interface (CLI)**   | A text-based user interface used to interact with the software program.                                                                           |
+|               | **Graphical User Interface (GUI)** | A visual interface that allows you to view Tuiniverse through graphical elements like icons, buttons, and menus.                                  |
+|               | **Terminal**                       | A command window found in all operating systems where you type instructions for the computer to run.                                              |
 | **Actors**    | **Tutor**                          | The user - you, the person managing and teaching students.                                                                                        |
 |               | **Student**                        | A person currently enrolled in secondary school who is being taught one-on-one tuition services by the tutor.                                     |
 | **Payments**  | **Payment Status**                 | Indicates whether a student has paid for their lessons within the month. Each student has a payment status which updates every month.             |
