@@ -423,6 +423,34 @@ For example, if a student currently has the tags `earlyLesson` and `moreExplanat
 want to change `earlyLesson` to `lateLesson`, use the edit command as follows:
 `edit [INDEX] t/lateLesson t/moreExplanation`
 
+**Q**: Why are non-zero rates allowed in `edit.lesson` and `add.lesson` commands?<br>
+**A**: Some tutors may choose to give their lessons to students for free, for example through volunteering events or as a complimentary service. Tutors who teach their students
+for free thus can still use our app for lesson scheduling and student contact tracking, and payment status will simply remain unchanged.
+
+**Q**: What is the **Total earned for month** and **Total unpaid**? How are they calculated, and how are they changed?<br>
+**A**: Please refer to the [Glossary](#glossary) for formal definitions of the two terms.
+The total earned for month is calculated by calculating the amount earned from each lesson, for each student, for each month.
+The total unpaid is calculated from the amount unpaid by each unpaid student. 
+There will be several cases where these numbers will change:
+1. A tutor adds a lesson<br>
+Both of these totals will change by the amount calculated for each lesson for a month.
+2. A tutor edits a lesson's rate<br>
+Both of these totals will change by the amount calculated for each lesson for a month. If a tutor edits a lesson to a lower rate, the total unpaid will decrease to the maximum between 0 and the difference
+in amount owed for that lesson.
+3. A student makes a payment<br>
+The total unpaid will decrease by the student's amount unpaid. However, the total earned for the month **should not decrease**, as the total earned is calculated by
+the amount the tutor is supposed to get.
+4. Deleting a student/lesson<br>
+Both totals should decrease by the amount calculated for each lesson for a month.
+
+**Q**: A student paid their fees for the month, but they will be leaving my tutoring services next month. What should I do?<br>
+**A**: Please wait until the next month to delete a student, as deleting the student now will cause the Total earned for month to be incorrectly reflected.
+
+**Q**: A student paid their fees partially for only some lessons, but not all. What should I do?<br>
+**A**: As of the current release, Tuiniverse does not accept partial payments. Please refrain from using the `pay` command as all lessons will be marked as paid.
+Alternatively, you can mark the student as paid with `pay`, before deleting the unpaid lesson with the `delete.lesson` command. Then, add the lesson
+again with `add.lesson`
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## Glossary
