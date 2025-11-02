@@ -166,9 +166,9 @@ Adds a lesson to the specific student with these fields:
 * Subject (Refer to [Glossary](#Glossary) for the list of subject)
 * Level (1,2,3, or 4)
 * Day of Lesson (Monday, Tuesday...)
-* Start Time
-* End Time
-* Hourly Rate
+* Start Time (Time Format: HH:MM)
+* End Time (Time Format: HH:MM)
+* Hourly Rate (non-negative value)
 
 <box type="tip" seamless>
 
