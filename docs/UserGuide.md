@@ -35,7 +35,7 @@ Windows| Follow the Java installation instructions [here](https://se-education.o
 Linux | Follow the Java installation instructions [here](https://se-education.org/guides/tutorials/javaInstallationLinux.html)
 
 
-2. Download the latest `.jar` file from [here](https://github.com/AY2526S1-CS2103T-W08-2/tp/releases/tag/v1.4).
+2. Download the latest `.jar` file from [here](https://github.com/AY2526S1-CS2103T-W08-2/tp/releases/tag/v1.5.1).
 
 3. Copy the file to the folder you want to use as the _home folder_ for your Tuiniverse app.
 
@@ -139,10 +139,10 @@ Shows a message explaining how to access the help page.
 
 Adds a student to the address book with these fields:
 * Name
-* Phone
+* Phone (3 to 8 numerical digits)
 * Email
 * Address
-* Tag(s)
+* Tag(s) (alphanumerical characters - tags should not have spaces)
 
 **Format:** `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
 
@@ -164,10 +164,10 @@ Adds a student to the address book with these fields:
 Adds a lesson to the specific student with these fields:
 * Student Index
 * Subject (Refer to [Glossary](#Glossary) for the list of subject)
-* Level (1,2,3, or 4)
+* Level (1, 2, 3, 4, or 5)
 * Day of Lesson (Monday, Tuesday...)
-* Start Time (Time Format: HH:MM)
-* End Time (Time Format: HH:MM)
+* Start Time (Time Format: HH:MM, 24h format)
+* End Time (Time Format: HH:MM, 24h format)
 * Hourly Rate (non-negative value)
 
 <box type="tip" seamless>
