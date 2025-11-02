@@ -273,6 +273,13 @@ Edits an existing student in the contact book.
 * You can remove all the student’s tags by typing `t/` without
   specifying any tags after it.
 
+<box type="info" seamless>
+
+**Note:**
+Constraints for editing a student are the same as in [Add student](#adding-a-student-add)
+
+</box>
+
 **Examples:**
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st student to be `91234567` and `johndoe@example.com` respectively.
 *  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd student to be `Betsy Crower` and clears all existing tags.
@@ -297,6 +304,13 @@ Trying to edit a lesson before viewing the student's lesson (via `view` command)
 * The index refers to the index number shown in the displayed student list & lesson list respectively. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
+
+<box type="info" seamless>
+
+**Note:**
+Constraints for student are the same as in [Add lesson](#adding-a-lesson-addlesson)
+
+</box>
 
 **Examples:**
 *  `edit.lesson i/1 c/2 d/Monday r/44` Edits the 2nd lesson of the 1st student to be scheduled on every `Monday` at a rate of `$44/hr`.
