@@ -423,7 +423,7 @@ For example, if a student currently has the tags `earlyLesson` and `moreExplanat
 want to change `earlyLesson` to `lateLesson`, use the edit command as follows:
 `edit [INDEX] t/lateLesson t/moreExplanation`
 
-**Q**: Why are non-zero rates allowed in `edit.lesson` and `add.lesson` commands?<br>
+**Q**: Why are zero rates allowed in `edit.lesson` and `add.lesson` commands?<br>
 **A**: Some tutors may choose to give their lessons to students for free, for example through volunteering events or as a complimentary service. Tutors who teach their students
 for free thus can still use our app for lesson scheduling and student contact tracking, and payment status will simply remain unchanged.
 
