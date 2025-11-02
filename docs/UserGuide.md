@@ -45,7 +45,7 @@ Linux | Follow the Java installation instructions [here](https://se-education.or
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
 
-## Familarisation
+## Familiarisation
 To get adjusted to using Tuiniverse, we have created a short practice to keep users up to track on how to use the app.
 
 Type some commands into the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
@@ -139,12 +139,15 @@ Shows a message explaining how to access the help page.
 
 ### Adding a student: `add`
 
-Adds a student to the address book with these fields:
-* Name
-* Phone (3 to 8 numerical digits)
-* Email
-* Address
-* Tag(s) (alphanumerical characters - tags should not have spaces)
+Adds a student to the address book.
+
+| **Field** | **Prefix** | **Description / Constraints**                                      |
+|------------|-------------|--------------------------------------------------------------------|
+| **Name** | `n/` | The student’s full name.                                           |
+| **Phone** | `p/` | A Singaporean phone number containing 3–8 numerical digits.        |
+| **Email** | `e/` | Must be a valid email format (e.g., `example@email.com`).          |
+| **Address** | `a/` | Can include spaces and punctuation.                                |
+| **Tag(s)** | `t/` | Alphanumerical values only, with no spaces. Multiple tags allowed. |
 
 **Format:** `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
 
@@ -163,14 +166,17 @@ Adds a student to the address book with these fields:
 
 ### Adding a lesson: `add.lesson`
 
-Adds a lesson to the specific student with these fields:
-* Student Index
-* Subject (Refer to [Glossary](#Glossary) for the list of subject)
-* Level (1, 2, 3, 4, or 5)
-* Day of Lesson (Monday, Tuesday...)
-* Start Time (Time Format: HH:MM, 24h format)
-* End Time (Time Format: HH:MM, 24h format)
-* Hourly Rate (non-negative value)
+Adds a lesson to the specific student.
+
+| **Field** | **Prefix** | **Constraints**                                                                     |
+|------------|---------|-------------------------------------------------------------------------------------|
+| **Student Index** | `i/`    | The index of the student in the displayed list.                                     |
+| **Subject** | `s/`    | Subject taught (Refer to [Glossary](#glossary) for the list of available subjects). |
+| **Level** | `l/`    | An integer between 1–5 (Refer to [Glossary](#glossary) for definition).             |
+| **Day of Lesson** | `d/`    | Day of the week (e.g., `Monday`, `Tuesday`, ...).                                   |
+| **Start Time** | `st/`   | Time in 24-hour format — `HH:MM`.                                                   |
+| **End Time** | `et/`   | Time in 24-hour format — `HH:MM`.                                                   |
+| **Hourly Rate** | `r/`    | Must be a non-negative numerical value (Refer to [Glossary](#glossary) for definition).                                            |
 
 <box type="tip" seamless>
 
@@ -189,7 +195,7 @@ For example, if October 2025 has five Thursdays and you schedule a Thursday less
 
 ### List all lessons of a student: `view`
 
-Lists all the lessons taken by the specfied student.
+Lists all the lessons taken by the specified student.
 
 **Format:** `view INDEX`
 ![view command](images/viewCommand.png)
@@ -213,18 +219,23 @@ Shows a list of all students in the contact book.
 ### Listing all payments: `list.paid`
 Lists all students that have **paid** their fees for the month.
 
+Refer to [Glossary](#glossary) for the definition of **paid**.
+
 **Format:** `list.paid`
 ![list command](images/listpaid.png)
 
 ### Listing all unpaid fees: `list.unpaid`
 Lists all students that have **unpaid** fees for the month.<br>
-This means they have at least one lesson
+
+Refer to [Glossary](#glossary) for the definition of **unpaid**.
 
 **Format:** `list.unpaid`
 ![list command](images/listunpaid.png)
 
 ### Listing all overdue fees: `list.overdue`
 Lists all students that have **overdue** fees from previous months.
+
+Refer to [Glossary](#glossary) for the definition of **overdue**.
 
 **Format:** `list.overdue`
 ![list command](images/listoverdue.png)
@@ -402,18 +413,6 @@ want to change `earlyLesson` to `lateLesson`, use the edit command as follows:
 
 ## Glossary
 
-* Student: A person who's being taught by the tutor (you).
-* **Payment Status**: Each student has a payment status which updates every month.
-  * Paid - The student has paid within the month
-  * Unpaid - The student has not paid within the month
-  * Overdue - The student has outstanding bills from previous months
-* **Bill**: The payment amount owed by a student
-* **Subjects**: Math, English, Physics, Chemistry, Biology, Geography, History, Mother tongue, Social Studies, Literature
-* **Note**: A comment located in a student's information
-* **Schedule**: A timetable for classes containing the time, location, subject of the class and the student taking the class
-
-## Glossary
-
 | **Category**  | **Term**                           | **Definition**                                                                                                                                    |
 |---------------|------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------|
 | **Technical** | **Command Line Interface (CLI)**   | A text-based user interface used to interact with the software program.                                                                           |
@@ -429,6 +428,7 @@ want to change `earlyLesson` to `lateLesson`, use the edit command as follows:
 |               | **Total earned for month**         | The total amount to be earned for all lessons from all students in one month, when all students have paid their fees.                             |
 |               | **Total unpaid**                   | The total unpaid amounts between all students that the tutor has yet to receive.                                                                  |
 | **Lessons**   | **Lesson**                         | A session between a student and a tutor where the tutor teaches a student a subject.                                                              |
+|               | **Schedule**                       | A timetable for classes containing the time, location, subject of the class and the student taking the class. |
 |               | **Subjects**                       | The topics taught by the tutor (e.g., Math, English, Physics, Chemistry, Biology, Geography, History, Mother Tongue, Social Studies, Literature). |
 |               | **Level**                          | The level of the student in secondary school, depending on age and academic stream (1, 2, 3, 4, 5).                                               |
 |               | **Rate**                           | The hourly rate a student pays the tutor for a lesson.                                                                                            |
