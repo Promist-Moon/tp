@@ -7,7 +7,7 @@
 
 ## Introduction
 As a **private secondary school tutor** in Singapore, it can be hard to **manage student contacts**,
-**track payments** and **schedule lessons** with such a big group of people. Unless you are willing to fork out high prices for premium services meant
+**track payments** and **schedule one-on-one lessons** for such a big group of people. Unless you are willing to fork out high prices for premium services meant
 for larger tuition centre businesses, it means a lot of **unnecessary hassle** and much **room for error**.
 
 Tuiniverse is the solution for all things tuition!
