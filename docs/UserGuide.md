@@ -12,7 +12,7 @@ for larger tuition centre businesses, it means a lot of **unnecessary hassle** a
 
 Tuiniverse is the solution for all things tuition!
 Tuiniverse is a **desktop app** which <u>expedites</u>:
-* Contact storing and upkeep
+* Student contact storing and upkeep
 * Payment tracking
 * Lesson scheduling
 
@@ -49,13 +49,13 @@ To get adjusted to using Tuiniverse, we have created a short practice to keep us
 Type some commands into the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
 
 Some example commands you can try:
-* `list` : Lists all contacts.
+* `list` : Lists all student contacts.
 
-* `add n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 t/friends t/owesMoney` : Adds a contact named `John Doe` to the contact list.
+* `add n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 t/friends t/owesMoney` : Adds a student named `John Doe` to the student list.
 
-* `delete 3` : Deletes the 3rd contact shown in the current list.
+* `delete 3` : Deletes the 3rd student shown in the current list.
 
-* `clear` : Deletes all contacts.
+* `clear` : Deletes all students and lessons.
 
 * `exit` : Exits the app.
 
