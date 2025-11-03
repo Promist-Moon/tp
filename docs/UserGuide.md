@@ -141,13 +141,13 @@ Shows a message explaining how to access the help page.
 
 Adds a student to the address book.
 
-| **Field** | **Prefix** | **Description / Constraints**                                      |
-|------------|-------------|--------------------------------------------------------------------|
-| **Name** | `n/` | The student’s full name.                                           |
-| **Phone** | `p/` | A Singaporean phone number containing 3–8 numerical digits.        |
-| **Email** | `e/` | Must be a valid email format (e.g., `example@email.com`).          |
-| **Address** | `a/` | Can include spaces and punctuation.                                |
-| **Tag(s)** | `t/` | Alphanumerical values only, with no spaces. Multiple tags allowed. |
+| **Field** | **Prefix** | **Description / Constraints**                                               |
+|------------|-------------|-----------------------------------------------------------------------------|
+| **Name** | `n/` | The student’s full name. Note that special characters are not allowed. (e.g. `/`,`,`,`*`, etc.) |
+| **Phone** | `p/` | A Singaporean phone number containing 3–8 numerical digits.                 |
+| **Email** | `e/` | Must be a valid email format (e.g., `example@email.com`).                   |
+| **Address** | `a/` | Can include spaces and punctuation.                                         |
+| **Tag(s)** | `t/` | Alphanumerical values only, with no spaces. Multiple tags allowed.          |
 
 **Format:** `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
 
@@ -186,7 +186,9 @@ Adds a lesson to the specific student.
 **Notes**:
 When you add a lesson in Tuiniverse, it’s assumed to run every week from the first to the last week of the month.
 
-For example, if October 2025 has five Thursdays and you schedule a Thursday lesson, it will be set for all five Thursdays. The total payment will be calculated based on this.
+For example, if October 2025 has five Thursdays and you schedule a Thursday lesson, it will be set for all five Thursdays. The total amount for the month will be calculated based on this.
+
+After adding the lesson, the total amount earned for the month would refresh to include this lesson. 
 </box>
 
 **Format:** `add.lesson i/STUDENT_INDEX s/SUBJECT l/LEVEL d/DAY st/START_TIME et/END_TIME r/HOURLY RATE`
@@ -283,6 +285,13 @@ Constraints for editing a student are the same as in [Add student](#adding-a-stu
 
 </box>
 
+<box type="warning" seamless>
+
+**Caution:**
+To edit only one out of many tags of a specific student, you would need to specify 
+both the edited tag and the tags you want to keep. Refers to the [FAQ](#faq) for an example.
+</box>
+
 **Examples:**
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st student to be `91234567` and `johndoe@example.com` respectively.
 *  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd student to be `Betsy Crower` and clears all existing tags.
@@ -311,7 +320,7 @@ Trying to edit a lesson before viewing the student's lesson (via `view` command)
 <box type="info" seamless>
 
 **Note:**
-Constraints for student are the same as in [Add lesson](#adding-a-lesson-addlesson)
+Constraints for student are the same as in [Add lesson](#adding-a-lesson-addlesson).
 
 </box>
 
