@@ -202,6 +202,8 @@ public class MainWindow extends UiPart<Stage> {
                 lessonListPanel.updateLessonList(logic.getTodayLessonList());
             }
 
+            personListPanel.refresh();
+
             logger.info("Result: " + commandResult.getFeedbackToUser());
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
 
