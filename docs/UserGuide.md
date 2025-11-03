@@ -53,7 +53,7 @@ Type some commands into the command box and press Enter to execute it. e.g. typi
 Some example commands you can try:
 * `list` : Lists all student contacts.
 
-* `add n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 t/friends t/owesMoney` : Adds a student named `John Doe` to the student list.
+* `add n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 t/friends t/owesMoney` : Adds a student named `John Doe` to the contact list.
 
 * `delete 3` : Deletes the 3rd student shown in the current list.
 
@@ -201,7 +201,7 @@ Lists all the lessons taken by the specified student.
 ![view command](images/viewCommand.png)
 
 * List the lessons of the student at the specified `INDEX`.
-* The index refers to the index number shown in the displayed student list.
+* The index refers to the index number shown in the displayed contact list.
 * The index **must be a positive integer** 1, 2, 3, …​
 
 **Examples:**
@@ -266,7 +266,7 @@ Edits an existing student in the contact book.
 
 **Format:** `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
 
-* Edits the student at the specified `INDEX`. The index refers to the index number shown in the displayed student list. The index **must be a positive integer** 1, 2, 3, …​
+* Edits the student at the specified `INDEX`. The index refers to the index number shown in the displayed contact list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 * When editing tags, the existing tags of the student will be removed i.e adding of tags is not cumulative.
@@ -301,7 +301,7 @@ Trying to edit a lesson before viewing the student's lesson (via `view` command)
 </box>
 
 * Edits the lesson at the specified `LESSON_INDEX` of the student at`STUDENT_INDEX`.
-* The index refers to the index number shown in the displayed student list & lesson list respectively. The index **must be a positive integer** 1, 2, 3, …​
+* The index refers to the index number shown in the displayed contact list & lesson list respectively. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 
@@ -322,7 +322,7 @@ Tracks that a student has made payment for that month.
 
 **Format:** `pay INDEX`
 
-* Marks payment for the student at the specified `INDEX`. The index refers to the index number shown in the displayed student list. The index **must be a positive integer** 1, 2, 3, …​
+* Marks payment for the student at the specified `INDEX`. The index refers to the index number shown in the displayed contact list. The index **must be a positive integer** 1, 2, 3, …​
 * When you mark an **unpaid** or **overdue** student as paid, their status becomes **paid**.
 * A **paid** student cannot make payment until the next month.
 
@@ -339,7 +339,7 @@ After delete:
 ![after delete command](images/deleteAfter.png)
 
 * Deletes the student at the specified `INDEX`.
-* The index refers to the index number shown in the displayed student list.
+* The index refers to the index number shown in the displayed contact list.
 * The index **must be a positive integer** 1, 2, 3, …​
 * Deleting a student also delete away their related class and payment record for the month.
 
