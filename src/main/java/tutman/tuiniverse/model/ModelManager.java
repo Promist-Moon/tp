@@ -113,6 +113,9 @@ public class ModelManager implements Model {
 
     @Override
     public void deletePerson(Student target) {
+        for (Lesson lesson : target.getLessonList().getLessons()) {
+            deleteLesson(target, lesson);
+        }
         addressBook.removePerson(target);
         recomputeTotalEarnings();
         recomputeTotalUnpaid();

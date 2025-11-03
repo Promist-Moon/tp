@@ -21,6 +21,7 @@ import org.junit.jupiter.api.Test;
 import javafx.beans.value.ChangeListener;
 import tutman.tuiniverse.commons.core.GuiSettings;
 import tutman.tuiniverse.model.lesson.Lesson;
+import tutman.tuiniverse.model.lesson.LessonList;
 import tutman.tuiniverse.model.student.NameContainsKeywordsPredicate;
 import tutman.tuiniverse.model.student.PaymentStatus;
 import tutman.tuiniverse.model.student.Student;
@@ -292,6 +293,44 @@ public class ModelManagerTest {
         modelManager.deletePerson(s);
         assertEquals(0f, modelManager.totalEarningsProperty().get(), 1e-6);
         assertEquals(0f, modelManager.totalUnpaidProperty().get(), 1e-6);
+    }
+
+    @Test
+    public void deletePerson_callsDeleteLessonForEachLesson() {
+        // Spy ModelManager to count deleteLesson invocations
+        class SpyModelManager extends ModelManager {
+            private int deleteLessonCalls = 0;
+
+            @Override
+            public void deleteLesson(Student student, Lesson lesson) {
+                deleteLessonCalls++;
+            }
+        }
+
+        SpyModelManager spy = new SpyModelManager();
+
+        // Student with 3 lessons
+        Student s = new StudentBuilder().withName("Alice").withLessonList(new LessonList()).build();
+        Lesson l1 = new LessonBuilder().withSubject("Math").withDay("1")
+                .withLessonTime("10:00", "11:00").build();
+        Lesson l2 = new LessonBuilder().withSubject("English").withDay("2")
+                .withLessonTime("12:00", "13:00").build();
+        Lesson l3 = new LessonBuilder().withSubject("Physics").withDay("3")
+                .withLessonTime("14:00", "15:00").build();
+
+        // The model must actually contain the student
+        spy.addPerson(s);
+
+        // Add lessons through the model so AddressBook/Student/Global lists are in sync
+        spy.addLesson(s, l1);
+        spy.addLesson(s, l2);
+        spy.addLesson(s, l3);
+
+        // Act
+        spy.deletePerson(s);
+
+        // Assert: deleteLesson called once per lesson (3 test lessons)
+        assertEquals(3, spy.deleteLessonCalls);
     }
 
     @Test
