@@ -174,11 +174,8 @@ This section describes some noteworthy details on how certain features are imple
 ### \[Implemented\] Payment feature
 
 The Payment feature allows tutors to automatically track and manage tuition fees for each student.
-Each student has a PaymentList containing monthly Payment objects, which record the total and unpaid amounts for that month.
+Each student has a PaymentList containing monthly Payment objects, which record the total and unpaid amounts for that month. Refer to [Model](#model-component) component diagram for payment details.
 Whenever lessons are added, edited, or deleted, Tuiniverse automatically recalculates the corresponding monthly payment to keep all financial records consistent.
-
-To fully visualise `PaymentList`, the `Student` holds a `PaymentList`. The `PaymentList` is associated with a `PaymentStatus` enum. This allows for quick `PaymentStatus` checks for a `Student` object.
-<puml src="diagrams/PaymentClassDiagram.puml" width="250" />
 
 1. **`pay` command**
    <puml src="diagrams/PaySequenceDiagram.puml" width="250" />
