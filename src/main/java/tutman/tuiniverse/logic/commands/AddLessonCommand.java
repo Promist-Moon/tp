@@ -34,7 +34,7 @@ public class AddLessonCommand extends Command {
             + PREFIX_DAY + "DAY "
             + PREFIX_START_TIME + "START "
             + PREFIX_END_TIME + "END "
-            + PREFIX_RATE + "RATE "
+            + PREFIX_RATE + "RATE \n"
             + "(LEVEL is an integer from 1-5.)\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_STUDENT_INDEX + "1 "
@@ -59,9 +59,6 @@ public class AddLessonCommand extends Command {
         this.targetIndex = index;
         toAdd = lesson;
     }
-
-    // student and address fields should be set here...
-    // needs to check if person at index is a student
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
