@@ -210,24 +210,6 @@ This ensures tutors always start each month with up-to-date payment records with
 
 { to be updated }
 
-### \[Implemented\] Time clash feature
-
-The Time Clash feature prevents tutors from scheduling overlapping lessons.
-It checks for conflicts between lessons based on day and time intervals, ensuring that tutors can maintain an organized, non-overlapping schedule.
-
-#### Proposed Implementation
-
-* Implemented in the Lesson#hasTimeClash(Lesson otherLesson) method.
-* The method returns true if two lessons occur on the same Day and their LessonTime intervals overlap.
-* Used during AddLessonCommand to validate new lessons before insertion.
-* Also leveraged by the lesson calendar to flag and highlight clashes visually in the UI.
-
-{ to be updated with graph }
-
-#### Design considerations:
-
-{ to be updated }
-
 
 --------------------------------------------------------------------------------------------------------------------
 
