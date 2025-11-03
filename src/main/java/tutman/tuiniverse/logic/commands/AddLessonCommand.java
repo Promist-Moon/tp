@@ -35,6 +35,7 @@ public class AddLessonCommand extends Command {
             + PREFIX_START_TIME + "START "
             + PREFIX_END_TIME + "END "
             + PREFIX_RATE + "RATE "
+            + "(LEVEL is an integer from 1-5.)\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_STUDENT_INDEX + "1 "
             + PREFIX_SUBJECT + "English "
