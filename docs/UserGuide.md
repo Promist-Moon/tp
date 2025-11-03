@@ -153,7 +153,10 @@ Adds a student to the address book.
 
 <box type="tip" seamless>
 
-**Tip:** Tag is optional
+**Note**: Two students cannot have the same name, phone number and email address. <br>This means two students with names that have the same spelling, but are not case-matching (I.e. John Doe and john Doe) are deemed as different students if their phone number and email address are different.
+
+**Tip**: Tags are optional.
+
 </box>
 
 ![add command](images/add.png)

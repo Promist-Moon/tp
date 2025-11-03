@@ -267,7 +267,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* *`    | tutor with many students in the address book | sort students by name                                   | locate a student easily                                                |
 | `* *`    | tutor                                        | see students' payment status                            | track who has and has not paid                                         |
 | `* *`    | tutor                                        | list students who have not made payment                 | track students who have not paid                                       |
-| `* *`    | tutor                                        | view my schedule for today                              | know which locations I will be travelling to today                     |
+| `* *`    | tutor                                        | view my schedule for today                              | know which students I will be teaching today                           |
 | `*`      | busy tutor                                   | view upcoming lessons for a certain day                 | plan, prepare and organise lesson materials in advance                 |
 | `* * *`  | tutor                                        | add a new lesson                                        | view lesson details                                                    |
 | `* *`    | forgetful tutor                              | be prevented from adding lessons of conflicting timings | avoid accidentally holding two lessons at the same time                |
