@@ -168,15 +168,15 @@ Adds a student to the address book.
 
 Adds a lesson to the specific student.
 
-| **Field** | **Prefix** | **Constraints**                                                                     |
-|------------|---------|-------------------------------------------------------------------------------------|
-| **Student Index** | `i/`    | The index of the student in the displayed list.                                     |
-| **Subject** | `s/`    | Subject taught (Refer to [Glossary](#glossary) for the list of available subjects). |
-| **Level** | `l/`    | An integer between 1–5 (Refer to [Glossary](#glossary) for definition).             |
-| **Day of Lesson** | `d/`    | Day of the week (e.g., `Monday`, `Tuesday`, ...).                                   |
-| **Start Time** | `st/`   | Time in 24-hour format — `HH:MM`.                                                   |
-| **End Time** | `et/`   | Time in 24-hour format — `HH:MM`.                                                   |
-| **Hourly Rate** | `r/`    | Must be a non-negative numerical value (Refer to [Glossary](#glossary) for definition).                                            |
+| **Field** | **Prefix** | **Constraints**                                                                         |
+|------------|---------|-----------------------------------------------------------------------------------------|
+| **Student Index** | `i/`    | The index of the student in the displayed list.                                         |
+| **Subject** | `s/`    | Subject taught (Refer to [Glossary](#glossary) for the list of available subjects).     |
+| **Level** | `l/`    | An integer between 1–5 (Refer to [Glossary](#glossary) for definition).                 |
+| **Day of Lesson** | `d/`    | Day of the week (Refer to [Glossary](#glossary) for definition).                        |
+| **Start Time** | `st/`   | Time in 24-hour format — `HH:MM`.                                                       |
+| **End Time** | `et/`   | Time in 24-hour format — `HH:MM`.                                                       |
+| **Hourly Rate** | `r/`    | Must be a non-negative numerical value (Refer to [Glossary](#glossary) for definition). |
 
 <box type="tip" seamless>
 
@@ -471,6 +471,7 @@ again with `add.lesson`
 |               | **Total earned for month**         | The total amount to be earned for all lessons from all students in one month, when all students have paid their fees.                             |
 |               | **Total unpaid**                   | The total unpaid amounts between all students that the tutor has yet to receive.                                                                  |
 | **Lessons**   | **Lesson**                         | A session between a student and a tutor where the tutor teaches a student a subject.                                                              |
+|               | **Day**                            | Day of the week `Monday`, `Tuesday`, `Wednesday`, `Thursday`, `Friday`, `Saturday`, `Sunday`. Case insensitive, but word matching (I.e. mon or tues doesn't work)| 
 |               | **Schedule**                       | A timetable for classes containing the time, location, subject of the class and the student taking the class. |
 |               | **Subjects**                       | The topics taught by the tutor (e.g., Math, English, Physics, Chemistry, Biology, Geography, History, Mother Tongue, Social Studies, Literature). |
 |               | **Level**                          | The level of the student in secondary school, depending on age and academic stream (1, 2, 3, 4, 5).                                               |
