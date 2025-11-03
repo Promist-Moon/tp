@@ -67,12 +67,15 @@ public class UniquePersonList implements Iterable<Student> {
             throw new DuplicatePersonException();
         }
 
+        editedPerson.disableAutoPaymentRefresh();
+
         ArrayList<Lesson> lessons = target.getLessonList().getLessons();
         for (Lesson lesson : lessons) {
             lesson.addStudent(editedPerson);
             editedPerson.getLessonList().addLesson(lesson);
         }
 
+        editedPerson.enableAutoPaymentRefresh();
         internalList.set(index, editedPerson);
     }
 
