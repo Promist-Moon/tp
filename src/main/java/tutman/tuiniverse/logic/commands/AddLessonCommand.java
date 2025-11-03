@@ -17,6 +17,7 @@ import tutman.tuiniverse.logic.Messages;
 import tutman.tuiniverse.logic.commands.exceptions.CommandException;
 import tutman.tuiniverse.model.Model;
 import tutman.tuiniverse.model.lesson.Lesson;
+import tutman.tuiniverse.model.lesson.exceptions.DuplicateLessonException;
 import tutman.tuiniverse.model.student.Student;
 
 /**
@@ -74,11 +75,14 @@ public class AddLessonCommand extends Command {
         if (targetIndex.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
+        try {
+            Student person = lastShownList.get(targetIndex.getZeroBased());
+            model.addLesson(person, toAdd);
 
-        Student person = lastShownList.get(targetIndex.getZeroBased());
-        model.addLesson(person, toAdd);
-
-        return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.formatLesson(toAdd)));
+            return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.formatLesson(toAdd)));
+        } catch (DuplicateLessonException e) {
+            throw new CommandException(MESSAGE_DUPLICATE_LESSON);
+        }
     }
 
     @Override
