@@ -80,7 +80,7 @@ public class PersonTest {
 
         assertTrue(amy.isSamePerson(amy));
         assertFalse(amy.isSamePerson(null));
-        assertTrue(amy.isSamePerson(amyCopyDifferentEmail));
+        assertFalse(amy.isSamePerson(amyCopyDifferentEmail));
         assertFalse(amy.isSamePerson(bob));
     }
 
