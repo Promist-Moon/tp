@@ -105,7 +105,8 @@ public class EditLessonCommand extends Command {
                     lesson -> person.getLessonList().hasLesson(lesson);
             model.updateFilteredLessonList(belongsToStudent);
 
-            return new CommandResult(String.format(MESSAGE_EDIT_LESSON_SUCCESS, Messages.formatLesson(editedLesson)));
+            return new CommandResult(String.format(MESSAGE_EDIT_LESSON_SUCCESS, Messages.formatLesson(editedLesson)),
+                    true, person.getName().toString());
 
         } catch (LessonException e) {
             throw new CommandException(MESSAGE_INVALID_DISPLAYED_LESSON_INDEX);

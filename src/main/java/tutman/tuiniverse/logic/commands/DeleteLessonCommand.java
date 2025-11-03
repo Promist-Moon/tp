@@ -82,7 +82,8 @@ public class DeleteLessonCommand extends Command {
         try {
             Lesson deleteLesson = lls.getLesson(lessonIndex.getOneBased());
             model.deleteLesson(student, deleteLesson);
-            return new CommandResult(String.format(MESSAGE_DELETE_LESSON_SUCCESS, Messages.formatLesson(deleteLesson)));
+            return new CommandResult(String.format(MESSAGE_DELETE_LESSON_SUCCESS, Messages.formatLesson(deleteLesson)),
+                    true, student.getName().toString());
         } catch (LessonException e) {
             throw new CommandException(MESSAGE_INVALID_DISPLAYED_LESSON_INDEX);
         }
