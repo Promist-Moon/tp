@@ -12,7 +12,8 @@ import java.time.format.DateTimeFormatter;
  */
 public class LessonTime implements Comparable<LessonTime> {
 
-    public static final String MESSAGE_CONSTRAINTS = "Time must be given in the format HH:MM, "
+    public static final String MESSAGE_CONSTRAINTS = "Time should be in HH:MM format using 24-hour notation "
+            + "(e.g., st/09:00 et/17:30), "
             + "and the start time should be before the end time";
 
     /** Input time format for parsing user input. */

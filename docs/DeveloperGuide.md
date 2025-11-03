@@ -141,7 +141,7 @@ The `Model` component,
 
 <puml src="diagrams/BetterModelClassDiagram.puml" width="450" />
 
-To fully visualise `PaymentList`, the `Student` holds a `PaymentList`. The `PaymentList` is associated with a `PaymentStatus` enum. This allows for quick `PaymentStatus` checks for a `Student` object.
+To fully visualise `PaymentList`, the `Student` holds a `PaymentList`. The `PaymentList` is associated with a `Status` enum. This allows for quick `Status` checks for a `Student` object.
 <puml src="diagrams/PaymentClassDiagram.puml" width="250" />
 
 In the same vein `Student` holds a `LessonList`, which contains any amount of `Lesson` as shown in the diagram below
@@ -188,7 +188,6 @@ Whenever lessons are added, edited, or deleted, Tuiniverse automatically recalcu
 
 #### Design considerations:
 
-{ to be updated }
 
 ### \[Implemented\] Monthly rollover feature
 
@@ -204,8 +203,9 @@ This ensures tutors always start each month with up-to-date payment records with
 { to be updated with graph }
 
 #### Design considerations:
+This sequence diagram illustrates Tuiniverse’s startup monthly-rollover flow, showing how the application automatically checks if a new month has begun when the user opens the app. Upon launch, MainApp constructs the StartupRolloverHandler (linked with Model and Storage) and calls perform(userPrefs). The handler retrieves the lastOpened month from UserPrefs and triggers a monthly rollover with `compute(lastOpened, now)`, creating new Payment entries for each student while carrying forward any unpaid balances if `lastOpened` and `now` is different. It then updates lastOpened in UserPrefs, synchronises the Model, and saves all changes to Storage, ensuring the app always starts each month with up-to-date payment records.
+<puml src="diagrams/MonthlyRollover.puml" width="800" />
 
-{ to be updated }
 
 ### \[Implemented\] Time clash feature
 
