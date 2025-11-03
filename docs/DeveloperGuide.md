@@ -628,11 +628,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 3. TSMS displays the list of students and their amounts.
    **Use case ends.**
 
-### **Extensions**
-- **2a.** No students have paid for the month.
-    - **2a1.** TSMS displays a message in the console:
-  **Use case ends.**
-
 ---
 
 ## **UC-ListUnpaid**
@@ -651,11 +646,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 3. TSMS displays the list of students and their owed amounts.
    **Use case ends.**
 
-### **Extensions**
-- **2a.** All students have paid.
-    - **2a1.** TSMS displays a message in the console.
-      **Use case ends.**
-
 ---
 
 ## **UC-ListOverdue**
@@ -673,11 +663,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 2. TSMS retrieves all students who have unpaid fees from past months.
 3. TSMS displays the list of overdue students and their owed amounts.
    **Use case ends.**
-
-### **Extensions**
-- **2a.** All students have paid for previous months.
-    - **2a1.** TSMS displays a message in the console.
-      **Use case ends.**
 
 ---
 
