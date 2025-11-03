@@ -308,6 +308,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Use case:** UC-AddStudent
 **Actor:** Tutor
 
+### **Guarantees:**
+- Student appears in the student contact list with payment status **Paid** and amount unpaid **$0.00**.
+
 ### **MSS**
 1. Tutor chooses to add a student.
 2. Tutor enters all details in order.
@@ -337,7 +340,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Actor:** Tutor
 
 ### **Preconditions**
-- There is an existing student with the same details.
+- There is an existing student with the specified index.
+
+### **Guarantees:**
+- Student details change in the student contact list.
 
 ### **MSS**
 1. Tutor chooses to edit a student detail (eg address, phone number, tag).
@@ -373,6 +379,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Use case:** UC-AddLesson
 **Actor:** Tutor
 
+### **Preconditions**
+- There is an existing student with the specified index.
+
+### **Guarantees:**
+- Amount unpaid for the student changes.
+- Student's payment status changes to **Unpaid**.
+
 ### **MSS**
 1. User adds a lesson using the command.
 2. TSMS checks that the student index exists.
@@ -404,6 +417,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     - **4a2.** TSMS clears user input.
       **Use case ends.**
 
+- **5a.** Tutor adds a student for the current day.
+    - **5a1.** Lesson appears in the lesson list.
+      **Use case ends.**
+
 ---
 
 ## **UC-Pay**
@@ -412,9 +429,14 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Use case:** UC-Pay
 **Actor:** Tutor
 
-**Guarantees:**
-- Student's payment status changes.
+### **Preconditions**
+- There is an existing student with the specified index.
+
+### **Guarantees:**
+- Student's payment status changes to **Paid**.
+- Student's amount unpaid changes to `$0.00`.
 - Student shows up in list of paid students.
+- Total unpaid in amount panel will decrease.
 
 ### **MSS**
 1. Tutor chooses a student to mark as paid.
@@ -450,6 +472,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Use case:** UC-FindStudent
 **Actor:** Tutor
 
+### **Guarantees:**
+- Students whose name matching specified keyword shows up in contact list panel.
+
 ### **MSS**
 1. Tutor chooses to find a student.
 2. TSMS checks that the student with the given keyword exists.
@@ -470,6 +495,14 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **System:** Tuiniverse Student Management System (TSMS)
 **Use case:** UC-DeleteStudent
 **Actor:** Tutor
+
+### **Preconditions**
+- There is an existing student with the specified index.
+
+### **Guarantees:**
+- Student no longer appears in contact list panel.
+- Student's lessons get removed from lesson list.
+- Total earned for month and total unpaid will decrease.
 
 ### **MSS**
 1. Tutor chooses to delete a student.
@@ -505,6 +538,14 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Use case:** UC-DeleteLesson
 **Actor:** Tutor
 
+### **Preconditions**
+- There is an existing student with the specified index.
+- There is an existing lesson with the specified index.
+
+### **Guarantees:**
+- Lesson no longer appears in lesson list panel.
+- Total earned for month and total unpaid will decrease.
+
 ### **MSS**
 1. Tutor deletes a lesson with the command.
 2. TSMS checks that the student index exists.
@@ -532,6 +573,15 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Use case:** UC-EditLesson
 **Actor:** Tutor
 
+### **Preconditions**
+- There is an existing student with the specified index.
+- There is an existing lesson with the specified index.
+
+### **Guarantees:**
+- Lesson details change.
+- If rate is edited, student's amount unpaid will change.
+- If rate is edited, total earned for month and total unpaid will change.
+- 
 ### **MSS**
 1. Tutor edits a lesson with the command.
 2. TSMS checks that the student index exists.
@@ -570,8 +620,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Actor:** Tutor
 
 **Guarantees:**
-- Lists students who have paid for the current month.
-- Lists corresponding amounts paid by each student.
+- Lists paid students who have paid for the current month in contact list panel.
 
 ### **MSS**
 1. Tutor chooses to list paid students.
@@ -593,7 +642,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Actor:** Tutor
 
 **Guarantees:**
-- Lists students who have not paid for the current month.
+- Lists unpaid students who have not paid for the current month in contact list panel.
 - Lists corresponding amount owed by each student.
 
 ### **MSS**
@@ -616,7 +665,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Actor:** Tutor
 
 **Guarantees:**
-- Lists students who have not paid for previous months.
+- Lists overdue students who have not paid for previous months in contact list panel.
 - Lists corresponding amounts owed.
 
 ### **MSS**
@@ -639,7 +688,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Actor:** Tutor
 
 **Guarantees:**
-- Lists lessons belonging to a certain student.
+- Lists lessons belonging to a certain student in lesson list panel.
 
 ### **MSS**
 1. Tutor chooses to list lessons belonging to a student.
@@ -690,9 +739,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### **Precondition**
 - Student currently has lessons with the tutor.
+- Student is quitting lessons with the tutor
 
 **Guarantees:**
-- Lists lessons belonging to a certain student.
+- Student no longer appears in contact list panel.
+- Total earned for month will decrease.
 
 ### **MSS**
 1. Student terminates lessons with the tutor.
@@ -701,9 +752,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### **Extensions**
 - **2b.** Student has unpaid fees.
-    - **2b1.** TSMS displays an additional confirmation prompt.
-    - **2b2.** Tutor confirms the deletion.
-    - **2b3.** TSMS updates owed amount and total earnings.
+    - **2b1.** TSMS decreases total unpaid.
       **Use case ends.**
 
 ---
@@ -736,7 +785,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Guarantees:**
 - All students with lessons becomes **Unpaid**.
-- Total earnings and total unpaid are recalculated
+- Total earnings and total unpaid are recalculated.
 
 ### **MSS**
 1. TSMS enters a new month
