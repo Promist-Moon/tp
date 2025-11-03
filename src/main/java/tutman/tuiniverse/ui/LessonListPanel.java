@@ -53,6 +53,11 @@ public class LessonListPanel extends UiPart<Region> {
         this.showingStudentLesson = showingStudentLesson;
     }
 
+    /** Update lesson list panel to show lessons using the right card. */
+    public void updateLessonList(ObservableList<Lesson> lessonList) {
+        lessonListView.setItems(lessonList);
+    }
+
     /**
      * Custom {@code ListCell} that displays the graphics of a {@code Lesson} using a {@code LessonCard}.
      */

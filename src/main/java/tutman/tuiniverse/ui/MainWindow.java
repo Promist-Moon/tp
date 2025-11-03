@@ -195,11 +195,11 @@ public class MainWindow extends UiPart<Stage> {
             if (commandResult.isShowingName()) {
                 lessonListPanel.toggleShowingStudentLesson(true);
                 lessonListPanel.updateLessonTitle(commandResult.getStudentName());
-                logic.execute(commandText);
+                lessonListPanel.updateLessonList(logic.getFilteredLessonList());
             } else {
                 lessonListPanel.toggleShowingStudentLesson(false);
                 lessonListPanel.updateLessonTitle(DateTimeUtil.currentDay() + "'S SCHEDULE");
-                logic.getTodayLessonList();
+                lessonListPanel.updateLessonList(logic.getTodayLessonList());
             }
 
             logger.info("Result: " + commandResult.getFeedbackToUser());
