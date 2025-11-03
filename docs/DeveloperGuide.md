@@ -930,11 +930,11 @@ testers are expected to do more *exploratory* testing.
 
 5. Adding a lesson to a student with incorrect Day field
     * Test case: `add.lesson i/1 s/English l/2 d/Today st/10:00 et/12:00 r/80 `
-      Expected: Day is an integer which corresponds to: [1: Monday], [2: Tuesday], [3: Wednesday], [4: Thursday], [5: Friday], [6: Saturday], [7: Sunday]. No lesson is added, error message displayed.
+      Expected: Day is a string which can take values: [Monday], [Tuesday], [Wednesday], [Thursday], [Friday], [Saturday], [Sunday]. No lesson is added, error message displayed.
 
 6. Adding a lesson to a student with incorrect start and end time
    * Test case: `add.lesson i/1 s/English l/2 d/Monday st/WRONG_TIME et/12:00 r/80 `
-   Expected: Time must be given in the format HH:MM, and the start time should be before the end time. No lesson is added, error message displayed.
+   Expected: Time should be in HH:MM format using 24-hour notation (e.g., st/09:00 et/17:30), and the start time should be before the end time
 
 
 ### Deleting a lesson from student
