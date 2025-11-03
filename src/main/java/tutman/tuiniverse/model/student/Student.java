@@ -218,7 +218,7 @@ public class Student {
     }
 
     /**
-     * Returns true if both person have the same name.
+     * Returns true if both person have the same phone number and email.
      * This defines a weaker notion of equality between two persons.
      */
     public boolean isSamePerson(Student otherPerson) {
@@ -227,9 +227,8 @@ public class Student {
         }
 
         return otherPerson != null
-                && otherPerson.getName().equals(getName())
-                && otherPerson.getEmail().equals(getEmail())
-                && otherPerson.getPhone().equals(getPhone());
+                && (otherPerson.getEmail().equals(getEmail())
+                || otherPerson.getPhone().equals(getPhone()));
     }
 
     public int hashCode() {
