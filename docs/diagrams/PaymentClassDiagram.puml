@@ -2,17 +2,21 @@
 @startuml
 !include style.puml
 skinparam arrowThickness 1.1
-skinparam arrowColor MODEL_COLOR
-skinparam classBackgroundColor MODEL_COLOR
+skinparam arrowColor PAYMENT_COLOR
+skinparam classBackgroundColor PAYMENT_COLOR
 
-enum PaymentStatus
+enum Status {
+  PAID
+  UNPAID
+  OVERDUE
+}
 class Payment
 class TotalAmount
 class YearMonth
 class UnpaidAmount
 
 PaymentList *-->"*" Payment
-PaymentList *-->"1" PaymentStatus
+PaymentList *-->"1" Status
 Payment *-->"1" TotalAmount
 Payment *-->"1" UnpaidAmount
 Payment *-->"1" YearMonth

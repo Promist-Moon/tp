@@ -177,18 +177,21 @@ The Payment feature allows tutors to automatically track and manage tuition fees
 Each student has a PaymentList containing monthly Payment objects, which record the total and unpaid amounts for that month.
 Whenever lessons are added, edited, or deleted, Tuiniverse automatically recalculates the corresponding monthly payment to keep all financial records consistent.
 
-#### Proposed Implementation
+To fully visualise `PaymentList`, the `Student` holds a `PaymentList`. The `PaymentList` is associated with a `PaymentStatus` enum. This allows for quick `PaymentStatus` checks for a `Student` object.
+<puml src="diagrams/PaymentClassDiagram.puml" width="250" />
 
-* The Payment class stores details such as YearMonth, TotalAmount, and UnpaidAmount.
-* The PaymentList aggregates all payments per student and provides utility methods such as calculateUnpaidAmount() and getTotalAmountFloat().
-* The ModelManager maintains observable properties (totalEarningsProperty, totalUnpaidProperty) that automatically update whenever any student’s payment data changes in UI.
-* Commands like PayCommand mark payments as settled, updating both the UI and underlying model in real time.
+1. **`pay` command**
+   <puml src="diagrams/PaySequenceDiagram.puml" width="250" />
 
-{ to be updated with graph }
+Tutor asks Student to pay; the Student delegates to PaymentList method `markAllPaid()`, which finds unpaid payments, and marks each one as paid. This is done by the `markPaid` method in `Payment`,
+which zeroes out unpaid amount objects, and updates payment status. If there are no unpaids, it returns a message in the consolve instead.
+
+Commands like PayCommand mark payments as settled, updating both the UI and underlying model in real time.
 
 #### Design considerations:
 
-{ to be updated }
+* The PaymentList aggregates all payments per student and provides utility methods such as calculateUnpaidAmount() and getTotalAmountFloat().
+* The ModelManager maintains observable properties (totalEarningsProperty, totalUnpaidProperty) that automatically update whenever any student’s payment data changes in UI.
 
 ### \[Implemented\] Monthly rollover feature
 
