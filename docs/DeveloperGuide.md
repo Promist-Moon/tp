@@ -141,7 +141,7 @@ The `Model` component,
 
 <puml src="diagrams/BetterModelClassDiagram.puml" width="450" />
 
-To fully visualise `PaymentList`, the `Student` holds a `PaymentList`. The `PaymentList` is associated with a `PaymentStatus` enum. This allows quick for quick `PaymentStatus` checks for a `Student` object.
+To fully visualise `PaymentList`, the `Student` holds a `PaymentList`. The `PaymentList` is associated with a `PaymentStatus` enum. This allows for quick `PaymentStatus` checks for a `Student` object.
 <puml src="diagrams/PaymentClassDiagram.puml" width="250" />
 
 In the same vein `Student` holds a `LessonList`, which contains any amount of `Lesson` as shown in the diagram below
@@ -1011,7 +1011,7 @@ To view the exact changes in lesson, use `view 1` to see the student's lessons i
 3. Editing preferences.json (changing `lastOpened`)
    1. Simulate a month elapsing:
       * Close the application.
-      * Navigate the root directory where the application store the `preferences.json`
+      * Navigate the root directory where the application stores the `preferences.json`
       * Find the `lastOpened` field and set it to a valid `YearMonth`
           * Example: `"lastOpened": "2025-9"`
    2. Save the file and relaunch the application.
