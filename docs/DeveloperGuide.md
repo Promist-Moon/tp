@@ -349,7 +349,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 1. Tutor chooses to edit a student detail (eg address, phone number, tag).
 2. Tutor enters the student index followed by the amended detail.
 3. TSMS validates the details:
-    - Student current exists.
+    - Student currently exists.
     - Contact number must contain only numerical digits.
 4. TSMS edits the student detail and displays a message confirming successful edition.
    **Use case ends.**
