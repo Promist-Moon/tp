@@ -61,6 +61,7 @@ public class EditLessonCommand extends Command {
     public static final String MESSAGE_DUPLICATE_LESSON = "This lesson clashes with an existing "
             + "lesson in the address book.";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
+    public static final String RATE_FIELD_EMPTY = "Rate cannot be empty. Choose any number bigger than or equal to 0.";
     private final Index studentIndex;
     private final Index lessonIndex;
     private final EditLessonDescriptor editLessonDescriptor;
@@ -110,6 +111,8 @@ public class EditLessonCommand extends Command {
             throw new CommandException(MESSAGE_INVALID_DISPLAYED_LESSON_INDEX);
         } catch (DuplicateLessonException e) {
             throw new CommandException(MESSAGE_DUPLICATE_LESSON);
+        } catch (NumberFormatException e) {
+            throw new CommandException(RATE_FIELD_EMPTY);
         }
     }
 
