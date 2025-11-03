@@ -13,9 +13,9 @@
 
 ## **Acknowledgements**
 
-Our project is built based on the foundation design and documentation structure of AddressBook-Level3 (AB3) by the SE-EDU team, as provided in the CS2103T module at the National University of Singapore (NUS).
+Our project is built based on the foundation design and documentation structure of [AddressBook-Level3](https://github.com/nus-cs2103-AY2526S1/tp) (AB3) by the SE-EDU team, as provided in the CS2103T module at the National University of Singapore (NUS).
 
-We also referenced SE-EDU’s AB3 Developer Guide and Sample MarkBind sites for documentation and diagram formatting conventions.
+We also referenced SE-EDU’s [AB3 Developer Guide](https://se-education.org/addressbook-level3/DeveloperGuide.html) and [Sample MarkBind sites](https://damithc.github.io/ab3-markbind/) given in the CS2103T module for documentation and diagram formatting conventions.
 
 --------------------------------------------------------------------------------------------------------------------
 
