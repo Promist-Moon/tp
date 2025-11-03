@@ -45,6 +45,19 @@ public class StringUtilTest {
         assertTrue(StringUtil.isNonZeroUnsignedInteger("10"));
     }
 
+    //---------------- Tests for isOutOfBoundsInteger --------------------------------------
+
+    @Test
+    public void isOutOfBoundsInteger() {
+
+        // EP: within boundaries
+        assertFalse(StringUtil.isOutOfBoundsInteger("1"));
+        assertFalse(StringUtil.isOutOfBoundsInteger("999999999"));
+
+        // EP: numbers out of bounds
+        assertTrue(StringUtil.isOutOfBoundsInteger("1000000000"));
+        assertTrue(StringUtil.isOutOfBoundsInteger("1000000001"));
+    }
 
     //---------------- Tests for containsWordIgnoreCase --------------------------------------
 

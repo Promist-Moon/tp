@@ -26,6 +26,7 @@ import tutman.tuiniverse.model.student.tag.Tag;
 public class ParserUtil {
 
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
+    public static final String MESSAGE_INDEX_OUT_OF_BOUNDS = "Index is out of bounds.";
 
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
@@ -36,6 +37,9 @@ public class ParserUtil {
         String trimmedIndex = oneBasedIndex.trim();
         if (!StringUtil.isNonZeroUnsignedInteger(trimmedIndex)) {
             throw new ParseException(MESSAGE_INVALID_INDEX);
+        }
+        if (StringUtil.isOutOfBoundsInteger(trimmedIndex)) {
+            throw new ParseException(MESSAGE_INDEX_OUT_OF_BOUNDS);
         }
         return Index.fromOneBased(Integer.parseInt(trimmedIndex));
     }

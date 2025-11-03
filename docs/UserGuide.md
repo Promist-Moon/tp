@@ -7,12 +7,12 @@
 
 ## Introduction
 As a **private secondary school tutor** in Singapore, it can be hard to **manage student contacts**,
-**track payments** and **schedule lessons** with such a big group of people. Unless you are willing to fork out high prices for premium services meant
-for larger tuition centre businesses, it means a lot of **unnecessary hassle** and much **room for error**. 
+**track payments** and **schedule one-on-one lessons** for such a big group of people. Unless you are willing to fork out high prices for premium services meant
+for larger tuition centre businesses, it means a lot of **unnecessary hassle** and much **room for error**.
 
 Tuiniverse is the solution for all things tuition!
 Tuiniverse is a **desktop app** which <u>expedites</u>:
-* Contact storing and upkeep
+* Student contact storing and upkeep
 * Payment tracking
 * Lesson scheduling
 
@@ -28,34 +28,36 @@ display of all the information you need.
 
 1. Ensure you have Java `17` or above installed in your Computer.<br>
 
-Operating System | What to expect 
+Operating System | What to expect
 -----------------|------------------
 Mac|  Follow the Java installation instructions [here](https://se-education.org/guides/tutorials/javaInstallationMac.html)
 Windows| Follow the Java installation instructions [here](https://se-education.org/guides/tutorials/javaInstallationWindows.html)
 Linux | Follow the Java installation instructions [here](https://se-education.org/guides/tutorials/javaInstallationLinux.html)
 
 
-2. Download the latest `.jar` file from [here](https://github.com/AY2526S1-CS2103T-W08-2/tp/releases/tag/v1.4).
+2. Download the latest `.jar` file from [here](https://github.com/AY2526S1-CS2103T-W08-2/tp/releases/tag/v1.5.1).
 
-3. Copy the file to the folder you want to use as the _home folder_ for your Tuiniverse app.
+3. Copy the file to the folder you want to use as the _home folder_ for your Tuiniverse app (e.g. `Desktop/Tuiniverse`).
 
-4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar tuiniverse.jar` command to run the application.<br>
+4. Open a command terminal, and type `cd [folder/path]` into the home folder of your jar, eg `cd Desktop/Tuiniverse`.
+
+5. Use the `java -jar tuiniverse.jar` command to run the application.<br>
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
 
-## Familarisation
+## Familiarisation
 To get adjusted to using Tuiniverse, we have created a short practice to keep users up to track on how to use the app.
 
 Type some commands into the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
 
 Some example commands you can try:
-* `list` : Lists all contacts.
+* `list` : Lists all student contacts.
 
-* `add n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 t/friends t/owesMoney` : Adds a contact named `John Doe` to the contact list.
+* `add n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 t/friends t/owesMoney` : Adds a student named `John Doe` to the student list.
 
-* `delete 3` : Deletes the 3rd contact shown in the current list.
+* `delete 3` : Deletes the 3rd student shown in the current list.
 
-* `clear` : Deletes all contacts.
+* `clear` : Deletes all students and lessons.
 
 * `exit` : Exits the app.
 
@@ -95,7 +97,7 @@ Action | Format, Examples
 | **Message Box**                      | Displays temporary feedback, including success confirmations and error messages, following a user action.           |
 | **Contact List Panel**               | View students' contact details here.                                                                                |
 | **Lesson List Panel/Today Schedule** | Displays the scheduled lessons of the day. This panel can be toggled to show all the lessons of a selected student. |
-| **Amount Panel**                | View summary of earnings and payment here.   
+| **Amount Panel**                | View summary of earnings and payment here.
 
 
 
@@ -137,12 +139,15 @@ Shows a message explaining how to access the help page.
 
 ### Adding a student: `add`
 
-Adds a student to the address book with these fields:
-* Name
-* Phone
-* Email
-* Address
-* Tag(s)
+Adds a student to the address book.
+
+| **Field** | **Prefix** | **Description / Constraints**                                      |
+|------------|-------------|--------------------------------------------------------------------|
+| **Name** | `n/` | The student’s full name.                                           |
+| **Phone** | `p/` | A Singaporean phone number containing 3–8 numerical digits.        |
+| **Email** | `e/` | Must be a valid email format (e.g., `example@email.com`).          |
+| **Address** | `a/` | Can include spaces and punctuation.                                |
+| **Tag(s)** | `t/` | Alphanumerical values only, with no spaces. Multiple tags allowed. |
 
 **Format:** `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
 
@@ -161,14 +166,17 @@ Adds a student to the address book with these fields:
 
 ### Adding a lesson: `add.lesson`
 
-Adds a lesson to the specific student with these fields:
-* Student Index
-* Subject (Refer to [Glossary](#Glossary) for the list of subject)
-* Level (1,2,3, or 4)
-* Day of Lesson (Monday, Tuesday...)
-* Start Time
-* End Time
-* Hourly Rate
+Adds a lesson to the specific student.
+
+| **Field** | **Prefix** | **Constraints**                                                                     |
+|------------|---------|-------------------------------------------------------------------------------------|
+| **Student Index** | `i/`    | The index of the student in the displayed list.                                     |
+| **Subject** | `s/`    | Subject taught (Refer to [Glossary](#glossary) for the list of available subjects). |
+| **Level** | `l/`    | An integer between 1–5 (Refer to [Glossary](#glossary) for definition).             |
+| **Day of Lesson** | `d/`    | Day of the week (e.g., `Monday`, `Tuesday`, ...).                                   |
+| **Start Time** | `st/`   | Time in 24-hour format — `HH:MM`.                                                   |
+| **End Time** | `et/`   | Time in 24-hour format — `HH:MM`.                                                   |
+| **Hourly Rate** | `r/`    | Must be a non-negative numerical value (Refer to [Glossary](#glossary) for definition).                                            |
 
 <box type="tip" seamless>
 
@@ -187,7 +195,7 @@ For example, if October 2025 has five Thursdays and you schedule a Thursday less
 
 ### List all lessons of a student: `view`
 
-Lists all the lessons taken by the specfied student.
+Lists all the lessons taken by the specified student.
 
 **Format:** `view INDEX`
 ![view command](images/viewCommand.png)
@@ -211,17 +219,23 @@ Shows a list of all students in the contact book.
 ### Listing all payments: `list.paid`
 Lists all students that have **paid** their fees for the month.
 
+Refer to [Glossary](#glossary) for the definition of **paid**.
+
 **Format:** `list.paid`
 ![list command](images/listpaid.png)
 
 ### Listing all unpaid fees: `list.unpaid`
-Lists all students that have **unpaid** fees for the month.
+Lists all students that have **unpaid** fees for the month.<br>
+
+Refer to [Glossary](#glossary) for the definition of **unpaid**.
 
 **Format:** `list.unpaid`
 ![list command](images/listunpaid.png)
 
 ### Listing all overdue fees: `list.overdue`
 Lists all students that have **overdue** fees from previous months.
+
+Refer to [Glossary](#glossary) for the definition of **overdue**.
 
 **Format:** `list.overdue`
 ![list command](images/listoverdue.png)
@@ -259,6 +273,13 @@ Edits an existing student in the contact book.
 * You can remove all the student’s tags by typing `t/` without
   specifying any tags after it.
 
+<box type="info" seamless>
+
+**Note:**
+Constraints for editing a student are the same as in [Add student](#adding-a-student-add)
+
+</box>
+
 **Examples:**
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st student to be `91234567` and `johndoe@example.com` respectively.
 *  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd student to be `Betsy Crower` and clears all existing tags.
@@ -283,6 +304,13 @@ Trying to edit a lesson before viewing the student's lesson (via `view` command)
 * The index refers to the index number shown in the displayed student list & lesson list respectively. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
+
+<box type="info" seamless>
+
+**Note:**
+Constraints for student are the same as in [Add lesson](#adding-a-lesson-addlesson)
+
+</box>
 
 **Examples:**
 *  `edit.lesson i/1 c/2 d/Monday r/44` Edits the 2nd lesson of the 1st student to be scheduled on every `Monday` at a rate of `$44/hr`.
@@ -395,19 +423,57 @@ For example, if a student currently has the tags `earlyLesson` and `moreExplanat
 want to change `earlyLesson` to `lateLesson`, use the edit command as follows:
 `edit [INDEX] t/lateLesson t/moreExplanation`
 
+**Q**: Why are zero rates allowed in `edit.lesson` and `add.lesson` commands?<br>
+**A**: Some tutors may choose to give their lessons to students for free, for example through volunteering events or as a complimentary service. Tutors who teach their students
+for free thus can still use our app for lesson scheduling and student contact tracking, and payment status will simply remain unchanged.
+
+**Q**: What is the **Total earned for month** and **Total unpaid**? How are they calculated, and how are they changed?<br>
+**A**: Please refer to the [Glossary](#glossary) for formal definitions of the two terms.
+The total earned for month is calculated by calculating the amount earned from each lesson, for each student, for each month.
+The total unpaid is calculated from the amount unpaid by each unpaid student. 
+There will be several cases where these numbers will change:
+1. A tutor adds a lesson<br>
+Both of these totals will change by the amount calculated for each lesson for a month.
+2. A tutor edits a lesson's rate<br>
+Both of these totals will change by the amount calculated for each lesson for a month. If a tutor edits a lesson to a lower rate, the total unpaid will decrease to the maximum between 0 and the difference
+in amount owed for that lesson.
+3. A student makes a payment<br>
+The total unpaid will decrease by the student's amount unpaid. However, the total earned for the month **should not decrease**, as the total earned is calculated by
+the amount the tutor is supposed to get.
+4. Deleting a student/lesson<br>
+Both totals should decrease by the amount calculated for each lesson for a month.
+
+**Q**: A student paid their fees for the month, but they will be leaving my tutoring services next month. What should I do?<br>
+**A**: Please wait until the next month to delete a student, as deleting the student now will cause the Total earned for month to be incorrectly reflected.
+
+**Q**: A student paid their fees partially for only some lessons, but not all. What should I do?<br>
+**A**: As of the current release, Tuiniverse does not accept partial payments. Please refrain from using the `pay` command as all lessons will be marked as paid.
+Alternatively, you can mark the student as paid with `pay`, before deleting the unpaid lesson with the `delete.lesson` command. Then, add the lesson
+again with `add.lesson`
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## Glossary
 
-* Student: A person who's being taught by the tutor (you).
-* **Payment Status**: Each student has a payment status which updates every month.
-  * Paid - The student has paid within the month
-  * Unpaid - The student has not paid within the month
-  * Overdue - The student has outstanding bills from previous months
-* **Bill**: The payment amount owed by a student
-* **Subjects**: Math, English, Physics, Chemistry, Biology, Geography, History, Mother tongue, Social Studies, Literature
-* **Note**: A comment located in a student's information
-* **Schedule**: A timetable for classes containing the time, location, subject of the class and the student taking the class
+| **Category**  | **Term**                           | **Definition**                                                                                                                                    |
+|---------------|------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Technical** | **Command Line Interface (CLI)**   | A text-based user interface used to interact with the software program.                                                                           |
+|               | **Graphical User Interface (GUI)** | A visual interface that allows you to view Tuiniverse through graphical elements like icons, buttons, and menus.                                  |
+|               | **Terminal**                       | A command window found in all operating systems where you type instructions for the computer to run.                                              |
+| **Actors**    | **Tutor**                          | The user - you, the person managing and teaching students.                                                                                        |
+|               | **Student**                        | A person currently enrolled in secondary school who is being taught one-on-one tuition services by the tutor.                                     |
+| **Payments**  | **Payment Status**                 | Indicates whether a student has paid for their lessons within the month. Each student has a payment status which updates every month.             |
+|               | **Paid**                           | The student has paid for all lessons within the current month.                                                                                    |
+|               | **Unpaid**                         | The student has not paid the full amount for some lessons within the current month.                                                               |
+|               | **Overdue**                        | The student has outstanding unpaid lessons from previous months.                                                                                  |
+|               | **Amount unpaid**                  | The amount the student has yet to pay the tutor for both current and previous months.                                                             |
+|               | **Total earned for month**         | The total amount to be earned for all lessons from all students in one month, when all students have paid their fees.                             |
+|               | **Total unpaid**                   | The total unpaid amounts between all students that the tutor has yet to receive.                                                                  |
+| **Lessons**   | **Lesson**                         | A session between a student and a tutor where the tutor teaches a student a subject.                                                              |
+|               | **Schedule**                       | A timetable for classes containing the time, location, subject of the class and the student taking the class. |
+|               | **Subjects**                       | The topics taught by the tutor (e.g., Math, English, Physics, Chemistry, Biology, Geography, History, Mother Tongue, Social Studies, Literature). |
+|               | **Level**                          | The level of the student in secondary school, depending on age and academic stream (1, 2, 3, 4, 5).                                               |
+|               | **Rate**                           | The hourly rate a student pays the tutor for a lesson.                                                                                            |
 
 --------------------------------------------------------------------------------------------------------------------
 

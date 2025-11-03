@@ -264,9 +264,9 @@ public class ModelManager implements Model {
     public void setLesson(Student student, Lesson target, Lesson editedLesson) {
         requireAllNonNull(target, editedLesson);
 
-        addressBook.setLesson(target, editedLesson);
         LessonList studentLessonList = student.getLessonList();
         studentLessonList.setLesson(target, editedLesson);
+        addressBook.setLesson(target, editedLesson);
         updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         recomputeTotalEarnings();
         recomputeTotalUnpaid();
