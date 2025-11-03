@@ -12,7 +12,6 @@ import static tutman.tuiniverse.testutil.TypicalPersons.DANIEL;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.ArrayList;
 import java.util.Arrays;
 
 import org.junit.jupiter.api.AfterEach;
@@ -300,7 +299,7 @@ public class ModelManagerTest {
     public void deletePerson_callsDeleteLessonForEachLesson() {
         // Spy ModelManager to count deleteLesson invocations
         class SpyModelManager extends ModelManager {
-            int deleteLessonCalls = 0;
+            private int deleteLessonCalls = 0;
 
             @Override
             public void deleteLesson(Student student, Lesson lesson) {
@@ -315,7 +314,7 @@ public class ModelManagerTest {
         Lesson l1 = new LessonBuilder().withSubject("Math").withDay("1")
                 .withLessonTime("10:00", "11:00").build();
         Lesson l2 = new LessonBuilder().withSubject("English").withDay("2")
-                .withLessonTime("12:00",  "13:00").build();
+                .withLessonTime("12:00", "13:00").build();
         Lesson l3 = new LessonBuilder().withSubject("Physics").withDay("3")
                 .withLessonTime("14:00", "15:00").build();
 
