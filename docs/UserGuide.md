@@ -153,7 +153,7 @@ Adds a student to the address book.
 
 <box type="tip" seamless>
 
-**Note**: Two students cannot have the same name, phone number and email address. <br>This means two students with names that have the same spelling, but are not case-matching (I.e. John Doe and john Doe) are deemed as different students if their phone number and email address are different.
+**Note**: Each student must have a unique phone number and email address. <br> You can save students with the same name, as long as their phone number and email address are different.
 
 **Tip**: Tags are optional.
 
