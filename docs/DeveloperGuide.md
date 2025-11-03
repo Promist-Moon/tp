@@ -174,21 +174,21 @@ This section describes some noteworthy details on how certain features are imple
 ### \[Implemented\] Payment feature
 
 The Payment feature allows tutors to automatically track and manage tuition fees for each student.
-Each student has a PaymentList containing monthly Payment objects, which record the total and unpaid amounts for that month.
+Each student has a PaymentList containing monthly Payment objects, which record the total and unpaid amounts for that month. Refer to [Model](#model-component) class diagram for payment details.
 Whenever lessons are added, edited, or deleted, Tuiniverse automatically recalculates the corresponding monthly payment to keep all financial records consistent.
 
-#### Proposed Implementation
+1. **`pay` command**
+   <puml src="diagrams/PaySequenceDiagram.puml" width="250" />
 
-* The Payment class stores details such as YearMonth, TotalAmount, and UnpaidAmount.
-* The PaymentList aggregates all payments per student and provides utility methods such as calculateUnpaidAmount() and getTotalAmountFloat().
-* The ModelManager maintains observable properties (totalEarningsProperty, totalUnpaidProperty) that automatically update whenever any student’s payment data changes in UI.
-* Commands like PayCommand mark payments as settled, updating both the UI and underlying model in real time.
+Tutor asks Student to pay; the Student delegates to PaymentList method `markAllPaid()`, which finds unpaid payments, and marks each one as paid. This is done by the `markPaid` method in `Payment`,
+which zeroes out unpaid amount objects, and updates payment status. If there are no unpaids, it returns a message in the consolve instead.
 
-{ to be updated with graph }
+Commands like PayCommand mark payments as settled, updating both the UI and underlying model in real time.
 
 #### Design considerations:
 
-{ to be updated }
+* The PaymentList aggregates all payments per student and provides utility methods such as calculateUnpaidAmount() and getTotalAmountFloat().
+* The ModelManager maintains observable properties (totalEarningsProperty, totalUnpaidProperty) that automatically update whenever any student’s payment data changes in UI.
 
 ### \[Implemented\] Monthly rollover feature
 
@@ -200,24 +200,6 @@ This ensures tutors always start each month with up-to-date payment records with
 * Implemented in ModelManager#rolloverMonthlyPayments() and invoked during app startup or when DateTimeUtil.currentYearMonth() differs from the last recorded month in UserPrefs.
 * For each student, the system creates a new Payment entry for the current month based on their latest LessonList and carries over any unpaid balances from the previous month.
 * The logic ensures idempotence (no duplicate months added).
-
-{ to be updated with graph }
-
-#### Design considerations:
-
-{ to be updated }
-
-### \[Implemented\] Time clash feature
-
-The Time Clash feature prevents tutors from scheduling overlapping lessons.
-It checks for conflicts between lessons based on day and time intervals, ensuring that tutors can maintain an organized, non-overlapping schedule.
-
-#### Proposed Implementation
-
-* Implemented in the Lesson#hasTimeClash(Lesson otherLesson) method.
-* The method returns true if two lessons occur on the same Day and their LessonTime intervals overlap.
-* Used during AddLessonCommand to validate new lessons before insertion.
-* Also leveraged by the lesson calendar to flag and highlight clashes visually in the UI.
 
 { to be updated with graph }
 
