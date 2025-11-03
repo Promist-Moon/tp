@@ -141,7 +141,7 @@ The `Model` component,
 
 <puml src="diagrams/BetterModelClassDiagram.puml" width="450" />
 
-To fully visualise `PaymentList`, the `Student` holds a `PaymentList`. The `PaymentList` is associated with a `PaymentStatus` enum. This allows for quick `PaymentStatus` checks for a `Student` object.
+To fully visualise `PaymentList`, the `Student` holds a `PaymentList`. The `PaymentList` is associated with a `Status` enum. This allows for quick `Status` checks for a `Student` object.
 <puml src="diagrams/PaymentClassDiagram.puml" width="250" />
 
 In the same vein `Student` holds a `LessonList`, which contains any amount of `Lesson` as shown in the diagram below
@@ -204,8 +204,9 @@ This ensures tutors always start each month with up-to-date payment records with
 { to be updated with graph }
 
 #### Design considerations:
+This sequence diagram illustrates Tuiniverse’s startup monthly-rollover flow, showing how the application automatically checks if a new month has begun when the user opens the app. Upon launch, MainApp constructs the StartupRolloverHandler (linked with Model and Storage) and calls perform(userPrefs). The handler retrieves the lastOpened month from UserPrefs and triggers a monthly rollover with `compute(lastOpened, now)`, creating new Payment entries for each student while carrying forward any unpaid balances if `lastOpened` and `now` is different. It then updates lastOpened in UserPrefs, synchronises the Model, and saves all changes to Storage, ensuring the app always starts each month with up-to-date payment records.
+<puml src="diagrams/MonthlyRollover.puml" width="800" />
 
-{ to be updated }
 
 
 --------------------------------------------------------------------------------------------------------------------
@@ -912,11 +913,11 @@ testers are expected to do more *exploratory* testing.
 
 5. Adding a lesson to a student with incorrect Day field
     * Test case: `add.lesson i/1 s/English l/2 d/Today st/10:00 et/12:00 r/80 `
-      Expected: Day is an integer which corresponds to: [1: Monday], [2: Tuesday], [3: Wednesday], [4: Thursday], [5: Friday], [6: Saturday], [7: Sunday]. No lesson is added, error message displayed.
+      Expected: Day is a string which can take values: [Monday], [Tuesday], [Wednesday], [Thursday], [Friday], [Saturday], [Sunday]. No lesson is added, error message displayed.
 
 6. Adding a lesson to a student with incorrect start and end time
    * Test case: `add.lesson i/1 s/English l/2 d/Monday st/WRONG_TIME et/12:00 r/80 `
-   Expected: Time must be given in the format HH:MM, and the start time should be before the end time. No lesson is added, error message displayed.
+   Expected: Time should be in HH:MM format using 24-hour notation (e.g., st/09:00 et/17:30), and the start time should be before the end time
 
 
 ### Deleting a lesson from student
