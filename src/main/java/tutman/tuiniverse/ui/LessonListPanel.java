@@ -53,7 +53,7 @@ public class LessonListPanel extends UiPart<Region> {
         this.showingStudentLesson = showingStudentLesson;
     }
 
-    /** Update lesson list panel to show lessons using the right card. */
+    /** Update lesson list panel to show lessons using either sorted or unsorted list. */
     public void updateLessonList(ObservableList<Lesson> lessonList) {
         lessonListView.setItems(lessonList);
     }
