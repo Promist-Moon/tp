@@ -11,8 +11,8 @@ import java.time.DayOfWeek;
  */
 public class Day {
 
-    public static final String MESSAGE_CONSTRAINTS = "Day is an integer which corresponds to: "
-            + "[1: Monday], [2: Tuesday], [3: Wednesday], [4: Thursday], [5: Friday], [6: Saturday], [7: Sunday]";
+    public static final String MESSAGE_CONSTRAINTS = "Day is a string which can take values: "
+            + "[Monday], [Tuesday], [Wednesday], [Thursday], [Friday], [Saturday], [Sunday]";
     public static final String VALIDATION_REGEX = "\\d";
 
     private final DayOfWeek day;
