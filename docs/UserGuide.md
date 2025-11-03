@@ -153,7 +153,10 @@ Adds a student to the address book.
 
 <box type="tip" seamless>
 
-**Tip:** Tag is optional
+**Note**: Each student must have a unique phone number and email address. <br> You can save students with the same name, as long as their phone number and email address are different.
+
+**Tip**: Tags are optional.
+
 </box>
 
 ![add command](images/add.png)
