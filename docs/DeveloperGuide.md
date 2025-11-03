@@ -653,7 +653,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     - **2a2.** TSMS clears user input.
       Steps **2a1–2a2** repeat until valid input is entered.
       **Use case ends.**
-  
+
 - **3a.** The student has no lessons.
     - **3a1.** TSMS displays a message in the console.
       **Use case ends.**
@@ -795,7 +795,7 @@ testers are expected to do more *exploratory* testing.
 
     * Download the jar file and copy into an empty folder
 
-    * Double-click the jar file 
+    * Double-click the jar file
 
     Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
 
@@ -823,7 +823,7 @@ testers are expected to do more *exploratory* testing.
 1. Adding a student with invalid phone number
    * Test case: `add n/John Doe p/INVALID_NUMBER e/johnd@example.com a/311, Clementi Ave 2, #02-25`
      Expected: Phone numbers should only contain numbers, and it should be between 3 and 8 digits long. Error message is displayed
-   
+
 
 ### Deleting a student
 
@@ -832,7 +832,7 @@ testers are expected to do more *exploratory* testing.
    * Prerequisites: List all student using the `list` command. Multiple students in the list.
 
    * Test case: `delete 1`<br>
-     Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. 
+     Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message.
 
    * Test case: `delete 0`<br>
      Expected: No Student is deleted. Error message indicating that invalid command format will output.
@@ -844,7 +844,7 @@ testers are expected to do more *exploratory* testing.
 ### Editing a student
 <box seamless>
 
-**Tip:** Confirmation message will also display the lessons associated to the edited student. LESSONS refer to the lessons that was previously added.  
+**Tip:** Confirmation message will also display the lessons associated to the edited student. LESSONS refer to the lessons that was previously added.
 
 </box>
 <box seamless>
@@ -879,7 +879,7 @@ testers are expected to do more *exploratory* testing.
 
 3. Adding a lesson to a student with incorrect Subject field
    * Test case: `add.lesson i/1 s/Dragon l/2 d/Monday st/10:00 et/12:00 r/80`
-   Expected: Subjects are not case-sensitive, and can only take these values: Math, English, Physics, Chemistry, Biology, Geography, History, Literature, Social Studies, Mother Tongue. No lesson is added, error message displayed. 
+   Expected: Subjects are not case-sensitive, and can only take these values: Math, English, Physics, Chemistry, Biology, Geography, History, Literature, Social Studies, Mother Tongue. No lesson is added, error message displayed.
 
 4. Adding a lesson to a student with incorrect Level field
    * Test case: `add.lesson i/1 s/English l/6 d/Monday st/10:00 et/12:00 r/80 `
@@ -924,11 +924,11 @@ and add a lesson to the student with `add.lesson i/1 s/English l/2 d/Monday st/1
 **Tip:** Add a student to test delete capabilities using `add n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25`,
 and add a lesson to the student with `add.lesson i/1 s/English l/2 d/Monday st/10:00 et/12:00 r/80`.
 
-To view the exact changes in lesson, use `view 1` to see the student's lessons in the Lesson list panel on the right. 
+To view the exact changes in lesson, use `view 1` to see the student's lessons in the Lesson list panel on the right.
 <br>After successfully editing a lesson, use `view 1` and check that the edited lesson details has been changed.
 </box>
 
-1. Edit a lesson's details 
+1. Edit a lesson's details
    * Test case: `edit.lesson i/1 c/1 s/Math l/3 d/Friday st/11:00 et/13:00 r/90`
      Expected: Edited Lesson:  Subject: Math; Secondary: 3; Day: FRIDAY; Start: 11:00; End: 13:00; Address: 311, Clementi Ave 2, #02-25; Rate: $90.00. Confirmation message is displayed with the updated details.
 
@@ -1068,20 +1068,20 @@ Adding/editing tags will only register one tag for the same tag instance (ie edi
 message in usage indicates that duplicates are not allowed. Hence, the message usage can be amended.
 
 ### 6. Custom Payment amount
-Currently payCommand assumes student has paid his due fees all at once. In a future enhancement, tutor would be able to decrement unpaidAmount with a custom amount. 
+Currently payCommand assumes student has paid his due fees all at once. In a future enhancement, tutor would be able to decrement unpaidAmount with a custom amount.
 
 ### 7. Attendance list
 Current implementation assumes that student attends all the lessons in the month, not accounting for public holidays and instances where student is absent. An attendance list where tutor can mark student's attendance will help solve the problem
 
 ### 8. Today's Schedule Not Showing Student Name
-Currently, the lesson list panel displays the day’s lesson schedule but does not 
-indicate which student each lesson is associated with. We plan to enhance this feature 
-in the future by including the student’s name alongside each lesson, allowing users to 
+Currently, the lesson list panel displays the day’s lesson schedule but does not
+indicate which student each lesson is associated with. We plan to enhance this feature
+in the future by including the student’s name alongside each lesson, allowing users to
 easily identify which students they will be teaching for the day.
 
 ### 9. Add, Edit, and Delete Lesson UI
-At present, when users add, edit, or delete a lesson, only a confirmation message 
+At present, when users add, edit, or delete a lesson, only a confirmation message
 appears in the message box to indicate that the command has been successfully executed.
-In the future, we plan to improve the user experience by automatically switching the 
-lesson panel to display the specific student’s lesson list, enabling users to immediately 
+In the future, we plan to improve the user experience by automatically switching the
+lesson panel to display the specific student’s lesson list, enabling users to immediately
 view the updates they have made.

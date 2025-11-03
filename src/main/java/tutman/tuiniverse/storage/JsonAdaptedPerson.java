@@ -140,11 +140,14 @@ class JsonAdaptedPerson {
             final LessonList ll = new LessonList();
             final Student student = new Student(modelName, modelPhone, modelEmail, modelAddress, modelTags, ll, pl);
 
+            student.disableAutoPaymentRefresh();
             for (JsonAdaptedLesson lesson : lessons) {
                 Lesson l = lesson.toModelType();
                 l.addStudent(student);
                 student.getLessonList().addLesson(l);
             }
+            student.enableAutoPaymentRefresh();
+
 
             return student;
         }

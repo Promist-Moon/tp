@@ -8,7 +8,7 @@
 ## Introduction
 As a **private secondary school tutor** in Singapore, it can be hard to **manage student contacts**,
 **track payments** and **schedule lessons** with such a big group of people. Unless you are willing to fork out high prices for premium services meant
-for larger tuition centre businesses, it means a lot of **unnecessary hassle** and much **room for error**. 
+for larger tuition centre businesses, it means a lot of **unnecessary hassle** and much **room for error**.
 
 Tuiniverse is the solution for all things tuition!
 Tuiniverse is a **desktop app** which <u>expedites</u>:
@@ -28,7 +28,7 @@ display of all the information you need.
 
 1. Ensure you have Java `17` or above installed in your Computer.<br>
 
-Operating System | What to expect 
+Operating System | What to expect
 -----------------|------------------
 Mac|  Follow the Java installation instructions [here](https://se-education.org/guides/tutorials/javaInstallationMac.html)
 Windows| Follow the Java installation instructions [here](https://se-education.org/guides/tutorials/javaInstallationWindows.html)
@@ -95,7 +95,7 @@ Action | Format, Examples
 | **Message Box**                      | Displays temporary feedback, including success confirmations and error messages, following a user action.           |
 | **Contact List Panel**               | View students' contact details here.                                                                                |
 | **Lesson List Panel/Today Schedule** | Displays the scheduled lessons of the day. This panel can be toggled to show all the lessons of a selected student. |
-| **Amount Panel**                | View summary of earnings and payment here.   
+| **Amount Panel**                | View summary of earnings and payment here.
 
 
 

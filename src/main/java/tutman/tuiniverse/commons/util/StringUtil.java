@@ -65,4 +65,21 @@ public class StringUtil {
             return false;
         }
     }
+
+    /**
+     * Returns true if {@code s} represents a number greater than 999999999.
+     *
+     * @param s String representing an integer index.
+     * @return boolean.
+     */
+    public static boolean isOutOfBoundsInteger(String s) {
+        requireNonNull(s);
+
+        try {
+            int value = Integer.parseInt(s);
+            return value > 999999999;
+        } catch (NumberFormatException nfe) {
+            return false;
+        }
+    }
 }

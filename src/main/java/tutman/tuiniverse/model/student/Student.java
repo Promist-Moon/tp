@@ -40,6 +40,7 @@ public class Student {
     private final PaymentList payments;
 
     private PaymentStatus paymentStatus;
+    private boolean autoRefreshEnabled = true;
 
     /**
      * Every field must be present and not null.
@@ -276,6 +277,9 @@ public class Student {
     private void wireLessonListeners() {
         // Recompute whenever lessons change (add/remove/edit).
         this.lessons.addListener(change -> {
+            if (!autoRefreshEnabled) {
+                return;
+            }
             while (change.next()) {
                 if (hasStructuralChange(change)) {
                     refreshCurrentMonthPayment();
@@ -304,6 +308,20 @@ public class Student {
         } catch (PaymentException e) {
             throw new PaymentStatusUpdateException();
         }
+    }
+
+    /**
+     * Disables automatic payment refreshes triggered by changes in the {@code LessonList}.
+     */
+    public void disableAutoPaymentRefresh() {
+        this.autoRefreshEnabled = false;
+    }
+
+    /**
+     * Re-enables automatic payment refreshes triggered by changes in the {@code LessonList}.
+     */
+    public void enableAutoPaymentRefresh() {
+        this.autoRefreshEnabled = true;
     }
 }
 
