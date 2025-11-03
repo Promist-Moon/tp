@@ -797,18 +797,27 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Glossary
 
-* **Mainstream OS**: Windows, Linux, Unix, MacOS
-* **GUI**: Graphical User Interface
-* **CLI**: Command Line Interface
-* **Student**: A person studying in secondary school taking private one-on-one lessons with a tutor
-* **Payment Status**:
-  * Paid - The student has paid within the month
-  * Unpaid - Payment of fees for lessons of the current month has not been paid
-  * Overdue - Payment of fees for lessons of previous months has not been paid
-* **Amount unpaid**: The payment amount owed by a student
-* **Subjects**: Math, English, Physics, Chemistry, Biology, Geography, History, Mother tongue, Social Studies, Literature
-* **Tag**: A comment located in a student's information
-* **Schedule**: A timetable for lessons containing the time, location, subject of the lesson and the student taking the lesson
+| **Category**  | **Term**                          | **Definition**                                                                                                                                    |
+|---------------|-----------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Technical** | **Mainstream OS**   | Windows, Linux, Unix, MacOS.                                                                           |
+|               | **CLI**   | Command Line Interface.                                                                           |
+|               | **GUI** | Graphical User Interface.                                  |
+|               | **Terminal**                      | A command window found in all operating systems where you type instructions for the computer to run.                                              |
+| **Actors**    | **Tutor**                         | The user - you, the person managing and teaching students.                                                                                        |
+|               | **Student**                       | A person currently enrolled in secondary school who is being taught one-on-one tuition services by the tutor.                                     |
+| **Payments**  | **Payment Status**                | Indicates whether a student has paid for their lessons within the month. Each student has a payment status which updates every month.             |
+|               | **Paid**                          | The student has paid for all lessons within the current month.                                                                                    |
+|               | **Unpaid**                        | The student has not paid the full amount for some lessons within the current month.                                                               |
+|               | **Overdue**                       | The student has outstanding unpaid lessons from previous months.                                                                                  |
+|               | **Amount unpaid**                 | The amount the student has yet to pay the tutor for both current and previous months.                                                             |
+|               | **Total earned for month**        | The total amount to be earned for all lessons from all students in one month, when all students have paid their fees.                             |
+|               | **Total unpaid**                  | The total unpaid amounts between all students that the tutor has yet to receive.                                                                  |
+| **Lessons**   | **Lesson**                        | A session between a student and a tutor where the tutor teaches a student a subject.                                                              |
+|               | **Schedule**                      | A timetable for classes containing the time, location, subject of the class and the student taking the class. |
+|               | **Subjects**                      | The topics taught by the tutor (e.g., Math, English, Physics, Chemistry, Biology, Geography, History, Mother Tongue, Social Studies, Literature). |
+|               | **Level**                         | The level of the student in secondary school, depending on age and academic stream (1, 2, 3, 4, 5).                                               |
+|               | **Rate**                          | The hourly rate a student pays the tutor for a lesson.                                                                                            |
+
 
 --------------------------------------------------------------------------------------------------------------------
 
