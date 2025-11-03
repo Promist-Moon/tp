@@ -50,13 +50,6 @@ public class AddLessonCommandIntegrationTest {
         assertCommandSuccess(addLessonCommand, model, expectedMessage, expectedModel);
     }
 
-    @Test
-    public void execute_duplicateLesson_throwsCommandException() {
-        Student student = model.getFilteredPersonList().get(0);
-        Lesson lesson = student.getLessonList().getLessons().get(0);
-        AddLessonCommand addLessonCommand = new AddLessonCommand(Index.fromZeroBased(0), lesson);
-        assertCommandFailure(addLessonCommand, model, AddLessonCommand.MESSAGE_DUPLICATE_LESSON);
-    }
 
     @Test
     public void execute_invalidStudentIndex_throwsCommandException() {

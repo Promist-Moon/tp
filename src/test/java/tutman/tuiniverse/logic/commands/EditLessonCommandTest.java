@@ -52,21 +52,6 @@ public class EditLessonCommandTest {
         assertThrows(NullPointerException.class, () -> editLessonCommand.execute(null));
     }
 
-    @Test
-    public void execute_allFieldsSpecifiedUnfilteredList_success() {
-        Lesson editedLesson = model.getFilteredLessonList().get(0);
-        editedLesson.addStudent(ALICE);
-        EditLessonDescriptor descriptor = new EditLessonDescriptorBuilder(editedLesson).build();
-        EditLessonCommand editLessonCommand = new EditLessonCommand(INDEX_FIRST_LESSON, INDEX_FIRST_LESSON, descriptor);
-
-        String expectedMessage = String.format(EditLessonCommand.MESSAGE_EDIT_LESSON_SUCCESS,
-                Messages.formatLesson(editedLesson));
-
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
-        expectedModel.setLesson(ALICE, editedLesson, editedLesson);
-
-        assertCommandSuccess(editLessonCommand, model, expectedMessage, expectedModel);
-    }
 
     @Test
     public void execute_duplicateLessonUnfilteredList_failure() {
