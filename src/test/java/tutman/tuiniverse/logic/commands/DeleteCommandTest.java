@@ -4,7 +4,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static tutman.tuiniverse.logic.commands.CommandTestUtil.assertCommandFailure;
-import static tutman.tuiniverse.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static tutman.tuiniverse.logic.commands.CommandTestUtil.showPersonAtIndex;
 import static tutman.tuiniverse.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static tutman.tuiniverse.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
@@ -17,7 +16,6 @@ import tutman.tuiniverse.logic.Messages;
 import tutman.tuiniverse.model.Model;
 import tutman.tuiniverse.model.ModelManager;
 import tutman.tuiniverse.model.UserPrefs;
-import tutman.tuiniverse.model.student.Student;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for
