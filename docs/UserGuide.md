@@ -341,7 +341,7 @@ After delete:
 * Deletes the student at the specified `INDEX`.
 * The index refers to the index number shown in the displayed contact list.
 * The index **must be a positive integer** 1, 2, 3, …​
-* Deleting a student also delete away their related class and payment record for the month.
+* Deleting a student also deletes away their related class and payment record for the month.
 
 **Examples:**
 * `list` followed by `delete 2` deletes the 2nd student in the address book.
@@ -414,6 +414,7 @@ _Details coming soon ..._
 
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous Tuiniverse home folder.
+
 **Q**: How do I add a payment for a student?<br>
 **A**: Our app handles the payment for you, add a payment for every month elapsed since you have opened the app.
 

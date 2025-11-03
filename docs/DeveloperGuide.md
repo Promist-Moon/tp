@@ -13,9 +13,9 @@
 
 ## **Acknowledgements**
 
-Our project is built based on the foundation design and documentation structure of AddressBook-Level3 (AB3) by the SE-EDU team, as provided in the CS2103T module at the National University of Singapore (NUS).
+Our project is built based on the foundation design and documentation structure of [AddressBook-Level3](https://github.com/nus-cs2103-AY2526S1/tp) (AB3) by the SE-EDU team, as provided in the CS2103T module at the National University of Singapore (NUS).
 
-We also referenced SE-EDU’s AB3 Developer Guide and Sample MarkBind sites for documentation and diagram formatting conventions.
+We also referenced SE-EDU’s [AB3 Developer Guide](https://se-education.org/addressbook-level3/DeveloperGuide.html) and [Sample MarkBind sites](https://damithc.github.io/ab3-markbind/) given in the CS2103T module for documentation and diagram formatting conventions.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -42,7 +42,7 @@ Given below is a quick overview of main components and how they interact with ea
 
 **Main components of the architecture**
 
-**`Main`** (consisting of classes [`Main`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/MainApp.java)) is in charge of the app launch and shut down.
+**`Main`** (consisting of classes [`Main`](https://github.com/AY2526S1-CS2103T-W08-2/tp/blob/master/src/main/java/tutman/tuiniverse/Main.java) and [`MainApp`](https://github.com/AY2526S1-CS2103T-W08-2/tp/blob/master/src/main/java/tutman/tuiniverse/MainApp.java)) is in charge of the app launch and shut down.
 * At app launch, it initializes the other components in the correct sequence, and connects them up with each other.
 * At shut down, it shuts down the other components and invokes cleanup methods where necessary.
 
@@ -74,13 +74,13 @@ The sections below give more details of each component.
 
 ### UI component
 
-The **API** of this component is specified in [`Ui.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/Ui.java)
+The **API** of this component is specified in [`Ui.java`](https://github.com/AY2526S1-CS2103T-W08-2/tp/blob/master/src/main/java/tutman/tuiniverse/ui/Ui.java)
 
 <puml src="diagrams/UiClassDiagram.puml" alt="Structure of the UI Component"/>
 
 The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
 
-The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
+The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/AY2526S1-CS2103T-W08-2/tp/blob/master/src/main/java/tutman/tuiniverse/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/AY2526S1-CS2103T-W08-2/tp/blob/master/src/main/resources/view/MainWindow.fxml)
 
 The `UI` component,
 
@@ -91,7 +91,7 @@ The `UI` component,
 
 ### Logic component
 
-**API** : [`Logic.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/logic/Logic.java)
+**API** : [`Logic.java`](https://github.com/AY2526S1-CS2103T-W08-2/tp/blob/master/src/main/java/tutman/tuiniverse/logic/Logic.java)
 
 Here's a (partial) class diagram of the `Logic` component:
 
@@ -123,7 +123,7 @@ How the parsing works:
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
 ### Model component
-**API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
+**API** : [`Model.java`](https://github.com/AY2526S1-CS2103T-W08-2/tp/blob/master/src/main/java/tutman/tuiniverse/model/Model.java)
 
 <puml src="diagrams/ModelClassDiagram.puml" width="450" />
 
@@ -141,7 +141,7 @@ The `Model` component,
 
 <puml src="diagrams/BetterModelClassDiagram.puml" width="450" />
 
-To fully visualise `PaymentList`, the `Student` holds a `PaymentList`. The `PaymentList` is associated with a `PaymentStatus` enum. This allows quick for quick `PaymentStatus` checks for a `Student` object.
+To fully visualise `PaymentList`, the `Student` holds a `PaymentList`. The `PaymentList` is associated with a `PaymentStatus` enum. This allows for quick `PaymentStatus` checks for a `Student` object.
 <puml src="diagrams/PaymentClassDiagram.puml" width="250" />
 
 In the same vein `Student` holds a `LessonList`, which contains any amount of `Lesson` as shown in the diagram below
@@ -152,7 +152,7 @@ In the same vein `Student` holds a `LessonList`, which contains any amount of `L
 
 ### Storage component
 
-**API** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
+**API** : [`Storage.java`](https://github.com/AY2526S1-CS2103T-W08-2/tp/blob/master/src/main/java/tutman/tuiniverse/storage/Storage.java)
 
 <puml src="diagrams/StorageClassDiagram.puml" width="550" />
 
@@ -163,7 +163,7 @@ The `Storage` component,
 
 ### Common classes
 
-Classes used by multiple components are in the `seedu.address.commons` package.
+Classes used by multiple components are in the `tutman.tuiniverse.commons` package.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -308,6 +308,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Use case:** UC-AddStudent
 **Actor:** Tutor
 
+### **Guarantees:**
+- Student appears in the student contact list with payment status **Paid** and amount unpaid **$0.00**.
+
 ### **MSS**
 1. Tutor chooses to add a student.
 2. Tutor enters all details in order.
@@ -337,13 +340,16 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Actor:** Tutor
 
 ### **Preconditions**
-- There is an existing student with the same details.
+- There is an existing student with the specified index.
+
+### **Guarantees:**
+- Student details change in the student contact list.
 
 ### **MSS**
 1. Tutor chooses to edit a student detail (eg address, phone number, tag).
 2. Tutor enters the student index followed by the amended detail.
 3. TSMS validates the details:
-    - Student current exists.
+    - Student currently exists.
     - Contact number must contain only numerical digits.
 4. TSMS edits the student detail and displays a message confirming successful edition.
    **Use case ends.**
@@ -372,6 +378,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **System:** Tuiniverse Student Management System (TSMS)
 **Use case:** UC-AddLesson
 **Actor:** Tutor
+
+### **Preconditions**
+- There is an existing student with the specified index.
+
+### **Guarantees:**
+- Amount unpaid for the student changes.
+- Student's payment status changes to **Unpaid**.
 
 ### **MSS**
 1. User adds a lesson using the command.
@@ -404,6 +417,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     - **4a2.** TSMS clears user input.
       **Use case ends.**
 
+- **5a.** Tutor adds a student for the current day.
+    - **5a1.** Lesson appears in the lesson list.
+      **Use case ends.**
+
 ---
 
 ## **UC-Pay**
@@ -412,9 +429,14 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Use case:** UC-Pay
 **Actor:** Tutor
 
-**Guarantees:**
-- Student's payment status changes.
+### **Preconditions**
+- There is an existing student with the specified index.
+
+### **Guarantees:**
+- Student's payment status changes to **Paid**.
+- Student's amount unpaid changes to `$0.00`.
 - Student shows up in list of paid students.
+- Total unpaid in amount panel will decrease.
 
 ### **MSS**
 1. Tutor chooses a student to mark as paid.
@@ -450,6 +472,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Use case:** UC-FindStudent
 **Actor:** Tutor
 
+### **Guarantees:**
+- Students whose name matching specified keyword shows up in contact list panel.
+
 ### **MSS**
 1. Tutor chooses to find a student.
 2. TSMS checks that the student with the given keyword exists.
@@ -470,6 +495,14 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **System:** Tuiniverse Student Management System (TSMS)
 **Use case:** UC-DeleteStudent
 **Actor:** Tutor
+
+### **Preconditions**
+- There is an existing student with the specified index.
+
+### **Guarantees:**
+- Student no longer appears in contact list panel.
+- Student's lessons get removed from lesson list.
+- Total earned for month and total unpaid will decrease.
 
 ### **MSS**
 1. Tutor chooses to delete a student.
@@ -505,6 +538,14 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Use case:** UC-DeleteLesson
 **Actor:** Tutor
 
+### **Preconditions**
+- There is an existing student with the specified index.
+- There is an existing lesson with the specified index.
+
+### **Guarantees:**
+- Lesson no longer appears in lesson list panel.
+- Total earned for month and total unpaid will decrease.
+
 ### **MSS**
 1. Tutor deletes a lesson with the command.
 2. TSMS checks that the student index exists.
@@ -532,6 +573,15 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Use case:** UC-EditLesson
 **Actor:** Tutor
 
+### **Preconditions**
+- There is an existing student with the specified index.
+- There is an existing lesson with the specified index.
+
+### **Guarantees:**
+- Lesson details change.
+- If rate is edited, student's amount unpaid will change.
+- If rate is edited, total earned for month and total unpaid will change.
+- 
 ### **MSS**
 1. Tutor edits a lesson with the command.
 2. TSMS checks that the student index exists.
@@ -570,19 +620,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Actor:** Tutor
 
 **Guarantees:**
-- Lists students who have paid for the current month.
-- Lists corresponding amounts paid by each student.
+- Lists paid students who have paid for the current month in contact list panel.
 
 ### **MSS**
 1. Tutor chooses to list paid students.
 2. TSMS retrieves all students marked *Paid* for the current month.
 3. TSMS displays the list of students and their amounts.
    **Use case ends.**
-
-### **Extensions**
-- **2a.** No students have paid for the month.
-    - **2a1.** TSMS displays a message in the console:
-  **Use case ends.**
 
 ---
 
@@ -593,7 +637,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Actor:** Tutor
 
 **Guarantees:**
-- Lists students who have not paid for the current month.
+- Lists unpaid students who have not paid for the current month in contact list panel.
 - Lists corresponding amount owed by each student.
 
 ### **MSS**
@@ -601,11 +645,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 2. TSMS retrieves all students not marked *Paid* for the current month.
 3. TSMS displays the list of students and their owed amounts.
    **Use case ends.**
-
-### **Extensions**
-- **2a.** All students have paid.
-    - **2a1.** TSMS displays a message in the console.
-      **Use case ends.**
 
 ---
 
@@ -616,7 +655,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Actor:** Tutor
 
 **Guarantees:**
-- Lists students who have not paid for previous months.
+- Lists overdue students who have not paid for previous months in contact list panel.
 - Lists corresponding amounts owed.
 
 ### **MSS**
@@ -624,11 +663,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 2. TSMS retrieves all students who have unpaid fees from past months.
 3. TSMS displays the list of overdue students and their owed amounts.
    **Use case ends.**
-
-### **Extensions**
-- **2a.** All students have paid for previous months.
-    - **2a1.** TSMS displays a message in the console.
-      **Use case ends.**
 
 ---
 
@@ -639,7 +673,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Actor:** Tutor
 
 **Guarantees:**
-- Lists lessons belonging to a certain student.
+- Lists lessons belonging to a certain student in lesson list panel.
 
 ### **MSS**
 1. Tutor chooses to list lessons belonging to a student.
@@ -690,9 +724,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### **Precondition**
 - Student currently has lessons with the tutor.
+- Student is quitting lessons with the tutor
 
 **Guarantees:**
-- Lists lessons belonging to a certain student.
+- Student no longer appears in contact list panel.
+- Total earned for month will decrease.
 
 ### **MSS**
 1. Student terminates lessons with the tutor.
@@ -701,9 +737,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### **Extensions**
 - **2b.** Student has unpaid fees.
-    - **2b1.** TSMS displays an additional confirmation prompt.
-    - **2b2.** Tutor confirms the deletion.
-    - **2b3.** TSMS updates owed amount and total earnings.
+    - **2b1.** TSMS decreases total unpaid.
       **Use case ends.**
 
 ---
@@ -736,7 +770,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Guarantees:**
 - All students with lessons becomes **Unpaid**.
-- Total earnings and total unpaid are recalculated
+- Total earnings and total unpaid are recalculated.
 
 ### **MSS**
 1. TSMS enters a new month
@@ -763,18 +797,27 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Glossary
 
-* **Mainstream OS**: Windows, Linux, Unix, MacOS
-* **GUI**: Graphical User Interface
-* **CLI**: Command Line Interface
-* **Student**: A person studying in secondary school taking private one-on-one lessons with a tutor
-* **Payment Status**:
-  * Paid - The student has paid within the month
-  * Unpaid - Payment of fees for lessons of the current month has not been paid
-  * Overdue - Payment of fees for lessons of previous months has not been paid
-* **Amount unpaid**: The payment amount owed by a student
-* **Subjects**: Math, English, Physics, Chemistry, Biology, Geography, History, Mother tongue, Social Studies, Literature
-* **Tag**: A comment located in a student's information
-* **Schedule**: A timetable for lessons containing the time, location, subject of the lesson and the student taking the lesson
+| **Category**  | **Term**                          | **Definition**                                                                                                                                    |
+|---------------|-----------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Technical** | **Mainstream OS**   | Windows, Linux, Unix, MacOS.                                                                           |
+|               | **CLI**   | Command Line Interface.                                                                           |
+|               | **GUI** | Graphical User Interface.                                  |
+|               | **Terminal**                      | A command window found in all operating systems where you type instructions for the computer to run.                                              |
+| **Actors**    | **Tutor**                         | The user - you, the person managing and teaching students.                                                                                        |
+|               | **Student**                       | A person currently enrolled in secondary school who is being taught one-on-one tuition services by the tutor.                                     |
+| **Payments**  | **Payment Status**                | Indicates whether a student has paid for their lessons within the month. Each student has a payment status which updates every month.             |
+|               | **Paid**                          | The student has paid for all lessons within the current month.                                                                                    |
+|               | **Unpaid**                        | The student has not paid the full amount for some lessons within the current month.                                                               |
+|               | **Overdue**                       | The student has outstanding unpaid lessons from previous months.                                                                                  |
+|               | **Amount unpaid**                 | The amount the student has yet to pay the tutor for both current and previous months.                                                             |
+|               | **Total earned for month**        | The total amount to be earned for all lessons from all students in one month, when all students have paid their fees.                             |
+|               | **Total unpaid**                  | The total unpaid amounts between all students that the tutor has yet to receive.                                                                  |
+| **Lessons**   | **Lesson**                        | A session between a student and a tutor where the tutor teaches a student a subject.                                                              |
+|               | **Schedule**                      | A timetable for classes containing the time, location, subject of the class and the student taking the class. |
+|               | **Subjects**                      | The topics taught by the tutor (e.g., Math, English, Physics, Chemistry, Biology, Geography, History, Mother Tongue, Social Studies, Literature). |
+|               | **Level**                         | The level of the student in secondary school, depending on age and academic stream (1, 2, 3, 4, 5).                                               |
+|               | **Rate**                          | The hourly rate a student pays the tutor for a lesson.                                                                                            |
+
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -968,7 +1011,7 @@ To view the exact changes in lesson, use `view 1` to see the student's lessons i
 3. Editing preferences.json (changing `lastOpened`)
    1. Simulate a month elapsing:
       * Close the application.
-      * Navigate the root directory where the application store the `preferences.json`
+      * Navigate the root directory where the application stores the `preferences.json`
       * Find the `lastOpened` field and set it to a valid `YearMonth`
           * Example: `"lastOpened": "2025-9"`
    2. Save the file and relaunch the application.
