@@ -40,7 +40,7 @@ public class Student {
     private final PaymentList payments;
 
     private PaymentStatus paymentStatus;
-    private boolean autoRefreshEnabled = true;
+    private boolean isAutoRefreshEnabled = true;
 
     /**
      * Every field must be present and not null.
@@ -315,14 +315,14 @@ public class Student {
      * Disables automatic payment refreshes triggered by changes in the {@code LessonList}.
      */
     public void disableAutoPaymentRefresh() {
-        this.autoRefreshEnabled = false;
+        this.isAutoRefreshEnabled = false;
     }
 
     /**
      * Re-enables automatic payment refreshes triggered by changes in the {@code LessonList}.
      */
     public void enableAutoPaymentRefresh() {
-        this.autoRefreshEnabled = true;
+        this.isAutoRefreshEnabled = true;
     }
 }
 
