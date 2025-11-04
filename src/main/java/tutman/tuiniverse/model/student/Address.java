@@ -17,7 +17,7 @@ public class Address {
      * otherwise " " (a blank string) becomes a valid input.
      * The address must not contain forward slashes "/".
      */
-    public static final String VALIDATION_REGEX = "^[^\\s/][^/]*$";
+    public static final String VALIDATION_REGEX = "^(?!.*(?:r/|s/|l/|st/|et/|d/))\\S.*$";
 
 
     public final String value;
