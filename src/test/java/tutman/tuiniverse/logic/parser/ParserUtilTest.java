@@ -14,6 +14,11 @@ import java.util.Set;
 import org.junit.jupiter.api.Test;
 
 import tutman.tuiniverse.logic.parser.exceptions.ParseException;
+import tutman.tuiniverse.model.lesson.Day;
+import tutman.tuiniverse.model.lesson.LessonTime;
+import tutman.tuiniverse.model.lesson.Level;
+import tutman.tuiniverse.model.lesson.Rate;
+import tutman.tuiniverse.model.lesson.Subject;
 import tutman.tuiniverse.model.student.Address;
 import tutman.tuiniverse.model.student.Email;
 import tutman.tuiniverse.model.student.Name;
@@ -192,5 +197,108 @@ public class ParserUtilTest {
         Set<Tag> expectedTagSet = new HashSet<Tag>(Arrays.asList(new Tag(VALID_TAG_1), new Tag(VALID_TAG_2)));
 
         assertEquals(expectedTagSet, actualTagSet);
+    }
+
+    @Test
+    void parseSubject_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseSubject(null));
+    }
+
+    @Test
+    void parseSubject_invalid_throwsParseException() {
+        // Adjust "GARBAGE" if your validator allows anything else
+        assertThrows(ParseException.class, () -> ParserUtil.parseSubject("GARBAGE"));
+        assertThrows(ParseException.class, () -> ParserUtil.parseSubject(""));
+        assertThrows(ParseException.class, () -> ParserUtil.parseSubject("   "));
+    }
+
+    @Test
+    void parseSubject_valid_trimsAndParses() throws Exception {
+        Subject expected = Subject.fromString("English");
+        assertEquals(expected, ParserUtil.parseSubject("English"));
+        assertEquals(expected, ParserUtil.parseSubject("  English  "));
+    }
+
+    @Test
+    void parseLevel_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseLevel(null));
+    }
+
+    @Test
+    void parseLevel_invalid_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseLevel("0"));
+        assertThrows(ParseException.class, () -> ParserUtil.parseLevel("6"));
+        assertThrows(ParseException.class, () -> ParserUtil.parseLevel("X"));
+        assertThrows(ParseException.class, () -> ParserUtil.parseLevel(""));
+    }
+
+    @Test
+    void parseLevel_valid_trimsAndParses() throws Exception {
+        Level expected = Level.fromString("3");
+        assertEquals(expected, ParserUtil.parseLevel("3"));
+        assertEquals(expected, ParserUtil.parseLevel("   3   "));
+    }
+
+    @Test
+    void parseDay_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseDay(null));
+    }
+
+    @Test
+    void parseDay_invalid_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseDay("Funday"));
+        assertThrows(ParseException.class, () -> ParserUtil.parseDay(""));
+        assertThrows(ParseException.class, () -> ParserUtil.parseDay("   "));
+    }
+
+    @Test
+    void parseDay_valid_trimsAndParses() throws Exception {
+        Day expected = new Day("Monday");
+        assertEquals(expected, ParserUtil.parseDay("Monday"));
+        assertEquals(expected, ParserUtil.parseDay("   Monday   "));
+    }
+
+    @Test
+    void parseRate_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseRate(null));
+    }
+
+    @Test
+    void parseRate_invalid_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseRate("-1"));
+        assertThrows(ParseException.class, () -> ParserUtil.parseRate("abc"));
+        assertThrows(ParseException.class, () -> ParserUtil.parseRate(""));
+        assertThrows(ParseException.class, () -> ParserUtil.parseRate("   "));
+    }
+
+    @Test
+    void parseLessonTime_nulls_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseLessonTime(null, "10:00"));
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseLessonTime("09:00", null));
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseLessonTime(null, null));
+    }
+
+    @Test
+    void parseLessonTime_invalidFormat_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseLessonTime("9:00", "10:00"));
+        assertThrows(ParseException.class, () -> ParserUtil.parseLessonTime("09:60", "10:00"));
+        assertThrows(ParseException.class, () -> ParserUtil.parseLessonTime("aa:bb", "10:00"));
+    }
+
+    @Test
+    void parseLessonTime_endBeforeStart_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseLessonTime("10:00", "09:00"));
+    }
+
+    @Test
+    void parseLessonTime_equalTimes_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseLessonTime("09:00", "09:00"));
+    }
+
+    @Test
+    void parseLessonTime_valid_trimsAndParses() throws Exception {
+        LessonTime expected = LessonTime.ofLessonTime("14:00", "15:30");
+        assertEquals(expected, ParserUtil.parseLessonTime("14:00", "15:30"));
+        assertEquals(expected, ParserUtil.parseLessonTime("  14:00  ", "  15:30  "));
     }
 }
