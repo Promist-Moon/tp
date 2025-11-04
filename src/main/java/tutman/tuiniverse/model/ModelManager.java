@@ -293,9 +293,7 @@ public class ModelManager implements Model {
     private void recomputeTotalUnpaid() {
         float sum = 0f;
         for (Student student : addressBook.getPersonList()) {
-            sum += student.getPayments().getPayments().stream()
-                        .map(Payment::getUnpaidAmountFloat)
-                        .reduce(0f, Float::sum);
+            sum += student.getAmountDueFloat();
         }
         totalUnpaid.set(sum);
     }

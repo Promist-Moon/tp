@@ -159,6 +159,15 @@ public class Student {
         return payments.calculateUnpaidAmount();
     }
 
+    /**
+     * Returns the total amount unpaid by the student as a float.
+     *
+     * @return a UnpaidAmount object with amount equivalent to the total of unpaid payments.
+     */
+    public float getAmountDueFloat() {
+        return payments.calculateUnpaidAmountFloat();
+    }
+
     public TotalAmount getTotalAmountByMonth(YearMonth yearMonth) {
         float f = lessons.getTotalAmountEarned(yearMonth);
         return new TotalAmount(f);
