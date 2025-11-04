@@ -155,6 +155,8 @@ Adds a student to the address book.
 
 **Note**: Each student must have a unique phone number and email address. <br> You can save students with the same name, as long as their phone number and email address are different.
 
+**Tip**: Names with `\`, `/`, `-`, `@` or **any other special characters** cannot be added. <br> You can replace them with a blank space (e.g. Jack O'Neil can be added as Jack O Neil). 
+
 **Tip**: Tags are optional.
 
 </box>
