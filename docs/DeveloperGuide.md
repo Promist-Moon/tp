@@ -1069,17 +1069,17 @@ Team Size: 5
 ### 1. Overzealous `name` validation
 Currently, names do not accept special characters like `-`, `/`, `'`, and `@` (non-exhaustive), and users have to use a space in place of these characters. We plan to relax this restriction by allowing more special characters in names. 
 
-### 2. Overzealous `phone` and `email` validation
-Currently, users cannot add more than one `phone` or `email`. We plan to relax this by allowing more than one phone or email to be associated to a single `Student` object. This will allow users to input more than one phone/email (e.g., `1234 5678 (HP) 1111-3333 (Office)` and `example@mail.com (Personal) second@mail.com (Work)`).
+### 2. Overzealous `phone` validation
+Currently, users cannot add more than one `phone`. We plan to relax this by allowing more than one phone, to be associated to a single `Student` object. This will allow users to input more than one phone (e.g., `1234 5678 (HP) 1111-3333 (Office)`.
 
-### 3. Overzealous `tag` and `phone` validation
-Currently, users cannot add special characters or even input spaces in `tag` and `phone`. We plan on relaxing this restriction by allowing more special characters.
+### 3. Overzealous `tag` validation
+Currently, users cannot add special characters or even input spaces in `tag`. We plan on relaxing this restriction by allowing more special characters.
 
-### 4.Attendance List
-At present, Tuiniverse assumes that once a student begins lessons in a given month, they attend all lessons for that month – without accounting for absences, public holidays, or mid-month enrollments. As a result, total and unpaid fees are calculated based on a full month’s worth of lessons, even if a student joins late or misses sessions! In future updates, this limitation can be addressed through an attendance list feature, allowing tutors to mark each student’s attendance in an `attendanceList` object associated to a `Student` and enabling partial payment calculations that more accurately reflect lessons actually attended.
+### 4. Granular Lesson Handling
+At present, Tuiniverse assumes that once a student begins lessons in a given month, they attend all lessons for that month. Consequently, total and unpaid fees are calculated based on a full month’s worth of lessons, even if a student joins midway through the month. In future iterations, we plan to enhance this by tweaking `numberOfDaysInaMonth` into a `countLessonsFromDateUntilMonthEnd(date)` method, which calculates the number of lessons remaining in the month based on the given start date. This enhancement will allow tutors to more accurately account for students who start or pause lessons partway through a month, ensuring that payments reflect only the lessons actually conducted.
 
 ### 5. Granular Payment Handling
-Currently, the `pay` command assumes that a student has settled all outstanding fees for the month in a single transaction. This limits flexibility for tutors who may wish to record partial payments or track incremental settlements over time. In future iterations, we plan to enhance this by allowing tutors to specify a custom payment amount to deduct from the student’s unpaid balance. This would enable more accurate bookkeeping for cases where students make staggered or partial payments (e.g., paying half the month’s fees first and the remainder later). The system would update the `unpaidAmount` dynamically and adjust the payment status accordingly; remaining “Unpaid” or switching to “Paid” once the outstanding balance reaches zero.
+Currently, the `pay` command assumes that a student has settled all outstanding fees for the month in a single transaction. This limits flexibility for tutors who may wish to record partial payments or track incremental settlements over time. In future iterations, we plan to enhance this by allowing tutors to specify a custom payment amount such as `pay [INDEX] [AMOUNT]` to deduct from the student’s unpaid balance. This would enable more accurate bookkeeping for cases where students make staggered or partial payments (e.g., paying half the month’s fees first and the remainder later). The system would update the `unpaidAmount` dynamically and adjust the payment status accordingly; remaining “Unpaid”/"Overdue" or switching to “Paid” once the outstanding balance reaches zero.
 
 ### 6. Unselect a selected student
 Currently, when a student is pressed, the person card will turn from light blue to bright blue. However, one is unable to unselect
