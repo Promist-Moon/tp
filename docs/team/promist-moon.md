@@ -36,6 +36,7 @@ rates, or student edits are automatically reflected in the computed payments.
 This end-to-end integration between lessons, payments, and students allows tutors to view their monthly revenue and outstanding dues in real time
 
 ### Contributions to the User Guide
-I added the glossary to the User Guide.
+I added the glossary to the User Guide and updated the constraints to have tables.
 
 ### Contributions to the Developer Guide
+I added the acknowledgements, made the PaySequenceDiagram, the use cases, and the glossary.
