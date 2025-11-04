@@ -5,7 +5,7 @@ skinparam ArrowFontStyle plain
 Actor User as user USER_COLOR
 Participant ":MainApp" as MainApp UI_COLOR
 Participant ":StartupRolloverHandler" as StartupRolloverHandler LOGIC_COLOR
-Participant ":UserPref" as userpref USERPREF_COLOR
+Participant ":UserPrefs" as userpref USERPREF_COLOR
 Participant ":MonthlyRollover" as monthlyrollover MONTHLYROLLOVER_COLOR
 Participant ":Model" as model MODEL_COLOR
 Participant ":Storage" as storage STORAGE_COLOR
@@ -22,8 +22,8 @@ deactivate StartupRolloverHandler
 MainApp -[UI_COLOR]> StartupRolloverHandler : perform(UserPrefs)
 activate StartupRolloverHandler LOGIC_COLOR
 
-activate userpref USERPREF_COLOR
 StartupRolloverHandler -[LOGIC_COLOR]> userpref : getLastOpened()
+activate userpref USERPREF_COLOR
 userpref -[USERPREF_COLOR]-> StartupRolloverHandler
 
 StartupRolloverHandler -[LOGIC_COLOR]> userpref : setLastOpened(YearMonth)
@@ -40,7 +40,7 @@ activate monthlyrollover MONTHLYROLLOVER_COLOR
 deactivate
 
 
-StartupRolloverHandler -[LOGIC_COLOR]> model :setUserPref(UserPres)
+StartupRolloverHandler -[LOGIC_COLOR]> model :setUserPref(UserPrefs)
 activate model MODEL_COLOR
 
 model -[MODEL_COLOR]-> StartupRolloverHandler

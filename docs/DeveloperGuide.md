@@ -1066,48 +1066,38 @@ Beyond technical achievement, the project demonstrates our team’s mastery of:
 ## **Appendix: Planned Enhancements**
 Team Size: 5
 
-### 1. Granular payment handling
-At present, Tuiniverse assumes that once a student begins lessons in a given month, they attend for the entire month.
-Consequently, the system calculates the total and unpaid fees based on a full month’s worth of lessons, even if the student
-joined midway through the month.
-In future iterations, we plan to enhance this by supporting partial payment calculations, allowing tutors to accurately account for students who begin
-or pause lessons mid-month. This will be done by taking in the current date, and implementing a new CountDaysFromNowUntilMonthEnd method
-which counts the number of a certain day (eg Thursday) until the end of the month.
+### 1. Overzealous `name` validation
+Currently, names do not accept special characters like `-`, `/`, `'`, and `@` (non-exhaustive), and users have to use a space in place of these characters. We plan to relax this restriction by allowing more special characters in names. 
 
-### 2. Unselect a selected student
+### 2. Overzealous `phone` and `email` validation
+Currently, users cannot add more than one `phone` or `email`. We plan to relax this by allowing more than one phone or email to be associated to a single `Student` object. This will allow users to input more than one phone/email (e.g., `1234 5678 (HP) 1111-3333 (Office)` and `example@mail.com (Personal) second@mail.com (Work)`).
+
+### 3. Overzealous `tag` and `phone` validation
+Currently, users cannot add special characters or even input spaces in `tag` and `phone`. We plan on relaxing this restriction by allowing more special characters.
+
+### 4.Attendance List
+At present, Tuiniverse assumes that once a student begins lessons in a given month, they attend all lessons for that month – without accounting for absences, public holidays, or mid-month enrollments. As a result, total and unpaid fees are calculated based on a full month’s worth of lessons, even if a student joins late or misses sessions! In future updates, this limitation can be addressed through an attendance list feature, allowing tutors to mark each student’s attendance in an `attendanceList` object associated to a `Student` and enabling partial payment calculations that more accurately reflect lessons actually attended.
+
+### 5. Granular Payment Handling
+Currently, the `pay` command assumes that a student has settled all outstanding fees for the month in a single transaction. This limits flexibility for tutors who may wish to record partial payments or track incremental settlements over time. In future iterations, we plan to enhance this by allowing tutors to specify a custom payment amount to deduct from the student’s unpaid balance. This would enable more accurate bookkeeping for cases where students make staggered or partial payments (e.g., paying half the month’s fees first and the remainder later). The system would update the `unpaidAmount` dynamically and adjust the payment status accordingly; remaining “Unpaid” or switching to “Paid” once the outstanding balance reaches zero.
+
+### 6. Unselect a selected student
 Currently, when a student is pressed, the person card will turn from light blue to bright blue. However, one is unable to unselect
 this person card, and only press another person card to turn the card back to light blue. Hence in the future, we can implement an unselect
 by counting for the number of clicks.
 
-### 3. Adding tags
+### 7. Adding tags
 When editing a student to add tags, they currently need to retype every single tag to preserve the tags that were set previously, as a new
-tag list will be created. Hence, in the future, we can create an add.tag function that adds a tag to a person in case they have additional
+tag list will be created. Hence, in the future, we can create an `add.tag` function that adds a tag to a person in case they have additional
 information they want to store.
 
-### 4. Viewing lessons in order
-When viewing a student's lesson via the view command, the lessons are sorted by time. This is not optimal, as we can see Thursday 6am lessons
-ranked before Monday 8am lesson even if it is Monday. Hence, we can sort the student's lesson list first by day, then by time, instead of
-by time only.
+### 8. Viewing lessons in order
+When viewing a student's lesson via the view command, the lessons are sorted by the order they are added. This is not optimal, as we can see Thursday 6am lessons
+ranked before Monday 8am lesson even if it is Monday. Hence, we can sort the student's lesson list first by day, then by time, instead of by order in which they are added only.
 
-### 5. Duplicate tags
+### 9. Duplicate tags
 Adding/editing tags will only register one tag for the same tag instance (ie edit 1 t/tag t/tag only creates one tag tag). However, no error or
 message in usage indicates that duplicates are not allowed. Hence, the message usage can be amended.
 
-### 6. Custom Payment amount
-Currently payCommand assumes student has paid his due fees all at once. In a future enhancement, tutor would be able to decrement unpaidAmount with a custom amount.
-
-### 7. Attendance list
-Current implementation assumes that student attends all the lessons in the month, not accounting for public holidays and instances where student is absent. An attendance list where tutor can mark student's attendance will help solve the problem
-
-### 8. Today's Schedule Not Showing Student Name
-Currently, the lesson list panel displays the day’s lesson schedule but does not
-indicate which student each lesson is associated with. We plan to enhance this feature
-in the future by including the student’s name alongside each lesson, allowing users to
-easily identify which students they will be teaching for the day.
-
-### 9. Add, Edit, and Delete Lesson UI
-At present, when users add, edit, or delete a lesson, only a confirmation message
-appears in the message box to indicate that the command has been successfully executed.
-In the future, we plan to improve the user experience by automatically switching the
-lesson panel to display the specific student’s lesson list, enabling users to immediately
-view the updates they have made.
+### 10. Clashing lessons identified
+Currently, when adding a lesson, if a time clash occurs, the system only displays a generic error message “Timeslot is already taken”: which provides no information about the conflicting lesson or its cause, forcing tutors to manually inspect each student’s schedule to identify the clash. To improve usability, we plan to add a `getClashingLesson(Lesson toCheck)` method to `LessonList` that returns the specific Lesson causing the conflict and update the addLesson command to include this information in the error message. The enhanced message will display the student’s name, subject, day, and time slot of the conflicting lesson (e.g., “Time clash detected with an existing lesson: Alice Pauline - Math (Monday 10:00–12:00)”), enabling tutors to immediately identify and resolve overlapping sessions without manual checking.
