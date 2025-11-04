@@ -17,7 +17,6 @@ import tutman.tuiniverse.logic.parser.exceptions.ParseException;
 import tutman.tuiniverse.model.lesson.Day;
 import tutman.tuiniverse.model.lesson.LessonTime;
 import tutman.tuiniverse.model.lesson.Level;
-import tutman.tuiniverse.model.lesson.Rate;
 import tutman.tuiniverse.model.lesson.Subject;
 import tutman.tuiniverse.model.student.Address;
 import tutman.tuiniverse.model.student.Email;
