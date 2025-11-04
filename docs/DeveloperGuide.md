@@ -1072,19 +1072,17 @@ Currently, names do not accept special characters like `-`, `/`, `'`, and `@` (n
 ### 2. Overzealous `phone` validation
 Currently, users cannot add more than one `phone`. We plan to relax this by allowing more than one phone, to be associated to a single `Student` object. This will allow users to input more than one phone (e.g., `1234 5678 (HP) 1111-3333 (Office)`.
 
-### 3. Overzealous `tag` validation
+### 3. Overzealous `email` validation
+Currently, users cannot add more than one `email`. We plan to relax this by allowing more than one phone, to be associated to a single `Student` object. This will allow users to input more than one phone (e.g., `example@mail.com (Personal) second@mail.com (Work)`.
+
+### 4. Overzealous `tag` validation
 Currently, users cannot add special characters or even input spaces in `tag`. We plan on relaxing this restriction by allowing more special characters.
 
-### 4. Granular Lesson Handling
+### 5. Granular Lesson Handling
 At present, Tuiniverse assumes that once a student begins lessons in a given month, they attend all lessons for that month. Consequently, total and unpaid fees are calculated based on a full month’s worth of lessons, even if a student joins midway through the month. In future iterations, we plan to enhance this by tweaking `numberOfDaysInaMonth` into a `countLessonsFromDateUntilMonthEnd(date)` method, which calculates the number of lessons remaining in the month based on the given start date. This enhancement will allow tutors to more accurately account for students who start or pause lessons partway through a month, ensuring that payments reflect only the lessons actually conducted.
 
-### 5. Granular Payment Handling
+### 6. Granular Payment Handling
 Currently, the `pay` command assumes that a student has settled all outstanding fees for the month in a single transaction. This limits flexibility for tutors who may wish to record partial payments or track incremental settlements over time. In future iterations, we plan to enhance this by allowing tutors to specify a custom payment amount such as `pay [INDEX] [AMOUNT]` to deduct from the student’s unpaid balance. This would enable more accurate bookkeeping for cases where students make staggered or partial payments (e.g., paying half the month’s fees first and the remainder later). The system would update the `unpaidAmount` dynamically and adjust the payment status accordingly; remaining “Unpaid”/"Overdue" or switching to “Paid” once the outstanding balance reaches zero.
-
-### 6. Unselect a selected student
-Currently, when a student is pressed, the person card will turn from light blue to bright blue. However, one is unable to unselect
-this person card, and only press another person card to turn the card back to light blue. Hence in the future, we can implement an unselect
-by counting for the number of clicks.
 
 ### 7. Adding tags
 When editing a student to add tags, they currently need to retype every single tag to preserve the tags that were set previously, as a new
