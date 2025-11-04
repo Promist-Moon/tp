@@ -17,6 +17,8 @@ Our project is built based on the foundation design and documentation structure 
 
 We also referenced SE-EDU’s [AB3 Developer Guide](https://se-education.org/addressbook-level3/DeveloperGuide.html) and [Sample MarkBind sites](https://damithc.github.io/ab3-markbind/) given in the CS2103T module for documentation and diagram formatting conventions.
 
+The logo of Tuiniverse is created with logo template by gaga-vastard via Canva.com.
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Setting up, getting started**
