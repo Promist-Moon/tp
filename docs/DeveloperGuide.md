@@ -1070,10 +1070,10 @@ Team Size: 5
 Currently, names do not accept special characters like `-`, `/`, `'`, and `@` (non-exhaustive), and users have to use a space in place of these characters. We plan to relax this restriction by allowing more special characters in names. 
 
 ### 2. Overzealous `phone` validation
-Currently, users cannot add more than one `phone`. We plan to relax this by allowing more than one phone, to be associated to a single `Student` object. This will allow users to input more than one phone (e.g., `1234 5678 (HP) 1111-3333 (Office)`.
+Currently, users cannot add more than one `phone`. We plan to relax this by allowing more than one phone number to be associated to a single `Student` object. This will allow users to input more than one phone number (e.g., `1234 5678 (HP) 1111-3333 (Office)`.
 
 ### 3. Overzealous `email` validation
-Currently, users cannot add more than one `email`. We plan to relax this by allowing more than one phone, to be associated to a single `Student` object. This will allow users to input more than one phone (e.g., `example@mail.com (Personal) second@mail.com (Work)`.
+Currently, users cannot add more than one `email`. We plan to relax this by allowing more than one email address to be associated to a single `Student` object. This will allow users to input more than one email address (e.g., `example@mail.com (Personal) second@mail.com (Work)`.
 
 ### 4. Overzealous `tag` validation
 Currently, users cannot add special characters or even input spaces in `tag`. We plan on relaxing this restriction by allowing more special characters.
