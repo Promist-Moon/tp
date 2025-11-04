@@ -177,8 +177,8 @@ The Payment feature allows tutors to automatically track and manage tuition fees
 Each student has a PaymentList containing monthly Payment objects, which record the total and unpaid amounts for that month. Refer to [Model](#model-component) class diagram for payment details.
 Whenever lessons are added, edited, or deleted, Tuiniverse automatically recalculates the corresponding monthly payment to keep all financial records consistent.
 
-1. **`pay` command**
-   <puml src="diagrams/PaySequenceDiagram.puml" width="250" />
+1. **`pay` command**<br>
+   <puml src="diagrams/PaySequenceDiagram.puml" width="600" />
 
 Tutor asks Student to pay; the Student delegates to PaymentList method `markAllPaid()`, which finds unpaid payments, and marks each one as paid. This is done by the `markPaid` method in `Payment`,
 which zeroes out unpaid amount objects, and updates payment status. If there are no unpaids, it returns a message in the consolve instead.
