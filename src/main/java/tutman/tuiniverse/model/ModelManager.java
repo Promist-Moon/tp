@@ -17,7 +17,6 @@ import tutman.tuiniverse.commons.core.LogsCenter;
 import tutman.tuiniverse.model.lesson.Lesson;
 import tutman.tuiniverse.model.lesson.LessonList;
 import tutman.tuiniverse.model.lesson.LessonTimeComparator;
-import tutman.tuiniverse.model.payment.Payment;
 import tutman.tuiniverse.model.student.Student;
 
 /**
