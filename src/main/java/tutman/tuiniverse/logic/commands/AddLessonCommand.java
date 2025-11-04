@@ -69,7 +69,6 @@ public class AddLessonCommand extends Command {
         }
         List<Student> lastShownList = model.getFilteredPersonList();
 
-        // need to check if index is a student
         if (targetIndex.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
