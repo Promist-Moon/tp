@@ -17,7 +17,6 @@ import tutman.tuiniverse.commons.core.LogsCenter;
 import tutman.tuiniverse.model.lesson.Lesson;
 import tutman.tuiniverse.model.lesson.LessonList;
 import tutman.tuiniverse.model.lesson.LessonTimeComparator;
-import tutman.tuiniverse.model.payment.Payment;
 import tutman.tuiniverse.model.student.Student;
 
 /**
@@ -293,9 +292,7 @@ public class ModelManager implements Model {
     private void recomputeTotalUnpaid() {
         float sum = 0f;
         for (Student student : addressBook.getPersonList()) {
-            sum += student.getPayments().getPayments().stream()
-                        .map(Payment::getUnpaidAmountFloat)
-                        .reduce(0f, Float::sum);
+            sum += student.getAmountDueFloat();
         }
         totalUnpaid.set(sum);
     }

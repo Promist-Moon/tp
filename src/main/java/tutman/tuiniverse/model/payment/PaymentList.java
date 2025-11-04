@@ -221,12 +221,9 @@ public class PaymentList {
      * @return a float representing the amount of money.
      */
     public float calculateUnpaidAmountFloat() {
-        float total = 0;
-        ArrayList<Payment> unpaidList = findUnpaids();
-        for (Payment p : unpaidList) {
-            total += p.getUnpaidAmountFloat();
-        }
-        return total;
+        return payments.stream()
+                .map(Payment::getUnpaidAmountFloat)
+                .reduce(0f, Float::sum);
     }
 
     /**

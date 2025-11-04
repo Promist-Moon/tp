@@ -40,7 +40,7 @@ public class Student {
     private final PaymentList payments;
 
     private PaymentStatus paymentStatus;
-    private boolean autoRefreshEnabled = true;
+    private boolean isAutoRefreshEnabled = true;
 
     /**
      * Every field must be present and not null.
@@ -157,6 +157,15 @@ public class Student {
      */
     public UnpaidAmount getAmountDue() {
         return payments.calculateUnpaidAmount();
+    }
+
+    /**
+     * Returns the total amount unpaid by the student as a float.
+     *
+     * @return a UnpaidAmount object with amount equivalent to the total of unpaid payments.
+     */
+    public float getAmountDueFloat() {
+        return payments.calculateUnpaidAmountFloat();
     }
 
     public TotalAmount getTotalAmountByMonth(YearMonth yearMonth) {
@@ -278,7 +287,7 @@ public class Student {
     private void wireLessonListeners() {
         // Recompute whenever lessons change (add/remove/edit).
         this.lessons.addListener(change -> {
-            if (!autoRefreshEnabled) {
+            if (!isAutoRefreshEnabled) {
                 return;
             }
             while (change.next()) {
@@ -315,14 +324,14 @@ public class Student {
      * Disables automatic payment refreshes triggered by changes in the {@code LessonList}.
      */
     public void disableAutoPaymentRefresh() {
-        this.autoRefreshEnabled = false;
+        this.isAutoRefreshEnabled = false;
     }
 
     /**
      * Re-enables automatic payment refreshes triggered by changes in the {@code LessonList}.
      */
     public void enableAutoPaymentRefresh() {
-        this.autoRefreshEnabled = true;
+        this.isAutoRefreshEnabled = true;
     }
 }
 
