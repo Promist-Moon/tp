@@ -36,16 +36,19 @@ Our UI is readable and concise, providing tutors only with information they need
 ---
 
 ## Features
-1. Add Contact
-2. Delete Contact
-3. Add Class
-4. Delete Class
-5. Make Payment
-6. List all payments
-7. List all unpaid
-8. List all overdue
-9. Find student
-10. Filter students
+1. Add Student
+2. Edit Student
+3. Delete Student
+4. Add Lesson
+5. Edit Lesson
+6. Delete Lesson
+7. Make Payment
+8. List all paid
+9. List all unpaid
+10. List all overdue
+11. Find student
+12. Filter students
+13. View lessons for a student
 
 ---
 
