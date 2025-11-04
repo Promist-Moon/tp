@@ -278,7 +278,7 @@ public class Student {
     private void wireLessonListeners() {
         // Recompute whenever lessons change (add/remove/edit).
         this.lessons.addListener(change -> {
-            if (!autoRefreshEnabled) {
+            if (!isAutoRefreshEnabled) {
                 return;
             }
             while (change.next()) {
